@@ -30,6 +30,7 @@
       "block_order": [
         "text_mTEfgw"
       ],
+      "disabled": true,
       "settings": {
         "layout": "slider",
         "slider_autoplay": false,
