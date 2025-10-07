@@ -426,12 +426,13 @@
     },
     "hero": {
       "type": "section-hero",
+      "disabled": true,
       "settings": {
         "height": "screen-height-three-quarters",
         "width": "wrapper--full",
         "image_1": "shopify://shop_images/image.png",
         "image_2": "shopify://shop_images/image_1.png",
-        "mobile_height": "screen-height-one-third--mobile",
+        "mobile_height": "seven-fifty-height-hero--mobile",
         "flex_align": "align--middle-left",
         "overlay_opacity": 0,
         "overlay_color": "#000000",
@@ -532,6 +533,58 @@
         "padding_top": 50,
         "padding_bottom": 50
       }
+    },
+    "section_collections_list_TFaVUd": {
+      "type": "section-collections-list",
+      "blocks": {
+        "collection_xXnBPB": {
+          "type": "collection",
+          "settings": {
+            "collection": "new-arrival",
+            "title": ""
+          }
+        },
+        "collection_TgxUPG": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "title": ""
+          }
+        },
+        "collection_zY8iW8": {
+          "type": "collection",
+          "settings": {
+            "collection": "political-teas",
+            "title": ""
+          }
+        },
+        "collection_hKYLWc": {
+          "type": "collection",
+          "settings": {
+            "collection": "tributes",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_xXnBPB",
+        "collection_TgxUPG",
+        "collection_zY8iW8",
+        "collection_hKYLWc"
+      ],
+      "name": "Collection list",
+      "settings": {
+        "title": "Collection list",
+        "description": "",
+        "layout": "grid",
+        "aspect_ratio": 1,
+        "grid": 4,
+        "layout_mobile": "2",
+        "bg_color": "",
+        "color": "",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
     }
   },
   "order": [
@@ -545,6 +598,7 @@
     "featured-collection",
     "hero",
     "icons",
+    "section_collections_list_TFaVUd",
     "section_divider_c4YDxx",
     "section_accordion_group_zgLRtn"
   ]
