@@ -348,6 +348,7 @@
         "text",
         "buttons"
       ],
+      "disabled": true,
       "settings": {
         "width": "wrapper",
         "align_text": "text-left",
