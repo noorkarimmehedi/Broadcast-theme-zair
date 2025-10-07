@@ -475,6 +475,58 @@
         "layout_mobile": "carousel"
       }
     },
+    "section_collections_list_TFaVUd": {
+      "type": "section-collections-list",
+      "blocks": {
+        "collection_xXnBPB": {
+          "type": "collection",
+          "settings": {
+            "collection": "new-arrival",
+            "title": ""
+          }
+        },
+        "collection_TgxUPG": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "title": ""
+          }
+        },
+        "collection_zY8iW8": {
+          "type": "collection",
+          "settings": {
+            "collection": "political-teas",
+            "title": ""
+          }
+        },
+        "collection_hKYLWc": {
+          "type": "collection",
+          "settings": {
+            "collection": "tributes",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_xXnBPB",
+        "collection_TgxUPG",
+        "collection_zY8iW8",
+        "collection_hKYLWc"
+      ],
+      "name": "Collection list",
+      "settings": {
+        "title": "All Our Collection list",
+        "description": "",
+        "layout": "grid",
+        "aspect_ratio": 1,
+        "grid": 4,
+        "layout_mobile": "2",
+        "bg_color": "",
+        "color": "",
+        "padding_top": 9,
+        "padding_bottom": 13
+      }
+    },
     "section_divider_c4YDxx": {
       "type": "section-divider",
       "name": "Divider",
@@ -532,58 +584,6 @@
         "border_color": "",
         "padding_top": 50,
         "padding_bottom": 50
-      }
-    },
-    "section_collections_list_TFaVUd": {
-      "type": "section-collections-list",
-      "blocks": {
-        "collection_xXnBPB": {
-          "type": "collection",
-          "settings": {
-            "collection": "new-arrival",
-            "title": ""
-          }
-        },
-        "collection_TgxUPG": {
-          "type": "collection",
-          "settings": {
-            "collection": "frontpage",
-            "title": ""
-          }
-        },
-        "collection_zY8iW8": {
-          "type": "collection",
-          "settings": {
-            "collection": "political-teas",
-            "title": ""
-          }
-        },
-        "collection_hKYLWc": {
-          "type": "collection",
-          "settings": {
-            "collection": "tributes",
-            "title": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection_xXnBPB",
-        "collection_TgxUPG",
-        "collection_zY8iW8",
-        "collection_hKYLWc"
-      ],
-      "name": "Collection list",
-      "settings": {
-        "title": "Collection list",
-        "description": "",
-        "layout": "grid",
-        "aspect_ratio": 1,
-        "grid": 4,
-        "layout_mobile": "2",
-        "bg_color": "",
-        "color": "",
-        "padding_top": 32,
-        "padding_bottom": 32
       }
     }
   },
