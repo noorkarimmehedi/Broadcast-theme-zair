@@ -22,21 +22,21 @@
         "collection_nApm76": {
           "type": "collection",
           "settings": {
-            "collection": "new-arrival",
+            "collection": "frontpage",
             "title": ""
           }
         },
         "collection_iHpEPB": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "political-teas",
             "title": ""
           }
         },
         "collection_QGcTr9": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "tributes",
             "title": ""
           }
         }
