@@ -407,7 +407,7 @@
         "description": "",
         "layout": "inline",
         "link_text": "Shop Now",
-        "link_url": "",
+        "link_url": "shopify://collections/new-arrival",
         "button_type": "btn--primary",
         "button_size": "",
         "button_style": "btn--solid",
