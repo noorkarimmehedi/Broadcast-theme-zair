@@ -14384,7 +14384,7 @@ a.review {
 }
 .cart-bar.is-visible {
   opacity: 1;
-  visibility: visible;
+  visibility: hidden;
   transform: translateY(calc(var(--cookie-bar-height) * -1));
   transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0s;
 }
