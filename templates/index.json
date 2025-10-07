@@ -446,12 +446,12 @@
         "icon_LAMJw6": {
           "type": "icon",
           "settings": {
-            "icon_name": "icon-award",
+            "icon_name": "icon-pin",
             "icon_size": 20,
             "icon_color": "#545454",
-            "title": "Title",
+            "title": "Call us at +8801602070298",
             "heading_size": 4,
-            "text": "<p>Share details about your shipping policies, item returns, or customer service.</p>",
+            "text": "<p>Our customer support is available Monday to Friday: 8am-8:30pm.</p>",
             "text_size": 3
           }
         }
