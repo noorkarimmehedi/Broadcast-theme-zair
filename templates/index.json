@@ -426,12 +426,12 @@
     },
     "hero": {
       "type": "section-hero",
-      "disabled": true,
       "settings": {
         "height": "screen-height-three-quarters",
         "width": "wrapper--full",
-        "image_1": "shopify://shop_images/Gemini_Generated_Image_4bhzhx4bhzhx4bhz.png",
-        "mobile_height": "screen-height-three-quarters--mobile",
+        "image_1": "shopify://shop_images/image.png",
+        "image_2": "shopify://shop_images/image_1.png",
+        "mobile_height": "screen-height-one-third--mobile",
         "flex_align": "align--middle-left",
         "overlay_opacity": 0,
         "overlay_color": "#000000",

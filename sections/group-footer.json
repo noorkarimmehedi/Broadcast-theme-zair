@@ -1,1 +1,81 @@
-{"type":"footer","name":"Footer","sections":{"footer":{"type":"footer","blocks":{"footer-0":{"type":"newsletter","settings":{"text":"<p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.<\/p>","show_name":true}},"footer-1":{"type":"linklist","settings":{"linklist":"main-menu","title":""}},"footer-2":{"type":"text","settings":{"title":"Contact","text":"<p>1234 Main Street <br>New York, NY 12345 <br> 123.456.7890<br>help@broadcast.com<\/p>"}}},"block_order":["footer-0","footer-1","footer-2"],"settings":{"logo_image_width":150,"overlay_opacity":75,"overlay_color":"#ffffff"}},"supporting-menu":{"type":"section-supporting-menu","settings":{"linklist":"","footer_payment_enable":false,"show_locale_selector":true,"show_currency_selector":true,"type":"currency"}}},"order":["footer","supporting-menu"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "footer-0": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Newsletter",
+            "text": "<p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>",
+            "show_name": true,
+            "button_text": "Join",
+            "show_arrow": false,
+            "terms": true,
+            "button_type": "btn--black",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_social_links": false,
+            "column_width": 33
+          }
+        },
+        "footer-1": {
+          "type": "linklist",
+          "settings": {
+            "linklist": "main-menu",
+            "title": "",
+            "column_width": 33
+          }
+        },
+        "footer-2": {
+          "type": "text",
+          "settings": {
+            "image_width": 150,
+            "title": "Contact",
+            "text": "<p>59/3</p><p>Pilkhana Road</p><p>Azimpur, Dhaka-1205</p>",
+            "column_width": 33
+          }
+        }
+      },
+      "block_order": [
+        "footer-0",
+        "footer-1",
+        "footer-2"
+      ],
+      "settings": {
+        "logo_image_width": 150,
+        "overlay_opacity": 75,
+        "overlay_color": "#ffffff",
+        "padding_top": 75,
+        "padding_bottom": 30
+      }
+    },
+    "supporting-menu": {
+      "type": "section-supporting-menu",
+      "settings": {
+        "linklist": "",
+        "footer_payment_enable": false,
+        "show_locale_selector": true,
+        "show_currency_selector": true,
+        "type": "currency",
+        "padding_top": 30,
+        "padding_bottom": 30
+      }
+    }
+  },
+  "order": [
+    "footer",
+    "supporting-menu"
+  ]
+}
