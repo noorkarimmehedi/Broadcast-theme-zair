@@ -54,7 +54,7 @@
         "layout": "grid",
         "aspect_ratio": 1,
         "grid": 4,
-        "layout_mobile": "slider",
+        "layout_mobile": "2",
         "bg_color": "",
         "color": "",
         "padding_top": 4,
