@@ -287,11 +287,31 @@
             "button_style": "btn--outline",
             "show_arrow": false
           }
+        },
+        "collection_N3N4KW": {
+          "type": "collection",
+          "settings": {
+            "title": "",
+            "featured_collection": "political-teas",
+            "show_image": true,
+            "align_with_product_images": false,
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "description": "",
+            "color": "#ffffff",
+            "link_text": "View products",
+            "link": "",
+            "button_type": "btn--white",
+            "button_size": "",
+            "button_style": "btn--outline",
+            "show_arrow": false
+          }
         }
       },
       "block_order": [
         "tabs-1",
-        "tabs-0"
+        "tabs-0",
+        "collection_N3N4KW"
       ],
       "settings": {
         "title": "",
