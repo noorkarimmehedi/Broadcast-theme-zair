@@ -30,13 +30,9 @@
       "block_order": [
         "text_mTEfgw"
       ],
-      "disabled": true,
       "settings": {
-        "layout": "slider",
-        "slider_autoplay": false,
+        "layout": "marquee",
         "slider_speed": 5,
-        "show_arrows": false,
-        "marquee_autoplay": false,
         "marquee_speed": 50,
         "text_size": 2,
         "bg_color": "#000000",
