@@ -459,6 +459,7 @@
       "block_order": [
         "icon_LAMJw6"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": 5,
@@ -472,6 +473,65 @@
         "padding_bottom": 50,
         "layout_mobile": "carousel"
       }
+    },
+    "section_accordion_group_zgLRtn": {
+      "type": "section-accordion-group",
+      "blocks": {
+        "heading_NzWrb6": {
+          "type": "heading",
+          "settings": {
+            "title": "FAQ"
+          }
+        },
+        "question_MUgY8U": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "content": "<p>Share details about your shipping policies, item returns, or customer service.</p>"
+          }
+        },
+        "question_kGk3ix": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "content": "<p>Share details about your shipping policies, item returns, or customer service.</p>"
+          }
+        },
+        "question_6FrqVh": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "content": "<p>Share details about your shipping policies, item returns, or customer service.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_NzWrb6",
+        "question_MUgY8U",
+        "question_kGk3ix",
+        "question_6FrqVh"
+      ],
+      "name": "Accordion group",
+      "settings": {
+        "width": "wrapper--narrow",
+        "bg_color": "",
+        "color": "",
+        "border_color": "",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "section_divider_c4YDxx": {
+      "type": "section-divider",
+      "name": "Divider",
+      "settings": {
+        "show_line": true,
+        "width": "wrapper",
+        "border_color": "",
+        "bg_color": "",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
     }
   },
   "order": [
@@ -484,6 +544,8 @@
     "lookbook",
     "featured-collection",
     "hero",
-    "icons"
+    "icons",
+    "section_divider_c4YDxx",
+    "section_accordion_group_zgLRtn"
   ]
 }
