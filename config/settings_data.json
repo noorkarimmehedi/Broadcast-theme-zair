@@ -34,7 +34,7 @@
     "type_nav_caps": true,
     "btn_primary_bg_color": "#000000",
     "btn_primary_border_color": "#000000",
-    "grid_style": "classic",
+    "grid_style": "compact",
     "product_grid_outline": false,
     "show_scroll_top_button": true,
     "product_grid_aspect_ratio": 1.3,
