@@ -36,7 +36,7 @@
   {% endif %}
 
   .footer__credits {
-    text-align: center;
+    text-align: left;
     margin-top: 30px;
     font-size: 11px;
     line-height: 1.5;
@@ -176,11 +176,7 @@
 
     {%- comment -%} Arc Lab Technology Credit {%- endcomment -%}
     <div class="footer__credits">
-      <p>
-        © {{ 'now' | date: '%Y' }} {{ shop.name }}. 
-        Website designed and developed by 
-        <a href="https://api.whatsapp.com/send/?phone=8801733670129" target="_blank" rel="noopener">Arc Lab Technology</a>.
-      </p>
+      <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. Website designed and developed by <a href="https://api.whatsapp.com/send/?phone=8801733670129" target="_blank" rel="noopener">Arc Lab Technology</a>.</p>
     </div>
   </div>
 </section>
