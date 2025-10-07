@@ -126,6 +126,7 @@
         "text",
         "buttons"
       ],
+      "disabled": true,
       "settings": {
         "width": "wrapper",
         "align_text": "text-left",
@@ -186,6 +187,7 @@
         "image",
         "text"
       ],
+      "disabled": true,
       "settings": {
         "height": "screen-height-one-half",
         "mobile_height": "screen-height-one-half--mobile",
@@ -252,7 +254,7 @@
           "type": "collection",
           "settings": {
             "title": "",
-            "featured_collection": "",
+            "featured_collection": "new-arrival",
             "show_image": true,
             "align_with_product_images": false,
             "overlay_opacity": 0,
