@@ -23,32 +23,28 @@
         "collection_PiJJAa": {
           "type": "collection",
           "settings": {
-            "collection": "casual-shirts",
-            "collection_image": "shopify://shop_images/Gemini_Generated_Image_iubv5aiubv5aiubv.png",
+            "collection": "frontpage",
             "title": ""
           }
         },
         "collection_J633bB": {
           "type": "collection",
           "settings": {
-            "collection": "formal-shirts",
-            "collection_image": "shopify://shop_images/ChatGPT_Image_Sep_25_2025_10_00_20_PM.png",
+            "collection": "tributes",
             "title": ""
           }
         },
         "collection_wUcRFx": {
           "type": "collection",
           "settings": {
-            "collection": "panjabi",
-            "collection_image": "shopify://shop_images/ChatGPT_Image_Sep_25_2025_09_11_14_PM.png",
+            "collection": "new-arrival",
             "title": ""
           }
         },
         "collection_6Vmkn8": {
           "type": "collection",
           "settings": {
-            "collection": "pants",
-            "collection_image": "shopify://shop_images/Gemini_Generated_Image_r20nlur20nlur20n.png",
+            "collection": "political-teas",
             "title": ""
           }
         }
