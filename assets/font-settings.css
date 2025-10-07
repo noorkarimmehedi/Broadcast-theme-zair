@@ -1,0 +1,77 @@
+@font-face {
+  font-family: Cardo;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/cardo/cardo_n4.eebb245e383be6550785a657b25f51c2b83d7e78.woff2?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=5b43e7dfe5bfd2c5ed29b9be6b7ebda0e663095ecbb4c316d1ce50215e7bc9c9") format("woff2"),
+       url("https://fonts.shopifycdn.com/cardo/cardo_n4.5873ec3470fadfb2463a972a55c13c82fcea3051.woff?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=475296f54ee1c18fda1a00826244d95666c80298ae447edbe3f4ec6ff55e4418") format("woff");
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/avenir_next/avenirnext_n4.7fd0287595be20cd5a683102bf49d073b6abf144.woff2?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=76a5fc3a0cfdb43c83c5795aa03284ee7bfcfbf4d68a100da2daca7e9373479b") format("woff2"),
+       url("https://fonts.shopifycdn.com/avenir_next/avenirnext_n4.a26a334a0852627a5f36b195112385b0cd700077.woff?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=a451673fd04f423eab155de442a30bc43c71196989b76503ef09385d04f2ad9b") format("woff");
+}
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/poppins/poppins_n4.934accbf9f5987aa89334210e6c1e9151f37d3b6.woff2?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=524855f3fcbc0998a157e92c4d4301c095917d4408eb96d7d7de3da09ea3c6c5") format("woff2"),
+       url("https://fonts.shopifycdn.com/poppins/poppins_n4.ee28d4489eaf5de9cf6e17e696991b5e9148c716.woff?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=3948ac1d09a4de35099e550bdec3b741a5d368dd9e41902d8d8fcc89d676ee3d") format("woff");
+}
+
+
+
+  @font-face {
+  font-family: Cardo;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/cardo/cardo_n7.d02b7fb13fc5aac90b5334d99f92017ede2099f6.woff2?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=95078ba81b5caf85576d03c460cc0b41aef80df8a600ed99381953773f16923b") format("woff2"),
+       url("https://fonts.shopifycdn.com/cardo/cardo_n7.2bbbb0d9819b97cd025c56641e4eb6435f1c07d0.woff?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=77e98bfb9c53daa26c86a6bcdb4096a7408155df32b6bccc27a92e2bd5be2914") format("woff");
+}
+
+
+
+
+  @font-face {
+  font-family: "Avenir Next";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/avenir_next/avenirnext_n5.972a96b7a049f12c89d6d1cd0e1b6c9211f7ba14.woff2?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=1f26d54d9c5ed84da81d9bb109f49f9adffcdedf3452e9872db5dba35831f3f1") format("woff2"),
+       url("https://fonts.shopifycdn.com/avenir_next/avenirnext_n5.9e88d20fa9eb66ba268ac60ab013006ef69a310a.woff?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=7e53278a43a9a9a6e253fed7daf0b9b69d6e11db3a07712fc87b5fdcac6959ed") format("woff");
+}
+
+
+
+
+
+
+
+  @font-face {
+  font-family: "Avenir Next";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/avenir_next/avenirnext_i4.f1583d9f457b68e44fbda187a48b4096d547d7f4.woff2?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=68ccfbafcab04a42b902957a6675e87bef06d81ace8aee1dab27a3ba9290fc23") format("woff2"),
+       url("https://fonts.shopifycdn.com/avenir_next/avenirnext_i4.67fb53a3e0351125941146246183577ae8d8bf23.woff?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=b4b5155c1f518c55156671f26ae407d313bc83c73e1aa64639b9812164e21ebd") format("woff");
+}
+
+
+
+
+  @font-face {
+  font-family: "Avenir Next";
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  src: url("https://fonts.shopifycdn.com/avenir_next/avenirnext_i5.2d1a6d537e5b485482d6bcca34a56cc10d441a55.woff2?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=f5147bd24b46632b78c9f9a35bc24387fc028571e2b31d9c97dc374ae86d4b24") format("woff2"),
+       url("https://fonts.shopifycdn.com/avenir_next/avenirnext_i5.fcfa37c68ca483c41031623bfae4701d99bb4b95.woff?h1=ZXN0aGVyc2ZhaXJ5dGFsZWhvdXNlLmNvLnVr&hmac=32b01f5e920831d43c0d2bb36f806b8ea2ce36fa2633bb60280a3ab6ee3e5b7b") format("woff");
+}
+

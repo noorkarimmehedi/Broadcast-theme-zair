@@ -1,0 +1,216 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section_collections_list_Kwr4jp": {
+      "type": "section-collections-list",
+      "blocks": {
+        "collection_rn3hJw": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "new-arrival",
+            "title": ""
+          }
+        },
+        "collection_PiJJAa": {
+          "type": "collection",
+          "settings": {
+            "collection": "casual-shirts",
+            "collection_image": "shopify://shop_images/Gemini_Generated_Image_iubv5aiubv5aiubv.png",
+            "title": ""
+          }
+        },
+        "collection_J633bB": {
+          "type": "collection",
+          "settings": {
+            "collection": "formal-shirts",
+            "collection_image": "shopify://shop_images/ChatGPT_Image_Sep_25_2025_10_00_20_PM.png",
+            "title": ""
+          }
+        },
+        "collection_wUcRFx": {
+          "type": "collection",
+          "settings": {
+            "collection": "panjabi",
+            "collection_image": "shopify://shop_images/ChatGPT_Image_Sep_25_2025_09_11_14_PM.png",
+            "title": ""
+          }
+        },
+        "collection_6Vmkn8": {
+          "type": "collection",
+          "settings": {
+            "collection": "pants",
+            "collection_image": "shopify://shop_images/Gemini_Generated_Image_r20nlur20nlur20n.png",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_rn3hJw",
+        "collection_PiJJAa",
+        "collection_J633bB",
+        "collection_wUcRFx",
+        "collection_6Vmkn8"
+      ],
+      "name": "Collection list",
+      "settings": {
+        "title": "",
+        "description": "",
+        "layout": "slider",
+        "aspect_ratio": 1,
+        "grid": 5,
+        "layout_mobile": "2",
+        "bg_color": "",
+        "color": "",
+        "padding_top": 0,
+        "padding_bottom": 1
+      }
+    },
+    "17593394853e0db13d": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8cabaad_6pGLC6": {
+          "type": "ai_gen_block_8cabaad",
+          "settings": {
+            "heading": "Shop by category",
+            "subtitle": "Discover our curated collections",
+            "heading_alignment": "center",
+            "category_1": "new-arrival",
+            "custom_link_1": "",
+            "custom_title_1": "",
+            "custom_count_1": "",
+            "category_2": "frontpage",
+            "custom_link_2": "",
+            "custom_title_2": "",
+            "custom_count_2": "",
+            "category_3": "frontpage",
+            "custom_link_3": "",
+            "custom_title_3": "",
+            "custom_count_3": "",
+            "category_4": "new-arrival",
+            "custom_link_4": "",
+            "custom_title_4": "",
+            "custom_count_4": "",
+            "category_5": "",
+            "custom_link_5": "",
+            "custom_title_5": "",
+            "custom_count_5": "",
+            "category_6": "",
+            "custom_link_6": "",
+            "custom_title_6": "",
+            "custom_count_6": "",
+            "category_7": "",
+            "custom_link_7": "",
+            "custom_title_7": "",
+            "custom_count_7": "",
+            "category_8": "",
+            "custom_link_8": "",
+            "custom_title_8": "",
+            "custom_count_8": "",
+            "slides_desktop": 4,
+            "slides_mobile": 2,
+            "card_spacing": 20,
+            "image_height": 280,
+            "show_navigation": true,
+            "show_dots": true,
+            "autoplay": false,
+            "autoplay_speed": 4,
+            "show_product_count": true,
+            "text_alignment": "left",
+            "card_border_radius": 8,
+            "overlay_opacity": 40,
+            "hover_lift": 0,
+            "background_color": "#0c0eef",
+            "heading_color": "#212121",
+            "subtitle_color": "#666666",
+            "card_background": "#ffffff",
+            "card_title_color": "#ffffff",
+            "card_count_color": "#ffffff",
+            "nav_button_bg": "#ffffff",
+            "nav_button_hover_bg": "#ab8c52",
+            "nav_button_color": "#212121",
+            "nav_button_hover_color": "#ffffff",
+            "dot_color": "#212121",
+            "dot_active_color": "#212121",
+            "heading_font": "cardo_n4",
+            "heading_size": 32,
+            "subtitle_font": "figtree_n4",
+            "subtitle_size": 16,
+            "card_title_font": "cardo_n4",
+            "card_title_size": 20,
+            "card_count_font": "assistant_n4",
+            "card_count_size": 14,
+            "section_padding_top": 55,
+            "section_padding_bottom": 50
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8cabaad_6pGLC6"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "hero": {
+      "type": "collection-image-with-title",
+      "settings": {
+        "show_title": true,
+        "show_description": true,
+        "flex_align": "align--middle-center",
+        "bg_color": "#f9dee5",
+        "color": "#ffffff",
+        "show_image": true,
+        "banner_layout": "overlay",
+        "height": "screen-height-one-third",
+        "mobile_height": "screen-height-one-half--mobile",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000",
+        "show_overlay_text": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "subcollections": {
+      "type": "subcollections",
+      "settings": {
+        "subcollection_layout": "grid",
+        "subcollection_description": false,
+        "select_image": "collection",
+        "color": "#ffffff",
+        "bg_color": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "collection",
+      "settings": {
+        "enable_sort": true,
+        "enable_filters": true,
+        "filter_layout": "inline-closed",
+        "collection_linklist": "",
+        "grid": 3,
+        "grid_mobile": "2",
+        "product_limit": 36,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "section_collections_list_Kwr4jp",
+    "17593394853e0db13d",
+    "hero",
+    "subcollections",
+    "main"
+  ]
+}

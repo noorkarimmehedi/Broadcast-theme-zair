@@ -1,0 +1,1172 @@
+{% doc %}
+  @prompt
+    generate a modern size chart for me should be customizable and editable , should have the option to add more colums along side cheast, waist, sleeves, Collar, Shoulder like this , i need to scroll left to see all the sizes in mobile version. fix it , no i don't like the UI and layout for mobile version, still no i don't like the layout in mobile version, still don't like this one layout , still i need to scroll on mobile version i don't want it 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-size-chart-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding }}px;
+    border-radius: {{ block.settings.border_radius }}px;
+    border: 1px solid {{ block.settings.border_color }};
+    margin: 20px 0;
+  }
+
+  .ai-size-chart-title-{{ ai_gen_id }} {
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 {{ block.settings.title_margin }}px 0;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-size-chart-description-{{ ai_gen_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.description_margin }}px 0;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-size-chart-desktop-{{ ai_gen_id }} {
+    display: block;
+  }
+
+  .ai-size-chart-mobile-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-size-chart-table-wrapper-{{ ai_gen_id }} {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: {{ block.settings.table_border_radius }}px;
+    border: 1px solid {{ block.settings.table_border_color }};
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    background-color: {{ block.settings.table_background_color }};
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} th {
+    background-color: {{ block.settings.header_background_color }};
+    color: {{ block.settings.header_text_color }};
+    font-size: {{ block.settings.header_font_size }}px;
+    font-weight: 600;
+    padding: {{ block.settings.cell_padding }}px;
+    text-align: center;
+    border-bottom: 2px solid {{ block.settings.table_border_color }};
+    white-space: nowrap;
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} td {
+    padding: {{ block.settings.cell_padding }}px;
+    text-align: center;
+    border-bottom: 1px solid {{ block.settings.table_border_color }};
+    font-size: {{ block.settings.cell_font_size }}px;
+    color: {{ block.settings.text_color }};
+    white-space: nowrap;
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} tr:nth-child(even) {
+    background-color: {{ block.settings.row_alternate_color }};
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} tr:hover {
+    background-color: {{ block.settings.row_hover_color }};
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} td:first-child,
+  .ai-size-chart-table-{{ ai_gen_id }} th:first-child {
+    font-weight: 600;
+    background-color: {{ block.settings.size_column_background }};
+    color: {{ block.settings.size_column_text_color }};
+  }
+
+  .ai-size-chart-mobile-grid-{{ ai_gen_id }} {
+    display: grid;
+    gap: 16px;
+  }
+
+  .ai-size-chart-mobile-size-{{ ai_gen_id }} {
+    background-color: {{ block.settings.table_background_color }};
+    border: 1px solid {{ block.settings.table_border_color }};
+    border-radius: {{ block.settings.table_border_radius }}px;
+    padding: 16px;
+  }
+
+  .ai-size-chart-mobile-size-title-{{ ai_gen_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: 600;
+    font-size: {{ block.settings.header_font_size }}px;
+    color: {{ block.settings.size_column_text_color }};
+    background-color: {{ block.settings.size_column_background }};
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .ai-size-chart-mobile-measurements-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .ai-size-chart-mobile-measurement-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ai-size-chart-mobile-measurement-label-{{ ai_gen_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: 600;
+    font-size: {{ block.settings.cell_font_size | times: 0.9 }}px;
+    color: {{ block.settings.header_text_color }};
+    margin-bottom: 4px;
+  }
+
+  .ai-size-chart-mobile-measurement-value-{{ ai_gen_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    font-size: {{ block.settings.cell_font_size }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-size-chart-notes-{{ ai_gen_id }} {
+    margin-top: {{ block.settings.notes_margin }}px;
+    padding: {{ block.settings.notes_padding }}px;
+    background-color: {{ block.settings.notes_background_color }};
+    border-left: 4px solid {{ block.settings.accent_color }};
+    border-radius: {{ block.settings.notes_border_radius }}px;
+  }
+
+  .ai-size-chart-notes-title-{{ ai_gen_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: 600;
+    font-size: {{ block.settings.notes_title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 8px 0;
+  }
+
+  .ai-size-chart-notes-content-{{ ai_gen_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    font-size: {{ block.settings.notes_font_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-size-chart-desktop-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-size-chart-mobile-{{ ai_gen_id }} {
+      display: block;
+    }
+
+    .ai-size-chart-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding | times: 0.7 }}px;
+    }
+
+    .ai-size-chart-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.9 }}px;
+    }
+
+    .ai-size-chart-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.description_size | times: 0.9 }}px;
+    }
+
+    .ai-size-chart-notes-{{ ai_gen_id }} {
+      padding: {{ block.settings.notes_padding | times: 0.8 }}px;
+    }
+
+    .ai-size-chart-notes-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.notes_title_size | times: 0.9 }}px;
+    }
+
+    .ai-size-chart-notes-content-{{ ai_gen_id }} {
+      font-size: {{ block.settings.notes_font_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-size-chart-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.title != blank %}
+    <h3 class="ai-size-chart-title-{{ ai_gen_id }}">{{ block.settings.title }}</h3>
+  {% endif %}
+
+  {% if block.settings.description != blank %}
+    <div class="ai-size-chart-description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+  {% endif %}
+
+  <div class="ai-size-chart-desktop-{{ ai_gen_id }}">
+    <div class="ai-size-chart-table-wrapper-{{ ai_gen_id }}">
+      <table class="ai-size-chart-table-{{ ai_gen_id }}">
+        <thead>
+          <tr>
+            <th>{{ block.settings.size_header }}</th>
+            {% if block.settings.show_chest %}
+              <th>{{ block.settings.chest_header }}</th>
+            {% endif %}
+            {% if block.settings.show_waist %}
+              <th>{{ block.settings.waist_header }}</th>
+            {% endif %}
+            {% if block.settings.show_sleeves %}
+              <th>{{ block.settings.sleeves_header }}</th>
+            {% endif %}
+            {% if block.settings.show_collar %}
+              <th>{{ block.settings.collar_header }}</th>
+            {% endif %}
+            {% if block.settings.show_shoulder %}
+              <th>{{ block.settings.shoulder_header }}</th>
+            {% endif %}
+            {% if block.settings.show_length %}
+              <th>{{ block.settings.length_header }}</th>
+            {% endif %}
+            {% if block.settings.show_hip %}
+              <th>{{ block.settings.hip_header }}</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in (1..8) %}
+            {% liquid
+              assign size_key = 'size_' | append: i
+              assign chest_key = 'chest_' | append: i
+              assign waist_key = 'waist_' | append: i
+              assign sleeves_key = 'sleeves_' | append: i
+              assign collar_key = 'collar_' | append: i
+              assign shoulder_key = 'shoulder_' | append: i
+              assign length_key = 'length_' | append: i
+              assign hip_key = 'hip_' | append: i
+
+              assign size_value = block.settings[size_key]
+              assign chest_value = block.settings[chest_key]
+              assign waist_value = block.settings[waist_key]
+              assign sleeves_value = block.settings[sleeves_key]
+              assign collar_value = block.settings[collar_key]
+              assign shoulder_value = block.settings[shoulder_key]
+              assign length_value = block.settings[length_key]
+              assign hip_value = block.settings[hip_key]
+            %}
+
+            {% if size_value != blank %}
+              <tr>
+                <td>{{ size_value }}</td>
+                {% if block.settings.show_chest %}
+                  <td>{{ chest_value }}</td>
+                {% endif %}
+                {% if block.settings.show_waist %}
+                  <td>{{ waist_value }}</td>
+                {% endif %}
+                {% if block.settings.show_sleeves %}
+                  <td>{{ sleeves_value }}</td>
+                {% endif %}
+                {% if block.settings.show_collar %}
+                  <td>{{ collar_value }}</td>
+                {% endif %}
+                {% if block.settings.show_shoulder %}
+                  <td>{{ shoulder_value }}</td>
+                {% endif %}
+                {% if block.settings.show_length %}
+                  <td>{{ length_value }}</td>
+                {% endif %}
+                {% if block.settings.show_hip %}
+                  <td>{{ hip_value }}</td>
+                {% endif %}
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ai-size-chart-mobile-{{ ai_gen_id }}">
+    <div class="ai-size-chart-mobile-grid-{{ ai_gen_id }}">
+      {% for i in (1..8) %}
+        {% liquid
+          assign size_key = 'size_' | append: i
+          assign chest_key = 'chest_' | append: i
+          assign waist_key = 'waist_' | append: i
+          assign sleeves_key = 'sleeves_' | append: i
+          assign collar_key = 'collar_' | append: i
+          assign shoulder_key = 'shoulder_' | append: i
+          assign length_key = 'length_' | append: i
+          assign hip_key = 'hip_' | append: i
+
+          assign size_value = block.settings[size_key]
+          assign chest_value = block.settings[chest_key]
+          assign waist_value = block.settings[waist_key]
+          assign sleeves_value = block.settings[sleeves_key]
+          assign collar_value = block.settings[collar_key]
+          assign shoulder_value = block.settings[shoulder_key]
+          assign length_value = block.settings[length_key]
+          assign hip_value = block.settings[hip_key]
+        %}
+
+        {% if size_value != blank %}
+          <div class="ai-size-chart-mobile-size-{{ ai_gen_id }}">
+            <div class="ai-size-chart-mobile-size-title-{{ ai_gen_id }}">{{ size_value }}</div>
+            <div class="ai-size-chart-mobile-measurements-{{ ai_gen_id }}">
+              {% if block.settings.show_chest and chest_value != blank %}
+                <div class="ai-size-chart-mobile-measurement-{{ ai_gen_id }}">
+                  <div class="ai-size-chart-mobile-measurement-label-{{ ai_gen_id }}">{{ block.settings.chest_header }}</div>
+                  <div class="ai-size-chart-mobile-measurement-value-{{ ai_gen_id }}">{{ chest_value }}</div>
+                </div>
+              {% endif %}
+              {% if block.settings.show_waist and waist_value != blank %}
+                <div class="ai-size-chart-mobile-measurement-{{ ai_gen_id }}">
+                  <div class="ai-size-chart-mobile-measurement-label-{{ ai_gen_id }}">{{ block.settings.waist_header }}</div>
+                  <div class="ai-size-chart-mobile-measurement-value-{{ ai_gen_id }}">{{ waist_value }}</div>
+                </div>
+              {% endif %}
+              {% if block.settings.show_sleeves and sleeves_value != blank %}
+                <div class="ai-size-chart-mobile-measurement-{{ ai_gen_id }}">
+                  <div class="ai-size-chart-mobile-measurement-label-{{ ai_gen_id }}">{{ block.settings.sleeves_header }}</div>
+                  <div class="ai-size-chart-mobile-measurement-value-{{ ai_gen_id }}">{{ sleeves_value }}</div>
+                </div>
+              {% endif %}
+              {% if block.settings.show_collar and collar_value != blank %}
+                <div class="ai-size-chart-mobile-measurement-{{ ai_gen_id }}">
+                  <div class="ai-size-chart-mobile-measurement-label-{{ ai_gen_id }}">{{ block.settings.collar_header }}</div>
+                  <div class="ai-size-chart-mobile-measurement-value-{{ ai_gen_id }}">{{ collar_value }}</div>
+                </div>
+              {% endif %}
+              {% if block.settings.show_shoulder and shoulder_value != blank %}
+                <div class="ai-size-chart-mobile-measurement-{{ ai_gen_id }}">
+                  <div class="ai-size-chart-mobile-measurement-label-{{ ai_gen_id }}">{{ block.settings.shoulder_header }}</div>
+                  <div class="ai-size-chart-mobile-measurement-value-{{ ai_gen_id }}">{{ shoulder_value }}</div>
+                </div>
+              {% endif %}
+              {% if block.settings.show_length and length_value != blank %}
+                <div class="ai-size-chart-mobile-measurement-{{ ai_gen_id }}">
+                  <div class="ai-size-chart-mobile-measurement-label-{{ ai_gen_id }}">{{ block.settings.length_header }}</div>
+                  <div class="ai-size-chart-mobile-measurement-value-{{ ai_gen_id }}">{{ length_value }}</div>
+                </div>
+              {% endif %}
+              {% if block.settings.show_hip and hip_value != blank %}
+                <div class="ai-size-chart-mobile-measurement-{{ ai_gen_id }}">
+                  <div class="ai-size-chart-mobile-measurement-label-{{ ai_gen_id }}">{{ block.settings.hip_header }}</div>
+                  <div class="ai-size-chart-mobile-measurement-value-{{ ai_gen_id }}">{{ hip_value }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if block.settings.notes != blank %}
+    <div class="ai-size-chart-notes-{{ ai_gen_id }}">
+      <div class="ai-size-chart-notes-title-{{ ai_gen_id }}">{{ block.settings.notes_title }}</div>
+      <div class="ai-size-chart-notes-content-{{ ai_gen_id }}">{{ block.settings.notes }}</div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Size chart",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Size Chart"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Find your perfect fit with our detailed size guide</p>"
+    },
+    {
+      "type": "header",
+      "content": "Table headers"
+    },
+    {
+      "type": "text",
+      "id": "size_header",
+      "label": "Size column header",
+      "default": "Size"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_chest",
+      "label": "Show chest measurements",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "chest_header",
+      "label": "Chest column header",
+      "default": "Chest (cm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_waist",
+      "label": "Show waist measurements",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "waist_header",
+      "label": "Waist column header",
+      "default": "Waist (cm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sleeves",
+      "label": "Show sleeve measurements",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "sleeves_header",
+      "label": "Sleeves column header",
+      "default": "Sleeves (cm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collar",
+      "label": "Show collar measurements",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "collar_header",
+      "label": "Collar column header",
+      "default": "Collar (cm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shoulder",
+      "label": "Show shoulder measurements",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "shoulder_header",
+      "label": "Shoulder column header",
+      "default": "Shoulder (cm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_length",
+      "label": "Show length measurements",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "length_header",
+      "label": "Length column header",
+      "default": "Length (cm)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hip",
+      "label": "Show hip measurements",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "hip_header",
+      "label": "Hip column header",
+      "default": "Hip (cm)"
+    },
+    {
+      "type": "header",
+      "content": "Size 1"
+    },
+    {
+      "type": "text",
+      "id": "size_1",
+      "label": "Size",
+      "default": "XS"
+    },
+    {
+      "type": "text",
+      "id": "chest_1",
+      "label": "Chest",
+      "default": "86-89"
+    },
+    {
+      "type": "text",
+      "id": "waist_1",
+      "label": "Waist",
+      "default": "66-69"
+    },
+    {
+      "type": "text",
+      "id": "sleeves_1",
+      "label": "Sleeves"
+    },
+    {
+      "type": "text",
+      "id": "collar_1",
+      "label": "Collar"
+    },
+    {
+      "type": "text",
+      "id": "shoulder_1",
+      "label": "Shoulder"
+    },
+    {
+      "type": "text",
+      "id": "length_1",
+      "label": "Length"
+    },
+    {
+      "type": "text",
+      "id": "hip_1",
+      "label": "Hip"
+    },
+    {
+      "type": "header",
+      "content": "Size 2"
+    },
+    {
+      "type": "text",
+      "id": "size_2",
+      "label": "Size",
+      "default": "S"
+    },
+    {
+      "type": "text",
+      "id": "chest_2",
+      "label": "Chest",
+      "default": "90-93"
+    },
+    {
+      "type": "text",
+      "id": "waist_2",
+      "label": "Waist",
+      "default": "70-73"
+    },
+    {
+      "type": "text",
+      "id": "sleeves_2",
+      "label": "Sleeves"
+    },
+    {
+      "type": "text",
+      "id": "collar_2",
+      "label": "Collar"
+    },
+    {
+      "type": "text",
+      "id": "shoulder_2",
+      "label": "Shoulder"
+    },
+    {
+      "type": "text",
+      "id": "length_2",
+      "label": "Length"
+    },
+    {
+      "type": "text",
+      "id": "hip_2",
+      "label": "Hip"
+    },
+    {
+      "type": "header",
+      "content": "Size 3"
+    },
+    {
+      "type": "text",
+      "id": "size_3",
+      "label": "Size",
+      "default": "M"
+    },
+    {
+      "type": "text",
+      "id": "chest_3",
+      "label": "Chest",
+      "default": "94-97"
+    },
+    {
+      "type": "text",
+      "id": "waist_3",
+      "label": "Waist",
+      "default": "74-77"
+    },
+    {
+      "type": "text",
+      "id": "sleeves_3",
+      "label": "Sleeves"
+    },
+    {
+      "type": "text",
+      "id": "collar_3",
+      "label": "Collar"
+    },
+    {
+      "type": "text",
+      "id": "shoulder_3",
+      "label": "Shoulder"
+    },
+    {
+      "type": "text",
+      "id": "length_3",
+      "label": "Length"
+    },
+    {
+      "type": "text",
+      "id": "hip_3",
+      "label": "Hip"
+    },
+    {
+      "type": "header",
+      "content": "Size 4"
+    },
+    {
+      "type": "text",
+      "id": "size_4",
+      "label": "Size",
+      "default": "L"
+    },
+    {
+      "type": "text",
+      "id": "chest_4",
+      "label": "Chest",
+      "default": "98-101"
+    },
+    {
+      "type": "text",
+      "id": "waist_4",
+      "label": "Waist",
+      "default": "78-81"
+    },
+    {
+      "type": "text",
+      "id": "sleeves_4",
+      "label": "Sleeves"
+    },
+    {
+      "type": "text",
+      "id": "collar_4",
+      "label": "Collar"
+    },
+    {
+      "type": "text",
+      "id": "shoulder_4",
+      "label": "Shoulder"
+    },
+    {
+      "type": "text",
+      "id": "length_4",
+      "label": "Length"
+    },
+    {
+      "type": "text",
+      "id": "hip_4",
+      "label": "Hip"
+    },
+    {
+      "type": "header",
+      "content": "Size 5"
+    },
+    {
+      "type": "text",
+      "id": "size_5",
+      "label": "Size",
+      "default": "XL"
+    },
+    {
+      "type": "text",
+      "id": "chest_5",
+      "label": "Chest",
+      "default": "102-105"
+    },
+    {
+      "type": "text",
+      "id": "waist_5",
+      "label": "Waist",
+      "default": "82-85"
+    },
+    {
+      "type": "text",
+      "id": "sleeves_5",
+      "label": "Sleeves"
+    },
+    {
+      "type": "text",
+      "id": "collar_5",
+      "label": "Collar"
+    },
+    {
+      "type": "text",
+      "id": "shoulder_5",
+      "label": "Shoulder"
+    },
+    {
+      "type": "text",
+      "id": "length_5",
+      "label": "Length"
+    },
+    {
+      "type": "text",
+      "id": "hip_5",
+      "label": "Hip"
+    },
+    {
+      "type": "header",
+      "content": "Size 6"
+    },
+    {
+      "type": "text",
+      "id": "size_6",
+      "label": "Size",
+      "default": "XXL"
+    },
+    {
+      "type": "text",
+      "id": "chest_6",
+      "label": "Chest",
+      "default": "106-109"
+    },
+    {
+      "type": "text",
+      "id": "waist_6",
+      "label": "Waist",
+      "default": "86-89"
+    },
+    {
+      "type": "text",
+      "id": "sleeves_6",
+      "label": "Sleeves"
+    },
+    {
+      "type": "text",
+      "id": "collar_6",
+      "label": "Collar"
+    },
+    {
+      "type": "text",
+      "id": "shoulder_6",
+      "label": "Shoulder"
+    },
+    {
+      "type": "text",
+      "id": "length_6",
+      "label": "Length"
+    },
+    {
+      "type": "text",
+      "id": "hip_6",
+      "label": "Hip"
+    },
+    {
+      "type": "header",
+      "content": "Size 7"
+    },
+    {
+      "type": "text",
+      "id": "size_7",
+      "label": "Size"
+    },
+    {
+      "type": "text",
+      "id": "chest_7",
+      "label": "Chest"
+    },
+    {
+      "type": "text",
+      "id": "waist_7",
+      "label": "Waist"
+    },
+    {
+      "type": "text",
+      "id": "sleeves_7",
+      "label": "Sleeves"
+    },
+    {
+      "type": "text",
+      "id": "collar_7",
+      "label": "Collar"
+    },
+    {
+      "type": "text",
+      "id": "shoulder_7",
+      "label": "Shoulder"
+    },
+    {
+      "type": "text",
+      "id": "length_7",
+      "label": "Length"
+    },
+    {
+      "type": "text",
+      "id": "hip_7",
+      "label": "Hip"
+    },
+    {
+      "type": "header",
+      "content": "Size 8"
+    },
+    {
+      "type": "text",
+      "id": "size_8",
+      "label": "Size"
+    },
+    {
+      "type": "text",
+      "id": "chest_8",
+      "label": "Chest"
+    },
+    {
+      "type": "text",
+      "id": "waist_8",
+      "label": "Waist"
+    },
+    {
+      "type": "text",
+      "id": "sleeves_8",
+      "label": "Sleeves"
+    },
+    {
+      "type": "text",
+      "id": "collar_8",
+      "label": "Collar"
+    },
+    {
+      "type": "text",
+      "id": "shoulder_8",
+      "label": "Shoulder"
+    },
+    {
+      "type": "text",
+      "id": "length_8",
+      "label": "Length"
+    },
+    {
+      "type": "text",
+      "id": "hip_8",
+      "label": "Hip"
+    },
+    {
+      "type": "header",
+      "content": "Notes"
+    },
+    {
+      "type": "text",
+      "id": "notes_title",
+      "label": "Notes title",
+      "default": "Sizing Notes"
+    },
+    {
+      "type": "richtext",
+      "id": "notes",
+      "label": "Notes content",
+      "default": "<p>All measurements are in centimeters. For the best fit, measure yourself and compare with our size chart.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#ab8c52"
+    },
+    {
+      "type": "header",
+      "content": "Table colors"
+    },
+    {
+      "type": "color",
+      "id": "table_background_color",
+      "label": "Table background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "table_border_color",
+      "label": "Table borders",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "header_background_color",
+      "label": "Header background",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "row_alternate_color",
+      "label": "Alternate row color",
+      "default": "#fafafa"
+    },
+    {
+      "type": "color",
+      "id": "row_hover_color",
+      "label": "Row hover color",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
+      "id": "size_column_background",
+      "label": "Size column background",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "size_column_text_color",
+      "label": "Size column text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Notes colors"
+    },
+    {
+      "type": "color",
+      "id": "notes_background_color",
+      "label": "Notes background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Title font",
+      "default": "helvetica_n7"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 24
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "header_font_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Table header size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "cell_font_size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Table cell size",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "notes_title_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Notes title size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "notes_font_size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Notes text size",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Container padding",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Container border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "table_border_radius",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "unit": "px",
+      "label": "Table border radius",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "cell_padding",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Cell padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_margin",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Title bottom margin",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_margin",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Description bottom margin",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "notes_margin",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Notes top margin",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "notes_padding",
+      "min": 10,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "label": "Notes padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "notes_border_radius",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "unit": "px",
+      "label": "Notes border radius",
+      "default": 6
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size chart"
+    }
+  ]
+}
+{% endschema %}

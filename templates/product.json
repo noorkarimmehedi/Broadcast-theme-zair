@@ -1,0 +1,690 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product",
+      "blocks": {
+        "title_8Y7MTP": {
+          "type": "title",
+          "settings": {
+            "subheading_option": "none",
+            "show_rating": true,
+            "enable_star_rating": true,
+            "show_rating_count": false,
+            "padding_bottom": 8
+          }
+        },
+        "price_LbWbx7": {
+          "type": "price",
+          "settings": {
+            "padding_bottom": 20
+          }
+        },
+        "pickup": {
+          "type": "pickup",
+          "disabled": true,
+          "settings": {
+            "padding_bottom": 32
+          }
+        },
+        "variants_3cRT3q": {
+          "type": "variants",
+          "settings": {
+            "info_page": "",
+            "subscriptions_enable_selectors": false,
+            "padding_bottom": 16
+          }
+        },
+        "tabs": {
+          "type": "tab_richtext",
+          "disabled": true,
+          "settings": {
+            "show_read_more": true,
+            "style": "tabs",
+            "title_1": "ORIGIN",
+            "raw_content_1": "<p>Manufactured & Marketed by: <strong>ZAIR</strong></p><p>Our Experience Centre: Gulshan, Dhaka Bangladesh</p><p>Country of Origin: Bangladesh</p>",
+            "title_2": "Info",
+            "raw_content_2": "<p>The <strong>Beige & Sky Blue Striped Casual Shirt </strong>from ZAIR is the perfect choice for effortless summer style. Crafted for comfort and breathability, this lightweight shirt keeps you cool during warmer days. With its <strong>relaxed fit </strong>and timeless stripes, it’s ideal for both casual outings and laid-back occasions. If you're looking for <strong>premium Full-sleeve shirts </strong>for men in BD, this versatile piece is a must-have. Stay stylish and comfortable all season long<strong>.</strong></p>",
+            "title_3": "",
+            "raw_content_3": "",
+            "title_4": "",
+            "raw_content_4": "",
+            "title_5": "",
+            "raw_content_5": "",
+            "padding_bottom": 0
+          }
+        },
+        "buttons_xAgMTi": {
+          "type": "buttons",
+          "settings": {
+            "show_quantity": true,
+            "show_payment_button": true,
+            "show_gift_card_recipient": false,
+            "padding_bottom": 32
+          }
+        }
+      },
+      "block_order": [
+        "title_8Y7MTP",
+        "price_LbWbx7",
+        "pickup",
+        "variants_3cRT3q",
+        "tabs",
+        "buttons_xAgMTi"
+      ],
+      "custom_css": [
+        "h1 {font-size: 22px;}"
+      ],
+      "settings": {
+        "product_sticky_enable": true,
+        "image_layout": "thumbnails-left",
+        "image_size": "normal",
+        "show_cart_bar": true,
+        "enable_zoom": true,
+        "enable_video_looping": false,
+        "mobile_image_style": "thumbs",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "17596492331a37535f": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_7cc8916_Jjn6PX": {
+          "type": "ai_gen_block_7cc8916",
+          "disabled": true,
+          "settings": {
+            "title": "Size Chart",
+            "description": "<p>Find your perfect fit with our detailed size guide.</p>",
+            "note": "<p>All measurements are in inches. For best fit, measure yourself and compare with the chart above.</p>",
+            "note_icon": "📏",
+            "size_header": "Size",
+            "show_chest": true,
+            "chest_header": "Length",
+            "show_waist": true,
+            "waist_header": "Chest",
+            "show_sleeves": true,
+            "sleeves_header": "Sleeves",
+            "show_collar": true,
+            "collar_header": "Collar",
+            "show_shoulder": true,
+            "shoulder_header": "Shoulder",
+            "show_custom_1": false,
+            "custom_1_header": "",
+            "show_custom_2": false,
+            "custom_2_header": "",
+            "show_custom_3": false,
+            "custom_3_header": "",
+            "size_1": "",
+            "size_1_chest": "",
+            "size_1_waist": "",
+            "size_1_sleeves": "32",
+            "size_1_collar": "14",
+            "size_1_shoulder": "16",
+            "size_1_custom_1": "",
+            "size_1_custom_2": "",
+            "size_1_custom_3": "",
+            "size_2": "S",
+            "size_2_chest": "29",
+            "size_2_waist": "40",
+            "size_2_sleeves": "25.2",
+            "size_2_collar": "15",
+            "size_2_shoulder": "16.5",
+            "size_2_custom_1": "",
+            "size_2_custom_2": "",
+            "size_2_custom_3": "",
+            "size_3": "M",
+            "size_3_chest": "29",
+            "size_3_waist": "42",
+            "size_3_sleeves": "25.5",
+            "size_3_collar": "15.6",
+            "size_3_shoulder": "17",
+            "size_3_custom_1": "",
+            "size_3_custom_2": "",
+            "size_3_custom_3": "",
+            "size_4": "L",
+            "size_4_chest": "29.5",
+            "size_4_waist": "44",
+            "size_4_sleeves": "26",
+            "size_4_collar": "16.2",
+            "size_4_shoulder": "18",
+            "size_4_custom_1": "",
+            "size_4_custom_2": "",
+            "size_4_custom_3": "",
+            "size_5": "XL",
+            "size_5_chest": "30",
+            "size_5_waist": "46",
+            "size_5_sleeves": "27",
+            "size_5_collar": "16.2",
+            "size_5_shoulder": "19",
+            "size_5_custom_1": "",
+            "size_5_custom_2": "",
+            "size_5_custom_3": "",
+            "size_6": "",
+            "size_6_chest": "",
+            "size_6_waist": "",
+            "size_6_sleeves": "37",
+            "size_6_collar": "19",
+            "size_6_shoulder": "21",
+            "size_6_custom_1": "",
+            "size_6_custom_2": "",
+            "size_6_custom_3": "",
+            "title_alignment": "center",
+            "table_alignment": "center",
+            "padding": 30,
+            "margin": 20,
+            "border_radius": 0,
+            "background_color": "#ffffff",
+            "title_color": "#000000",
+            "text_color": "#666666",
+            "table_background": "#ffffff",
+            "header_background": "#f8f8f8",
+            "header_text_color": "#000000",
+            "cell_text_color": "#333333",
+            "row_alternate_color": "#fafafa",
+            "row_hover_color": "#ffffff",
+            "table_border_color": "#ffffff",
+            "cell_border_color": "#f0f0f0",
+            "note_background": "#f8f9fa",
+            "note_text_color": "#495057",
+            "note_border_color": "#dee2e6",
+            "note_accent_color": "#007bff",
+            "note_icon_background": "#007bff",
+            "note_icon_color": "#ffffff",
+            "note_padding": 16,
+            "note_border_radius": 8,
+            "note_border_width": 1,
+            "note_accent_height": 4,
+            "note_icon_size": 28,
+            "note_icon_spacing": 12,
+            "title_size": 24,
+            "text_size": 14,
+            "header_text_size": 14,
+            "table_text_size": 13,
+            "note_text_size": 12,
+            "title_spacing": 20,
+            "description_spacing": 20,
+            "note_spacing": 20,
+            "cell_padding": 12,
+            "table_border_radius": 6,
+            "table_border_width": 1,
+            "cell_border_width": 1
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_7cc8916_Jjn6PX"
+      ],
+      "settings": {}
+    },
+    "17596469702ade7f46": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_25894f9_t6qAWM": {
+          "type": "ai_gen_block_25894f9",
+          "settings": {
+            "title": "Size Chart",
+            "description": "<p>Find your perfect fit with our detailed size guide</p>",
+            "size_header": "Size",
+            "show_chest": true,
+            "chest_header": "Chest (cm)",
+            "show_waist": true,
+            "waist_header": "Waist (cm)",
+            "show_sleeves": false,
+            "sleeves_header": "Sleeves (cm)",
+            "show_collar": false,
+            "collar_header": "Collar (cm)",
+            "show_shoulder": false,
+            "shoulder_header": "Shoulder (cm)",
+            "show_length": false,
+            "length_header": "Length (cm)",
+            "show_hip": false,
+            "hip_header": "Hip (cm)",
+            "size_1": "XS",
+            "chest_1": "86-89",
+            "waist_1": "66-69",
+            "sleeves_1": "",
+            "collar_1": "",
+            "shoulder_1": "",
+            "length_1": "",
+            "hip_1": "",
+            "size_2": "S",
+            "chest_2": "90-93",
+            "waist_2": "70-73",
+            "sleeves_2": "",
+            "collar_2": "",
+            "shoulder_2": "",
+            "length_2": "",
+            "hip_2": "",
+            "size_3": "M",
+            "chest_3": "94-97",
+            "waist_3": "74-77",
+            "sleeves_3": "",
+            "collar_3": "",
+            "shoulder_3": "",
+            "length_3": "",
+            "hip_3": "",
+            "size_4": "L",
+            "chest_4": "98-101",
+            "waist_4": "78-81",
+            "sleeves_4": "",
+            "collar_4": "",
+            "shoulder_4": "",
+            "length_4": "",
+            "hip_4": "",
+            "size_5": "XL",
+            "chest_5": "102-105",
+            "waist_5": "82-85",
+            "sleeves_5": "",
+            "collar_5": "",
+            "shoulder_5": "",
+            "length_5": "",
+            "hip_5": "",
+            "size_6": "XXL",
+            "chest_6": "106-109",
+            "waist_6": "86-89",
+            "sleeves_6": "",
+            "collar_6": "",
+            "shoulder_6": "",
+            "length_6": "",
+            "hip_6": "",
+            "size_7": "",
+            "chest_7": "",
+            "waist_7": "",
+            "sleeves_7": "",
+            "collar_7": "",
+            "shoulder_7": "",
+            "length_7": "",
+            "hip_7": "",
+            "size_8": "",
+            "chest_8": "",
+            "waist_8": "",
+            "sleeves_8": "",
+            "collar_8": "",
+            "shoulder_8": "",
+            "length_8": "",
+            "hip_8": "",
+            "notes_title": "Sizing Notes",
+            "notes": "<p>All measurements are in centimeters. For the best fit, measure yourself and compare with our size chart.</p>",
+            "background_color": "#ffffff",
+            "border_color": "#e0e0e0",
+            "text_color": "#333333",
+            "title_color": "#000000",
+            "accent_color": "#ab8c52",
+            "table_background_color": "#ffffff",
+            "table_border_color": "#e0e0e0",
+            "header_background_color": "#f8f8f8",
+            "header_text_color": "#333333",
+            "row_alternate_color": "#fafafa",
+            "row_hover_color": "#f0f0f0",
+            "size_column_background": "#f8f8f8",
+            "size_column_text_color": "#000000",
+            "notes_background_color": "#f9f9f9",
+            "title_font": "sans_serif_n7",
+            "title_size": 24,
+            "body_font": "sans_serif_n4",
+            "description_size": 14,
+            "header_font_size": 14,
+            "cell_font_size": 13,
+            "notes_title_size": 16,
+            "notes_font_size": 13,
+            "text_alignment": "center",
+            "padding": 30,
+            "border_radius": 8,
+            "table_border_radius": 6,
+            "cell_padding": 12,
+            "title_margin": 16,
+            "description_margin": 20,
+            "notes_margin": 20,
+            "notes_padding": 16,
+            "notes_border_radius": 6
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_25894f9_t6qAWM"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "faq": {
+      "type": "section-accordion",
+      "blocks": {
+        "faq-1": {
+          "type": "text",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this to answer some common questions you hear from your customers. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your products. This section will appear across all products.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this to answer some common questions you hear from your customers. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your products. This section will appear across all products.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this to answer some common questions you hear from your customers. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your products. This section will appear across all products.</p>"
+          }
+        },
+        "faq-4": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this to answer some common questions you hear from your customers. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your products. This section will appear across all products.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4"
+      ],
+      "settings": {
+        "title": "Details",
+        "bg_color": "",
+        "color": "",
+        "border_color": "",
+        "width": "wrapper",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "about": {
+      "type": "section-accordion",
+      "blocks": {
+        "about-0": {
+          "type": "image",
+          "settings": {
+            "title": "",
+            "text": "<p>All measurements are in inches. For best fit, measure yourself and compare with the chart above.</p>",
+            "image": "shopify://shop_images/0c7233a7-2a65-4cd5-9ddf-28e6383c5fcd.jpg",
+            "aspect_ratio": 0.6
+          }
+        },
+        "about-1": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "title": "Image heading",
+            "text": "<p>Use this to answer some common questions you hear from your customers. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your products. This section will appear across all products.</p>",
+            "aspect_ratio": 0.6
+          }
+        },
+        "about-2": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "title": "Image heading",
+            "text": "<p>Use this to answer some common questions you hear from your customers. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your products. This section will appear across all products.</p>",
+            "aspect_ratio": 0.6
+          }
+        }
+      },
+      "block_order": [
+        "about-0",
+        "about-1",
+        "about-2"
+      ],
+      "settings": {
+        "title": "Size Chart",
+        "bg_color": "",
+        "color": "",
+        "border_color": "",
+        "width": "wrapper",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "shipping": {
+      "type": "section-accordion",
+      "blocks": {
+        "shipping-0": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-fast-shipment",
+            "icon_size": 20,
+            "icon_color": "#545454",
+            "title": "Fast shipping",
+            "text": "<p>Use this to answer some common questions you hear from your customers. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your products. This section will appear across all products.</p>"
+          }
+        },
+        "shipping-1": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-box",
+            "icon_size": 20,
+            "icon_color": "#545454",
+            "title": "Order tracking",
+            "text": "<p>Use this to answer some common questions you hear from your customers. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your products. This section will appear across all products.</p>"
+          }
+        },
+        "shipping-2": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-chat",
+            "icon_size": 20,
+            "icon_color": "#545454",
+            "title": "Get in touch",
+            "text": "<p>Use this to answer some common questions you hear from your customers. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your products. This section will appear across all products.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "shipping-0",
+        "shipping-1",
+        "shipping-2"
+      ],
+      "settings": {
+        "title": "Delivery & Returns",
+        "bg_color": "",
+        "color": "",
+        "border_color": "",
+        "width": "wrapper",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "enable_product_reviews": false,
+        "enable_accordion": true,
+        "width": "wrapper",
+        "padding_top": 0,
+        "padding_bottom": 30
+      }
+    },
+    "custom": {
+      "type": "section-custom-content",
+      "blocks": {
+        "custom-0": {
+          "type": "image",
+          "settings": {
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "show_overlay_text": false,
+            "title": "",
+            "heading_size": 7,
+            "description": "",
+            "text_size": 3,
+            "flex_align": "align--middle-center",
+            "bg_color": "",
+            "color": "#ffffff",
+            "link_text": "",
+            "link": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false
+          }
+        },
+        "custom-1": {
+          "type": "text",
+          "settings": {
+            "subheading": "Introducing",
+            "subheading_size": 3,
+            "title": "Product feature",
+            "heading_size": 7,
+            "text": "<p>Use this section to create unique side-by-side layouts with various content blocks. Pair text with images, newsletter blocks, products, videos, testimonials and more.</p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "show_social_links": false,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "bg_color": "#f7f7f7",
+            "color": ""
+          }
+        }
+      },
+      "block_order": [
+        "custom-0",
+        "custom-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "height": "screen-height-one-half",
+        "mobile_height": "screen-height-one-half--mobile",
+        "width": "wrapper--full-padded",
+        "borders": false,
+        "reverse_blocks": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "imgtxt": {
+      "type": "section-custom-content",
+      "blocks": {
+        "imgtxt-0": {
+          "type": "text",
+          "settings": {
+            "subheading": "Introducing",
+            "subheading_size": 3,
+            "title": "Another feature",
+            "heading_size": 7,
+            "text": "<p>Use this section to create unique side-by-side layouts with various content blocks. Pair text with images, newsletter blocks, products, videos, testimonials and more.</p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "show_social_links": false,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "bg_color": "#f7f7f7",
+            "color": ""
+          }
+        },
+        "imgtxt-1": {
+          "type": "image",
+          "settings": {
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "show_overlay_text": false,
+            "title": "",
+            "heading_size": 7,
+            "description": "",
+            "text_size": 3,
+            "flex_align": "align--middle-center",
+            "bg_color": "",
+            "color": "#ffffff",
+            "link_text": "",
+            "link": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "imgtxt-0",
+        "imgtxt-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "height": "screen-height-one-half",
+        "mobile_height": "screen-height-one-half--mobile",
+        "width": "wrapper--full-padded",
+        "borders": false,
+        "reverse_blocks": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "related": {
+      "type": "related",
+      "disabled": true,
+      "settings": {
+        "enable_tabs": true,
+        "bg_color": "",
+        "color": "",
+        "border_color": "",
+        "padding_top": 30,
+        "padding_bottom": 0
+      }
+    },
+    "section_collection_hA8Jpn": {
+      "type": "section-collection",
+      "name": "Featured collection",
+      "settings": {
+        "heading": "You may also like",
+        "description": "",
+        "layout": "inline",
+        "link_text": "",
+        "link_url": "",
+        "button_type": "btn--primary",
+        "button_size": "",
+        "button_style": "btn--solid",
+        "show_arrow": false,
+        "featured_collection": "new-arrival",
+        "style": "grid",
+        "grid": 4,
+        "rows": 3,
+        "layout_mobile": "1",
+        "bg_color": "",
+        "color": "",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    }
+  },
+  "order": [
+    "main",
+    "17596492331a37535f",
+    "17596469702ade7f46",
+    "faq",
+    "about",
+    "shipping",
+    "reviews",
+    "custom",
+    "imgtxt",
+    "related",
+    "section_collection_hA8Jpn"
+  ]
+}

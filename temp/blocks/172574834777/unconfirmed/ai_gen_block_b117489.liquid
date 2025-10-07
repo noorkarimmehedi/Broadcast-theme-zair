@@ -1,0 +1,285 @@
+{% doc %}
+  @prompt
+    create a simple announce bar with color customizable and link
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-announce-bar-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    padding: {{ block.settings.padding_vertical }}px 20px;
+    text-align: {{ block.settings.text_alignment }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-announce-bar-content-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    {% if block.settings.text_alignment == 'center' %}
+      justify-content: center;
+    {% elsif block.settings.text_alignment == 'right' %}
+      justify-content: flex-end;
+    {% else %}
+      justify-content: flex-start;
+    {% endif %}
+    gap: 10px;
+    position: relative;
+  }
+
+  .ai-announce-bar-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: {{ block.settings.font_weight }};
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .ai-announce-bar-link-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-announce-bar-link-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  .ai-announce-bar-close-{{ ai_gen_id }} {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: {{ block.settings.text_color }};
+    cursor: pointer;
+    padding: 5px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-announce-bar-close-{{ ai_gen_id }}:hover {
+    opacity: 1;
+  }
+
+  .ai-announce-bar-close-{{ ai_gen_id }} svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .ai-announce-bar-{{ ai_gen_id }}.hidden {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-announce-bar-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_vertical | times: 0.8 }}px 15px;
+    }
+
+    .ai-announce-bar-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.font_size | times: 0.9 }}px;
+    }
+
+    .ai-announce-bar-close-{{ ai_gen_id }} {
+      right: 15px;
+    }
+  }
+{% endstyle %}
+
+<announce-bar-{{ ai_gen_id }}
+  class="ai-announce-bar-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+  data-dismissible="{{ block.settings.dismissible }}"
+>
+  {% if block.settings.link_url != blank %}
+    <a href="{{ block.settings.link_url }}" class="ai-announce-bar-link-{{ ai_gen_id }}">
+  {% endif %}
+    
+    <div class="ai-announce-bar-content-{{ ai_gen_id }}">
+      {% if block.settings.announcement_text != blank %}
+        <p class="ai-announce-bar-text-{{ ai_gen_id }}">
+          {{ block.settings.announcement_text }}
+        </p>
+      {% else %}
+        <p class="ai-announce-bar-text-{{ ai_gen_id }}">
+          Add your announcement text here
+        </p>
+      {% endif %}
+    </div>
+
+  {% if block.settings.link_url != blank %}
+    </a>
+  {% endif %}
+
+  {% if block.settings.dismissible %}
+    <button
+      class="ai-announce-bar-close-{{ ai_gen_id }}"
+      aria-label="Close announcement"
+      type="button"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  {% endif %}
+</announce-bar-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AnnounceBar{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.closeButton = this.querySelector('.ai-announce-bar-close-{{ ai_gen_id }}');
+        this.isDismissible = this.dataset.dismissible === 'true';
+        
+        if (this.isDismissible && this.closeButton) {
+          this.setupDismissible();
+        }
+      }
+
+      setupDismissible() {
+        const storageKey = 'announce-bar-dismissed-{{ ai_gen_id }}';
+        
+        if (localStorage.getItem(storageKey) === 'true') {
+          this.classList.add('hidden');
+          return;
+        }
+
+        this.closeButton.addEventListener('click', () => {
+          this.classList.add('hidden');
+          localStorage.setItem(storageKey, 'true');
+        });
+      }
+    }
+
+    customElements.define('announce-bar-{{ ai_gen_id }}', AnnounceBar{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Free shipping on orders over $50!"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "dismissible",
+      "label": "Allow customers to dismiss",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Vertical padding",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar"
+    }
+  ]
+}
+{% endschema %}
