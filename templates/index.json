@@ -404,7 +404,7 @@
     "featured-collection": {
       "type": "section-collection",
       "settings": {
-        "heading": "Featured Collection",
+        "heading": "Products",
         "description": "",
         "layout": "inline",
         "link_text": "Shop Now",
@@ -413,11 +413,11 @@
         "button_size": "",
         "button_style": "btn--solid",
         "show_arrow": false,
-        "featured_collection": "",
+        "featured_collection": "products",
         "style": "grid",
         "grid": 4,
         "rows": 2,
-        "layout_mobile": "carousel",
+        "layout_mobile": "1",
         "bg_color": "",
         "color": "",
         "padding_top": 50,
@@ -426,6 +426,7 @@
     },
     "hero": {
       "type": "section-hero",
+      "disabled": true,
       "settings": {
         "height": "screen-height-three-quarters",
         "width": "wrapper--full",
