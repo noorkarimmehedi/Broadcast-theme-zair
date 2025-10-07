@@ -54,6 +54,7 @@
         "footer-2"
       ],
       "settings": {
+        "logo": "shopify://shop_images/Image_10-7-25_at_19.26.png",
         "logo_image_width": 150,
         "overlay_opacity": 75,
         "overlay_color": "#ffffff",
@@ -63,6 +64,7 @@
     },
     "supporting-menu": {
       "type": "section-supporting-menu",
+      "disabled": true,
       "settings": {
         "linklist": "",
         "footer_payment_enable": false,
