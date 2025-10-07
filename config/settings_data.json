@@ -53,6 +53,7 @@
     "show_free_shipping_message": true,
     "message": "You are ||amount|| away from free shipping.",
     "free_shipping_limit": "1000",
+    "cart_custom_message_text": "",
     "checkout_logo_position": "left",
     "checkout_logo_size": "medium",
     "checkout_body_background_color": "#fff",
