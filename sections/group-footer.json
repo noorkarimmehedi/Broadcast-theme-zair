@@ -33,7 +33,7 @@
         "footer-1": {
           "type": "linklist",
           "settings": {
-            "linklist": "main-menu",
+            "linklist": "footer",
             "title": "",
             "column_width": 33
           }
