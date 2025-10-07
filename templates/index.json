@@ -296,7 +296,7 @@
       "settings": {
         "title": "",
         "text": "",
-        "layout": "stacked",
+        "layout": "left",
         "show_product_count": false,
         "product_limit": 6,
         "bg_color": "",
