@@ -250,25 +250,6 @@
     "tabs": {
       "type": "section-tab-collections",
       "blocks": {
-        "tabs-1": {
-          "type": "collection",
-          "settings": {
-            "title": "",
-            "featured_collection": "tributes",
-            "show_image": true,
-            "align_with_product_images": false,
-            "overlay_opacity": 0,
-            "overlay_color": "#ffffff",
-            "description": "",
-            "color": "#ffffff",
-            "link_text": "View products",
-            "link": "",
-            "button_type": "btn--white",
-            "button_size": "",
-            "button_style": "btn--solid",
-            "show_arrow": false
-          }
-        },
         "tabs-0": {
           "type": "collection",
           "settings": {
@@ -285,6 +266,25 @@
             "button_type": "btn--white",
             "button_size": "",
             "button_style": "btn--outline",
+            "show_arrow": false
+          }
+        },
+        "tabs-1": {
+          "type": "collection",
+          "settings": {
+            "title": "",
+            "featured_collection": "tributes",
+            "show_image": true,
+            "align_with_product_images": false,
+            "overlay_opacity": 0,
+            "overlay_color": "#ffffff",
+            "description": "",
+            "color": "#ffffff",
+            "link_text": "View products",
+            "link": "",
+            "button_type": "btn--white",
+            "button_size": "",
+            "button_style": "btn--solid",
             "show_arrow": false
           }
         },
@@ -309,8 +309,8 @@
         }
       },
       "block_order": [
-        "tabs-1",
         "tabs-0",
+        "tabs-1",
         "collection_N3N4KW"
       ],
       "settings": {
@@ -384,13 +384,14 @@
         "lookbook-0": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "bidrohi-drop-shoulder",
             "position_x": 18,
             "position_y": 50
           }
         },
         "lookbook-1": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "product": "",
             "position_x": 41,
@@ -403,13 +404,13 @@
         "lookbook-1"
       ],
       "settings": {
-        "image": "shopify://shop_images/imgi_23_1542737338461496.png",
+        "image": "shopify://shop_images/image.png",
         "title": "Shop the look",
         "show_dots": true,
         "products_per_row": "1",
         "enable_aspect_ratio": true,
         "image_aspect_ratio": 1,
-        "button_type": "btn--primary",
+        "button_type": "btn--white",
         "button_size": "",
         "button_style": "btn--outline",
         "show_arrow": false,
