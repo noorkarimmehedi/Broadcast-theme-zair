@@ -17,7 +17,7 @@
         "announcement": true,
         "speed": 5000,
         "design": "design1",
-        "design1_message": "<strong>New Year Special</strong> Up to 20% off",
+        "design1_message": "<strong>October Sale</strong> Up to 20% off",
         "countdown_day": 31,
         "countdown_month": 12,
         "countdown_year": 2026,
@@ -27,7 +27,7 @@
         "design3_message": "Join our New Year Challenge",
         "design3_buttontext": "Join Now",
         "design4_message": "Our 2025 Collection Launched",
-        "link": ""
+        "link": "shopify://collections/products"
       }
     },
     "header": {
