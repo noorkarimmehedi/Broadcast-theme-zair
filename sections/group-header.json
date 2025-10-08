@@ -38,8 +38,8 @@
         "marquee_autoplay": true,
         "marquee_speed": 50,
         "text_size": 2,
-        "bg_color": "#fdf7c3",
-        "color": "#000000"
+        "bg_color": "#000000",
+        "color": "#ffffff"
       }
     },
     "header": {
