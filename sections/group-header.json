@@ -13,33 +13,21 @@
   "sections": {
     "announcement": {
       "type": "announcement",
-      "blocks": {
-        "text_mTEfgw": {
-          "type": "text",
-          "settings": {
-            "text": "<p>New Customers Save 10% with Code \"<strong>GET10\"</strong></p>",
-            "target_url_enabled": false,
-            "target_url": "",
-            "target_referrer_enabled": false,
-            "target_referrer": "",
-            "target_device_enabled": false,
-            "target_device": "mobile"
-          }
-        }
-      },
-      "block_order": [
-        "text_mTEfgw"
-      ],
       "settings": {
-        "layout": "marquee",
-        "slider_autoplay": true,
-        "slider_speed": 5,
-        "show_arrows": false,
-        "marquee_autoplay": true,
-        "marquee_speed": 50,
-        "text_size": 2,
-        "bg_color": "#000000",
-        "color": "#ffffff"
+        "announcement": true,
+        "speed": 5000,
+        "design": "design4",
+        "design1_message": "<strong>New Year Special</strong> Up to 20% off",
+        "countdown_day": 31,
+        "countdown_month": 12,
+        "countdown_year": 2024,
+        "countdown_hour": 23,
+        "countdown_minute": 59,
+        "design2_message": "Join 15,000+ Happy Customers",
+        "design3_message": "Join our New Year Challenge",
+        "design3_buttontext": "Join Now",
+        "design4_message": "Our 2025 Collection Launched",
+        "link": ""
       }
     },
     "header": {
