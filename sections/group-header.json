@@ -38,7 +38,7 @@
         "marquee_autoplay": true,
         "marquee_speed": 50,
         "text_size": 2,
-        "bg_color": "#ede9d0",
+        "bg_color": "#f2c2cf",
         "color": "#000000"
       }
     },
