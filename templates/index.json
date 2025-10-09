@@ -424,7 +424,7 @@
     "featured-collection": {
       "type": "section-collection",
       "settings": {
-        "heading": "Products",
+        "heading": "New Arrival",
         "description": "",
         "layout": "inline",
         "link_text": "Shop Now",
@@ -611,9 +611,9 @@
     "image-with-text",
     "product-with-image",
     "tabs",
+    "featured-collection",
     "rich-text",
     "lookbook",
-    "featured-collection",
     "hero",
     "icons",
     "section_collections_list_TFaVUd",
