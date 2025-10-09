@@ -253,24 +253,24 @@
         "icon_iwA8BK": {
           "type": "icon",
           "settings": {
-            "icon_name": "icon-shield",
+            "icon_name": "icon-pin",
             "icon_size": 20,
             "icon_color": "#545454",
             "title": "New Arrival Every-week",
             "heading_size": 4,
-            "text": "<p>Transactions are handled with bank-grade security.</p>",
+            "text": "<p>Discover the latest trends and fresh styles added every week.</p>",
             "text_size": 3
           }
         },
         "icon_HXtKgY": {
           "type": "icon",
           "settings": {
-            "icon_name": "icon-trophy",
+            "icon_name": "icon-fast-shipment",
             "icon_size": 20,
             "icon_color": "#545454",
             "title": "Delivery Within 48Hours",
             "heading_size": 4,
-            "text": "<p>Our secure checkout is quick and easy to use.</p>",
+            "text": "<p>Get your order fast – packed, shipped, and at your door within two days.</p>",
             "text_size": 3
           }
         },
