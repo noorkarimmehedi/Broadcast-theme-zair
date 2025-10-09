@@ -15,7 +15,7 @@
         "slideshow-0": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_15koeg15koeg15ko.png",
+            "mobile_image": "shopify://shop_images/demo.png",
             "overlay_opacity": 0,
             "overlay_color": "#000000",
             "show_overlay_text": false,
@@ -404,7 +404,6 @@
         "lookbook-1"
       ],
       "settings": {
-        "image": "shopify://shop_images/image.png",
         "title": "Shop the look",
         "show_dots": true,
         "products_per_row": "1",
@@ -451,8 +450,6 @@
       "settings": {
         "height": "screen-height-three-quarters",
         "width": "wrapper--full",
-        "image_1": "shopify://shop_images/image.png",
-        "image_2": "shopify://shop_images/image_1.png",
         "mobile_height": "seven-fifty-height-hero--mobile",
         "flex_align": "align--middle-left",
         "overlay_opacity": 0,
