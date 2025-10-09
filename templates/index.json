@@ -247,6 +247,66 @@
         "padding_bottom": 0
       }
     },
+    "section_text_row_fceaEz": {
+      "type": "section-text-row",
+      "blocks": {
+        "icon_LQQjiV": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-shield",
+            "icon_size": 20,
+            "icon_color": "#545454",
+            "title": "Secure transactions",
+            "heading_size": 4,
+            "text": "<p>Transactions are handled with bank-grade security.</p>",
+            "text_size": 3
+          }
+        },
+        "icon_8VrpFa": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-trophy",
+            "icon_size": 20,
+            "icon_color": "#545454",
+            "title": "Simple checkout",
+            "heading_size": 4,
+            "text": "<p>Our secure checkout is quick and easy to use.</p>",
+            "text_size": 3
+          }
+        },
+        "icon_BjcnCA": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-chat",
+            "icon_size": 20,
+            "icon_color": "#545454",
+            "title": "Get in touch",
+            "heading_size": 4,
+            "text": "<p>Have questions? Get in touch with us at any time.</p>",
+            "text_size": 3
+          }
+        }
+      },
+      "block_order": [
+        "icon_LQQjiV",
+        "icon_8VrpFa",
+        "icon_BjcnCA"
+      ],
+      "name": "Text columns with icons",
+      "settings": {
+        "title": "",
+        "heading_size": 5,
+        "align_text": "text-center",
+        "icon_alignment": "icon--left",
+        "align_columns": "flex-align-top",
+        "width": "wrapper--full-padded",
+        "bg_color": "",
+        "color": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "layout_mobile": "carousel"
+      }
+    },
     "tabs": {
       "type": "section-tab-collections",
       "blocks": {
@@ -323,6 +383,29 @@
         "color": "",
         "padding_top": 32,
         "padding_bottom": 32
+      }
+    },
+    "featured-collection": {
+      "type": "section-collection",
+      "settings": {
+        "heading": "New Arrival",
+        "description": "",
+        "layout": "inline",
+        "link_text": "Shop Now",
+        "link_url": "shopify://products/bidrohi-drop-shoulder",
+        "button_type": "btn--primary",
+        "button_size": "",
+        "button_style": "btn--solid",
+        "show_arrow": false,
+        "featured_collection": "products",
+        "style": "grid",
+        "grid": 4,
+        "rows": 2,
+        "layout_mobile": "1",
+        "bg_color": "",
+        "color": "",
+        "padding_top": 50,
+        "padding_bottom": 50
       }
     },
     "rich-text": {
@@ -419,29 +502,6 @@
         "dot_background": "",
         "padding_top": 0,
         "padding_bottom": 0
-      }
-    },
-    "featured-collection": {
-      "type": "section-collection",
-      "settings": {
-        "heading": "New Arrival",
-        "description": "",
-        "layout": "inline",
-        "link_text": "Shop Now",
-        "link_url": "shopify://products/bidrohi-drop-shoulder",
-        "button_type": "btn--primary",
-        "button_size": "",
-        "button_style": "btn--solid",
-        "show_arrow": false,
-        "featured_collection": "products",
-        "style": "grid",
-        "grid": 4,
-        "rows": 2,
-        "layout_mobile": "1",
-        "bg_color": "",
-        "color": "",
-        "padding_top": 50,
-        "padding_bottom": 50
       }
     },
     "hero": {
@@ -610,6 +670,7 @@
     "docs",
     "image-with-text",
     "product-with-image",
+    "section_text_row_fceaEz",
     "tabs",
     "featured-collection",
     "rich-text",
