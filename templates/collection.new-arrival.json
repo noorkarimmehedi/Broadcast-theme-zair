@@ -23,28 +23,28 @@
         "collection_PiJJAa": {
           "type": "collection",
           "settings": {
-            "collection": "frontpage",
+            "collection": "new-arrival",
             "title": ""
           }
         },
         "collection_J633bB": {
           "type": "collection",
           "settings": {
-            "collection": "tributes",
+            "collection": "formal-shirts",
             "title": ""
           }
         },
         "collection_wUcRFx": {
           "type": "collection",
           "settings": {
-            "collection": "new-arrival",
+            "collection": "casual-shirts",
             "title": ""
           }
         },
         "collection_6Vmkn8": {
           "type": "collection",
           "settings": {
-            "collection": "political-teas",
+            "collection": "pants",
             "title": ""
           }
         }
