@@ -43,7 +43,7 @@
           "settings": {
             "image_width": 150,
             "title": "Contact",
-            "text": "<p>59/3</p><p>Pilkhana Road</p><p>Azimpur, Dhaka-1205</p>",
+            "text": "<p>59/3</p><p>Gulshan 02</p><p>Gulshan, Dhaka-1205</p>",
             "column_width": 33
           }
         }
@@ -54,7 +54,6 @@
         "footer-2"
       ],
       "settings": {
-        "logo": "shopify://shop_images/Image_10-7-25_at_19.26.png",
         "logo_image_width": 150,
         "overlay_opacity": 75,
         "overlay_color": "#ffffff",
