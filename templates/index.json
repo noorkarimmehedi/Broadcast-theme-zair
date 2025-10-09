@@ -247,35 +247,36 @@
         "padding_bottom": 0
       }
     },
-    "section_text_row_fceaEz": {
+    "section_text_row_H6Lwne": {
       "type": "section-text-row",
       "blocks": {
-        "icon_LQQjiV": {
+        "icon_iwA8BK": {
           "type": "icon",
           "settings": {
             "icon_name": "icon-shield",
             "icon_size": 20,
             "icon_color": "#545454",
-            "title": "Secure transactions",
+            "title": "New Arrival Everyweek",
             "heading_size": 4,
             "text": "<p>Transactions are handled with bank-grade security.</p>",
             "text_size": 3
           }
         },
-        "icon_8VrpFa": {
+        "icon_HXtKgY": {
           "type": "icon",
           "settings": {
             "icon_name": "icon-trophy",
             "icon_size": 20,
             "icon_color": "#545454",
-            "title": "Simple checkout",
+            "title": "Delivery Within 48Hours",
             "heading_size": 4,
             "text": "<p>Our secure checkout is quick and easy to use.</p>",
             "text_size": 3
           }
         },
-        "icon_BjcnCA": {
+        "icon_WiRN4M": {
           "type": "icon",
+          "disabled": true,
           "settings": {
             "icon_name": "icon-chat",
             "icon_size": 20,
@@ -288,23 +289,23 @@
         }
       },
       "block_order": [
-        "icon_LQQjiV",
-        "icon_8VrpFa",
-        "icon_BjcnCA"
+        "icon_iwA8BK",
+        "icon_HXtKgY",
+        "icon_WiRN4M"
       ],
       "name": "Text columns with icons",
       "settings": {
         "title": "",
         "heading_size": 5,
         "align_text": "text-center",
-        "icon_alignment": "icon--left",
-        "align_columns": "flex-align-top",
+        "icon_alignment": "icon--top",
+        "align_columns": "flex-align-center",
         "width": "wrapper--full-padded",
         "bg_color": "",
         "color": "",
         "padding_top": 50,
         "padding_bottom": 50,
-        "layout_mobile": "carousel"
+        "layout_mobile": "grid"
       }
     },
     "tabs": {
@@ -670,7 +671,7 @@
     "docs",
     "image-with-text",
     "product-with-image",
-    "section_text_row_fceaEz",
+    "section_text_row_H6Lwne",
     "tabs",
     "featured-collection",
     "rich-text",
