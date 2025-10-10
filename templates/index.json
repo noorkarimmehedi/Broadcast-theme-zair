@@ -83,6 +83,46 @@
         "autoplay_speed": 8
       }
     },
+    "17601233244b92d09c": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_924fda4_JUAArY": {
+          "type": "ai_gen_block_924fda4",
+          "settings": {
+            "background_color": "#ffffff",
+            "text_color": "#1a365d",
+            "icon_color": "#1a365d",
+            "section_padding": 60,
+            "column_spacing": 40,
+            "column_padding": 20,
+            "heading_font": "baskervville_n4",
+            "heading_size": 18,
+            "icon_size": 50,
+            "icon_spacing": 20,
+            "icon_stroke_width": 1.5,
+            "mobile_spacing": 10,
+            "mobile_padding": 5,
+            "mobile_icon_size": 35,
+            "mobile_icon_spacing": 12,
+            "mobile_heading_size": 13,
+            "heading_1": "New Arrival Every-Week",
+            "icon_type_1": "preset",
+            "icon_1": "thumbs_up",
+            "heading_2": "Delivery Within 48Hours",
+            "icon_type_2": "preset",
+            "icon_2": "percent",
+            "heading_3": "Free & Easy Returns",
+            "icon_type_3": "preset",
+            "icon_3": "star"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_924fda4_JUAArY"
+      ],
+      "settings": {}
+    },
     "docs": {
       "type": "section-rich-text",
       "blocks": {
@@ -293,6 +333,7 @@
         "icon_HXtKgY",
         "icon_WiRN4M"
       ],
+      "disabled": true,
       "name": "Text columns with icons",
       "settings": {
         "title": "",
@@ -669,6 +710,7 @@
   },
   "order": [
     "slideshow",
+    "17601233244b92d09c",
     "docs",
     "image-with-text",
     "product-with-image",
