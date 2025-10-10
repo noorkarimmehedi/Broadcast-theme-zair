@@ -11,6 +11,15 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "section_anchor_logo_jq77Xk": {
+      "type": "section-anchor-logo",
+      "name": "Logo",
+      "settings": {
+        "logo": "shopify://shop_images/Untitled_280_x_80_px_1.png",
+        "padding_top": 30,
+        "padding_bottom": 30
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -77,6 +86,7 @@
   },
   "order": [
     "footer",
-    "supporting-menu"
+    "supporting-menu",
+    "section_anchor_logo_jq77Xk"
   ]
 }
