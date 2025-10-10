@@ -107,13 +107,13 @@
             "mobile_heading_size": 13,
             "heading_1": "New Arrival Every-Week",
             "icon_type_1": "preset",
-            "icon_1": "thumbs_up",
+            "icon_1": "trending_up",
             "heading_2": "Delivery Within 48Hours",
             "icon_type_2": "preset",
-            "icon_2": "percent",
+            "icon_2": "truck",
             "heading_3": "Free & Easy Returns",
             "icon_type_3": "preset",
-            "icon_3": "star"
+            "icon_3": "shield"
           },
           "blocks": {}
         }
