@@ -11,15 +11,6 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
-    "section_anchor_logo_jq77Xk": {
-      "type": "section-anchor-logo",
-      "name": "Logo",
-      "settings": {
-        "logo": "shopify://shop_images/Untitled_280_x_80_px_1.png",
-        "padding_top": 30,
-        "padding_bottom": 30
-      }
-    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -79,6 +70,15 @@
         "show_locale_selector": true,
         "show_currency_selector": true,
         "type": "currency",
+        "padding_top": 30,
+        "padding_bottom": 30
+      }
+    },
+    "section_anchor_logo_jq77Xk": {
+      "type": "section-anchor-logo",
+      "name": "Logo",
+      "settings": {
+        "logo": "shopify://shop_images/Untitled_280_x_80_px.svg",
         "padding_top": 30,
         "padding_bottom": 30
       }
