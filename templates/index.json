@@ -114,8 +114,9 @@
             "icon_2": "shipping_fast",
             "custom_icon_2": "shopify://shop_images/icons8-delivery-48.png",
             "heading_3": "Free & Easy Returns",
-            "icon_type_3": "preset",
-            "icon_3": "shield_check"
+            "icon_type_3": "custom",
+            "icon_3": "shield_check",
+            "custom_icon_3": "shopify://shop_images/icons8-return-48.png"
           },
           "blocks": {}
         }
