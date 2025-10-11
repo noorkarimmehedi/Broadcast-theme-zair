@@ -92,7 +92,7 @@
             "background_color": "#ffffff",
             "text_color": "#1a365d",
             "icon_color": "#1a365d",
-            "section_padding": 60,
+            "section_padding": 30,
             "column_spacing": 40,
             "column_padding": 20,
             "heading_font": "baskervville_n4",
