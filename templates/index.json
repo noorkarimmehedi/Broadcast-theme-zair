@@ -153,7 +153,7 @@
             "arrow_hover_color": "#ffffff",
             "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7) 100%)",
             "overlay_hover_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85) 100%)",
-            "category_name_size": 16,
+            "category_name_size": 12,
             "category_count_size": 12,
             "category_name_color": "#ffffff",
             "category_count_color": "#ffffff",
