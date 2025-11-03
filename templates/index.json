@@ -126,6 +126,65 @@
       ],
       "settings": {}
     },
+    "1762201422e82b3de5": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8c1a77a_V6Cym4": {
+          "type": "ai_gen_block_8c1a77a",
+          "settings": {
+            "section_title": "Shop by Category",
+            "section_subtitle": "Discover our curated collections",
+            "title_size": 28,
+            "subtitle_size": 14,
+            "title_color": "#000000",
+            "subtitle_color": "#666666",
+            "header_spacing": 40,
+            "desktop_columns": 4,
+            "container_width": 1400,
+            "grid_gap": 16,
+            "section_padding_top": 60,
+            "section_padding_bottom": 60,
+            "background_color": "#fefbf6",
+            "border_radius": 0,
+            "image_aspect_ratio": 120,
+            "arrow_bg_color": "#ffffff",
+            "arrow_hover_bg_color": "#000000",
+            "arrow_color": "#000000",
+            "arrow_hover_color": "#ffffff",
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7) 100%)",
+            "overlay_hover_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85) 100%)",
+            "category_name_size": 16,
+            "category_count_size": 12,
+            "category_name_color": "#ffffff",
+            "category_count_color": "#ffffff",
+            "category_1": "casual-shirts",
+            "category_1_title": "",
+            "category_2": "formal-shirts",
+            "category_2_title": "",
+            "category_3": "new-arrival",
+            "category_3_title": "",
+            "category_4": "panjabi",
+            "category_4_title": "",
+            "category_5": "pants",
+            "category_5_title": "",
+            "category_6": "new-arrival",
+            "category_6_image": "shopify://shop_images/Gemini_Generated_Image_iubv5aiubv5aiubv.png",
+            "category_6_title": "",
+            "category_7": "",
+            "category_7_title": "",
+            "category_8": "",
+            "category_8_title": "",
+            "category_9": "",
+            "category_9_title": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8c1a77a_V6Cym4"
+      ],
+      "settings": {}
+    },
     "docs": {
       "type": "section-rich-text",
       "blocks": {
@@ -714,6 +773,7 @@
   "order": [
     "slideshow",
     "17601233244b92d09c",
+    "1762201422e82b3de5",
     "docs",
     "image-with-text",
     "product-with-image",
