@@ -1,6 +1,782 @@
+{% doc %}
+  @prompt
+    generate me a fashion brand category section where 3 categories in every row in mobile version and appealing in desktop version , should have the option for Category custom image adding , in desktop version it should be slider with arrow key . don't change anything on mobile version
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-category-section-{{ ai_gen_id }} {
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-category-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-category-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-category-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+
+  .ai-category-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+  }
+
+  .ai-category-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-category-item-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .ai-category-item-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .ai-category-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: {{ block.settings.image_aspect_ratio }}%;
+    overflow: hidden;
+    background-color: #f4f4f4;
+  }
+
+  .ai-category-image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ai-category-item-{{ ai_gen_id }}:hover .ai-category-image-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-category-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .ai-category-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-category-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: {{ block.settings.overlay_gradient }};
+    transition: background 0.3s ease;
+  }
+
+  .ai-category-item-{{ ai_gen_id }}:hover .ai-category-overlay-{{ ai_gen_id }} {
+    background: {{ block.settings.overlay_hover_gradient }};
+  }
+
+  .ai-category-name-{{ ai_gen_id }} {
+    font-size: {{ block.settings.category_name_size }}px;
+    color: {{ block.settings.category_name_color }};
+    margin: 0 0 4px;
+    font-weight: 600;
+  }
+
+  .ai-category-count-{{ ai_gen_id }} {
+    font-size: {{ block.settings.category_count_size }}px;
+    color: {{ block.settings.category_count_color }};
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-category-slider-wrapper-{{ ai_gen_id }} {
+      position: relative;
+    }
+
+    .ai-category-grid-{{ ai_gen_id }} {
+      display: flex;
+      overflow: hidden;
+      scroll-behavior: smooth;
+      gap: {{ block.settings.grid_gap }}px;
+    }
+
+    .ai-category-item-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - ({{ block.settings.desktop_columns | minus: 1 }} * {{ block.settings.grid_gap }}px)) / {{ block.settings.desktop_columns }});
+      min-width: calc((100% - ({{ block.settings.desktop_columns | minus: 1 }} * {{ block.settings.grid_gap }}px)) / {{ block.settings.desktop_columns }});
+    }
+
+    .ai-category-arrow-{{ ai_gen_id }} {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: {{ block.settings.arrow_bg_color }};
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background-color 0.3s ease, opacity 0.3s ease;
+      opacity: 0.9;
+    }
+
+    .ai-category-arrow-{{ ai_gen_id }}:hover {
+      background-color: {{ block.settings.arrow_hover_bg_color }};
+      opacity: 1;
+    }
+
+    .ai-category-arrow-{{ ai_gen_id }}:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .ai-category-arrow-{{ ai_gen_id }}--prev {
+      left: -24px;
+    }
+
+    .ai-category-arrow-{{ ai_gen_id }}--next {
+      right: -24px;
+    }
+
+    .ai-category-arrow-{{ ai_gen_id }} svg {
+      width: 24px;
+      height: 24px;
+      stroke: {{ block.settings.arrow_color }};
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .ai-category-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 1.4);
+    }
+
+    .ai-category-subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subtitle_size }}px * 1.2);
+    }
+
+    .ai-category-name-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.category_name_size }}px * 1.2);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-category-section-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.6 }}px 0 {{ block.settings.section_padding_bottom | times: 0.6 }}px;
+    }
+
+    .ai-category-container-{{ ai_gen_id }} {
+      padding: 0 16px;
+    }
+
+    .ai-category-overlay-{{ ai_gen_id }} {
+      padding: 12px;
+    }
+  }
+{% endstyle %}
+
+<category-slider-{{ ai_gen_id }} class="ai-category-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-category-container-{{ ai_gen_id }}">
+    {% if block.settings.section_title != blank or block.settings.section_subtitle != blank %}
+      <div class="ai-category-header-{{ ai_gen_id }}">
+        {% if block.settings.section_title != blank %}
+          <h2 class="ai-category-title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
+        {% endif %}
+        {% if block.settings.section_subtitle != blank %}
+          <p class="ai-category-subtitle-{{ ai_gen_id }}">{{ block.settings.section_subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-category-slider-wrapper-{{ ai_gen_id }}">
+      <button
+        class="ai-category-arrow-{{ ai_gen_id }} ai-category-arrow-{{ ai_gen_id }}--prev"
+        aria-label="Previous"
+        data-prev
+      >
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="ai-category-grid-{{ ai_gen_id }}" data-slider>
+        {% for i in (1..9) %}
+          {% liquid
+            assign collection_key = 'category_' | append: i
+            assign custom_image_key = 'category_' | append: i | append: '_image'
+            assign custom_title_key = 'category_' | append: i | append: '_title'
+            assign category = block.settings[collection_key]
+            assign custom_image = block.settings[custom_image_key]
+            assign custom_title = block.settings[custom_title_key]
+          %}
+
+          {% if category != blank %}
+            <a href="{{ category.url }}" class="ai-category-item-{{ ai_gen_id }}">
+              <div class="ai-category-image-wrapper-{{ ai_gen_id }}">
+                {% if custom_image %}
+                  <img
+                    src="{{ custom_image | image_url: width: 600 }}"
+                    alt="{{ category.title | escape }}"
+                    class="ai-category-image-{{ ai_gen_id }}"
+                    loading="lazy"
+                    width="600"
+                    height="{{ 600 | times: block.settings.image_aspect_ratio | divided_by: 100 }}"
+                  >
+                {% elsif category.image %}
+                  <img
+                    src="{{ category.image | image_url: width: 600 }}"
+                    alt="{{ category.title | escape }}"
+                    class="ai-category-image-{{ ai_gen_id }}"
+                    loading="lazy"
+                    width="600"
+                    height="{{ 600 | times: block.settings.image_aspect_ratio | divided_by: 100 }}"
+                  >
+                {% elsif category.products.first and category.products.first.featured_image %}
+                  <img
+                    src="{{ category.products.first.featured_image | image_url: width: 600 }}"
+                    alt="{{ category.title | escape }}"
+                    class="ai-category-image-{{ ai_gen_id }}"
+                    loading="lazy"
+                    width="600"
+                    height="{{ 600 | times: block.settings.image_aspect_ratio | divided_by: 100 }}"
+                  >
+                {% else %}
+                  <div class="ai-category-placeholder-{{ ai_gen_id }}">
+                    {{ 'collection-1' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+
+                <div class="ai-category-overlay-{{ ai_gen_id }}">
+                  <h3 class="ai-category-name-{{ ai_gen_id }}">
+                    {% if custom_title != blank %}
+                      {{ custom_title }}
+                    {% else %}
+                      {{ category.title }}
+                    {% endif %}
+                  </h3>
+                  <p class="ai-category-count-{{ ai_gen_id }}">{{ category.products_count }} {% if category.products_count == 1 %}item{% else %}items{% endif %}</p>
+                </div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <button
+        class="ai-category-arrow-{{ ai_gen_id }} ai-category-arrow-{{ ai_gen_id }}--next"
+        aria-label="Next"
+        data-next
+      >
+        <svg viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</category-slider-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CategorySlider{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.slider = null;
+        this.prevButton = null;
+        this.nextButton = null;
+        this.itemWidth = 0;
+        this.gap = {{ block.settings.grid_gap }};
+        this.columns = {{ block.settings.desktop_columns }};
+      }
+
+      connectedCallback() {
+        if (window.innerWidth < 750) return;
+
+        this.slider = this.querySelector('[data-slider]');
+        this.prevButton = this.querySelector('[data-prev]');
+        this.nextButton = this.querySelector('[data-next]');
+
+        if (!this.slider || !this.prevButton || !this.nextButton) return;
+
+        this.setupSlider();
+        this.updateButtons();
+
+        this.prevButton.addEventListener('click', () => this.slide('prev'));
+        this.nextButton.addEventListener('click', () => this.slide('next'));
+        this.slider.addEventListener('scroll', () => this.updateButtons());
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth >= 750) {
+            this.setupSlider();
+            this.updateButtons();
+          }
+        });
+      }
+
+      setupSlider() {
+        const items = this.slider.querySelectorAll('.ai-category-item-{{ ai_gen_id }}');
+        if (items.length > 0) {
+          this.itemWidth = items[0].offsetWidth;
+        }
+      }
+
+      slide(direction) {
+        const scrollAmount = (this.itemWidth + this.gap) * this.columns;
+        
+        if (direction === 'prev') {
+          this.slider.scrollLeft -= scrollAmount;
+        } else {
+          this.slider.scrollLeft += scrollAmount;
+        }
+      }
+
+      updateButtons() {
+        const maxScroll = this.slider.scrollWidth - this.slider.clientWidth;
+        
+        if (this.slider.scrollLeft <= 0) {
+          this.prevButton.disabled = true;
+        } else {
+          this.prevButton.disabled = false;
+        }
+
+        if (this.slider.scrollLeft >= maxScroll - 1) {
+          this.nextButton.disabled = true;
+        } else {
+          this.nextButton.disabled = false;
+        }
+      }
+    }
+
+    customElements.define('category-slider-{{ ai_gen_id }}', CategorySlider{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Fashion category grid",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Subtitle",
+      "default": "Discover our curated collections"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Header spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Desktop columns",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Container width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Grid gap",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#fefbf6"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "image_aspect_ratio",
+      "min": 60,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "label": "Image aspect ratio",
+      "default": 120
+    },
+    {
+      "type": "header",
+      "content": "Slider arrows"
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_bg_color",
+      "label": "Hover background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Category overlay"
+    },
+    {
+      "type": "color_background",
+      "id": "overlay_gradient",
+      "label": "Overlay gradient",
+      "default": "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+      "type": "color_background",
+      "id": "overlay_hover_gradient",
+      "label": "Hover overlay gradient",
+      "default": "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 100%)"
+    },
+    {
+      "type": "range",
+      "id": "category_name_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Name size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "category_count_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Count size",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "category_name_color",
+      "label": "Name color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "category_count_color",
+      "label": "Count color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Category 1"
+    },
+    {
+      "type": "collection",
+      "id": "category_1",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_1_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "category_1_title",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Category 2"
+    },
+    {
+      "type": "collection",
+      "id": "category_2",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_2_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "category_2_title",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Category 3"
+    },
+    {
+      "type": "collection",
+      "id": "category_3",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_3_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "category_3_title",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Category 4"
+    },
+    {
+      "type": "collection",
+      "id": "category_4",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_4_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "category_4_title",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Category 5"
+    },
+    {
+      "type": "collection",
+      "id": "category_5",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_5_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "category_5_title",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Category 6"
+    },
+    {
+      "type": "collection",
+      "id": "category_6",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_6_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "category_6_title",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Category 7"
+    },
+    {
+      "type": "collection",
+      "id": "category_7",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_7_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "category_7_title",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Category 8"
+    },
+    {
+      "type": "collection",
+      "id": "category_8",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_8_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "category_8_title",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Category 9"
+    },
+    {
+      "type": "collection",
+      "id": "category_9",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_9_image",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "category_9_title",
+      "label": "Custom title"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fashion category grid"
+    }
+  ]
+}
 {% endschema %}
