@@ -202,7 +202,7 @@
             "grid_gap": 10,
             "section_padding_top": 15,
             "section_padding_bottom": 20,
-            "section_bg_color": "#ffffff",
+            "section_bg_color": "#fefbf6",
             "image_aspect_ratio": 1.2,
             "title_overlay": true,
             "text_alignment": "center",
