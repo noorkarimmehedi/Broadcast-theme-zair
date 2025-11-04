@@ -205,7 +205,7 @@
             "section_bg_color": "#ffffff",
             "image_aspect_ratio": 1.2,
             "title_overlay": true,
-            "text_alignment": "left",
+            "text_alignment": "center",
             "title_font_size": 12,
             "title_font_weight": 600,
             "title_padding": 15,
