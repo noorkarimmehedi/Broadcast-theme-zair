@@ -309,7 +309,7 @@
   }
 </style>
 
-{% if template != 'cart' and template != 'checkout' %}
+{% unless template == 'checkout' %}
   <div class="mobile-bottom-nav">
     <a href="/" title="Home">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -344,7 +344,7 @@
       <span>Cart</span>
     </a>
   </div>
-{% endif %}
+{% endunless %}
 
 <script>
   (function() {
