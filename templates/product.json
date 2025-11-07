@@ -398,6 +398,7 @@
         "faq-3",
         "faq-4"
       ],
+      "disabled": true,
       "settings": {
         "title": "Details",
         "bg_color": "",
@@ -493,6 +494,7 @@
         "shipping-1",
         "shipping-2"
       ],
+      "disabled": true,
       "settings": {
         "title": "Delivery & Returns",
         "bg_color": "",
