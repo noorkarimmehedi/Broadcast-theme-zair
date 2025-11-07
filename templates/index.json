@@ -186,6 +186,55 @@
       "disabled": true,
       "settings": {}
     },
+    "176251656635c66783": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_0ef7067_i8pFbF": {
+          "type": "ai_gen_block_0ef7067",
+          "settings": {
+            "section_title": "LATEST DROP",
+            "title_size": 36,
+            "title_letter_spacing": 2,
+            "heading_font": "sans_serif_n4",
+            "section_bg_color": "#ffffff",
+            "title_color": "#000000",
+            "button_text": "DISCOVER MORE",
+            "button_link": "",
+            "button_font_size": 13,
+            "button_bg_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_border_color": "#000000",
+            "button_hover_bg_color": "#ffffff",
+            "button_hover_text_color": "#000000",
+            "button_hover_border_color": "#000000",
+            "grid_gap": 30,
+            "image_aspect_ratio": 120,
+            "product_1": "",
+            "product_2": "",
+            "product_3": "",
+            "product_4": "",
+            "card_padding": 25,
+            "card_bg_color": "#ffffff",
+            "card_shadow_x": 0,
+            "card_shadow_y": 2,
+            "card_shadow_blur": 10,
+            "card_shadow_color": "rgba(0,0,0,0.1)",
+            "product_title_font": "sans_serif_n7",
+            "product_title_size": 16,
+            "product_title_color": "#000000",
+            "description_size": 13,
+            "description_color": "#666666",
+            "price_size": 15,
+            "price_color": "#000000"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_0ef7067_i8pFbF"
+      ],
+      "settings": {}
+    },
     "17622467612c9818ef": {
       "type": "_blocks",
       "blocks": {
@@ -853,6 +902,7 @@
     "slideshow",
     "17601233244b92d09c",
     "1762201422e82b3de5",
+    "176251656635c66783",
     "17622467612c9818ef",
     "docs",
     "image-with-text",
