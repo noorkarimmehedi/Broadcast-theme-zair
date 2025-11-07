@@ -235,9 +235,12 @@
       <button class="size-chart-close" onclick="closeSizeChart()">&times;</button>
     </div>
     
-    <div class="size-chart-tabs">
-  <button class="size-chart-tab active" onclick="switchTab(event, 'mens')">Men's</button>
-</div>
+    <div class="size-chart-body">
+      <div class="size-chart-tabs">
+        <button class="size-chart-tab active" onclick="switchTab(event, 'mens')">Men's</button>
+        <button class="size-chart-tab" onclick="switchTab(event, 'womens')">Women's</button>
+        <button class="size-chart-tab" onclick="switchTab(event, 'kids')">Kids'</button>
+      </div>
       
       <div id="mens" class="size-chart-table-container active">
         <table class="size-chart-table">
