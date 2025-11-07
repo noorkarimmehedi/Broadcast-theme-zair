@@ -186,6 +186,76 @@
       "disabled": true,
       "settings": {}
     },
+    "blocks_Hmhc8n": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_096e137_r3CLGn": {
+          "type": "ai_gen_block_096e137",
+          "settings": {
+            "section_title": "LATEST DROP",
+            "collection": "",
+            "background_color": "#f5f5f5",
+            "section_padding": 30,
+            "container_padding": 20,
+            "title_font": "system_ui_n4",
+            "title_size": 12,
+            "title_letter_spacing": 2,
+            "title_color": "#000000",
+            "header_spacing": 40,
+            "button_text": "DISCOVER MORE",
+            "button_link": "shopify://collections",
+            "button_font": "system_ui_n4",
+            "button_size": 11,
+            "button_letter_spacing": 1.5,
+            "button_text_color": "#000000",
+            "button_bg_color": "#ffffff",
+            "button_border_color": "#000000",
+            "button_border_width": 1,
+            "button_padding_vertical": 10,
+            "button_padding_horizontal": 24,
+            "button_hover_bg": "#000000",
+            "button_hover_text": "#ffffff",
+            "button_hover_border": "#000000",
+            "show_bottom_button": true,
+            "bottom_button_text": "DISCOVER MORE",
+            "bottom_button_link": "shopify://collections/new-arrival",
+            "bottom_button_spacing": 40,
+            "bottom_button_font": "system_ui_n4",
+            "bottom_button_size": 13,
+            "bottom_button_letter_spacing": 1.5,
+            "bottom_button_text_color": "#000000",
+            "bottom_button_bg_color": "#ffffff",
+            "bottom_button_border_color": "#000000",
+            "bottom_button_border_width": 1,
+            "bottom_button_border_radius": 0,
+            "bottom_button_padding_vertical": 14,
+            "bottom_button_padding_horizontal": 40,
+            "bottom_button_hover_bg": "#000000",
+            "bottom_button_hover_text": "#ffffff",
+            "bottom_button_hover_border": "#000000",
+            "grid_gap": 30,
+            "image_aspect_ratio": 1.3,
+            "image_spacing": 16,
+            "card_shadow": "0 2px 8px rgba(0, 0, 0, 0.08)",
+            "product_name_font": "system_ui_n4",
+            "product_name_size": 13,
+            "product_name_spacing": 1,
+            "product_name_color": "#000000",
+            "price_font": "system_ui_n4",
+            "price_size": 12,
+            "price_color": "#888888",
+            "name_price_gap": 8,
+            "text_alignment": "left"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_096e137_r3CLGn"
+      ],
+      "name": "You may also like",
+      "settings": {}
+    },
     "176251656635c66783": {
       "type": "_blocks",
       "blocks": {
@@ -284,6 +354,7 @@
       "block_order": [
         "ai_gen_block_0ef7067_i8pFbF"
       ],
+      "disabled": true,
       "settings": {}
     },
     "17622467612c9818ef": {
@@ -953,6 +1024,7 @@
     "slideshow",
     "17601233244b92d09c",
     "1762201422e82b3de5",
+    "blocks_Hmhc8n",
     "176251656635c66783",
     "17622467612c9818ef",
     "docs",
