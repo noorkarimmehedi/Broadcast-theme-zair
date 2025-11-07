@@ -649,6 +649,58 @@
         "padding_bottom": 0
       }
     },
+    "1762517065e9496c0e": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_fd779fe_BY4JYp": {
+          "type": "ai_gen_block_fd779fe",
+          "settings": {
+            "padding": 20,
+            "label_width": 30,
+            "column_gap": 30,
+            "row_padding": 20,
+            "background_color": "#ffffff",
+            "label_color": "#000000",
+            "content_color": "#333333",
+            "label_font_size": 14,
+            "label_font_weight": "600",
+            "label_text_transform": "uppercase",
+            "label_letter_spacing": 0.5,
+            "content_font_size": 14,
+            "content_line_height": 1.6,
+            "paragraph_spacing": 10,
+            "list_item_spacing": 5,
+            "mobile_gap": 10,
+            "mobile_row_padding": 15,
+            "mobile_label_font_size": 13,
+            "mobile_content_font_size": 13,
+            "show_row_1": true,
+            "row_1_label": "Description",
+            "row_1_content": "<p>Premium quality fabric with exceptional comfort and durability. Perfect for everyday wear.</p>",
+            "show_row_2": true,
+            "row_2_label": "Details",
+            "row_2_content": "<p>100% Cotton<br>Regular fit<br>Button closure<br>Machine washable</p>",
+            "show_row_3": true,
+            "row_3_label": "Wash Care",
+            "row_3_content": "<p>Machine wash cold with like colors. Do not bleach. Tumble dry low. Iron on low heat if needed.</p>",
+            "show_row_4": true,
+            "row_4_label": "Shipping",
+            "row_4_content": "<p>Free shipping on orders over $50. Standard delivery takes 3-5 business days.</p>",
+            "show_row_5": false,
+            "row_5_label": "",
+            "row_5_content": "",
+            "show_row_6": false,
+            "row_6_label": "",
+            "row_6_content": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_fd779fe_BY4JYp"
+      ],
+      "settings": {}
+    },
     "section_collection_hA8Jpn": {
       "type": "section-collection",
       "name": "Featured collection",
@@ -685,6 +737,7 @@
     "custom",
     "imgtxt",
     "related",
+    "1762517065e9496c0e",
     "section_collection_hA8Jpn"
   ]
 }
