@@ -103,6 +103,49 @@
         "padding_bottom": 0
       }
     },
+    "176252484968af5b3a": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_87ea7e5_GAexUM": {
+          "type": "ai_gen_block_87ea7e5",
+          "settings": {
+            "feature_1_text": "Free and easy returns",
+            "feature_1_icon_type": "custom",
+            "feature_1_shopify_icon": "package",
+            "feature_1_icon": "shopify://shop_images/icons8-replace-96.png",
+            "feature_2_text": "Delivery within 48 hours",
+            "feature_2_icon_type": "custom",
+            "feature_2_shopify_icon": "clock",
+            "feature_2_icon": "shopify://shop_images/icons8-delivery-truck-96.png",
+            "feature_3_text": "Export fabric",
+            "feature_3_icon_type": "shopify",
+            "feature_3_shopify_icon": "sparkles",
+            "padding_top": 0,
+            "padding_bottom": 12,
+            "gap": 16,
+            "icon_text_gap": 8,
+            "padding": 16,
+            "mobile_gap": 16,
+            "border_width": 1,
+            "border_color": "#000000",
+            "border_radius": 4,
+            "background_color": "#ffffff",
+            "text_color": "#000000",
+            "icon_color": "#000000",
+            "text_font": "serif",
+            "icon_size": 40,
+            "text_size": 14,
+            "mobile_icon_size": 32,
+            "mobile_text_size": 12
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_87ea7e5_GAexUM"
+      ],
+      "settings": {}
+    },
     "17596492331a37535f": {
       "type": "_blocks",
       "blocks": {
@@ -910,6 +953,7 @@
   },
   "order": [
     "main",
+    "176252484968af5b3a",
     "17596492331a37535f",
     "17596469702ade7f46",
     "faq",
