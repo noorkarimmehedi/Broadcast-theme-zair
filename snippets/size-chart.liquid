@@ -1,0 +1,440 @@
+{% comment %}
+  Size Chart Snippet
+  Usage: {% render 'size-chart' %}
+{% endcomment %}
+
+<style>
+  .size-chart-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: white;
+    transition: all 0.2s ease;
+    margin: 12px 0;
+  }
+  
+  .size-chart-trigger:hover {
+    background: #f9fafb;
+    border-color: #2563eb;
+  }
+  
+  .size-chart-trigger svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .size-chart-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+  }
+  
+  .size-chart-modal.active {
+    display: flex;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .size-chart-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.3s ease;
+  }
+  
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .size-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .size-chart-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #111827;
+  }
+  
+  .size-chart-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #6b7280;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  
+  .size-chart-close:hover {
+    background: #f3f4f6;
+    color: #111827;
+  }
+  
+  .size-chart-body {
+    padding: 24px;
+  }
+  
+  .size-chart-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #e5e7eb;
+  }
+  
+  .size-chart-tab {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s ease;
+  }
+  
+  .size-chart-tab.active {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+  }
+  
+  .size-chart-tab:hover {
+    color: #111827;
+  }
+  
+  .size-chart-table-container {
+    display: none;
+    overflow-x: auto;
+  }
+  
+  .size-chart-table-container.active {
+    display: block;
+  }
+  
+  .size-chart-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  
+  .size-chart-table th {
+    background: #f9fafb;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+  }
+  
+  .size-chart-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #4b5563;
+  }
+  
+  .size-chart-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .size-chart-table tr:hover {
+    background: #f9fafb;
+  }
+  
+  .size-chart-note {
+    margin-top: 20px;
+    padding: 16px;
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #1e40af;
+  }
+  
+  @media (max-width: 768px) {
+    .size-chart-content {
+      margin: 0;
+      border-radius: 12px 12px 0 0;
+      max-height: 85vh;
+    }
+    
+    .size-chart-header h2 {
+      font-size: 20px;
+    }
+    
+    .size-chart-table {
+      font-size: 12px;
+    }
+    
+    .size-chart-table th,
+    .size-chart-table td {
+      padding: 8px;
+    }
+  }
+</style>
+
+<button class="size-chart-trigger" onclick="openSizeChart()">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+  </svg>
+  Size Guide
+</button>
+
+<div class="size-chart-modal" id="sizeChartModal" onclick="closeSizeChartOnOutside(event)">
+  <div class="size-chart-content">
+    <div class="size-chart-header">
+      <h2>Size Guide</h2>
+      <button class="size-chart-close" onclick="closeSizeChart()">&times;</button>
+    </div>
+    
+    <div class="size-chart-body">
+      <div class="size-chart-tabs">
+        <button class="size-chart-tab active" onclick="switchTab(event, 'mens')">Men's</button>
+        <button class="size-chart-tab" onclick="switchTab(event, 'womens')">Women's</button>
+        <button class="size-chart-tab" onclick="switchTab(event, 'kids')">Kids'</button>
+      </div>
+      
+      <div id="mens" class="size-chart-table-container active">
+        <table class="size-chart-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Chest (inches)</th>
+              <th>Waist (inches)</th>
+              <th>Hip (inches)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>XS</strong></td>
+              <td>33-35</td>
+              <td>27-29</td>
+              <td>33-35</td>
+            </tr>
+            <tr>
+              <td><strong>S</strong></td>
+              <td>35-37</td>
+              <td>29-31</td>
+              <td>35-37</td>
+            </tr>
+            <tr>
+              <td><strong>M</strong></td>
+              <td>38-40</td>
+              <td>32-34</td>
+              <td>38-40</td>
+            </tr>
+            <tr>
+              <td><strong>L</strong></td>
+              <td>41-43</td>
+              <td>35-37</td>
+              <td>41-43</td>
+            </tr>
+            <tr>
+              <td><strong>XL</strong></td>
+              <td>44-46</td>
+              <td>38-40</td>
+              <td>44-46</td>
+            </tr>
+            <tr>
+              <td><strong>XXL</strong></td>
+              <td>47-49</td>
+              <td>41-43</td>
+              <td>47-49</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div id="womens" class="size-chart-table-container">
+        <table class="size-chart-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Bust (inches)</th>
+              <th>Waist (inches)</th>
+              <th>Hip (inches)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>XS</strong></td>
+              <td>31-33</td>
+              <td>24-26</td>
+              <td>34-36</td>
+            </tr>
+            <tr>
+              <td><strong>S</strong></td>
+              <td>33-35</td>
+              <td>26-28</td>
+              <td>36-38</td>
+            </tr>
+            <tr>
+              <td><strong>M</strong></td>
+              <td>35-37</td>
+              <td>28-30</td>
+              <td>38-40</td>
+            </tr>
+            <tr>
+              <td><strong>L</strong></td>
+              <td>37-39</td>
+              <td>30-32</td>
+              <td>40-42</td>
+            </tr>
+            <tr>
+              <td><strong>XL</strong></td>
+              <td>39-42</td>
+              <td>32-35</td>
+              <td>42-45</td>
+            </tr>
+            <tr>
+              <td><strong>XXL</strong></td>
+              <td>42-45</td>
+              <td>35-38</td>
+              <td>45-48</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div id="kids" class="size-chart-table-container">
+        <table class="size-chart-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Age</th>
+              <th>Height (inches)</th>
+              <th>Chest (inches)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>2-3Y</strong></td>
+              <td>2-3 years</td>
+              <td>35-38</td>
+              <td>20-21</td>
+            </tr>
+            <tr>
+              <td><strong>4-5Y</strong></td>
+              <td>4-5 years</td>
+              <td>39-43</td>
+              <td>22-23</td>
+            </tr>
+            <tr>
+              <td><strong>6-7Y</strong></td>
+              <td>6-7 years</td>
+              <td>44-48</td>
+              <td>24-25</td>
+            </tr>
+            <tr>
+              <td><strong>8-9Y</strong></td>
+              <td>8-9 years</td>
+              <td>49-53</td>
+              <td>26-27</td>
+            </tr>
+            <tr>
+              <td><strong>10-11Y</strong></td>
+              <td>10-11 years</td>
+              <td>54-58</td>
+              <td>28-30</td>
+            </tr>
+            <tr>
+              <td><strong>12-13Y</strong></td>
+              <td>12-13 years</td>
+              <td>59-63</td>
+              <td>31-33</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="size-chart-note">
+        <strong>📏 How to Measure:</strong> Use a soft measuring tape and measure around the fullest part of your chest/bust, natural waistline, and hips. If you're between sizes, we recommend sizing up for a comfortable fit.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openSizeChart() {
+    document.getElementById('sizeChartModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeSizeChart() {
+    document.getElementById('sizeChartModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  function closeSizeChartOnOutside(event) {
+    if (event.target.id === 'sizeChartModal') {
+      closeSizeChart();
+    }
+  }
+  
+  function switchTab(event, tabName) {
+    // Remove active class from all tabs and containers
+    var tabs = document.querySelectorAll('.size-chart-tab');
+    var containers = document.querySelectorAll('.size-chart-table-container');
+    
+    tabs.forEach(function(tab) {
+      tab.classList.remove('active');
+    });
+    
+    containers.forEach(function(container) {
+      container.classList.remove('active');
+    });
+    
+    // Add active class to clicked tab and corresponding container
+    event.currentTarget.classList.add('active');
+    document.getElementById(tabName).classList.add('active');
+  }
+  
+  // Close on ESC key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeSizeChart();
+    }
+  });
+</script>
