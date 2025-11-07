@@ -244,3 +244,202 @@
 </body>
 </html>
 
+
+<style>
+  /* Sticky Bottom Navigation - Mobile Only */
+  @media screen and (max-width: 768px) {
+    .mobile-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      z-index: 1000;
+    }
+    .mobile-bottom-nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex: 1;
+      color: #333;
+      text-decoration: none;
+      font-size: 12px;
+      position: relative;
+    }
+    .mobile-bottom-nav a svg {
+      flex-shrink: 0;
+    }
+    
+    /* Cart Badge */
+    .cart-badge {
+      position: absolute;
+      top: -2px;
+      right: 50%;
+      transform: translateX(12px);
+      background: #ff4444;
+      color: white;
+      border-radius: 10px;
+      padding: 2px 5px;
+      font-size: 10px;
+      font-weight: bold;
+      min-width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    
+    .cart-badge.hidden {
+      display: none;
+    }
+  }
+
+  /* Ensure it is hidden on larger screens */
+  @media screen and (min-width: 769px) {
+    .mobile-bottom-nav {
+      display: none;
+    }
+  }
+</style>
+
+{% if template != 'cart' and template != 'checkout' %}
+  <div class="mobile-bottom-nav">
+    <a href="/" title="Home">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.25 16.88V10.9146C5.25 10.3375 5.51642 9.79278 5.97193 9.4385L10.8519 5.64294C11.5272 5.11773 12.4728 5.11773 13.1481 5.64294L18.0281 9.4385C18.4836 9.79278 18.75 10.3375 18.75 10.9146V16.88C18.75 17.9128 17.9128 18.75 16.88 18.75H7.12C6.08723 18.75 5.25 17.9128 5.25 16.88Z" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14.25 14.25C14.0657 14.694 13.7535 15.0735 13.353 15.3405C12.9525 15.6075 12.4817 15.75 12 15.75C11.5183 15.75 11.0475 15.6075 10.647 15.3405C10.2465 15.0735 9.93433 14.694 9.75 14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="/search" title="Search">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M20 20L16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>Search</span>
+    </a>
+    <a href="/collections" title="Shop Under ৳500">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none">
+        <path d="M7.72852 15.2861H12.7285M10.2271 12.7861H10.2364M10.2294 17.7861H10.2388" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M6.5 3.69682C9.53332 6.78172 14.5357 0.123719 17.4957 2.53998C19.1989 3.93028 18.6605 7 16.4494 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        <path d="M18.664 6.57831C19.6473 6.75667 19.8679 7.34313 20.1615 8.97048C20.4259 10.4361 20.5 12.1949 20.5 12.9436C20.4731 13.2195 20.3532 13.477 20.1615 13.687C18.1054 15.722 14.0251 19.565 11.9657 21.474C11.1575 22.1555 9.93819 22.1702 9.08045 21.5447C7.32407 20.0526 5.63654 18.366 3.98343 16.8429C3.3193 16.035 3.33487 14.8866 4.0585 14.1255C6.23711 11.9909 10.1793 8.33731 12.4047 6.31887C12.6278 6.1383 12.9012 6.02536 13.1942 6C13.6935 5.99988 14.5501 6.06327 15.3845 6.10896" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </svg>
+      <span>Under ৳500</span>
+    </a>
+    <a href="/cart" title="Cart">
+      <span class="cart-badge {% if cart.item_count == 0 %}hidden{% endif %}" id="mobile-cart-badge">
+        {{ cart.item_count }}
+      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none">
+        <path d="M8 7H16C17.8856 7 18.8284 7 19.4142 7.58579C20 8.17157 20 9.11438 20 11V15C20 18.2998 20 19.9497 18.9749 20.9749C17.9497 22 16.2998 22 13 22H11C7.70017 22 6.05025 22 5.02513 20.9749C4 19.9497 4 18.2998 4 15V11C4 9.11438 4 8.17157 4.58579 7.58579C5.17157 7 6.11438 7 8 7Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M16 9.5C16 5.63401 14.2091 2 12 2C9.79086 2 8 5.63401 8 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span>Cart</span>
+    </a>
+  </div>
+{% endif %}
+
+<script>
+  (function() {
+    // Update mobile cart badge when cart changes
+    function updateMobileCartBadge() {
+      fetch('/cart.js')
+        .then(response => response.json())
+        .then(cart => {
+          const badge = document.getElementById('mobile-cart-badge');
+          if (badge) {
+            badge.textContent = cart.item_count;
+            if (cart.item_count > 0) {
+              badge.classList.remove('hidden');
+            } else {
+              badge.classList.add('hidden');
+            }
+          }
+        })
+        .catch(error => console.error('Error updating cart badge:', error));
+    }
+
+    // Intercept fetch requests to detect cart changes
+    const originalFetch = window.fetch;
+    window.fetch = function(...args) {
+      const url = args[0];
+      
+      return originalFetch.apply(this, args).then(response => {
+        // Check if it's a cart-related API call
+        if (typeof url === 'string' && 
+            (url.includes('/cart/add') || 
+             url.includes('/cart/change') || 
+             url.includes('/cart/update') ||
+             url.includes('/cart/clear'))) {
+          // Update badge after cart operation
+          setTimeout(updateMobileCartBadge, 300);
+        }
+        return response;
+      });
+    };
+
+    // Listen for cart updates on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateMobileCartBadge);
+    } else {
+      updateMobileCartBadge();
+    }
+    
+    // Listen for various cart-related events
+    const cartEvents = [
+      'cart:updated',
+      'cart:refresh',
+      'cart.requestComplete',
+      'ajaxCart:added',
+      'ajaxCart:updated',
+      'product:added',
+      'variant:add'
+    ];
+    
+    cartEvents.forEach(event => {
+      document.addEventListener(event, updateMobileCartBadge);
+    });
+    
+    // Listen for add to cart form submissions
+    document.addEventListener('submit', function(e) {
+      if (e.target.matches('form[action*="/cart/add"]')) {
+        setTimeout(updateMobileCartBadge, 500);
+      }
+    });
+    
+    // Listen for click events on add to cart buttons
+    document.addEventListener('click', function(e) {
+      const target = e.target.closest('[name="add"], .add-to-cart, .product-form__submit');
+      if (target) {
+        setTimeout(updateMobileCartBadge, 500);
+      }
+    });
+
+    // Periodic check as fallback (every 2 seconds when page is visible)
+    let lastKnownCount = {{ cart.item_count }};
+    setInterval(function() {
+      if (!document.hidden) {
+        fetch('/cart.js')
+          .then(response => response.json())
+          .then(cart => {
+            if (cart.item_count !== lastKnownCount) {
+              lastKnownCount = cart.item_count;
+              updateMobileCartBadge();
+            }
+          });
+      }
+    }, 2000);
+  })();
+</script>
+
+  {%- comment -%} WhatsApp Chat Widget {%- endcomment -%}
+    {% render 'whatsapp-widget' %}
+  </body>
+</html>
