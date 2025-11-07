@@ -453,6 +453,7 @@
         "about-1",
         "about-2"
       ],
+      "disabled": true,
       "settings": {
         "title": "Size Chart",
         "bg_color": "",
