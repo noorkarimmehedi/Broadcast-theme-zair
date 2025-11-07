@@ -16,6 +16,7 @@
       "blocks": {
         "footer-0": {
           "type": "newsletter",
+          "disabled": true,
           "settings": {
             "title": "Newsletter",
             "text": "<p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>",
