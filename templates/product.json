@@ -719,10 +719,10 @@
         "style": "grid",
         "grid": 4,
         "rows": 3,
-        "layout_mobile": "1",
+        "layout_mobile": "2",
         "bg_color": "",
         "color": "",
-        "padding_top": 50,
+        "padding_top": 0,
         "padding_bottom": 50
       }
     }
