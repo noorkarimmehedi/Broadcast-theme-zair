@@ -1,6 +1,613 @@
+{% doc %}
+  @prompt
+    generate me a section for these with icons: Free and easy returns
+    Delivery within 48 hours
+    Export fabric. in mobile version the three should be in same one row , don't like the icons, option for custom icon upload and select icons from shopify. also add a black border , add border radius option , i want slight gap on both left and right side on mobile version
+    
+    , font should be customizable from Shopify also i need section top and bottom padding, i don't like the current icons. change them to more modern one.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-features-container-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.padding_top }}px {{ block.settings.mobile_gap }}px {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-features-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: {{ block.settings.gap }}px;
+    background-color: {{ block.settings.background_color }};
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: {{ block.settings.padding }}px;
+  }
+
+  .ai-feature-item-{{ ai_gen_id }} {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: {{ block.settings.icon_text_gap }}px;
+  }
+
+  .ai-feature-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-feature-icon-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ai-feature-icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    stroke: {{ block.settings.icon_color }};
+    fill: none;
+  }
+
+  .ai-feature-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
+    font-weight: {{ block.settings.text_font.weight }};
+    font-style: {{ block.settings.text_font.style }};
+    line-height: 1.3;
+    word-break: break-word;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-features-wrapper-{{ ai_gen_id }} {
+      flex-wrap: nowrap;
+    }
+
+    .ai-feature-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.mobile_text_size }}px;
+    }
+
+    .ai-feature-icon-{{ ai_gen_id }} {
+      width: {{ block.settings.mobile_icon_size }}px;
+      height: {{ block.settings.mobile_icon_size }}px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-features-container-{{ ai_gen_id }} {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-features-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-features-wrapper-{{ ai_gen_id }}">
+    {% for i in (1..3) %}
+      {% liquid
+        assign text_key = 'feature_' | append: i | append: '_text'
+        assign icon_key = 'feature_' | append: i | append: '_icon'
+        assign icon_type_key = 'feature_' | append: i | append: '_icon_type'
+        assign shopify_icon_key = 'feature_' | append: i | append: '_shopify_icon'
+
+        assign feature_text = block.settings[text_key]
+        assign custom_icon = block.settings[icon_key]
+        assign icon_type = block.settings[icon_type_key]
+        assign shopify_icon = block.settings[shopify_icon_key]
+      %}
+
+      <div class="ai-feature-item-{{ ai_gen_id }}">
+        <div class="ai-feature-icon-{{ ai_gen_id }}">
+          {% if icon_type == 'custom' and custom_icon %}
+            <img
+              src="{{ custom_icon | image_url: width: 200 }}"
+              alt="{{ feature_text | escape }}"
+              loading="lazy"
+              width="200"
+              height="200"
+            >
+          {% elsif icon_type == 'shopify' %}
+            {% case shopify_icon %}
+              {% when 'truck' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+              {% when 'return' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l4-4 4 4"></path>
+                  <path d="M7 5v11a3 3 0 0 0 3 3h10"></path>
+                  <path d="M20 19l-3 3-3-3"></path>
+                </svg>
+              {% when 'shield' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l-8 3v7c0 5.5 3.84 10.74 8 12 4.16-1.26 8-6.5 8-12V5l-8-3z"></path>
+                  <path d="M9 12l2 2 4-4"></path>
+                </svg>
+              {% when 'check' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M8 12l2.5 2.5L16 9"></path>
+                </svg>
+              {% when 'star' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
+              {% when 'package' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8z"></path>
+                  <path d="M3.27 6.96L12 12.01l8.73-5.05"></path>
+                  <path d="M12 22.08V12"></path>
+                </svg>
+              {% when 'heart' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              {% when 'gift' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="8" width="18" height="4"></rect>
+                  <path d="M12 8v13"></path>
+                  <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                  <path d="M7.5 8a2.5 2.5 0 0 1 0-5A3.5 3.5 0 0 1 12 6.5M16.5 8a2.5 2.5 0 0 0 0-5A3.5 3.5 0 0 0 12 6.5"></path>
+                </svg>
+              {% when 'clock' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 6v6l4 2"></path>
+                </svg>
+              {% when 'sparkles' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"></path>
+                  <path d="M19 12l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z"></path>
+                  <path d="M6 18l.5 1.5L8 20l-1.5.5L6 22l-.5-1.5L4 20l1.5-.5L6 18z"></path>
+                </svg>
+              {% else %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M8 12l2.5 2.5L16 9"></path>
+                </svg>
+            {% endcase %}
+          {% endif %}
+        </div>
+        {% if feature_text != blank %}
+          <div class="ai-feature-text-{{ ai_gen_id }}">{{ feature_text }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Features with icons",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Feature 1"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_text",
+      "label": "Text",
+      "default": "Free and easy returns"
+    },
+    {
+      "type": "select",
+      "id": "feature_1_icon_type",
+      "label": "Icon type",
+      "options": [
+        {
+          "value": "shopify",
+          "label": "Shopify icon"
+        },
+        {
+          "value": "custom",
+          "label": "Custom upload"
+        }
+      ],
+      "default": "shopify"
+    },
+    {
+      "type": "select",
+      "id": "feature_1_shopify_icon",
+      "label": "Shopify icon",
+      "options": [
+        {
+          "value": "return",
+          "label": "Return arrows"
+        },
+        {
+          "value": "truck",
+          "label": "Delivery truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield check"
+        },
+        {
+          "value": "check",
+          "label": "Check circle"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "package",
+          "label": "Package box"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "gift",
+          "label": "Gift box"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "sparkles",
+          "label": "Sparkles"
+        }
+      ],
+      "default": "return"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_1_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Feature 2"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_text",
+      "label": "Text",
+      "default": "Delivery within 48 hours"
+    },
+    {
+      "type": "select",
+      "id": "feature_2_icon_type",
+      "label": "Icon type",
+      "options": [
+        {
+          "value": "shopify",
+          "label": "Shopify icon"
+        },
+        {
+          "value": "custom",
+          "label": "Custom upload"
+        }
+      ],
+      "default": "shopify"
+    },
+    {
+      "type": "select",
+      "id": "feature_2_shopify_icon",
+      "label": "Shopify icon",
+      "options": [
+        {
+          "value": "return",
+          "label": "Return arrows"
+        },
+        {
+          "value": "truck",
+          "label": "Delivery truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield check"
+        },
+        {
+          "value": "check",
+          "label": "Check circle"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "package",
+          "label": "Package box"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "gift",
+          "label": "Gift box"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "sparkles",
+          "label": "Sparkles"
+        }
+      ],
+      "default": "clock"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_2_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Feature 3"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_text",
+      "label": "Text",
+      "default": "Export fabric"
+    },
+    {
+      "type": "select",
+      "id": "feature_3_icon_type",
+      "label": "Icon type",
+      "options": [
+        {
+          "value": "shopify",
+          "label": "Shopify icon"
+        },
+        {
+          "value": "custom",
+          "label": "Custom upload"
+        }
+      ],
+      "default": "shopify"
+    },
+    {
+      "type": "select",
+      "id": "feature_3_shopify_icon",
+      "label": "Shopify icon",
+      "options": [
+        {
+          "value": "return",
+          "label": "Return arrows"
+        },
+        {
+          "value": "truck",
+          "label": "Delivery truck"
+        },
+        {
+          "value": "shield",
+          "label": "Shield check"
+        },
+        {
+          "value": "check",
+          "label": "Check circle"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "package",
+          "label": "Package box"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "gift",
+          "label": "Gift box"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "sparkles",
+          "label": "Sparkles"
+        }
+      ],
+      "default": "sparkles"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_3_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between features",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "icon_text_gap",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between icon and text",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Inner padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile side gap",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "text_font",
+      "label": "Font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "header",
+      "content": "Desktop"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "mobile_icon_size",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 8,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 11
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features with icons"
+    }
+  ]
+}
 {% endschema %}
