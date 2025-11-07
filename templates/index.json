@@ -89,7 +89,7 @@
         "ai_gen_block_924fda4_JUAArY": {
           "type": "ai_gen_block_924fda4",
           "settings": {
-            "background_color": "#fefbf6",
+            "background_color": "#ffffff",
             "text_color": "#1a365d",
             "icon_color": "#1a365d",
             "section_padding": 30,
@@ -267,8 +267,8 @@
             "name_spacing": 10,
             "description_spacing": 10,
             "image_aspect_ratio": 120,
-            "section_bg_color": "#fefbf6",
-            "card_bg_color": "#fefbf6",
+            "section_bg_color": "#ffffff",
+            "card_bg_color": "#ffffff",
             "card_border_width": 1,
             "card_border_color": "#e0e0e0",
             "card_border_hover_color": "#cccccc",
