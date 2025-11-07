@@ -8,21 +8,22 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: #2563eb;
+    color: #000000;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     padding: 8px 12px;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    background: white;
+    border: none;
+    border-radius: 0;
+    background: transparent;
     transition: all 0.2s ease;
     margin: 4px 0;
   }
   
   .size-chart-trigger:hover {
-    background: #f9fafb;
-    border-color: #2563eb;
+    background: transparent;
+    border-color: transparent;
+    opacity: 0.7;
   }
   
   .size-chart-trigger svg {
@@ -222,7 +223,7 @@
 
 <button class="size-chart-trigger" onclick="openSizeChart()">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
   </svg>
   Size Guide
 </button>
