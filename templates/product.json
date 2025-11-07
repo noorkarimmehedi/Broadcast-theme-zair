@@ -22,6 +22,13 @@
             "padding_bottom": 8
           }
         },
+        "code_aWfpk3": {
+          "type": "code",
+          "settings": {
+            "code": "{% render 'size-chart' %}",
+            "padding_bottom": 16
+          }
+        },
         "price_LbWbx7": {
           "type": "price",
           "settings": {
@@ -40,13 +47,6 @@
           "settings": {
             "info_page": "",
             "subscriptions_enable_selectors": false,
-            "padding_bottom": 16
-          }
-        },
-        "code_aWfpk3": {
-          "type": "code",
-          "settings": {
-            "code": "{% render 'size-chart' %}",
             "padding_bottom": 16
           }
         },
@@ -81,10 +81,10 @@
       },
       "block_order": [
         "title_8Y7MTP",
+        "code_aWfpk3",
         "price_LbWbx7",
         "pickup",
         "variants_3cRT3q",
-        "code_aWfpk3",
         "tabs",
         "buttons_xAgMTi"
       ],
