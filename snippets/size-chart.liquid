@@ -116,42 +116,8 @@
     padding: 24px;
   }
   
-  .size-chart-tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
-    border-bottom: 2px solid #e5e7eb;
-  }
-  
-  .size-chart-tab {
-    padding: 12px 20px;
-    background: none;
-    border: none;
-    font-size: 15px;
-    font-weight: 500;
-    color: #6b7280;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
-    transition: all 0.2s ease;
-  }
-  
-  .size-chart-tab.active {
-    color: #2563eb;
-    border-bottom-color: #2563eb;
-  }
-  
-  .size-chart-tab:hover {
-    color: #111827;
-  }
-  
   .size-chart-table-container {
-    display: none;
     overflow-x: auto;
-  }
-  
-  .size-chart-table-container.active {
-    display: block;
   }
   
   .size-chart-table {
@@ -236,13 +202,7 @@
     </div>
     
     <div class="size-chart-body">
-      <div class="size-chart-tabs">
-        <button class="size-chart-tab active" onclick="switchTab(event, 'mens')">Men's</button>
-        <button class="size-chart-tab" onclick="switchTab(event, 'womens')">Women's</button>
-        <button class="size-chart-tab" onclick="switchTab(event, 'kids')">Kids'</button>
-      </div>
-      
-      <div id="mens" class="size-chart-table-container active">
+      <div class="size-chart-table-container">
         <table class="size-chart-table">
           <thead>
             <tr>
@@ -293,108 +253,6 @@
         </table>
       </div>
       
-      <div id="womens" class="size-chart-table-container">
-        <table class="size-chart-table">
-          <thead>
-            <tr>
-              <th>Size</th>
-              <th>Bust (inches)</th>
-              <th>Waist (inches)</th>
-              <th>Hip (inches)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>XS</strong></td>
-              <td>31-33</td>
-              <td>24-26</td>
-              <td>34-36</td>
-            </tr>
-            <tr>
-              <td><strong>S</strong></td>
-              <td>33-35</td>
-              <td>26-28</td>
-              <td>36-38</td>
-            </tr>
-            <tr>
-              <td><strong>M</strong></td>
-              <td>35-37</td>
-              <td>28-30</td>
-              <td>38-40</td>
-            </tr>
-            <tr>
-              <td><strong>L</strong></td>
-              <td>37-39</td>
-              <td>30-32</td>
-              <td>40-42</td>
-            </tr>
-            <tr>
-              <td><strong>XL</strong></td>
-              <td>39-42</td>
-              <td>32-35</td>
-              <td>42-45</td>
-            </tr>
-            <tr>
-              <td><strong>XXL</strong></td>
-              <td>42-45</td>
-              <td>35-38</td>
-              <td>45-48</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div id="kids" class="size-chart-table-container">
-        <table class="size-chart-table">
-          <thead>
-            <tr>
-              <th>Size</th>
-              <th>Age</th>
-              <th>Height (inches)</th>
-              <th>Chest (inches)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>2-3Y</strong></td>
-              <td>2-3 years</td>
-              <td>35-38</td>
-              <td>20-21</td>
-            </tr>
-            <tr>
-              <td><strong>4-5Y</strong></td>
-              <td>4-5 years</td>
-              <td>39-43</td>
-              <td>22-23</td>
-            </tr>
-            <tr>
-              <td><strong>6-7Y</strong></td>
-              <td>6-7 years</td>
-              <td>44-48</td>
-              <td>24-25</td>
-            </tr>
-            <tr>
-              <td><strong>8-9Y</strong></td>
-              <td>8-9 years</td>
-              <td>49-53</td>
-              <td>26-27</td>
-            </tr>
-            <tr>
-              <td><strong>10-11Y</strong></td>
-              <td>10-11 years</td>
-              <td>54-58</td>
-              <td>28-30</td>
-            </tr>
-            <tr>
-              <td><strong>12-13Y</strong></td>
-              <td>12-13 years</td>
-              <td>59-63</td>
-              <td>31-33</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
       <div class="size-chart-note">
         <strong>📏 How to Measure:</strong> Use a soft measuring tape and measure around the fullest part of your chest/bust, natural waistline, and hips. If you're between sizes, we recommend sizing up for a comfortable fit.
       </div>
@@ -417,24 +275,6 @@
     if (event.target.id === 'sizeChartModal') {
       closeSizeChart();
     }
-  }
-  
-  function switchTab(event, tabName) {
-    // Remove active class from all tabs and containers
-    var tabs = document.querySelectorAll('.size-chart-tab');
-    var containers = document.querySelectorAll('.size-chart-table-container');
-    
-    tabs.forEach(function(tab) {
-      tab.classList.remove('active');
-    });
-    
-    containers.forEach(function(container) {
-      container.classList.remove('active');
-    });
-    
-    // Add active class to clicked tab and corresponding container
-    event.currentTarget.classList.add('active');
-    document.getElementById(tabName).classList.add('active');
   }
   
   // Close on ESC key
