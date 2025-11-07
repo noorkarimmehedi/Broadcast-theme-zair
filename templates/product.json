@@ -43,6 +43,13 @@
             "padding_bottom": 16
           }
         },
+        "code_aWfpk3": {
+          "type": "code",
+          "settings": {
+            "code": "{% render 'size-chart' %}",
+            "padding_bottom": 16
+          }
+        },
         "tabs": {
           "type": "tab_richtext",
           "disabled": true,
@@ -77,6 +84,7 @@
         "price_LbWbx7",
         "pickup",
         "variants_3cRT3q",
+        "code_aWfpk3",
         "tabs",
         "buttons_xAgMTi"
       ],
@@ -880,8 +888,8 @@
             "section_bg_color": "#ffffff",
             "card_bg_color": "#ffffff",
             "card_border_width": 1,
-            "card_border_color": "#E0E0E0",
-            "card_border_hover_color": "#CCCCCC",
+            "card_border_color": "#e0e0e0",
+            "card_border_hover_color": "#cccccc",
             "card_border_radius": 4,
             "card_shadow_x": -7,
             "card_shadow_y": 1,
