@@ -672,7 +672,7 @@
             "border_color": "#000000",
             "border_width": 1,
             "border_radius": 4,
-            "outer_background_color": "#ffffff",
+            "outer_background_color": "#fefbf6",
             "background_color": "#ffffff",
             "label_color": "#000000",
             "content_color": "#333333",
