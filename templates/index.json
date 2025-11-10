@@ -15,6 +15,7 @@
         "slideshow-0": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/demo.png",
             "mobile_image": "shopify://shop_images/demo.png",
             "overlay_opacity": 0,
             "overlay_color": "#000000",
@@ -82,6 +83,60 @@
         "autoplay": false,
         "autoplay_speed": 8
       }
+    },
+    "17627819267e731e03": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_19a4a03_cdXxr6": {
+          "type": "ai_gen_block_19a4a03",
+          "settings": {
+            "image_mobile": "shopify://shop_images/demo.png",
+            "height_mobile": 600,
+            "height_desktop": 700,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.3,
+            "content_alignment": "left",
+            "content_padding_mobile": 30,
+            "button_side_gap_mobile": 15,
+            "content_padding_desktop": 60,
+            "content_spacing": 10,
+            "heading": "<p>Welcome to our store</p>",
+            "heading_color": "#ffffff",
+            "heading_size_mobile": 32,
+            "heading_size_desktop": 60,
+            "subheading": "<p>Discover our latest collection</p>",
+            "subheading_color": "#ffffff",
+            "subheading_size_mobile": 16,
+            "subheading_size_desktop": 20,
+            "text_spacing": 5,
+            "button_primary_label": "Shop now",
+            "button_primary_link": "",
+            "button_primary_bg": "#000000",
+            "button_primary_color": "#ffffff",
+            "button_primary_hover_bg": "#333333",
+            "button_primary_hover_color": "#ffffff",
+            "button_secondary_label": "Learn more",
+            "button_secondary_link": "",
+            "button_secondary_bg": "rgba(0,0,0,0)",
+            "button_secondary_color": "#ffffff",
+            "button_secondary_border": "#ffffff",
+            "button_secondary_hover_bg": "#ffffff",
+            "button_secondary_hover_color": "#000000",
+            "button_secondary_hover_border": "#ffffff",
+            "button_font_size": 16,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal_mobile": 60,
+            "button_padding_horizontal_desktop": 40,
+            "button_border_radius": 0,
+            "button_spacing": 12
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_19a4a03_cdXxr6"
+      ],
+      "settings": {}
     },
     "blocks_FDm6Jp": {
       "type": "_blocks",
@@ -1024,6 +1079,7 @@
   },
   "order": [
     "slideshow",
+    "17627819267e731e03",
     "blocks_FDm6Jp",
     "1762201422e82b3de5",
     "blocks_Hmhc8n",
