@@ -6,10 +6,25 @@
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
-{% comment %} Get current collection information {% endcomment %}
+{% comment %} Get current collection information - multiple ways to ensure we catch it {% endcomment %}
 {% assign current_collection_handle = collection.handle | default: '' %}
 {% assign current_collection_id = collection.id | default: '' %}
+{% assign current_collection_title = collection.title | default: '' %}
 {% assign current_url = request.path %}
+
+{% comment %} Extract collection handle from URL as backup {% endcomment %}
+{% assign url_parts = current_url | split: '/' %}
+{% assign url_collection_handle = '' %}
+{% assign found_collections = false %}
+{% for part in url_parts %}
+  {% if found_collections %}
+    {% assign url_collection_handle = part %}
+    {% break %}
+  {% endif %}
+  {% if part == 'collections' %}
+    {% assign found_collections = true %}
+  {% endif %}
+{% endfor %}
 
 {% style %}
   .ai-category-filter-{{ ai_gen_id }} {
@@ -72,9 +87,23 @@
   }
 
   .ai-category-filter-button-{{ ai_gen_id }}.active {
-    background-color: {{ block.settings.active_bg_color }};
-    color: {{ block.settings.active_text_color }};
-    border-color: {{ block.settings.active_border_color }};
+    background-color: {{ block.settings.active_bg_color }} !important;
+    color: {{ block.settings.active_text_color }} !important;
+    border-color: {{ block.settings.active_border_color }} !important;
+  }
+
+  .debug-info-{{ ai_gen_id }} {
+    padding: 15px;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    margin: 10px 20px;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .debug-info-{{ ai_gen_id }} strong {
+    color: #333;
   }
 
   @media screen and (min-width: 750px) {
@@ -107,7 +136,9 @@
 <div class="ai-category-filter-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-category-filter-container-{{ ai_gen_id }}">
     <ul class="ai-category-filter-list-{{ ai_gen_id }}">
-      {% assign has_active = false %}
+      {% assign found_active = false %}
+      {% assign active_category_index = 0 %}
+      
       {% for i in (1..20) %}
         {% liquid
           assign category_enabled_key = 'category_' | append: i | append: '_enabled'
@@ -120,23 +151,54 @@
           
           # Determine if this category is active
           assign is_active = false
+          assign match_reason = ''
           
           if category_collection != blank
-            # Check if the collection ID matches
-            if category_collection.id == current_collection_id
+            # Try multiple ways to match the collection
+            assign cat_handle = category_collection.handle
+            assign cat_id = category_collection.id | plus: 0
+            assign current_id = current_collection_id | plus: 0
+            
+            # Method 1: Direct handle comparison
+            if cat_handle == current_collection_handle
               assign is_active = true
-              assign has_active = true
+              assign match_reason = 'handle match'
+              assign found_active = true
+              assign active_category_index = i
+            # Method 2: URL handle comparison
+            elsif cat_handle == url_collection_handle
+              assign is_active = true
+              assign match_reason = 'url handle match'
+              assign found_active = true
+              assign active_category_index = i
+            # Method 3: ID comparison
+            elsif cat_id == current_id and cat_id != 0
+              assign is_active = true
+              assign match_reason = 'id match'
+              assign found_active = true
+              assign active_category_index = i
+            # Method 4: URL contains check
+            elsif current_url contains cat_handle and cat_handle != ''
+              assign is_active = true
+              assign match_reason = 'url contains'
+              assign found_active = true
+              assign active_category_index = i
             endif
-            # Also check by handle as fallback
-            if category_collection.handle == current_collection_handle
-              assign is_active = true
-              assign has_active = true
-            endif
-          elsif i == 1 and category_collection == blank
-            # This is for the ALL category (first category with no collection)
-            if current_url contains '/collections/all' or current_collection_handle == 'all'
-              assign is_active = true
-              assign has_active = true
+          else
+            # Handle the ALL category (no collection assigned)
+            if i == 1
+              if url_collection_handle == 'all' or current_collection_handle == 'all' or current_url contains '/collections/all'
+                assign is_active = true
+                assign match_reason = 'all collection'
+                assign found_active = true
+                assign active_category_index = i
+              elsif current_collection_handle == blank and url_collection_handle == blank
+                # No collection page, make first item active
+                assign is_active = true
+                assign match_reason = 'default first'
+                assign found_active = true
+                assign active_category_index = i
+              endif
             endif
           endif
         %}
@@ -148,35 +210,49 @@
               class="ai-category-filter-button-{{ ai_gen_id }}{% if is_active %} active{% endif %}"
               data-collection-id="{% if category_collection != blank %}{{ category_collection.id }}{% else %}all{% endif %}"
               data-collection-handle="{% if category_collection != blank %}{{ category_collection.handle }}{% else %}all{% endif %}"
+              data-category-index="{{ i }}"
+              data-match-reason="{{ match_reason }}"
             >
               {{ category_label }}
             </a>
           </li>
         {% endif %}
       {% endfor %}
-      
-      {% comment %} If no category is active and we're on homepage or non-collection page, activate the first one {% endcomment %}
-      {% if has_active == false and collection == blank %}
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            var firstButton = document.querySelector('.ai-category-filter-{{ ai_gen_id }} .ai-category-filter-button-{{ ai_gen_id }}');
-            if (firstButton && !document.querySelector('.ai-category-filter-{{ ai_gen_id }} .ai-category-filter-button-{{ ai_gen_id }}.active')) {
-              firstButton.classList.add('active');
-            }
-          });
-        </script>
-      {% endif %}
     </ul>
   </div>
   
-  {% comment %} Debug info - remove this in production {% endcomment %}
   {% if block.settings.show_debug %}
-    <div style="padding: 10px; background: #f0f0f0; margin-top: 10px; font-size: 12px;">
-      Debug Info:<br>
-      Current Collection Handle: {{ current_collection_handle }}<br>
-      Current Collection ID: {{ current_collection_id }}<br>
-      Current URL: {{ current_url }}<br>
-      Collection Title: {{ collection.title }}<br>
+    <div class="debug-info-{{ ai_gen_id }}">
+      <strong>Debug Information:</strong><br>
+      Current Collection Handle: <strong>{{ current_collection_handle | default: 'none' }}</strong><br>
+      Current Collection ID: <strong>{{ current_collection_id | default: 'none' }}</strong><br>
+      Current Collection Title: <strong>{{ current_collection_title | default: 'none' }}</strong><br>
+      URL Collection Handle: <strong>{{ url_collection_handle | default: 'none' }}</strong><br>
+      Current URL: <strong>{{ current_url }}</strong><br>
+      Found Active: <strong>{{ found_active }}</strong><br>
+      Active Category Index: <strong>{{ active_category_index }}</strong><br>
+      <br>
+      <strong>All Configured Categories:</strong><br>
+      {% for i in (1..20) %}
+        {% liquid
+          assign category_enabled_key = 'category_' | append: i | append: '_enabled'
+          assign category_label_key = 'category_' | append: i | append: '_label'
+          assign category_collection_key = 'category_' | append: i | append: '_collection'
+          
+          assign cat_enabled = block.settings[category_enabled_key]
+          assign cat_label = block.settings[category_label_key]
+          assign cat_collection = block.settings[category_collection_key]
+        %}
+        {% if cat_enabled and cat_label != blank %}
+          Category {{ i }}: <strong>{{ cat_label }}</strong> → 
+          {% if cat_collection != blank %}
+            Collection: {{ cat_collection.title }} (handle: {{ cat_collection.handle }}, id: {{ cat_collection.id }})
+          {% else %}
+            No collection assigned
+          {% endif %}
+          <br>
+        {% endif %}
+      {% endfor %}
     </div>
   {% endif %}
 </div>
@@ -414,7 +490,7 @@
       "id": "show_debug",
       "label": "Show debug info",
       "default": false,
-      "info": "Shows current collection info for troubleshooting"
+      "info": "Enable to troubleshoot active state issues"
     },
     {
       "type": "header",
