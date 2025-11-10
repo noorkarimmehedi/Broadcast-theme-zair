@@ -125,13 +125,32 @@
 
       setActiveFromCurrentURL() {
         const currentPath = window.location.pathname;
+        let matchFound = false;
+        
+        // Remove active class from all buttons first
+        this.buttons.forEach((btn) => btn.classList.remove('active'));
+        
+        // Find exact match or best match
         this.buttons.forEach((button) => {
           const buttonHref = button.getAttribute('href');
-          if (buttonHref && buttonHref !== '#' && currentPath.includes(buttonHref)) {
-            this.buttons.forEach((btn) => btn.classList.remove('active'));
+          
+          if (!buttonHref || buttonHref === '#' || buttonHref === '') return;
+          
+          // Normalize URLs (remove trailing slashes for comparison)
+          const normalizedHref = buttonHref.replace(/\/$/, '');
+          const normalizedPath = currentPath.replace(/\/$/, '');
+          
+          // Check for exact match first
+          if (normalizedPath === normalizedHref) {
             button.classList.add('active');
+            matchFound = true;
           }
         });
+        
+        // If no exact match found, keep the first button (usually "ALL") active
+        if (!matchFound && this.buttons.length > 0) {
+          this.buttons[0].classList.add('active');
+        }
       }
 
       setupEventListeners() {
