@@ -4,158 +4,205 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  /* WhatsApp Chat Widget Styles */
-  .whatsapp-chat-widget {
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap');
+
+  /* Luxury Chat Widget Styles */
+  .luxury-chat-widget {
     position: fixed;
-    bottom: 15px;
-    right: 20px;
+    bottom: 30px;
+    right: 30px;
     z-index: 9999;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   /* Floating Button */
-  .whatsapp-float-button {
-    width: 56px;
-    height: 56px;
-    background: #ffe603; /* Yellow background */
+  .luxury-float-button {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px #ffffff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    animation: pulse 2s infinite;
-    border: 0px solid #ffffff; /* Black circle border */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
-}
-
-  .whatsapp-float-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(255, 230, 3, 0.4);
+    overflow: hidden;
   }
 
-  .whatsapp-float-button.active {
-    background: #FFD700;
-    animation: none;
+  .luxury-float-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
 
-  .whatsapp-float-button .icon {
+  .luxury-float-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .luxury-float-button:hover::before {
+    opacity: 1;
+  }
+
+  .luxury-float-button.active {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  }
+
+  .luxury-float-button .icon {
     position: absolute;
     width: 28px;
     height: 28px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .whatsapp-float-button .whatsapp-icon {
-    stroke:#000000;
+  .luxury-float-button .chat-icon {
+    stroke: #ffffff;
     fill: none;
     stroke-width: 1.5;
     transform: rotate(0deg) scale(1);
     opacity: 1;
   }
 
-  .whatsapp-float-button.active .whatsapp-icon {
-    transform: rotate(180deg) scale(0);
+  .luxury-float-button.active .chat-icon {
+    transform: rotate(90deg) scale(0);
     opacity: 0;
   }
 
-  .whatsapp-float-button .close-icon {
-    stroke: #141B34;
+  .luxury-float-button .close-icon {
+    stroke: #ffffff;
     stroke-width: 1.5;
-    transform: rotate(-180deg) scale(0);
+    transform: rotate(-90deg) scale(0);
     opacity: 0;
   }
 
-  .whatsapp-float-button.active .close-icon {
+  .luxury-float-button.active .close-icon {
     transform: rotate(0deg) scale(1);
     opacity: 1;
   }
 
-  /* Pulse Animation */
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 4px 12px rgba(255, 230, 3, 0.3);
-    }
-    50% {
-      box-shadow: 0 4px 12px rgba(255, 230, 3, 0.3), 0 0 0 10px rgba(255, 230, 3, 0.1);
-    }
-    100% {
-      box-shadow: 0 4px 12px rgba(255, 230, 3, 0.3);
-    }
-  }
-
   /* Chat Container */
-  .whatsapp-chat-container {
+  .luxury-chat-container {
     position: absolute;
-    bottom: 80px;
+    bottom: 90px;
     right: 0;
-    width: 320px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    width: 380px;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     opacity: 0;
-    transform: scale(0.8) translateY(20px);
+    transform: scale(0.95) translateY(10px);
     transform-origin: bottom right;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     overflow: hidden;
-    border: 3px solid #FFD700;
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
-  .whatsapp-chat-container.active {
+  .luxury-chat-container.active {
     opacity: 1;
     transform: scale(1) translateY(0);
     pointer-events: all;
   }
 
   /* Header */
-  .whatsapp-chat-header {
-    background: white;
-    padding: 24px 20px 20px;
-    color: #1f2937;
+  .luxury-chat-header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    padding: 32px 28px;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
   }
 
-  .whatsapp-chat-header h3 {
-    margin: 0 0 8px 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: #1f2937;
+  .luxury-chat-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    pointer-events: none;
   }
 
-  .whatsapp-chat-header p {
+  .luxury-chat-header h3 {
+    margin: 0 0 12px 0;
+    font-size: 22px;
+    font-weight: 300;
+    color: #ffffff;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+
+  .luxury-chat-header p {
     margin: 0;
-    font-size: 14px;
-    color: #6b7280;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
     display: flex;
     align-items: center;
     gap: 8px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: relative;
   }
 
-  .status-dot {
-    width: 10px;
-    height: 10px;
-    background: #10b981;
+  .status-indicator {
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
     border-radius: 50%;
     display: inline-block;
     flex-shrink: 0;
+    animation: luxuryPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes luxuryPulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
   }
 
   /* Body */
-  .whatsapp-chat-body {
+  .luxury-chat-body {
     padding: 0;
-    background: white;
-    min-height: auto;
+    background: #ffffff;
   }
 
-  .whatsapp-message {
-    display: none;
+  /* Divider */
+  .luxury-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
+    margin: 0;
   }
 
   /* Footer */
-  .whatsapp-chat-footer {
-    padding: 0 20px 24px;
-    background: white;
+  .luxury-chat-footer {
+    padding: 32px 28px;
+    background: #ffffff;
+  }
+
+  .luxury-subtitle {
+    font-size: 11px;
+    color: #666666;
+    margin: 0 0 20px 0;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
   }
 
   .chat-buttons-container {
@@ -164,105 +211,129 @@
     gap: 12px;
   }
 
-  .whatsapp-start-button,
-  .messenger-button {
+  .luxury-button {
     width: 100%;
-    border: 2px solid #E0E0E0;
-    padding: 16px 20px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
+    border: 1px solid #000000;
+    padding: 16px 24px;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 400;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    transition: all 0.2s ease;
-    box-shadow: none;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     box-sizing: border-box;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
   }
 
-  .whatsapp-start-button {
-    background: #FFD700;
-    color: #000;
+  .luxury-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
   }
 
-  .whatsapp-start-button:hover {
-    border-color: #CCCCCC;
-    transform: translateY(-1px);
-    box-shadow: none;
+  .luxury-button:hover::before {
+    left: 0;
   }
 
-  .whatsapp-start-button:active {
-    transform: translateY(0);
+  .luxury-button span,
+  .luxury-button svg {
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
   }
 
-  .whatsapp-start-button svg {
-    width: 24px;
-    height: 24px;
-    fill: #000;
+  .whatsapp-button {
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
+  }
+
+  .whatsapp-button::before {
+    background: #1a1a1a;
+  }
+
+  .whatsapp-button:hover {
+    border-color: #1a1a1a;
+  }
+
+  .whatsapp-button svg {
+    width: 18px;
+    height: 18px;
+    fill: #ffffff;
   }
 
   .messenger-button {
-    background: white;
-    color: #000;
+    background: transparent;
+    color: #000000;
+    border-color: #000000;
   }
 
   .messenger-button:hover {
-    border-color: #CCCCCC;
-    transform: translateY(-1px);
-  }
-
-  .messenger-button:active {
-    transform: translateY(0);
+    color: #ffffff;
   }
 
   .messenger-button svg {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
+    transition: all 0.3s ease;
   }
 
-  /* Close Button */
-  .whatsapp-close-button {
-    position: absolute;
-    bottom: -50px;
-    right: 0;
-    width: 40px;
-    height: 40px;
-    background: #FFD700;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    opacity: 0;
-    pointer-events: none;
+  .messenger-button:hover svg path {
+    fill: #ffffff;
   }
 
   /* Mobile Responsive */
   @media screen and (max-width: 768px) {
-    .whatsapp-chat-widget {
-      bottom: 90px; /* Offset for mobile bottom nav */
+    .luxury-chat-widget {
+      bottom: 20px;
+      right: 20px;
     }
 
-    .whatsapp-chat-container {
+    .luxury-chat-container {
       width: calc(100vw - 40px);
-      max-width: 320px;
+      max-width: 380px;
     }
 
-    .whatsapp-chat-header h3 {
-      font-size: 16px;
+    .luxury-float-button {
+      width: 56px;
+      height: 56px;
+    }
+
+    .luxury-float-button .icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .luxury-chat-header {
+      padding: 28px 24px;
+    }
+
+    .luxury-chat-header h3 {
+      font-size: 20px;
+    }
+
+    .luxury-chat-footer {
+      padding: 28px 24px;
     }
   }
 
-  /* Hide on very small screens */
-  @media screen and (max-width: 360px) {
-    .whatsapp-chat-container {
-      width: calc(100vw - 20px);
+  @media screen and (max-width: 420px) {
+    .luxury-chat-container {
+      width: calc(100vw - 32px);
       right: -10px;
     }
   }
@@ -270,81 +341,66 @@
 </head>
 <body>
 
-<!-- WhatsApp Chat Widget -->
-<div class="whatsapp-chat-widget" id="whatsapp-widget">
+<!-- Luxury Chat Widget -->
+<div class="luxury-chat-widget" id="luxury-widget">
   <!-- Floating Button -->
-  <button class="whatsapp-float-button" id="whatsapp-toggle" aria-label="Toggle WhatsApp Chat">
-    <svg class="icon whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="#000000">
-      <path d="M26.576 5.363c-2.69-2.69-6.406-4.354-10.511-4.354-8.209 0-14.865 6.655-14.865 14.865 0 2.732 0.737 5.291 2.022 7.491l-0.038-0.070-2.109 7.702 7.879-2.067c2.051 1.139 4.498 1.809 7.102 1.809h0.006c8.209-0.003 14.862-6.659 14.862-14.868 0-4.103-1.662-7.817-4.349-10.507l0 0zM16.062 28.228h-0.005c-0 0-0.001 0-0.001 0-2.319 0-4.489-0.64-6.342-1.753l0.056 0.031-0.451-0.267-4.675 1.227 1.247-4.559-0.294-0.467c-1.185-1.862-1.889-4.131-1.889-6.565 0-6.822 5.531-12.353 12.353-12.353s12.353 5.531 12.353 12.353c0 6.822-5.53 12.353-12.353 12.353h-0zM22.838 18.977c-0.371-0.186-2.197-1.083-2.537-1.208-0.341-0.124-0.589-0.185-0.837 0.187-0.246 0.371-0.958 1.207-1.175 1.455-0.216 0.249-0.434 0.279-0.805 0.094-1.15-0.466-2.138-1.087-2.997-1.852l0.010 0.009c-0.799-0.74-1.484-1.587-2.037-2.521l-0.028-0.052c-0.216-0.371-0.023-0.572 0.162-0.757 0.167-0.166 0.372-0.434 0.557-0.65 0.146-0.179 0.271-0.384 0.366-0.604l0.006-0.017c0.043-0.087 0.068-0.188 0.068-0.296 0-0.131-0.037-0.253-0.101-0.357l0.002 0.003c-0.094-0.186-0.836-2.014-1.145-2.758-0.302-0.724-0.609-0.625-0.836-0.637-0.216-0.010-0.464-0.012-0.712-0.012-0.395 0.010-0.746 0.188-0.988 0.463l-0.001 0.002c-0.802 0.761-1.3 1.834-1.3 3.023 0 0.026 0 0.053 0.001 0.079l-0-0.004c0.131 1.467 0.681 2.784 1.527 3.857l-0.012-0.015c1.604 2.379 3.742 4.282 6.251 5.564l0.094 0.043c0.548 0.248 1.25 0.513 1.968 0.74l0.149 0.041c0.442 0.14 0.951 0.221 1.479 0.221 0.303 0 0.601-0.027 0.889-0.078l-0.031 0.004c1.069-0.223 1.956-0.868 2.497-1.749l0.009-0.017c0.165-0.366 0.261-0.793 0.261-1.242 0-0.185-0.016-0.366-0.047-0.542l0.003 0.019c-0.092-0.155-0.34-0.247-0.712-0.434z"></path>
+  <button class="luxury-float-button" id="luxury-toggle" aria-label="Toggle Concierge Chat">
+    <svg class="icon chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <svg class="icon close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-      <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M14.9994 15L9 9M9.00064 15L15 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
 
   <!-- Chat Container -->
-  <div class="whatsapp-chat-container" id="whatsapp-chat">
+  <div class="luxury-chat-container" id="luxury-chat">
     <!-- Header -->
-    <div class="whatsapp-chat-header">
-      <h3>Hi there 👋 How can we help you?</h3>
+    <div class="luxury-chat-header">
+      <h3>Concierge Service</h3>
       <p>
-        <span class="status-dot"></span>
-        Typically replies in few minutes
+        <span class="status-indicator"></span>
+        Available Now
       </p>
     </div>
 
-    <!-- Body -->
-    <div class="whatsapp-chat-body">
-      <div class="whatsapp-message" style="display: none;">
-        <p>Hi there 👋<br>How can we help you?</p>
-      </div>
-    </div>
+    <!-- Divider -->
+    <div class="luxury-divider"></div>
 
     <!-- Footer -->
-    <div class="whatsapp-chat-footer">
+    <div class="luxury-chat-footer">
+      <p class="luxury-subtitle">How may we assist you?</p>
       <div class="chat-buttons-container">
-        <button class="whatsapp-start-button" id="whatsapp-start">
+        <button class="luxury-button whatsapp-button" id="whatsapp-start">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
           </svg>
-          Start Chat
+          <span>WhatsApp</span>
         </button>
         
-        <a href="#" class="messenger-button" id="messenger-btn">
+        <a href="#" class="luxury-button messenger-button" id="messenger-btn">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-            <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.912 1.448 5.51 3.71 7.206V22l3.398-1.87c.907.251 1.87.384 2.892.384 5.523 0 10-4.145 10-9.243S17.523 2 12 2zm.994 12.438l-2.56-2.733-4.996 2.733 5.493-5.828 2.623 2.733 4.933-2.733-5.493 5.828z" fill="#0084FF"/>
+            <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.912 1.448 5.51 3.71 7.206V22l3.398-1.87c.907.251 1.87.384 2.892.384 5.523 0 10-4.145 10-9.243S17.523 2 12 2zm.994 12.438l-2.56-2.733-4.996 2.733 5.493-5.828 2.623 2.733 4.933-2.733-5.493 5.828z" fill="#000000"/>
           </svg>
-          Messenger
+          <span>Messenger</span>
         </a>
       </div>
     </div>
-
-    <!-- Close Button -->
-    <button class="whatsapp-close-button" id="whatsapp-close" aria-label="Close WhatsApp Chat" style="display: none;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
   </div>
 </div>
 
 <script>
   // Configuration
-  const whatsappConfig = {
-    phoneNumber: '+8801819502705', // WhatsApp number with country code
-    message: 'Hello there! Is someone available to chat?', // WhatsApp pre-filled message
-
-    // Messenger pre-filled message
-    messengerUrl: 'https://m.me/angonaloyofficial?ref=Hello%20there!%20I%20need%20some%20help.', 
+  const luxuryConfig = {
+    phoneNumber: '+8801819502705',
+    message: 'Hello, I would like to inquire about your collection.',
+    messengerUrl: 'https://m.me/angonaloyofficial?ref=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20collection.',
   };
 
   // Elements
-  const widget = document.getElementById('whatsapp-widget');
-  const toggleBtn = document.getElementById('whatsapp-toggle');
-  const chatContainer = document.getElementById('whatsapp-chat');
-  const closeBtn = document.getElementById('whatsapp-close');
+  const widget = document.getElementById('luxury-widget');
+  const toggleBtn = document.getElementById('luxury-toggle');
+  const chatContainer = document.getElementById('luxury-chat');
   const startBtn = document.getElementById('whatsapp-start');
   const messengerBtn = document.getElementById('messenger-btn');
 
@@ -353,28 +409,18 @@
     const isActive = chatContainer.classList.contains('active');
     
     if (isActive) {
-      // Close chat
       chatContainer.classList.remove('active');
       toggleBtn.classList.remove('active');
     } else {
-      // Open chat
       chatContainer.classList.add('active');
       toggleBtn.classList.add('active');
     }
   });
 
-  // Close chat
-  closeBtn.addEventListener('click', function() {
-    chatContainer.classList.remove('active');
-    closeBtn.classList.remove('active');
-    toggleBtn.style.opacity = '1';
-    toggleBtn.style.pointerEvents = 'all';
-  });
-
   // Start WhatsApp chat
   startBtn.addEventListener('click', function() {
-    const phone = whatsappConfig.phoneNumber.replace(/[^0-9]/g, '');
-    const message = encodeURIComponent(whatsappConfig.message);
+    const phone = luxuryConfig.phoneNumber.replace(/[^0-9]/g, '');
+    const message = encodeURIComponent(luxuryConfig.message);
     const url = `https://wa.me/${phone}?text=${message}`;
     
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -383,7 +429,7 @@
   // Start Messenger chat
   messengerBtn.addEventListener('click', function(e) {
     e.preventDefault();
-    window.open(whatsappConfig.messengerUrl, '_blank', 'noopener,noreferrer');
+    window.open(luxuryConfig.messengerUrl, '_blank', 'noopener,noreferrer');
   });
 
   // Close on outside click
@@ -393,21 +439,6 @@
       toggleBtn.classList.remove('active');
     }
   });
-
-  // Adjust position on window resize for mobile
-  function adjustPosition() {
-    if (window.innerWidth <= 768) {
-      widget.style.bottom = '30px'; // Offset for mobile bottom nav
-    } else {
-      widget.style.bottom = '15px';
-    }
-  }
-
-  // Initialize position
-  adjustPosition();
-  
-  // Listen for resize
-  window.addEventListener('resize', adjustPosition);
 </script>
 
 </body>
