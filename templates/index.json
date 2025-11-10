@@ -156,7 +156,7 @@
             "feature_3_text": "Free & Easy Returns",
             "feature_3_icon_type": "custom",
             "feature_3_shopify_icon": "sparkles",
-            "feature_3_icon": "shopify://shop_images/icons8-replace-96.png",
+            "feature_3_icon": "shopify://shop_images/return-box.png",
             "padding_top": 12,
             "padding_bottom": 0,
             "gap": 16,
