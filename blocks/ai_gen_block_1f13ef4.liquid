@@ -123,31 +123,54 @@
         this.setupEventListeners();
       }
 
+      normalizeURL(url) {
+        if (!url) return '';
+        
+        try {
+          // Handle both relative and absolute URLs
+          let path = url;
+          
+          // If it's a full URL, extract the pathname
+          if (url.startsWith('http://') || url.startsWith('https://')) {
+            const urlObj = new URL(url);
+            path = urlObj.pathname;
+          }
+          
+          // Remove trailing slash and convert to lowercase for comparison
+          path = path.replace(/\/$/, '').toLowerCase();
+          
+          // Remove query parameters and hash for comparison
+          path = path.split('?')[0].split('#')[0];
+          
+          return path;
+        } catch (e) {
+          return url.replace(/\/$/, '').toLowerCase();
+        }
+      }
+
       setActiveFromCurrentURL() {
-        const currentPath = window.location.pathname;
+        const currentPath = this.normalizeURL(window.location.pathname);
         let matchFound = false;
         
         // Remove active class from all buttons first
         this.buttons.forEach((btn) => btn.classList.remove('active'));
         
-        // Find exact match or best match
+        // Find exact match
         this.buttons.forEach((button) => {
           const buttonHref = button.getAttribute('href');
           
           if (!buttonHref || buttonHref === '#' || buttonHref === '') return;
           
-          // Normalize URLs (remove trailing slashes for comparison)
-          const normalizedHref = buttonHref.replace(/\/$/, '');
-          const normalizedPath = currentPath.replace(/\/$/, '');
+          const normalizedHref = this.normalizeURL(buttonHref);
           
-          // Check for exact match first
-          if (normalizedPath === normalizedHref) {
+          // Check for exact match
+          if (currentPath === normalizedHref && normalizedHref !== '') {
             button.classList.add('active');
             matchFound = true;
           }
         });
         
-        // If no exact match found, keep the first button (usually "ALL") active
+        // If no exact match found, keep the first button active (usually "ALL")
         if (!matchFound && this.buttons.length > 0) {
           this.buttons[0].classList.add('active');
         }
@@ -164,8 +187,8 @@
               this.buttons.forEach((btn) => btn.classList.remove('active'));
               button.classList.add('active');
             }
-            // If there's a valid URL, let the browser handle navigation normally
-            // The active state will be set when the page loads
+            // If there's a valid URL, let the browser handle navigation
+            // Active state will be set when page loads via setActiveFromCurrentURL()
           });
         });
       }
