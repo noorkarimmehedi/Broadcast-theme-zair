@@ -201,52 +201,56 @@
                     <span class="radio__legend__label">
                       <span class="radio__legend__option-name">{{ option.name | escape_once }}</span>
 
-                      {%- if is_size_option -%}
-                        {{- size_chart_link -}}
-                      {%- endif -%}
-
                       {%- if settings.show_labels -%}
                         <small class="radio__legend__value" data-option-value>{{ current_value }}</small>
                       {%- endif -%}
                     </span>
                   </legend>
 
-                  <div class="radio__buttons">
-                    {%- for value in option.values -%}
-                      {%- capture input_id -%}{{ uniq_id }}-{{ option.name | handle }}-{{ value | strip_html | escape }}{%- endcapture -%}
+                  <div style="display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap;">
+                    <div class="radio__buttons" style="flex: 1;">
+                      {%- for value in option.values -%}
+                        {%- capture input_id -%}{{ uniq_id }}-{{ option.name | handle }}-{{ value | strip_html | escape }}{%- endcapture -%}
 
-                      {%- if is_swatch_option -%}
-                        <span class="swatch__button swatch__button--{{ settings.swatch_style }}" data-tooltip="{{ value | escape_once | capitalize }}">
-                          <input type="radio"
+                        {%- if is_swatch_option -%}
+                          <span class="swatch__button swatch__button--{{ settings.swatch_style }}" data-tooltip="{{ value | escape_once | capitalize }}">
+                            <input type="radio"
+                                form="{{ product_form_id }}"
+                                data-single-option-selector
+                                data-index="option{{ option.position }}"
+                                name="options[{{ option.name | escape_once }}]-{{ uniq_id }}"
+                                value="{{ value | escape_once }}"
+                                id="{{ input_id }}"
+                                {% if value == current_value %}checked{% endif %}>
+                            <label for="{{ input_id }}" data-swatch="{{ value | escape_once }}">
+                              <span class="visually-hidden">{{ value | escape_once }}</span>
+                            </label>
+                          </span>
+
+                        {%- else -%}
+                          {% comment %} radio button {% endcomment %}
+                          <span class="radio__button">
+                            <input
+                              type="radio"
                               form="{{ product_form_id }}"
                               data-single-option-selector
                               data-index="option{{ option.position }}"
                               name="options[{{ option.name | escape_once }}]-{{ uniq_id }}"
-                              value="{{ value | escape_once }}"
-                              id="{{ input_id }}"
+                              value="{{ value | escape_once }}" id="{{ input_id }}"
                               {% if value == current_value %}checked{% endif %}>
-                          <label for="{{ input_id }}" data-swatch="{{ value | escape_once }}">
-                            <span class="visually-hidden">{{ value | escape_once }}</span>
-                          </label>
-                        </span>
-
-                      {%- else -%}
-                        {% comment %} radio button {% endcomment %}
-                        <span class="radio__button">
-                          <input
-                            type="radio"
-                            form="{{ product_form_id }}"
-                            data-single-option-selector
-                            data-index="option{{ option.position }}"
-                            name="options[{{ option.name | escape_once }}]-{{ uniq_id }}"
-                            value="{{ value | escape_once }}" id="{{ input_id }}"
-                            {% if value == current_value %}checked{% endif %}>
-                          <label for="{{ input_id }}">
-                            <span>{{ value | escape_once }}</span>
-                          </label>
-                        </span>
-                      {%- endif -%}
-                    {%- endfor -%}
+                            <label for="{{ input_id }}">
+                              <span>{{ value | escape_once }}</span>
+                            </label>
+                          </span>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                    
+                    {%- if is_size_option -%}
+                      <div>
+                        {% render 'size-chart' %}
+                      </div>
+                    {%- endif -%}
                   </div>
                 </div>
               </fieldset>
