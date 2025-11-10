@@ -1,6 +1,6 @@
 {% doc %}
   @prompt
-    Create a minimal, horizontally swipeable category filter bar for a fashion e-commerce website. Use a clean white background with a row of rectangular buttons labeled in uppercase sans-serif text (e.g., ALL, NEW, FORMAL, PRINTS, PLAIN, etc.). Each button has a thin black border and white fill, except the active one (‘ALL’), which features a solid black background with white text.
+    Create a minimal, horizontally swipeable category filter bar for a fashion e-commerce website. Use a clean white background with a row of rectangular buttons labeled in uppercase sans-serif text (e.g., ALL, NEW, FORMAL, PRINTS, PLAIN, etc.). Each button has a thin black border and white fill, except the active one ('ALL'), which features a solid black background with white text.
     
     The filter bar should scroll horizontally (swipeable) on mobile and have smooth snap scrolling. Maintain equal spacing, rounded corners (small radius), and consistent padding. Add a subtle hover or active state transition that inverts colors. The style should feel premium, minimal, and fashion-forward, emphasizing clarity and usability., should be option for adding 20 Category and also in desktop version there should be option for alligment 
 {% enddoc %}
@@ -125,8 +125,16 @@
       setupEventListeners() {
         this.buttons.forEach((button) => {
           button.addEventListener('click', (e) => {
+            // Only prevent default if the link is # (no URL set)
+            if (button.getAttribute('href') === '#') {
+              e.preventDefault();
+            }
+            
+            // Update active state
             this.buttons.forEach((btn) => btn.classList.remove('active'));
             button.classList.add('active');
+            
+            // If there's a valid URL, the browser will navigate naturally
           });
         });
       }
