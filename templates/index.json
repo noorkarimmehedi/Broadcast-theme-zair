@@ -172,7 +172,7 @@
             "text_font": "assistant_n4",
             "icon_size": 52,
             "text_size": 14,
-            "mobile_icon_size": 30,
+            "mobile_icon_size": 34,
             "mobile_text_size": 11
           },
           "blocks": {}
