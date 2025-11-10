@@ -246,11 +246,10 @@
                       {%- endfor -%}
                     </div>
                     
-                    {%- if is_size_option -%}
-                      <div>
-                        {% render 'size-chart' %}
-                      </div>
-                    {%- endif -%}
+                    <div>
+                      {% render 'size-chart' %}
+                      <div style="background: yellow; padding: 5px; font-size: 10px;">DEBUG: is_size_option = {{ is_size_option }} | Option name: {{ option.name }}</div>
+                    </div>
                   </div>
                 </div>
               </fieldset>
