@@ -2,7 +2,7 @@
   assign uniq_id = section_id | append: 'product-' | append: product.id | append: '-'
   assign hide_labels_class = ''
   assign current_variant = product.selected_or_first_available_variant
-  assign enable_size_chart = enable_size_chart | default: false
+  assign enable_size_chart = enable_size_chart | default: true
 -%}
 
 {%- capture product_variant_options -%}
@@ -181,15 +181,12 @@
 
 {%- liquid
   assign is_size_option = false
-  if show_size_chart and is_size_option == false
-    assign size_translation = 'general.size_chart.size' | t
-    assign translation_string = size_translation | remove: '  ' | replace: ', ', ',' | replace: ' ,', ',' | replace: ',', '____' | handle | replace: '____', ',' | append: ',' | prepend: ','
-
-    if translation_string contains option_name_handle_separator
-      assign is_size_option = true
-      assign show_size_link_inline = true
-    endif
-  endif -%}
+  assign size_option_name = option.name | downcase | handle
+  
+  if size_option_name == 'size' or size_option_name == 'sizes' or size_option_name == 'taille' or size_option_name == 'tailles'
+    assign is_size_option = true
+  endif
+-%}
 
           <div class="selector-wrapper{% if settings.variant_lines and is_size_option %} selector-wrapper--size{% elsif settings.variant_lines or is_swatch_option %} selector-wrapper--fullwidth{% endif %}"
             data-option-position="{{ option.position }}">
@@ -208,7 +205,7 @@
                   </legend>
 
                   <div style="display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap;">
-                    <div class="radio__buttons" style="flex: 1;">
+                    <div class="radio__buttons">
                       {%- for value in option.values -%}
                         {%- capture input_id -%}{{ uniq_id }}-{{ option.name | handle }}-{{ value | strip_html | escape }}{%- endcapture -%}
 
@@ -246,10 +243,11 @@
                       {%- endfor -%}
                     </div>
                     
-                    <div>
-                      {% render 'size-chart' %}
-                      <div style="background: yellow; padding: 5px; font-size: 10px;">DEBUG: is_size_option = {{ is_size_option }} | Option name: {{ option.name }}</div>
-                    </div>
+                    {%- if is_size_option -%}
+                      <div style="margin-left: auto;">
+                        {% render 'size-chart' %}
+                      </div>
+                    {%- endif -%}
                   </div>
                 </div>
               </fieldset>
