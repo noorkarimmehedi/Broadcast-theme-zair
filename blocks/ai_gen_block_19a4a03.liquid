@@ -70,8 +70,9 @@
     display: flex;
     flex-direction: column;
     gap: {{ block.settings.text_spacing }}px;
-    padding: 0 {{ block.settings.content_padding_mobile | minus: block.settings.button_side_gap_mobile }}px;
+    padding: 0;
   }
+
 
   .ai-hero-heading-{{ ai_gen_id }} {
     margin: 0;
