@@ -116,7 +116,7 @@
             "button_primary_color": "#ffffff",
             "button_primary_hover_bg": "#333333",
             "button_primary_hover_color": "#ffffff",
-            "button_secondary_label": "DISCOVER BEST ARRIVALS",
+            "button_secondary_label": "DISCOVER NEW ARRIVALS",
             "button_secondary_link": "shopify://collections/new-arrival",
             "button_secondary_bg": "#ffffff",
             "button_secondary_color": "#000000",
