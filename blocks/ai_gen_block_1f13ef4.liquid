@@ -119,22 +119,34 @@
 
       connectedCallback() {
         this.buttons = this.querySelectorAll('[data-filter-button]');
+        this.setActiveFromCurrentURL();
         this.setupEventListeners();
+      }
+
+      setActiveFromCurrentURL() {
+        const currentPath = window.location.pathname;
+        this.buttons.forEach((button) => {
+          const buttonHref = button.getAttribute('href');
+          if (buttonHref && buttonHref !== '#' && currentPath.includes(buttonHref)) {
+            this.buttons.forEach((btn) => btn.classList.remove('active'));
+            button.classList.add('active');
+          }
+        });
       }
 
       setupEventListeners() {
         this.buttons.forEach((button) => {
           button.addEventListener('click', (e) => {
-            // Only prevent default if the link is # (no URL set)
-            if (button.getAttribute('href') === '#') {
+            const href = button.getAttribute('href');
+            
+            // Only prevent default and handle styling if no URL is set
+            if (!href || href === '#' || href === '') {
               e.preventDefault();
+              this.buttons.forEach((btn) => btn.classList.remove('active'));
+              button.classList.add('active');
             }
-            
-            // Update active state
-            this.buttons.forEach((btn) => btn.classList.remove('active'));
-            button.classList.add('active');
-            
-            // If there's a valid URL, the browser will navigate naturally
+            // If there's a valid URL, let the browser handle navigation normally
+            // The active state will be set when the page loads
           });
         });
       }
