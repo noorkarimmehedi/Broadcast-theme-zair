@@ -28,14 +28,6 @@
             "padding_bottom": 20
           }
         },
-        "code_aWfpk3": {
-          "type": "code",
-          "disabled": true,
-          "settings": {
-            "code": "{% render 'size-chart' %}",
-            "padding_bottom": 16
-          }
-        },
         "pickup": {
           "type": "pickup",
           "disabled": true,
@@ -83,7 +75,6 @@
       "block_order": [
         "title_8Y7MTP",
         "price_LbWbx7",
-        "code_aWfpk3",
         "pickup",
         "variants_3cRT3q",
         "tabs",
