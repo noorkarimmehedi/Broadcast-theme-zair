@@ -112,7 +112,7 @@
             "feature_1_text": "Free and easy returns",
             "feature_1_icon_type": "custom",
             "feature_1_shopify_icon": "package",
-            "feature_1_icon": "shopify://shop_images/icons8-replace-96.png",
+            "feature_1_icon": "shopify://shop_images/return-box.png",
             "feature_2_text": "Delivery within 48 hours",
             "feature_2_icon_type": "custom",
             "feature_2_shopify_icon": "clock",
