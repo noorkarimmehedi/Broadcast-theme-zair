@@ -135,7 +135,7 @@
             "text_font": "serif",
             "icon_size": 40,
             "text_size": 14,
-            "mobile_icon_size": 32,
+            "mobile_icon_size": 34,
             "mobile_text_size": 12
           },
           "blocks": {}
