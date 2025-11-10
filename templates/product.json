@@ -30,6 +30,7 @@
         },
         "code_aWfpk3": {
           "type": "code",
+          "disabled": true,
           "settings": {
             "code": "{% render 'size-chart' %}",
             "padding_bottom": 16
