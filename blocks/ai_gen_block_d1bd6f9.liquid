@@ -6,6 +6,10 @@
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
+{% comment %} Get current collection handle {% endcomment %}
+{% assign current_collection_handle = collection.handle | default: '' %}
+{% assign current_url = request.path %}
+
 {% style %}
   .ai-category-filter-{{ ai_gen_id }} {
     width: 100%;
@@ -111,13 +115,35 @@
           assign category_enabled = block.settings[category_enabled_key]
           assign category_label = block.settings[category_label_key]
           assign category_collection = block.settings[category_collection_key]
+          
+          # Determine if this category is active
+          assign is_active = false
+          
+          # Check if we're on the collection page that matches this category
+          if category_collection != blank and category_collection.handle == current_collection_handle
+            assign is_active = true
+          elsif category_collection == blank and current_url contains '/collections/all' and i == 1
+            # If this is the first category (typically "ALL") with no collection assigned and we're on /collections/all
+            assign is_active = true
+          elsif category_collection == blank and current_collection_handle == 'all' and i == 1
+            # Alternative check for all collections
+            assign is_active = true
+          endif
+          
+          # Special handling for homepage or non-collection pages - make first enabled category active
+          if current_collection_handle == blank and collection == blank
+            if i == 1 and category_enabled
+              assign is_active = true
+            endif
+          endif
         %}
 
         {% if category_enabled and category_label != blank %}
           <li class="ai-category-filter-item-{{ ai_gen_id }}">
             <a
               href="{% if category_collection != blank %}{{ category_collection.url }}{% else %}/collections/all{% endif %}"
-              class="ai-category-filter-button-{{ ai_gen_id }}{% if i == 1 %} active{% endif %}"
+              class="ai-category-filter-button-{{ ai_gen_id }}{% if is_active %} active{% endif %}"
+              data-collection-handle="{% if category_collection != blank %}{{ category_collection.handle }}{% else %}all{% endif %}"
             >
               {{ category_label }}
             </a>
