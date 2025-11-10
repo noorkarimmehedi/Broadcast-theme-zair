@@ -152,7 +152,7 @@
             "category_3_label": "FORMAL",
             "category_3_url": "shopify://collections/new-arrival",
             "category_3_active": false,
-            "category_4_enabled": true,
+            "category_4_enabled": false,
             "category_4_label": "PANTS",
             "category_4_url": "shopify://collections/pants",
             "category_4_active": false,
