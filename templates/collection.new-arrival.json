@@ -19,7 +19,7 @@
             "vertical_padding": 20,
             "horizontal_padding": 20,
             "horizontal_padding_mobile": 16,
-            "button_spacing": 12,
+            "button_spacing": 8,
             "button_font": "assistant_n4",
             "font_size": 12,
             "letter_spacing": 1,
