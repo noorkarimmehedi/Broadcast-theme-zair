@@ -1,6 +1,919 @@
+{% doc %}
+  @prompt
+    Create a minimal, horizontally swipeable category filter bar for a fashion e-commerce website. Use a clean white background with a row of rectangular buttons labeled in uppercase sans-serif text (e.g., ALL, NEW, FORMAL, PRINTS, PLAIN, etc.). Each button has a thin black border and white fill, except the active one ('ALL'), which features a solid black background with white text.
+    
+    The filter bar should scroll horizontally (swipeable) on mobile and have smooth snap scrolling. Maintain equal spacing, rounded corners (small radius), and consistent padding. Add a subtle hover or active state transition that inverts colors. The style should feel premium, minimal, and fashion-forward, emphasizing clarity and usability., should be option for adding 20 Category and also in desktop version there should be option for alligment
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-category-filter-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.vertical_padding }}px 0;
+  }
+
+  .ai-category-filter-container-{{ ai_gen_id }} {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .ai-category-filter-container-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-category-filter-list-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.button_spacing }}px;
+    padding: 0 {{ block.settings.horizontal_padding }}px;
+    margin: 0;
+    list-style: none;
+    scroll-snap-type: x mandatory;
+    {% if block.settings.desktop_alignment == 'center' %}
+      justify-content: center;
+    {% elsif block.settings.desktop_alignment == 'right' %}
+      justify-content: flex-end;
+    {% else %}
+      justify-content: flex-start;
+    {% endif %}
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-category-filter-list-{{ ai_gen_id }} {
+      justify-content: flex-start;
+    }
+  }
+
+  .ai-category-filter-item-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+
+  .ai-category-filter-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: {{ block.settings.border_width }}px solid {{ block.settings.button_border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
+    font-weight: {{ block.settings.button_font.weight }};
+    font-size: {{ block.settings.font_size }}px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: {{ block.settings.letter_spacing }}px;
+    cursor: pointer;
+    transition: all {{ block.settings.transition_speed }}s ease;
+    white-space: nowrap;
+  }
+
+  .ai-category-filter-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+  }
+
+  .ai-category-filter-button-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.active_bg_color }};
+    color: {{ block.settings.active_text_color }};
+    border-color: {{ block.settings.active_border_color }};
+  }
+
+  .ai-category-filter-button-{{ ai_gen_id }}.active:hover {
+    background-color: {{ block.settings.active_hover_bg_color }};
+    color: {{ block.settings.active_hover_text_color }};
+    border-color: {{ block.settings.active_hover_border_color }};
+  }
+{% endstyle %}
+
+<category-filter-{{ ai_gen_id }}
+  class="ai-category-filter-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-category-filter-container-{{ ai_gen_id }}">
+    <ul class="ai-category-filter-list-{{ ai_gen_id }}">
+      {% for i in (1..20) %}
+        {% liquid
+          assign category_enabled_key = 'category_' | append: i | append: '_enabled'
+          assign category_label_key = 'category_' | append: i | append: '_label'
+          assign category_url_key = 'category_' | append: i | append: '_url'
+          assign category_active_key = 'category_' | append: i | append: '_active'
+
+          assign category_enabled = block.settings[category_enabled_key]
+          assign category_label = block.settings[category_label_key]
+          assign category_url = block.settings[category_url_key]
+          assign category_active = block.settings[category_active_key]
+        %}
+
+        {% if category_enabled and category_label != blank %}
+          <li class="ai-category-filter-item-{{ ai_gen_id }}">
+            <a
+              href="{% if category_url != blank %}{{ category_url }}{% else %}#{% endif %}"
+              class="ai-category-filter-button-{{ ai_gen_id }}{% if category_active %} active{% endif %}"
+              data-category-id="{{ i }}"
+            >
+              {{ category_label }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</category-filter-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CategoryFilter{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.buttons = this.querySelectorAll('.ai-category-filter-button-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.buttons.forEach((button) => {
+          button.addEventListener('click', (e) => {
+            this.buttons.forEach((btn) => btn.classList.remove('active'));
+            button.classList.add('active');
+          });
+        });
+      }
+    }
+
+    customElements.define('category-filter-{{ ai_gen_id }}', CategoryFilter{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Category filter bar",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "desktop_alignment",
+      "label": "Desktop alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "font_picker",
+      "id": "button_font",
+      "label": "Font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 0.5
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Spacing",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "min": 0.1,
+      "max": 0.5,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Transition speed",
+      "default": 0.2
+    },
+    {
+      "type": "header",
+      "content": "Default state"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Hover state"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Active state"
+    },
+    {
+      "type": "color",
+      "id": "active_bg_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "active_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "active_border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Active hover state"
+    },
+    {
+      "type": "color",
+      "id": "active_hover_bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "active_hover_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "active_hover_border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Category 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_1_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "category_1_label",
+      "label": "Label",
+      "default": "ALL"
+    },
+    {
+      "type": "url",
+      "id": "category_1_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_1_active",
+      "label": "Set as active",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Category 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_2_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "category_2_label",
+      "label": "Label",
+      "default": "NEW"
+    },
+    {
+      "type": "url",
+      "id": "category_2_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_2_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_3_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "category_3_label",
+      "label": "Label",
+      "default": "FORMAL"
+    },
+    {
+      "type": "url",
+      "id": "category_3_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_3_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_4_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "category_4_label",
+      "label": "Label",
+      "default": "PRINTS"
+    },
+    {
+      "type": "url",
+      "id": "category_4_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_4_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_5_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "category_5_label",
+      "label": "Label",
+      "default": "PLAIN"
+    },
+    {
+      "type": "url",
+      "id": "category_5_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_5_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_6_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_6_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_6_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_6_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_7_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_7_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_7_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_7_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_8_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_8_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_8_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_8_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_9_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_9_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_9_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_9_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_10_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_10_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_10_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_10_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 11"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_11_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_11_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_11_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_11_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 12"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_12_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_12_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_12_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_12_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 13"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_13_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_13_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_13_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_13_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 14"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_14_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_14_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_14_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_14_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 15"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_15_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_15_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_15_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_15_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 16"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_16_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_16_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_16_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_16_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 17"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_17_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_17_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_17_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_17_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 18"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_18_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_18_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_18_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_18_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 19"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_19_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_19_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_19_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_19_active",
+      "label": "Set as active",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Category 20"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_20_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_20_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "category_20_url",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_20_active",
+      "label": "Set as active",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category filter bar"
+    }
+  ]
+}
 {% endschema %}
