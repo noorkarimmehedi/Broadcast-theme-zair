@@ -15,40 +15,33 @@
 
   /* Floating Button */
   .whatsapp-float-button {
-    width: 56px;
-    height: 56px;
-    background: #F5F5F5; /* Yellow background */
+    width: 48px;
+    height: 48px;
+    background: transparent;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(3, 2, 0, 0.3);
+    box-shadow: none;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    animation: pulse 2s infinite;
-    border: 2px solid #000; /* Black circle border */
+    transition: transform 0.3s ease;
+    border: none;
     position: relative;
-}
+    padding: 0;
+  }
 
   .whatsapp-float-button:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(255, 230, 3, 0.4);
-  }
-
-  .whatsapp-float-button.active {
-    background: #F5F5F5;
-    animation: none;
   }
 
   .whatsapp-float-button .icon {
     position: absolute;
-    width: 28px;
-    height: 28px;
+    width: 48px;
+    height: 48px;
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
   .whatsapp-float-button .whatsapp-icon {
-    fill: #000000;
     transform: rotate(0deg) scale(1);
     opacity: 1;
   }
@@ -59,28 +52,21 @@
   }
 
   .whatsapp-float-button .close-icon {
-    stroke: #141B34;
-    stroke-width: 1.5;
+    width: 48px;
+    height: 48px;
+    background: #25D366;
+    border-radius: 50%;
+    stroke: #fff;
+    stroke-width: 2;
     transform: rotate(-180deg) scale(0);
     opacity: 0;
+    padding: 14px;
+    box-sizing: border-box;
   }
 
   .whatsapp-float-button.active .close-icon {
     transform: rotate(0deg) scale(1);
     opacity: 1;
-  }
-
-  /* Pulse Animation */
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 4px 12px #F5F5F5;
-    }
-    50% {
-      box-shadow: 0 4px 12px #F5F5F5, 0 0 0 10px #F5F5F5;
-    }
-    100% {
-      box-shadow: 0 4px 12px #F5F5F5;
-    }
   }
 
   /* Chat Container */
@@ -98,7 +84,7 @@
     transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
     overflow: hidden;
-    border: 3px solid#000000;
+    border: 3px solid #000000;
   }
 
   .whatsapp-chat-container.active {
@@ -157,36 +143,33 @@
   }
 
   .whatsapp-start-button {
-  width: 100%;
-  background: #F5F5F5; /* Keep original bg */
-  border: 1px solid #E0E0E0; /* Light border */
-  padding: 16px 20px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #000;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: 
-    transform 0.2s ease, 
-    box-shadow 0.2s ease, 
-    border-color 0.2s ease;
-  box-shadow: 0 0px 0px #000000; /* Soft shadow */
-}
+    width: 100%;
+    background: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 0px 0px #000000;
+  }
 
-.whatsapp-start-button:hover {
-  transform: translateY(-2px);
-  border-color: #CCCCCC; /* Darker border on hover */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
+  .whatsapp-start-button:hover {
+    transform: translateY(-2px);
+    border-color: #CCCCCC;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
 
-.whatsapp-start-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
+  .whatsapp-start-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
 
   .whatsapp-start-button svg {
     width: 24px;
@@ -217,7 +200,7 @@
   /* Mobile Responsive */
   @media screen and (max-width: 768px) {
     .whatsapp-chat-widget {
-      bottom: 90px; /* Offset for mobile bottom nav */
+      bottom: 90px;
     }
 
     .whatsapp-chat-container {
@@ -245,19 +228,16 @@
 <div class="whatsapp-chat-widget" id="whatsapp-widget">
   <!-- Floating Button -->
   <button class="whatsapp-float-button" id="whatsapp-toggle" aria-label="Toggle WhatsApp Chat">
-  <!-- ✅ New WhatsApp Icon -->
-  <svg class="icon whatsapp-icon" fill="none" viewBox="0 0 360 362">
-    <path fill="#25D366" fill-rule="evenodd" d="M307.546 52.566C273.709 18.684 228.706.017 180.756 0 81.951 0 1.538 80.404 1.504 179.235c-.017 31.594 8.242 62.432 23.928 89.609L0 361.736l95.024-24.925c26.179 14.285 55.659 21.805 85.655 21.814h.077c98.788 0 179.21-80.413 179.244-179.244.017-47.898-18.608-92.926-52.454-126.807v-.008Zm-126.79 275.788h-.06c-26.73-.008-52.952-7.194-75.831-20.765l-5.44-3.231-56.391 14.791 15.05-54.981-3.542-5.638c-14.912-23.721-22.793-51.139-22.776-79.286.035-82.14 66.867-148.973 149.051-148.973 39.793.017 77.198 15.53 105.328 43.695 28.131 28.157 43.61 65.596 43.593 105.398-.035 82.149-66.867 148.982-148.982 148.982v.008Zm81.719-111.577c-4.478-2.243-26.497-13.073-30.606-14.568-4.108-1.496-7.09-2.243-10.073 2.243-2.982 4.487-11.568 14.577-14.181 17.559-2.613 2.991-5.226 3.361-9.704 1.117-4.477-2.243-18.908-6.97-36.02-22.226-13.313-11.878-22.304-26.54-24.916-31.027-2.613-4.486-.275-6.91 1.959-9.136 2.011-2.011 4.478-5.234 6.721-7.847 2.244-2.613 2.983-4.486 4.478-7.469 1.496-2.991.748-5.603-.369-7.847-1.118-2.243-10.073-24.289-13.812-33.253-3.636-8.732-7.331-7.546-10.073-7.692-2.613-.13-5.595-.155-8.586-.155-2.991 0-7.839 1.118-11.947 5.604-4.108 4.486-15.677 15.324-15.677 37.361s16.047 43.344 18.29 46.335c2.243 2.991 31.585 48.225 76.51 67.632 10.684 4.615 19.029 7.374 25.535 9.437 10.727 3.412 20.49 2.931 28.208 1.779 8.604-1.289 26.498-10.838 30.228-21.298 3.73-10.46 3.73-19.433 2.613-21.298-1.117-1.865-4.108-2.991-8.586-5.234l.008-.017Z" clip-rule="evenodd"/>
-  </svg>
+    <!-- WhatsApp Icon -->
+    <svg class="icon whatsapp-icon" fill="none" viewBox="0 0 360 362">
+      <path fill="#25D366" fill-rule="evenodd" d="M307.546 52.566C273.709 18.684 228.706.017 180.756 0 81.951 0 1.538 80.404 1.504 179.235c-.017 31.594 8.242 62.432 23.928 89.609L0 361.736l95.024-24.925c26.179 14.285 55.659 21.805 85.655 21.814h.077c98.788 0 179.21-80.413 179.244-179.244.017-47.898-18.608-92.926-52.454-126.807v-.008Zm-126.79 275.788h-.06c-26.73-.008-52.952-7.194-75.831-20.765l-5.44-3.231-56.391 14.791 15.05-54.981-3.542-5.638c-14.912-23.721-22.793-51.139-22.776-79.286.035-82.14 66.867-148.973 149.051-148.973 39.793.017 77.198 15.53 105.328 43.695 28.131 28.157 43.61 65.596 43.593 105.398-.035 82.149-66.867 148.982-148.982 148.982v.008Zm81.719-111.577c-4.478-2.243-26.497-13.073-30.606-14.568-4.108-1.496-7.09-2.243-10.073 2.243-2.982 4.487-11.568 14.577-14.181 17.559-2.613 2.991-5.226 3.361-9.704 1.117-4.477-2.243-18.908-6.97-36.02-22.226-13.313-11.878-22.304-26.54-24.916-31.027-2.613-4.486-.275-6.91 1.959-9.136 2.011-2.011 4.478-5.234 6.721-7.847 2.244-2.613 2.983-4.486 4.478-7.469 1.496-2.991.748-5.603-.369-7.847-1.118-2.243-10.073-24.289-13.812-33.253-3.636-8.732-7.331-7.546-10.073-7.692-2.613-.13-5.595-.155-8.586-.155-2.991 0-7.839 1.118-11.947 5.604-4.108 4.486-15.677 15.324-15.677 37.361s16.047 43.344 18.29 46.335c2.243 2.991 31.585 48.225 76.51 67.632 10.684 4.615 19.029 7.374 25.535 9.437 10.727 3.412 20.49 2.931 28.208 1.779 8.604-1.289 26.498-10.838 30.228-21.298 3.73-10.46 3.73-19.433 2.613-21.298-1.117-1.865-4.108-2.991-8.586-5.234l.008-.017Z" clip-rule="evenodd"/>
+    </svg>
 
-  <!-- ❌ Close icon remains unchanged -->
-  <svg class="icon close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-    <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M14.9994 15L9 9M9.00064 15L15 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-  </svg>
-</button>
-
-
+    <!-- Close icon -->
+    <svg class="icon close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
 
   <!-- Chat Container -->
   <div class="whatsapp-chat-container" id="whatsapp-chat">
