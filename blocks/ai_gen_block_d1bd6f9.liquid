@@ -6,8 +6,9 @@
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
-{% comment %} Get current collection handle {% endcomment %}
+{% comment %} Get current collection information {% endcomment %}
 {% assign current_collection_handle = collection.handle | default: '' %}
+{% assign current_collection_id = collection.id | default: '' %}
 {% assign current_url = request.path %}
 
 {% style %}
@@ -106,6 +107,7 @@
 <div class="ai-category-filter-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-category-filter-container-{{ ai_gen_id }}">
     <ul class="ai-category-filter-list-{{ ai_gen_id }}">
+      {% assign has_active = false %}
       {% for i in (1..20) %}
         {% liquid
           assign category_enabled_key = 'category_' | append: i | append: '_enabled'
@@ -119,21 +121,22 @@
           # Determine if this category is active
           assign is_active = false
           
-          # Check if we're on the collection page that matches this category
-          if category_collection != blank and category_collection.handle == current_collection_handle
-            assign is_active = true
-          elsif category_collection == blank and current_url contains '/collections/all' and i == 1
-            # If this is the first category (typically "ALL") with no collection assigned and we're on /collections/all
-            assign is_active = true
-          elsif category_collection == blank and current_collection_handle == 'all' and i == 1
-            # Alternative check for all collections
-            assign is_active = true
-          endif
-          
-          # Special handling for homepage or non-collection pages - make first enabled category active
-          if current_collection_handle == blank and collection == blank
-            if i == 1 and category_enabled
+          if category_collection != blank
+            # Check if the collection ID matches
+            if category_collection.id == current_collection_id
               assign is_active = true
+              assign has_active = true
+            endif
+            # Also check by handle as fallback
+            if category_collection.handle == current_collection_handle
+              assign is_active = true
+              assign has_active = true
+            endif
+          elsif i == 1 and category_collection == blank
+            # This is for the ALL category (first category with no collection)
+            if current_url contains '/collections/all' or current_collection_handle == 'all'
+              assign is_active = true
+              assign has_active = true
             endif
           endif
         %}
@@ -143,6 +146,7 @@
             <a
               href="{% if category_collection != blank %}{{ category_collection.url }}{% else %}/collections/all{% endif %}"
               class="ai-category-filter-button-{{ ai_gen_id }}{% if is_active %} active{% endif %}"
+              data-collection-id="{% if category_collection != blank %}{{ category_collection.id }}{% else %}all{% endif %}"
               data-collection-handle="{% if category_collection != blank %}{{ category_collection.handle }}{% else %}all{% endif %}"
             >
               {{ category_label }}
@@ -150,8 +154,31 @@
           </li>
         {% endif %}
       {% endfor %}
+      
+      {% comment %} If no category is active and we're on homepage or non-collection page, activate the first one {% endcomment %}
+      {% if has_active == false and collection == blank %}
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var firstButton = document.querySelector('.ai-category-filter-{{ ai_gen_id }} .ai-category-filter-button-{{ ai_gen_id }}');
+            if (firstButton && !document.querySelector('.ai-category-filter-{{ ai_gen_id }} .ai-category-filter-button-{{ ai_gen_id }}.active')) {
+              firstButton.classList.add('active');
+            }
+          });
+        </script>
+      {% endif %}
     </ul>
   </div>
+  
+  {% comment %} Debug info - remove this in production {% endcomment %}
+  {% if block.settings.show_debug %}
+    <div style="padding: 10px; background: #f0f0f0; margin-top: 10px; font-size: 12px;">
+      Debug Info:<br>
+      Current Collection Handle: {{ current_collection_handle }}<br>
+      Current Collection ID: {{ current_collection_id }}<br>
+      Current URL: {{ current_url }}<br>
+      Collection Title: {{ collection.title }}<br>
+    </div>
+  {% endif %}
 </div>
 
 {% schema %}
@@ -377,6 +404,17 @@
       "id": "active_border_color",
       "label": "Border",
       "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Debug"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_debug",
+      "label": "Show debug info",
+      "default": false,
+      "info": "Shows current collection info for troubleshooting"
     },
     {
       "type": "header",
