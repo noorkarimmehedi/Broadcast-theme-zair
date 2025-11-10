@@ -163,30 +163,30 @@
         {%- for option in product.options_with_values -%}
           {%- assign option_name_handle_separator = option.name | handle | prepend: ',' | append: ',' -%}
 
-          {% comment %} Determine if current option matches swatch handle translations {% endcomment %}
+          {%- comment -%} Determine if current option matches swatch handle translations {%- endcomment -%}
 
-{%- if settings.color_swatches -%}
-  {%- assign is_swatch_option = false -%}
-  {%- assign swatch_translation = 'general.swatches.color' | t -%}
-  {%- assign translation_string = swatch_translation | remove: '  ' | replace: ', ', ',' | replace: ' ,', ',' | replace: ',', '____' | handle | replace: '____', ',' | append: ',' | prepend: ',' -%}
+          {%- if settings.color_swatches -%}
+            {%- assign is_swatch_option = false -%}
+            {%- assign swatch_translation = 'general.swatches.color' | t -%}
+            {%- assign translation_string = swatch_translation | remove: '  ' | replace: ', ', ',' | replace: ' ,', ',' | replace: ',', '____' | handle | replace: '____', ',' | append: ',' | prepend: ',' -%}
 
-  {%- if translation_string contains option_name_handle_separator -%}
-    {%- assign is_swatch_option = true -%}
-  {%- endif -%}
-{%- endif -%}
+            {%- if translation_string contains option_name_handle_separator -%}
+              {%- assign is_swatch_option = true -%}
+            {%- endif -%}
+          {%- endif -%}
 
           {%- comment -%}
-  Determine if current option matches size handle translations
-{%- endcomment -%}
+            Determine if current option matches size handle translations
+          {%- endcomment -%}
 
-{%- liquid
-  assign is_size_option = false
-  assign size_option_name = option.name | downcase | handle
-  
-  if size_option_name == 'size' or size_option_name == 'sizes' or size_option_name == 'taille' or size_option_name == 'tailles'
-    assign is_size_option = true
-  endif
--%}
+          {%- liquid
+            assign is_size_option = false
+            assign size_option_name = option.name | downcase | handle
+            
+            if size_option_name == 'size' or size_option_name == 'sizes' or size_option_name == 'taille' or size_option_name == 'tailles'
+              assign is_size_option = true
+            endif
+          -%}
 
           <div class="selector-wrapper{% if settings.variant_lines and is_size_option %} selector-wrapper--size{% elsif settings.variant_lines or is_swatch_option %} selector-wrapper--fullwidth{% endif %}"
             data-option-position="{{ option.position }}">
@@ -225,7 +225,7 @@
                           </span>
 
                         {%- else -%}
-                          {% comment %} radio button {% endcomment %}
+                          {%- comment -%} radio button {%- endcomment -%}
                           <span class="radio__button">
                             <input
                               type="radio"
@@ -244,8 +244,8 @@
                     </div>
                     
                     {%- if is_size_option -%}
-                      <div style="margin-left: auto;">
-                        {% render 'size-chart' %}
+                      <div style="margin-left: auto; margin-top: -4px;">
+                        {%- render 'size-chart' -%}
                       </div>
                     {%- endif -%}
                   </div>
@@ -336,7 +336,7 @@
     {%- if block.settings.subscriptions_enable_selectors -%}
       {%- render 'subscription-form', product: product -%}
     {%- endif -%}
-    {% comment %} Delete the following line to block the theme from updating subscription prices {% endcomment %}
+    {%- comment -%} Delete the following line to block the theme from updating subscription prices {%- endcomment -%}
     <span data-subscription-watch-price></span>
   {%- endif -%}
 {%- endcapture -%}
