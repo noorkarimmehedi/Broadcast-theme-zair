@@ -117,7 +117,7 @@
   }
   
   .size-chart-table-container {
-    overflow-x: auto;
+    overflow-x: visible;
   }
   
   .size-chart-table {
@@ -149,10 +149,6 @@
     background: #f9fafb;
   }
   
-  .size-card {
-    display: none;
-  }
-  
   .size-chart-note {
     margin-top: 20px;
     padding: 16px;
@@ -166,7 +162,7 @@
   @media (max-width: 768px) {
     .size-chart-modal {
       align-items: flex-end;
-      justify-content: flex-end;
+      padding: 0;
     }
     
     .size-chart-content {
@@ -175,54 +171,34 @@
       max-height: 85vh;
     }
     
+    .size-chart-header {
+      padding: 16px 20px;
+    }
+    
     .size-chart-header h2 {
-      font-size: 20px;
-    }
-    
-    .size-chart-table-container {
-      display: none;
-    }
-    
-    .size-card {
-      display: block;
-    }
-    
-    .size-card-item {
-      background: #f9fafb;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 12px;
-      border: 1px solid #e5e7eb;
-    }
-    
-    .size-card-item:last-child {
-      margin-bottom: 0;
-    }
-    
-    .size-card-header {
       font-size: 18px;
-      font-weight: 700;
-      color: #111827;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #2563eb;
     }
     
-    .size-card-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      font-size: 14px;
+    .size-chart-body {
+      padding: 16px 20px;
     }
     
-    .size-card-label {
-      color: #6b7280;
-      font-weight: 500;
+    .size-chart-table {
+      font-size: 11px;
     }
     
-    .size-card-value {
-      color: #111827;
-      font-weight: 600;
+    .size-chart-table th,
+    .size-chart-table td {
+      padding: 6px 4px;
+    }
+    
+    .size-chart-table th {
+      font-size: 10px;
+    }
+    
+    .size-chart-note {
+      font-size: 11px;
+      padding: 12px;
     }
   }
 </style>
@@ -248,146 +224,48 @@
           <thead>
             <tr>
               <th>Size</th>
-              <th>Length (inches)</th>
-              <th>Chest (inches)</th>
-              <th>Sleeves (inches)</th>
-              <th>Collar (inches)</th>
-              <th>Shoulder (inches)</th>
+              <th>Length</th>
+              <th>Chest</th>
+              <th>Sleeves</th>
+              <th>Collar</th>
+              <th>Shoulder</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>S</strong></td>
-              <td>29</td>
-              <td>40</td>
-              <td>25.2</td>
-              <td>15</td>
-              <td>16.5</td>
+              <td>29"</td>
+              <td>40"</td>
+              <td>25.2"</td>
+              <td>15"</td>
+              <td>16.5"</td>
             </tr>
             <tr>
               <td><strong>M</strong></td>
-              <td>29</td>
-              <td>42</td>
-              <td>25.5</td>
-              <td>15.6</td>
-              <td>17</td>
+              <td>29"</td>
+              <td>42"</td>
+              <td>25.5"</td>
+              <td>15.6"</td>
+              <td>17"</td>
             </tr>
             <tr>
               <td><strong>L</strong></td>
-              <td>29.5</td>
-              <td>44</td>
-              <td>26</td>
-              <td>16.2</td>
-              <td>18</td>
+              <td>29.5"</td>
+              <td>44"</td>
+              <td>26"</td>
+              <td>16.2"</td>
+              <td>18"</td>
             </tr>
             <tr>
               <td><strong>XL</strong></td>
-              <td>30</td>
-              <td>46</td>
-              <td>27</td>
-              <td>17.5</td>
-              <td>19</td>
+              <td>30"</td>
+              <td>46"</td>
+              <td>27"</td>
+              <td>17.5"</td>
+              <td>19"</td>
             </tr>
           </tbody>
         </table>
-      </div>
-      
-      <div class="size-card">
-        <div class="size-card-item">
-          <div class="size-card-header">Size S</div>
-          <div class="size-card-row">
-            <span class="size-card-label">Length:</span>
-            <span class="size-card-value">29"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Chest:</span>
-            <span class="size-card-value">40"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Sleeves:</span>
-            <span class="size-card-value">25.2"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Collar:</span>
-            <span class="size-card-value">15"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Shoulder:</span>
-            <span class="size-card-value">16.5"</span>
-          </div>
-        </div>
-        
-        <div class="size-card-item">
-          <div class="size-card-header">Size M</div>
-          <div class="size-card-row">
-            <span class="size-card-label">Length:</span>
-            <span class="size-card-value">29"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Chest:</span>
-            <span class="size-card-value">42"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Sleeves:</span>
-            <span class="size-card-value">25.5"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Collar:</span>
-            <span class="size-card-value">15.6"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Shoulder:</span>
-            <span class="size-card-value">17"</span>
-          </div>
-        </div>
-        
-        <div class="size-card-item">
-          <div class="size-card-header">Size L</div>
-          <div class="size-card-row">
-            <span class="size-card-label">Length:</span>
-            <span class="size-card-value">29.5"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Chest:</span>
-            <span class="size-card-value">44"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Sleeves:</span>
-            <span class="size-card-value">26"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Collar:</span>
-            <span class="size-card-value">16.2"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Shoulder:</span>
-            <span class="size-card-value">18"</span>
-          </div>
-        </div>
-        
-        <div class="size-card-item">
-          <div class="size-card-header">Size XL</div>
-          <div class="size-card-row">
-            <span class="size-card-label">Length:</span>
-            <span class="size-card-value">30"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Chest:</span>
-            <span class="size-card-value">46"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Sleeves:</span>
-            <span class="size-card-value">27"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Collar:</span>
-            <span class="size-card-value">17.5"</span>
-          </div>
-          <div class="size-card-row">
-            <span class="size-card-label">Shoulder:</span>
-            <span class="size-card-value">19"</span>
-          </div>
-        </div>
       </div>
       
       <div class="size-chart-note">
