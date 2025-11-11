@@ -1,4 +1,7 @@
-/* Minimal Mobile Menu Redesign */
+/* ============================================
+   MINIMAL MOBILE MENU REDESIGN
+   ============================================ */
+
 /* Reset and Base Styles */
 .drawer--header .drawer__inner {
   background: #ffffff;
@@ -33,24 +36,40 @@
 .drawer--header .drawer__body {
   background: #ffffff;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 72px);
 }
 
 .drawer--header .drawer__content {
   padding: 0;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .drawer--header .drawer__menu {
-  padding: 20px;
+  padding: 0 20px 20px 20px;
 }
 
-/* Main Navigation Items */
+/* Remove "SHOP" label */
+.drawer--header .drawer__menu:before {
+  display: none;
+}
+
+/* Main Navigation Wrapper */
 .drawer--header .sliderule__wrapper {
   margin-bottom: 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: none;
 }
 
+/* Hide Secondary Menu (we'll show it differently) */
+.drawer--header .sliderule__wrapper--secondary {
+  display: none;
+}
+
+/* ALL NAVIGATION ITEMS - Reset */
 .drawer--header .sliderow {
-  padding: 16px 0;
+  padding: 0;
   background: none;
   border: none;
   width: 100%;
@@ -59,27 +78,37 @@
 
 .drawer--header .sliderow__title {
   color: #000000;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 400;
   text-decoration: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: opacity 0.2s ease;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
+/* FIRST TWO ITEMS IN BOLD (New Arrivals & Best Sellers) */
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 18px 0;
+}
+
+/* REST OF THE COLLECTIONS - Normal Weight */
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(n+3) .sliderow__title {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Hover Effect */
 .drawer--header .sliderow__title:hover {
   opacity: 0.7;
 }
 
-/* Secondary Menu Items */
-.drawer--header .sliderule__wrapper--secondary .sliderow__title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #666666;
-}
-
-/* Chevron Icons */
+/* Chevron Icons for Expandable Items */
 .drawer--header .sliderule__chevron--right {
   display: flex;
   align-items: center;
@@ -102,13 +131,19 @@
   background: #ffffff;
   left: 0;
   right: 0;
+  padding: 0;
 }
 
 /* Back Button */
 .drawer--header .sliderow--back {
   border-bottom: 1px solid #f0f0f0;
-  margin-bottom: 10px;
-  padding-bottom: 16px;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.drawer--header .sliderow--back .sliderow__title {
+  padding: 16px 0;
+  font-weight: 600;
 }
 
 .drawer--header .sliderow__back-button {
@@ -118,10 +153,10 @@
   display: flex;
   align-items: center;
   color: #000000;
+  margin-right: 8px;
 }
 
 .drawer--header .sliderule__chevron--left {
-  margin-right: 10px;
   display: flex;
   align-items: center;
 }
@@ -131,142 +166,86 @@
   height: 16px;
 }
 
-/* Submenu Links */
+/* Subcollection Links */
+.drawer--header .sliderow__links {
+  padding: 0;
+}
+
 .drawer--header .sliderow__links .sliderule__wrapper {
   border-bottom: none;
 }
 
 .drawer--header .sliderow__links .sliderow {
-  padding: 14px 0 14px 20px;
+  padding: 0;
 }
 
 .drawer--header .sliderow__links .sliderow__title {
   font-size: 15px;
   font-weight: 400;
   color: #333333;
+  padding: 12px 0 12px 20px;
+  border-bottom: 1px solid #f5f5f5;
 }
 
-/* Add "SHOP" Label Before Main Menu */
-.drawer--header .drawer__menu:before {
-  content: "SHOP";
-  display: block;
-  color: #999999;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  padding: 0;
+.drawer--header .sliderow__links .sliderow__title:hover {
+  color: #000000;
 }
 
-/* Bottom Section - Social & Localization */
+/* Remove chevron from sub-items that don't have children */
+.drawer--header .sliderow__links .sliderule__chevron--right {
+  display: none;
+}
+
+/* Bottom Section - LOGIN */
 .drawer--header .drawer__bottom {
   padding: 20px;
   background: #ffffff;
   border-top: 1px solid #f0f0f0;
-  margin-top: auto;
+  margin-top: 0;
 }
 
+/* Hide social and localization in bottom */
 .drawer--header .drawer__bottom__row {
-  margin-bottom: 15px;
+  display: none;
 }
 
-.drawer--header .drawer__bottom__row:last-child {
-  margin-bottom: 0;
+/* Show only login/account link */
+.drawer--header .drawer__bottom__row:has(a[href*="/account"]) {
+  display: block;
+  margin: 0;
 }
 
-/* Social Icons */
-.drawer--header .social__icons {
+/* Style the LOGIN link */
+.drawer--header a[href*="/account"] {
   display: flex;
-  gap: 15px;
-}
-
-.drawer--header .social__icons a {
+  align-items: center;
+  gap: 10px;
   color: #999999;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   transition: color 0.2s ease;
+  text-transform: uppercase;
 }
 
-.drawer--header .social__icons a:hover {
-  color: #000000;
+.drawer--header a[href*="/account"]:hover {
+  color: #666666;
 }
 
-.drawer--header .social__icons svg {
+/* Add user icon before LOGIN */
+.drawer--header a[href*="/account"] .navlink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.drawer--header a[href*="/account"] svg {
   width: 20px;
   height: 20px;
 }
 
-/* Localization Selectors */
-.drawer--header .popout--drawer {
-  background: #f8f8f8;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  padding: 8px 12px;
-  margin-bottom: 10px;
-}
-
-.drawer--header .popout__toggle {
-  color: #333333;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-/* Animation Improvements */
-.drawer--header .sliderule__wrapper {
-  opacity: 0;
-  animation: fadeInUp 0.4s ease forwards;
-}
-
-.drawer--header .sliderule__wrapper:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.drawer--header .sliderule__wrapper:nth-child(2) {
-  animation-delay: 0.15s;
-}
-
-.drawer--header .sliderule__wrapper:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-.drawer--header .sliderule__wrapper:nth-child(4) {
-  animation-delay: 0.25s;
-}
-
-.drawer--header .sliderule__wrapper:nth-child(5) {
-  animation-delay: 0.3s;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Highlight Campaign/Sale Items */
-.drawer--header .sliderow__title--highlight {
-  color: #FF0000 !important;
-  position: relative;
-}
-
-/* Optional: Add "NEW" or "SALE" badge */
-.drawer--header .sliderow__title--highlight:after {
-  content: "SALE";
-  font-size: 10px;
-  font-weight: 600;
-  color: #FF0000;
-  margin-left: 8px;
-  letter-spacing: 0.5px;
-}
-
-/* Clean up any existing borders/backgrounds */
+/* Clean up any existing styles */
 .drawer--header .sliderule__panel {
   border: none;
   box-shadow: none;
@@ -277,6 +256,22 @@
   outline: none;
 }
 
+/* Remove animations on initial items */
+.drawer--header .sliderule__wrapper {
+  opacity: 1;
+  animation: none;
+}
+
+/* Optional: Highlight specific items (like Sale) */
+.drawer--header .sliderow__title--highlight {
+  color: #FF0000 !important;
+}
+
+/* Remove the SALE badge */
+.drawer--header .sliderow__title--highlight:after {
+  display: none;
+}
+
 /* Mobile Adjustments */
 @media (max-width: 375px) {
   .drawer--header .drawer__inner {
@@ -284,8 +279,13 @@
     max-width: 100%;
   }
   
-  .drawer--header .sliderow__title {
+  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
+  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
     font-size: 16px;
+  }
+  
+  .drawer--header .sliderow__title {
+    font-size: 15px;
   }
   
   .drawer--header .sliderow__links .sliderow__title {
@@ -293,33 +293,20 @@
   }
 }
 
-/* Hide elements you don't need */
+/* Hide visually-hidden elements properly */
 .drawer--header .visually-hidden {
   position: absolute;
   left: -10000px;
-  top: auto;
   width: 1px;
   height: 1px;
   overflow: hidden;
 }
 
-/* Optional: Add Login Section at Bottom */
-.drawer--header .drawer__bottom:after {
-  content: "";
-  display: block;
-  padding-top: 15px;
-  margin-top: 15px;
-  border-top: 1px solid #f0f0f0;
+/* Clean layout - remove extra spacing */
+.drawer--header .drawer__menu > .sliderule__wrapper:first-child .sliderow__title {
+  padding-top: 10px;
 }
 
-/* If you have account links in the menu */
-.drawer--header a[href*="/account"] .sliderow__title {
-  color: #999999;
-  font-weight: 500;
-  font-size: 14px;
-}
-
-.drawer--header a[href*="/account"] .sliderow__title:before {
-  content: "👤 ";
-  margin-right: 8px;
+.drawer--header .drawer__menu > .sliderule__wrapper:last-child .sliderow__title {
+  border-bottom: none;
 }
