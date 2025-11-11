@@ -834,7 +834,7 @@
             "tab_alignment": "center",
             "container_padding": 20,
             "header_layout_mobile": "stacked",
-            "header_alignment_mobile": "center",
+            "header_alignment_mobile": "left",
             "tab_alignment_mobile": "center",
             "tab_font_size": 12,
             "tab_spacing": 40,
