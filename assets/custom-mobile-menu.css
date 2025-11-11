@@ -70,14 +70,17 @@
   transform: none !important;
   opacity: 1 !important;
   visibility: visible !important;
+  display: block !important;
   left: auto !important;
   right: auto !important;
   top: auto !important;
   height: auto !important;
+  max-height: none !important;
   background: none !important;
   box-shadow: none !important;
   border: none !important;
   padding: 0 !important;
+  pointer-events: auto !important;
 }
 
 /* Hide secondary menu wrapper (not needed) */
@@ -97,7 +100,11 @@
   border: none;
   width: 100%;
   text-align: left;
-  cursor: pointer;
+}
+
+/* Main level items without children */
+.drawer--header .drawer__menu > .sliderule__wrapper > .sliderow {
+  cursor: default;
 }
 
 /* Main Collection Links */
@@ -147,7 +154,14 @@
   background: #fafafa;
   border-left: 3px solid #e0e0e0;
   margin-left: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  margin-top: -14px;
+}
+
+/* Add spacing between parent and subcollections */
+.drawer--header .sliderule__wrapper:has(.sliderow__links) > .sliderow > .sliderow__title {
+  margin-bottom: 0;
+  padding-bottom: 14px;
 }
 
 /* Make subcollections always visible */
