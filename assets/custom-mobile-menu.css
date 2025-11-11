@@ -123,16 +123,27 @@
   text-transform: capitalize;
 }
 
-/* FIRST TWO ITEMS IN BOLD (New Arrivals & Best Sellers) */
+/* FIRST THREE ITEMS IN BOLD AND SAME SIZE (Home, New Arrivals & Best Sellers) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title,
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
   font-size: 18px;
   font-weight: 700;
-  padding: 18px 0;
+  padding: 12px 0;
+}
+
+/* REMOVE BORDER AFTER HOME (1st item) */
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title {
+  border-bottom: none;
+}
+
+/* REMOVE BORDER AFTER NEW ARRIVALS (2nd item) */
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
+  border-bottom: none;
 }
 
 /* REST OF THE COLLECTIONS - Normal Weight */
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(n+3) > .sliderow > .sliderow__title {
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(n+4) > .sliderow > .sliderow__title {
   font-size: 16px;
   font-weight: 400;
 }
@@ -305,9 +316,9 @@
   outline: none;
 }
 
-/* Clean up spacing */
+/* Clean up spacing - reduce top padding for first item */
 .drawer--header .drawer__menu > .sliderule__wrapper:first-child .sliderow__title {
-  padding-top: 10px;
+  padding-top: 8px;
 }
 
 .drawer--header .drawer__menu > .sliderule__wrapper:last-child > .sliderow > .sliderow__title {
@@ -341,7 +352,8 @@
   }
   
   .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
-  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
+  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title,
+  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
     font-size: 16px;
   }
   
