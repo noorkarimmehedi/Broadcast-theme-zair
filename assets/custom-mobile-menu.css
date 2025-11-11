@@ -127,19 +127,22 @@
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title,
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
-  font-size: 18px;
-  font-weight: 700;
-  padding: 6px 0;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  padding: 6px 0 !important;
+  margin: 0 !important;
 }
 
 /* REMOVE BORDER AFTER HOME (1st item) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title {
-  border-bottom: none;
+  border-bottom: none !important;
+  padding-bottom: 6px !important;
 }
 
 /* REMOVE BORDER AFTER NEW ARRIVALS (2nd item) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
-  border-bottom: none;
+  border-bottom: none !important;
+  padding-bottom: 6px !important;
 }
 
 /* REST OF THE COLLECTIONS - Normal Weight */
@@ -318,7 +321,14 @@
 
 /* Clean up spacing - reduce top padding for first item */
 .drawer--header .drawer__menu > .sliderule__wrapper:first-child .sliderow__title {
-  padding-top: 4px;
+  padding-top: 4px !important;
+}
+
+/* Reduce spacing between first three items */
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1),
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2),
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) {
+  margin-bottom: 0 !important;
 }
 
 .drawer--header .drawer__menu > .sliderule__wrapper:last-child > .sliderow > .sliderow__title {
