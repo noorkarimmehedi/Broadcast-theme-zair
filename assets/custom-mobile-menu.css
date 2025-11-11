@@ -247,9 +247,9 @@
 /* Style the LOGIN link */
 .drawer--header a[href*="/account"],
 .drawer--header a[href*="/login"] {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: #000000;
   text-decoration: none;
   font-size: 14px;
@@ -264,31 +264,39 @@
   color: #666666;
 }
 
-/* Add user icon before LOGIN */
+/* Make sure icon and text are together */
 .drawer--header a[href*="/account"] .navlink,
 .drawer--header a[href*="/login"] .navlink {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .drawer--header a[href*="/account"] svg,
 .drawer--header a[href*="/login"] svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 /* If there's no icon, add one with CSS */
 .drawer--header a[href*="/account"]::before,
 .drawer--header a[href*="/login"]::before {
   content: '';
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3Ccircle cx='12' cy='7' r='4'%3E%3C/circle%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   flex-shrink: 0;
+  display: none;
+}
+
+/* Only show CSS icon if no SVG exists */
+.drawer--header a[href*="/account"]:not(:has(svg))::before,
+.drawer--header a[href*="/login"]:not(:has(svg))::before {
+  display: block;
 }
 
 /* Remove focus outlines */
