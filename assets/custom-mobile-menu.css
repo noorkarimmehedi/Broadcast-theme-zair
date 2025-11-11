@@ -116,7 +116,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: opacity 0.2s ease;
+  transition: background-color 0.2s ease;
   padding: 14px 0;
   border-bottom: 1px solid #f0f0f0;
   cursor: pointer;
@@ -139,10 +139,10 @@
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
   font-size: 18px !important;
   font-weight: 700 !important;
-  padding: 0 !important;
+  padding: 14px 0 !important;
   margin: 0 !important;
   border-bottom: none !important;
-  line-height: 1 !important;
+  line-height: 1.4 !important;
   height: auto !important;
   min-height: 0 !important;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
@@ -150,19 +150,19 @@
 
 /* Extra tight spacing for first item (Home) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title {
-  padding: 0 !important;
+  padding: 14px 0 !important;
   margin-bottom: 0 !important;
 }
 
 /* Tight spacing for second item (New Arrivals) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
-  padding: 0 !important;
+  padding: 14px 0 !important;
   margin-bottom: 0 !important;
 }
 
 /* Tight spacing for third item (Best Sellers) - with bottom border after */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
-  padding: 0 !important;
+  padding: 14px 0 !important;
   padding-bottom: 14px !important;
   margin-bottom: 0 !important;
   border-bottom: 1px solid #f0f0f0 !important;
@@ -175,9 +175,9 @@
   padding: 14px 0 !important;
 }
 
-/* Hover Effect on Main Items */
+/* Hover Effect on Main Items - Consistent for ALL items */
 .drawer--header .sliderow__title:hover {
-  opacity: 0.7;
+  background-color: #f5f5f5;
 }
 
 /* HIDE ALL CHEVRONS - We don't need them */
@@ -243,7 +243,7 @@
 
 .drawer--header .sliderow__links .sliderow__title:hover {
   color: #000000 !important;
-  background: transparent;
+  background-color: #f5f5f5;
 }
 
 /* Collections without subcollections - keep normal spacing */
