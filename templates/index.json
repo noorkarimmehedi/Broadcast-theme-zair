@@ -911,6 +911,7 @@
         "lookbook-0",
         "lookbook-1"
       ],
+      "disabled": true,
       "settings": {
         "title": "Shop the look",
         "show_dots": true,
