@@ -151,17 +151,18 @@
 .drawer--header .sliderow__links {
   padding: 0;
   margin: 0;
-  background: #fafafa;
-  border-left: 3px solid #e0e0e0;
-  margin-left: 10px;
-  margin-bottom: 12px;
-  margin-top: -14px;
+  background: transparent;
+  border-left: none;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 /* Add spacing between parent and subcollections */
 .drawer--header .sliderule__wrapper:has(.sliderow__links) > .sliderow > .sliderow__title {
   margin-bottom: 0;
   padding-bottom: 14px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 /* Make subcollections always visible */
@@ -187,9 +188,9 @@
 .drawer--header .sliderow__links .sliderow__title {
   font-size: 14px;
   font-weight: 400;
-  color: #555555 !important;
-  padding: 10px 16px;
-  border-bottom: 1px solid #eeeeee;
+  color: #666666 !important;
+  padding: 12px 0 12px 24px;
+  border-bottom: none;
   transition: all 0.2s ease;
   display: block !important;
   opacity: 1 !important;
@@ -197,17 +198,28 @@
 }
 
 .drawer--header .sliderow__links .sliderow:last-child .sliderow__title {
-  border-bottom: none;
+  padding-bottom: 16px;
 }
 
 .drawer--header .sliderow__links .sliderow__title:hover {
   color: #000000 !important;
-  background: #f5f5f5;
+  background: transparent;
 }
 
 /* Collections without subcollections - keep normal spacing */
 .drawer--header .sliderule__wrapper:not(:has(.sliderow__links)) {
   margin-bottom: 0;
+}
+
+/* Add bottom border to parent items that have subcollections - AFTER the subcollections */
+.drawer--header .sliderule__wrapper:has(.sliderow__links) {
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 0;
+}
+
+/* Remove border from parent title when it has subcollections */
+.drawer--header .sliderule__wrapper:has(.sliderow__links) > .sliderow > .sliderow__title {
+  border-bottom: none;
 }
 
 /* Bottom Section - LOGIN */
