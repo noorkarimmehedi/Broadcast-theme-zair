@@ -142,25 +142,28 @@
   padding: 0 !important;
   margin: 0 !important;
   border-bottom: none !important;
-  line-height: 1.2 !important;
+  line-height: 1 !important;
+  height: auto !important;
+  min-height: 0 !important;
 }
 
 /* Extra tight spacing for first item (Home) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title {
-  padding-top: 0 !important;
-  padding-bottom: 2px !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 /* Tight spacing for second item (New Arrivals) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
-  padding-top: 0 !important;
-  padding-bottom: 2px !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 /* Tight spacing for third item (Best Sellers) - with bottom border after */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
-  padding-top: 0 !important;
+  padding: 0 !important;
   padding-bottom: 14px !important;
+  margin-bottom: 0 !important;
   border-bottom: 1px solid #f0f0f0 !important;
 }
 
