@@ -869,7 +869,7 @@
             "image_aspect_ratio": 1.3,
             "image_bg_color": "#f0f0f0",
             "product_title_font": "assistant_n4",
-            "product_title_size": 12,
+            "product_title_size": 11,
             "product_title_color": "#000000",
             "price_size": 12,
             "price_color": "#666666",
