@@ -6,8 +6,8 @@
 /* Reset and Base Styles */
 .drawer--header .drawer__inner {
   background: #ffffff;
-  width: 320px;
-  max-width: 85vw;
+  width: 380px;
+  max-width: 90vw;
 }
 
 .drawer--header .drawer__head {
@@ -120,6 +120,7 @@
   padding: 14px 0;
   border-bottom: 1px solid #f0f0f0;
   cursor: pointer;
+  text-transform: capitalize;
 }
 
 /* FIRST TWO ITEMS IN BOLD (New Arrivals & Best Sellers) */
@@ -195,6 +196,7 @@
   display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
+  text-transform: capitalize;
 }
 
 .drawer--header .sliderow__links .sliderow:last-child .sliderow__title {
