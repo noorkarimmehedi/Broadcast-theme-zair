@@ -303,24 +303,22 @@
     }
 
     .ai-product-tabs-nav-{{ ai_gen_id }} {
-      gap: {{ block.settings.tab_spacing | times: 0.5 }}px;
-      flex-wrap: wrap;
+      gap: 8px;
+      flex-wrap: nowrap;
       overflow-x: visible;
-      {% if block.settings.tab_alignment_mobile == 'left' %}
-        justify-content: flex-start;
-      {% elsif block.settings.tab_alignment_mobile == 'center' %}
-        justify-content: center;
-      {% elsif block.settings.tab_alignment_mobile == 'right' %}
-        justify-content: flex-end;
-      {% endif %}
+      width: 100%;
+      justify-content: space-between;
     }
 
     .ai-product-tabs-tab-{{ ai_gen_id }} {
-      font-size: {{ block.settings.tab_font_size | times: 0.85 }}px;
-      padding: 10px 16px;
-      flex: 1 1 auto;
+      font-size: 9px;
+      padding: 8px 6px;
+      flex: 1 1 0;
       min-width: 0;
       text-align: center;
+      white-space: normal;
+      line-height: 1.2;
+      letter-spacing: 0.05em;
     }
 
     .ai-product-tabs-product-title-{{ ai_gen_id }} {
