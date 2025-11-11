@@ -8,7 +8,7 @@
     
     The section follows a centered, minimalist structure with a clear hierarchy.
     
-    The heading sits at the top, followed by evenly spaced horizontal tabs, each representing a category (e.g., “New Arrivals,” “Best Sellers,” “Essentials”).
+    The heading sits at the top, followed by evenly spaced horizontal tabs, each representing a category (e.g., "New Arrivals," "Best Sellers," "Essentials").
     
     The active tab should be visually emphasized for clarity and easy navigation.
     
@@ -18,7 +18,7 @@
     
     Top-left: Small, uppercase sans-serif text for the section title.
     
-    Top-right: A clean rectangular button labeled “DISCOVER MORE” for navigation.
+    Top-right: A clean rectangular button labeled "DISCOVER MORE" for navigation.
     
     Both title and button align horizontally at the top with balanced spacing and padding.
     
@@ -46,7 +46,7 @@
     
     Apply balanced padding to maintain clean visual hierarchy and focus on product imagery.
     
-    The overall presentation should feel luxurious yet simple, allowing the products to stand out., the YOU MAY ALSO LIKE title is clasing with the upper border , section title alligment and tab alligment can be customizable for both mobile and desktop , Section header alligment on desktop version can be customizable. also product name and pricing should be on left alligment. also product name font should be customizable , i need bottom padding too. also i want a button option for each tabs in the bottom , bottom button vertical padding can be customizable. also in desktop version there is so much gap on left and right side reduce that gap , still there is so much gap on both left and right side on desktop version reduce that gap. i want 4 products per row in desktop version , the gap on both left and right side on desktop version. reduce that a little bit more
+    The overall presentation should feel luxurious yet simple, allowing the products to stand out., the YOU MAY ALSO LIKE title is clasing with the upper border , section title alligment and tab alligment can be customizable for both mobile and desktop , Section header alligment on desktop version can be customizable. also product name and pricing should be on left alligment. also product name font should be customizable , i need bottom padding too. also i want a button option for each tabs in the bottom , bottom button vertical padding can be customizable. also in desktop version there is so much gap on left and right side reduce that gap , still there is so much gap on both left and right side on desktop version reduce that gap. i want 4 products per row in desktop version , the gap on both left and right side on desktop version. reduce that a little bit more. Tabs now have black borders without radius.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
@@ -114,7 +114,6 @@
     display: flex;
     gap: {{ block.settings.tab_spacing }}px;
     margin-bottom: {{ block.settings.tabs_spacing }}px;
-    border-bottom: 1px solid {{ block.settings.tab_border_color }};
     overflow-x: auto;
     scrollbar-width: none;
     {% if block.settings.tab_alignment == 'left' %}
@@ -131,37 +130,31 @@
   }
 
   .ai-product-tabs-tab-{{ ai_gen_id }} {
-    padding: 16px 0;
-    background: none;
-    border: none;
+    padding: 12px 24px;
+    background: {{ block.settings.tab_bg_color }};
+    border: {{ block.settings.tab_border_width }}px solid {{ block.settings.tab_border_color }};
+    border-radius: 0;
     font-size: {{ block.settings.tab_font_size }}px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: {{ block.settings.tab_inactive_color }};
     cursor: pointer;
-    position: relative;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     white-space: nowrap;
     font-weight: 400;
   }
 
   .ai-product-tabs-tab-{{ ai_gen_id }}:hover {
     color: {{ block.settings.tab_hover_color }};
+    background: {{ block.settings.tab_hover_bg }};
+    border-color: {{ block.settings.tab_hover_border }};
   }
 
   .ai-product-tabs-tab-{{ ai_gen_id }}.active {
     color: {{ block.settings.tab_active_color }};
+    background: {{ block.settings.tab_active_bg }};
+    border-color: {{ block.settings.tab_active_border }};
     font-weight: 500;
-  }
-
-  .ai-product-tabs-tab-{{ ai_gen_id }}.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: {{ block.settings.tab_active_underline }};
   }
 
   .ai-product-tabs-content-{{ ai_gen_id }} {
@@ -321,7 +314,7 @@
 
     .ai-product-tabs-tab-{{ ai_gen_id }} {
       font-size: {{ block.settings.tab_font_size | times: 0.9 }}px;
-      padding: 12px 0;
+      padding: 10px 20px;
     }
 
     .ai-product-tabs-product-title-{{ ai_gen_id }} {
@@ -648,7 +641,7 @@
     },
     {
       "type": "header",
-      "content": "Tabs"
+      "content": "Tab style"
     },
     {
       "type": "range",
@@ -663,12 +656,12 @@
     {
       "type": "range",
       "id": "tab_spacing",
-      "min": 20,
+      "min": 10,
       "max": 60,
       "step": 5,
       "unit": "px",
       "label": "Tab spacing",
-      "default": 40
+      "default": 20
     },
     {
       "type": "range",
@@ -681,34 +674,68 @@
       "default": 40
     },
     {
-      "type": "color",
-      "id": "tab_inactive_color",
-      "label": "Inactive color",
-      "default": "#999999"
+      "type": "range",
+      "id": "tab_border_width",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
     },
     {
       "type": "color",
-      "id": "tab_hover_color",
-      "label": "Hover color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "tab_active_color",
-      "label": "Active color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "tab_active_underline",
-      "label": "Active underline",
-      "default": "#000000"
+      "id": "tab_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "tab_border_color",
       "label": "Border color",
-      "default": "#e0e0e0"
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "tab_inactive_color",
+      "label": "Inactive text color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover_color",
+      "label": "Hover text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover_bg",
+      "label": "Hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover_border",
+      "label": "Hover border color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_color",
+      "label": "Active text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "label": "Active background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_border",
+      "label": "Active border color",
+      "default": "#000000"
     },
     {
       "type": "header",
