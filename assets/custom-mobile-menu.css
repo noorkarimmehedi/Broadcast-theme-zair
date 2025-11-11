@@ -129,7 +129,7 @@
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
   font-size: 18px;
   font-weight: 700;
-  padding: 12px 0;
+  padding: 6px 0;
 }
 
 /* REMOVE BORDER AFTER HOME (1st item) */
@@ -318,7 +318,7 @@
 
 /* Clean up spacing - reduce top padding for first item */
 .drawer--header .drawer__menu > .sliderule__wrapper:first-child .sliderow__title {
-  padding-top: 8px;
+  padding-top: 4px;
 }
 
 .drawer--header .drawer__menu > .sliderule__wrapper:last-child > .sliderow > .sliderow__title {
