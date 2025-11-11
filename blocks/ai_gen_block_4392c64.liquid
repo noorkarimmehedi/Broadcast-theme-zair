@@ -62,6 +62,12 @@
     padding: 0 {{ block.settings.container_padding }}px;
   }
 
+  @media screen and (min-width: 750px) {
+    .ai-product-tabs-container-{{ ai_gen_id }} {
+      padding: 0 5px;
+    }
+  }
+
   .ai-product-tabs-header-{{ ai_gen_id }} {
     display: flex;
     justify-content: space-between;
@@ -890,7 +896,7 @@
       "step": 5,
       "unit": "px",
       "label": "Gap between products",
-      "default": 20
+      "default": 10
     },
     {
       "type": "range",
