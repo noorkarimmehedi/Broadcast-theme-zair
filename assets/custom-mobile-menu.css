@@ -1,0 +1,325 @@
+/* Minimal Mobile Menu Redesign */
+/* Reset and Base Styles */
+.drawer--header .drawer__inner {
+  background: #ffffff;
+  width: 320px;
+  max-width: 85vw;
+}
+
+.drawer--header .drawer__head {
+  padding: 20px;
+  border-bottom: none;
+  background: #ffffff;
+}
+
+.drawer--header .drawer__close {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer--header .drawer__close svg {
+  width: 18px;
+  height: 18px;
+  color: #000000;
+}
+
+/* Body and Content */
+.drawer--header .drawer__body {
+  background: #ffffff;
+  padding: 0;
+}
+
+.drawer--header .drawer__content {
+  padding: 0;
+}
+
+.drawer--header .drawer__menu {
+  padding: 20px;
+}
+
+/* Main Navigation Items */
+.drawer--header .sliderule__wrapper {
+  margin-bottom: 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.drawer--header .sliderow {
+  padding: 16px 0;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.drawer--header .sliderow__title {
+  color: #000000;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: opacity 0.2s ease;
+}
+
+.drawer--header .sliderow__title:hover {
+  opacity: 0.7;
+}
+
+/* Secondary Menu Items */
+.drawer--header .sliderule__wrapper--secondary .sliderow__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #666666;
+}
+
+/* Chevron Icons */
+.drawer--header .sliderule__chevron--right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  color: #999999;
+}
+
+.drawer--header .sliderule__chevron--right svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s ease;
+}
+
+.drawer--header .sliderow:hover .sliderule__chevron--right svg {
+  transform: translateX(3px);
+}
+
+/* Submenu Panel */
+.drawer--header .mobile__menu__dropdown {
+  background: #ffffff;
+  left: 0;
+  right: 0;
+}
+
+/* Back Button */
+.drawer--header .sliderow--back {
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 10px;
+  padding-bottom: 16px;
+}
+
+.drawer--header .sliderow__back-button {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+
+.drawer--header .sliderule__chevron--left {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.drawer--header .sliderule__chevron--left svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Submenu Links */
+.drawer--header .sliderow__links .sliderule__wrapper {
+  border-bottom: none;
+}
+
+.drawer--header .sliderow__links .sliderow {
+  padding: 14px 0 14px 20px;
+}
+
+.drawer--header .sliderow__links .sliderow__title {
+  font-size: 15px;
+  font-weight: 400;
+  color: #333333;
+}
+
+/* Add "SHOP" Label Before Main Menu */
+.drawer--header .drawer__menu:before {
+  content: "SHOP";
+  display: block;
+  color: #999999;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding: 0;
+}
+
+/* Bottom Section - Social & Localization */
+.drawer--header .drawer__bottom {
+  padding: 20px;
+  background: #ffffff;
+  border-top: 1px solid #f0f0f0;
+  margin-top: auto;
+}
+
+.drawer--header .drawer__bottom__row {
+  margin-bottom: 15px;
+}
+
+.drawer--header .drawer__bottom__row:last-child {
+  margin-bottom: 0;
+}
+
+/* Social Icons */
+.drawer--header .social__icons {
+  display: flex;
+  gap: 15px;
+}
+
+.drawer--header .social__icons a {
+  color: #999999;
+  transition: color 0.2s ease;
+}
+
+.drawer--header .social__icons a:hover {
+  color: #000000;
+}
+
+.drawer--header .social__icons svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Localization Selectors */
+.drawer--header .popout--drawer {
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+}
+
+.drawer--header .popout__toggle {
+  color: #333333;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Animation Improvements */
+.drawer--header .sliderule__wrapper {
+  opacity: 0;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.drawer--header .sliderule__wrapper:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.drawer--header .sliderule__wrapper:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.drawer--header .sliderule__wrapper:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.drawer--header .sliderule__wrapper:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+.drawer--header .sliderule__wrapper:nth-child(5) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Highlight Campaign/Sale Items */
+.drawer--header .sliderow__title--highlight {
+  color: #FF0000 !important;
+  position: relative;
+}
+
+/* Optional: Add "NEW" or "SALE" badge */
+.drawer--header .sliderow__title--highlight:after {
+  content: "SALE";
+  font-size: 10px;
+  font-weight: 600;
+  color: #FF0000;
+  margin-left: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Clean up any existing borders/backgrounds */
+.drawer--header .sliderule__panel {
+  border: none;
+  box-shadow: none;
+}
+
+.drawer--header .sliderow:focus,
+.drawer--header .sliderow__title:focus {
+  outline: none;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 375px) {
+  .drawer--header .drawer__inner {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .drawer--header .sliderow__title {
+    font-size: 16px;
+  }
+  
+  .drawer--header .sliderow__links .sliderow__title {
+    font-size: 14px;
+  }
+}
+
+/* Hide elements you don't need */
+.drawer--header .visually-hidden {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Optional: Add Login Section at Bottom */
+.drawer--header .drawer__bottom:after {
+  content: "";
+  display: block;
+  padding-top: 15px;
+  margin-top: 15px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* If you have account links in the menu */
+.drawer--header a[href*="/account"] .sliderow__title {
+  color: #999999;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.drawer--header a[href*="/account"] .sliderow__title:before {
+  content: "👤 ";
+  margin-right: 8px;
+}
