@@ -142,6 +142,7 @@
     transition: all 0.3s ease;
     white-space: nowrap;
     font-weight: 400;
+    flex-shrink: 0;
   }
 
   .ai-product-tabs-tab-{{ ai_gen_id }}:hover {
@@ -302,7 +303,9 @@
     }
 
     .ai-product-tabs-nav-{{ ai_gen_id }} {
-      gap: {{ block.settings.tab_spacing | times: 0.7 }}px;
+      gap: {{ block.settings.tab_spacing | times: 0.5 }}px;
+      flex-wrap: wrap;
+      overflow-x: visible;
       {% if block.settings.tab_alignment_mobile == 'left' %}
         justify-content: flex-start;
       {% elsif block.settings.tab_alignment_mobile == 'center' %}
@@ -313,8 +316,11 @@
     }
 
     .ai-product-tabs-tab-{{ ai_gen_id }} {
-      font-size: {{ block.settings.tab_font_size | times: 0.9 }}px;
-      padding: 10px 20px;
+      font-size: {{ block.settings.tab_font_size | times: 0.85 }}px;
+      padding: 10px 16px;
+      flex: 1 1 auto;
+      min-width: 0;
+      text-align: center;
     }
 
     .ai-product-tabs-product-title-{{ ai_gen_id }} {
