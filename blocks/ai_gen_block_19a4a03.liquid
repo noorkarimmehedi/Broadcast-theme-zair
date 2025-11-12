@@ -346,6 +346,10 @@
   
   let currentSlide = 0;
   const totalSlides = 3;
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
+  let startTransform = 0;
 
   function goToSlide(index) {
     currentSlide = index;
@@ -370,6 +374,62 @@
     goToSlide(currentSlide);
   }
 
+  // Touch/Swipe Events
+  function handleTouchStart(e) {
+    isDragging = true;
+    startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    startTransform = currentSlide * 100;
+    container.style.transition = 'none';
+  }
+
+  function handleTouchMove(e) {
+    if (!isDragging) return;
+    
+    e.preventDefault();
+    currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    const diff = startX - currentX;
+    const containerWidth = container.offsetWidth;
+    const percentageMoved = (diff / containerWidth) * 100;
+    
+    const newTransform = startTransform + percentageMoved;
+    container.style.transform = 'translateX(-' + newTransform + '%)';
+  }
+
+  function handleTouchEnd(e) {
+    if (!isDragging) return;
+    
+    isDragging = false;
+    container.style.transition = 'transform 0.5s ease-in-out';
+    
+    const diff = startX - currentX;
+    const threshold = 50; // minimum swipe distance
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // Swiped left - go to next slide
+        nextSlide();
+      } else {
+        // Swiped right - go to previous slide
+        prevSlide();
+      }
+    } else {
+      // Return to current slide
+      goToSlide(currentSlide);
+    }
+  }
+
+  // Mouse events for desktop testing
+  container.addEventListener('mousedown', handleTouchStart);
+  container.addEventListener('mousemove', handleTouchMove);
+  container.addEventListener('mouseup', handleTouchEnd);
+  container.addEventListener('mouseleave', handleTouchEnd);
+
+  // Touch events for mobile
+  container.addEventListener('touchstart', handleTouchStart, { passive: false });
+  container.addEventListener('touchmove', handleTouchMove, { passive: false });
+  container.addEventListener('touchend', handleTouchEnd);
+
+  // Dot and Arrow Controls
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => goToSlide(index));
   });
@@ -379,7 +439,16 @@
 
   // Auto-play (optional)
   {% if block.settings.autoplay %}
-  setInterval(nextSlide, {{ block.settings.autoplay_speed | times: 1000 }});
+  let autoplayInterval = setInterval(nextSlide, {{ block.settings.autoplay_speed | times: 1000 }});
+  
+  // Pause autoplay on interaction
+  container.addEventListener('touchstart', function() {
+    clearInterval(autoplayInterval);
+  });
+  
+  container.addEventListener('touchend', function() {
+    autoplayInterval = setInterval(nextSlide, {{ block.settings.autoplay_speed | times: 1000 }});
+  });
   {% endif %}
 })();
 </script>
