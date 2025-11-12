@@ -21871,3 +21871,262 @@ recipient-form .recipient-form-field-label {
 }
 
 /*! ============ Add any custom styles below this line ================== */
+/* ============================================
+   MOBILE MENU - BROADCAST THEME FIX
+   Fixed: Safari transparency, hamburger menu, and scrolling
+   ============================================ */
+
+/* Only apply fixes when drawer is actually open */
+.drawer--open .drawer--header {
+  z-index: 999999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  opacity: 1 !important;
+}
+
+/* Drawer overlay background */
+.drawer--open .drawer__overlay {
+  background: rgba(0, 0, 0, 0.5) !important;
+  opacity: 1 !important;
+  z-index: 999998 !important;
+}
+
+/* Only target the mobile menu drawer, not other drawers */
+.drawer--open .drawer--header .drawer__inner {
+  background: #ffffff !important;
+  width: 380px;
+  max-width: 90vw;
+  font-family: 'Baskervville', serif;
+  height: 100vh !important;
+  height: 100dvh !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  z-index: 999999 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Force white background - only when drawer is open */
+.drawer--open .drawer--header .drawer__inner,
+.drawer--open .drawer--header .drawer__head,
+.drawer--open .drawer--header .drawer__body,
+.drawer--open .drawer--header .drawer__content,
+.drawer--open .drawer--header .drawer__menu,
+.drawer--open .drawer--header .drawer__bottom {
+  background: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Lock body scroll only when drawer is open */
+body.drawer--open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+}
+
+/* Safari-specific fixes - only when drawer is open */
+@supports (-webkit-touch-callout: none) {
+  .drawer--open .drawer--header .drawer__inner {
+    height: 100vh !important;
+    height: -webkit-fill-available !important;
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+  }
+}
+
+/* Reset and Base Styles - Always apply these */
+.drawer--header .drawer__head {
+  padding: 20px;
+  border-bottom: none;
+}
+
+.drawer--header .drawer__close {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer--header .drawer__close svg {
+  width: 22px;
+  height: 22px;
+  color: #000000;
+}
+
+/* Body and Content */
+.drawer--header .drawer__body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 72px);
+}
+
+.drawer--header .drawer__content {
+  padding: 0;
+  flex: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.drawer--header .drawer__menu {
+  padding: 0 20px 20px 20px;
+}
+
+/* Remove "SHOP" label */
+.drawer--header .drawer__menu:before {
+  display: none;
+}
+
+/* ONLY show inline subcollections in mobile menu drawer, not on product pages */
+.drawer--header .mobile__menu__dropdown .sliderule__panel,
+.drawer--header .drawer__menu .sliderule__panel {
+  position: static !important;
+  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  height: auto !important;
+  background: none !important;
+  padding: 0 !important;
+}
+
+/* Hide back buttons in mobile menu only */
+.drawer--header .sliderow--back {
+  display: none !important;
+}
+
+/* Main Collection Links */
+.drawer--header .sliderow__title {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+  padding: 14px 0;
+  border-bottom: 1px solid #000000;
+  cursor: pointer;
+  text-transform: capitalize;
+  margin: 0;
+  font-family: 'Baskervville', serif;
+}
+
+/* First three items styling */
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title,
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  padding: 8px 0 !important;
+  border-bottom: none !important;
+}
+
+/* Third item gets bottom border */
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
+  border-bottom: 1px solid #000000 !important;
+}
+
+/* Hide chevrons */
+.drawer--header .sliderule__chevron--right,
+.drawer--header .sliderule__chevron--left {
+  display: none !important;
+}
+
+/* Subcollection Links - only in drawer */
+.drawer--header .sliderow__links {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  display: block !important;
+}
+
+.drawer--header .sliderow__links .sliderow__title {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666 !important;
+  padding: 12px 0 12px 24px;
+  border-bottom: none;
+  transition: all 0.2s ease;
+  text-transform: capitalize;
+  font-family: 'Baskervville', serif;
+}
+
+.drawer--header .sliderow__links .sliderow__title:hover {
+  color: #000000 !important;
+  background-color: #f5f5f5;
+}
+
+/* Bottom Section - LOGIN */
+.drawer--header .drawer__bottom {
+  padding: 20px;
+  border-top: 1px solid #d0d0d0;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  min-height: 60px;
+}
+
+/* Hide social and localization */
+.drawer--header .drawer__bottom__row {
+  display: none;
+}
+
+/* Show only login/account link */
+.drawer--header .drawer__bottom__row:has(a[href*="/account"]),
+.drawer--header .drawer__bottom__row:has(a[href*="/login"]) {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  width: 100%;
+}
+
+/* Style the LOGIN link */
+.drawer--header a[href*="/account"],
+.drawer--header a[href*="/login"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #000000;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  font-family: 'Baskervville', serif;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 375px) {
+  .drawer--header .drawer__inner {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Animation when menu opens */
+.drawer--open .drawer--header .drawer__inner {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
