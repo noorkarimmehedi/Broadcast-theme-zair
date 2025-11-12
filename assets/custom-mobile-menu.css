@@ -118,7 +118,7 @@
   align-items: center;
   transition: background-color 0.2s ease;
   padding: 14px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #d0d0d0;
   cursor: pointer;
   text-transform: capitalize;
   margin: 0;
@@ -165,7 +165,7 @@
   padding: 14px 0 !important;
   padding-bottom: 14px !important;
   margin-bottom: 0 !important;
-  border-bottom: 1px solid #f0f0f0 !important;
+  border-bottom: 1px solid #d0d0d0 !important;
 }
 
 /* REST OF THE COLLECTIONS - Normal Weight (starting from 4th item) */
@@ -201,7 +201,7 @@
 .drawer--header .sliderule__wrapper:has(.sliderow__links) > .sliderow > .sliderow__title {
   margin-bottom: 0;
   padding-bottom: 14px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #d0d0d0;
 }
 
 /* Make subcollections always visible */
@@ -253,7 +253,7 @@
 
 /* Add bottom border to parent items that have subcollections - AFTER the subcollections */
 .drawer--header .sliderule__wrapper:has(.sliderow__links) {
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #d0d0d0;
   margin-bottom: 0;
 }
 
@@ -266,7 +266,7 @@
 .drawer--header .drawer__bottom {
   padding: 20px;
   background: #ffffff;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid #d0d0d0;
   margin-top: auto;
   display: flex;
   align-items: center;
