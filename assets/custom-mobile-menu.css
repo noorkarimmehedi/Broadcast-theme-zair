@@ -253,7 +253,7 @@
 
 /* Add bottom border to parent items that have subcollections - AFTER the subcollections */
 .drawer--header .sliderule__wrapper:has(.sliderow__links) {
-  border-bottom: 1px solid #d0d0d0;
+  border-bottom: 1px solid #000000;
   margin-bottom: 0;
 }
 
