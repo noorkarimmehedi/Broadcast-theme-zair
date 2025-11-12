@@ -21,6 +21,7 @@
     display: flex;
     transition: transform 0.5s ease-in-out;
     height: 100%;
+    will-change: transform;
   }
 
   .ai-hero-slide-{{ ai_gen_id }} {
@@ -353,10 +354,21 @@
   let isDragging = false;
   let startTransform = 0;
   let isHorizontalSwipe = false;
+  let rafId = null;
 
-  function goToSlide(index) {
+  function goToSlide(index, immediate = false) {
     currentSlide = index;
-    container.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    
+    if (immediate) {
+      container.style.transition = 'none';
+      container.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+      // Force reflow
+      container.offsetHeight;
+      container.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    } else {
+      container.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      container.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    }
     
     dots.forEach((dot, i) => {
       if (i === currentSlide) {
@@ -377,10 +389,33 @@
     goToSlide(currentSlide);
   }
 
+  function updateSlidePosition() {
+    if (isDragging && isHorizontalSwipe) {
+      const diff = startX - currentX;
+      const containerWidth = container.offsetWidth;
+      const percentageMoved = (diff / containerWidth) * 100;
+      const newTransform = startTransform + percentageMoved;
+      
+      // Limit drag range to prevent overscroll
+      const minTransform = 0;
+      const maxTransform = (totalSlides - 1) * 100;
+      const clampedTransform = Math.max(minTransform, Math.min(maxTransform, newTransform));
+      
+      container.style.transform = 'translateX(-' + clampedTransform + '%)';
+      rafId = requestAnimationFrame(updateSlidePosition);
+    }
+  }
+
   // Touch/Swipe Events
   function handleTouchStart(e) {
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+    }
+    
     startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
     startY = e.type.includes('mouse') ? e.pageY : e.touches[0].clientY;
+    currentX = startX;
+    currentY = startY;
     startTransform = currentSlide * 100;
     isDragging = true;
     isHorizontalSwipe = false;
@@ -396,20 +431,17 @@
     const diffY = Math.abs(startY - currentY);
     
     // Determine if it's a horizontal or vertical swipe
-    if (!isHorizontalSwipe && diffX > 10 && diffX > diffY) {
-      isHorizontalSwipe = true;
-      container.style.transition = 'none';
+    if (!isHorizontalSwipe && diffX > 5) {
+      if (diffX > diffY * 1.5) {
+        isHorizontalSwipe = true;
+        container.style.transition = 'none';
+        rafId = requestAnimationFrame(updateSlidePosition);
+      }
     }
     
-    // Only prevent scrolling and handle swipe if it's horizontal
+    // Only prevent scrolling if it's horizontal
     if (isHorizontalSwipe) {
       e.preventDefault();
-      const diff = startX - currentX;
-      const containerWidth = container.offsetWidth;
-      const percentageMoved = (diff / containerWidth) * 100;
-      
-      const newTransform = startTransform + percentageMoved;
-      container.style.transform = 'translateX(-' + newTransform + '%)';
     }
   }
 
@@ -417,14 +449,23 @@
     if (!isDragging) return;
     
     isDragging = false;
-    container.style.transition = 'transform 0.5s ease-in-out';
+    
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
     
     // Only change slide if it was a horizontal swipe
     if (isHorizontalSwipe) {
       const diff = startX - currentX;
-      const threshold = 50; // minimum swipe distance
+      const containerWidth = container.offsetWidth;
+      const swipePercentage = (diff / containerWidth) * 100;
+      const velocity = Math.abs(diff);
       
-      if (Math.abs(diff) > threshold) {
+      // More sensitive swipe detection
+      const threshold = velocity > 100 ? 15 : 30; // Lower threshold for fast swipes
+      
+      if (Math.abs(swipePercentage) > threshold) {
         if (diff > 0) {
           // Swiped left - go to next slide
           nextSlide();
@@ -433,12 +474,13 @@
           prevSlide();
         }
       } else {
-        // Return to current slide
+        // Return to current slide with smooth transition
         goToSlide(currentSlide);
       }
     } else {
       // Return to current slide if not horizontal swipe
-      goToSlide(currentSlide);
+      container.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      goToSlide(currentSlide, true);
     }
     
     isHorizontalSwipe = false;
@@ -448,6 +490,7 @@
   container.addEventListener('touchstart', handleTouchStart, { passive: true });
   container.addEventListener('touchmove', handleTouchMove, { passive: false });
   container.addEventListener('touchend', handleTouchEnd);
+  container.addEventListener('touchcancel', handleTouchEnd);
 
   // Dot and Arrow Controls
   dots.forEach((dot, index) => {
