@@ -152,20 +152,20 @@
 
 /* Extra tight spacing for first item (Home) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title {
-  padding: 14px 0 !important;
+  padding: 8px 0 !important;
   margin-bottom: 0 !important;
 }
 
 /* Tight spacing for second item (New Arrivals) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
-  padding: 14px 0 !important;
+  padding: 8px 0 !important;
   margin-bottom: 0 !important;
 }
 
 /* Tight spacing for third item (Best Sellers) - with bottom border after */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
-  padding: 14px 0 !important;
-  padding-bottom: 14px !important;
+  padding: 8px 0 !important;
+  padding-bottom: 8px !important;
   margin-bottom: 0 !important;
   border-bottom: 1px solid #000000 !important;
 }
