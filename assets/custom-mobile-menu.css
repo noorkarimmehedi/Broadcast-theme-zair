@@ -268,6 +268,9 @@
   background: #ffffff;
   border-top: 1px solid #f0f0f0;
   margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 /* Hide social and localization in bottom */
@@ -278,23 +281,25 @@
 /* Show only login/account link */
 .drawer--header .drawer__bottom__row:has(a[href*="/account"]),
 .drawer--header .drawer__bottom__row:has(a[href*="/login"]) {
-  display: block;
+  display: flex;
+  align-items: center;
   margin: 0;
+  width: 100%;
 }
 
-/* Style the LOGIN link */
+/* Style the LOGIN link - positioned at bottom left */
 .drawer--header a[href*="/account"],
 .drawer--header a[href*="/login"] {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: #000000;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: 15px;
+  font-weight: 500;
   transition: color 0.2s ease;
-  text-transform: uppercase;
+  text-transform: none;
+  padding: 0;
 }
 
 .drawer--header a[href*="/account"]:hover,
@@ -302,18 +307,18 @@
   color: #666666;
 }
 
-/* Make sure icon and text are together */
+/* Make sure icon and text are together on the left */
 .drawer--header a[href*="/account"] .navlink,
 .drawer--header a[href*="/login"] .navlink {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .drawer--header a[href*="/account"] svg,
 .drawer--header a[href*="/login"] svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
 }
 
@@ -321,8 +326,8 @@
 .drawer--header a[href*="/account"]::before,
 .drawer--header a[href*="/login"]::before {
   content: '';
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3Ccircle cx='12' cy='7' r='4'%3E%3C/circle%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
