@@ -1,6 +1,6 @@
 {% doc %}
   @prompt
-    generate me a hero section where the texts and bottom texts should be in the bottom and should be customizable. both should be in the bottom in the bottm and should be bottom left on desktop version , should be option for two buttons , button should be in two row one below another one, on mobile version i want button size increase on both left and right side.i need option for desktop image upload, there should be option for button size increase on left and right side on mobile version. also in desktop buttons should be side by side, there is a gap on left and right side of buttons on mobile versio. reduce that gap, i need a little bit gap on left and right side of buttons on mobile version. just a little bit gap, increase the gap just a little bit more just a little bit
+    generate me a hero section where the texts and bottom texts should be in the bottom and should be customizable. both should be in the bottom in the bottm and should be bottom left on desktop version , should be option for two buttons , button should be in two row one below another one, on mobile version i want button size increase on both left and right side.i need option for desktop image upload, there should be option for button size increase on left and right side on mobile version. also in desktop buttons should be side by side, there is a gap on left and right side of buttons on mobile versio. reduce that gap, i need a little bit gap on left and right side of buttons on mobile version. just a little bit gap, increase the gap just a little bit more just a little bit. Three showcase style options.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
@@ -66,14 +66,39 @@
     gap: {{ block.settings.content_spacing }}px;
   }
 
-    .ai-hero-text-wrapper-{{ ai_gen_id }} {
+  /* Showcase Style 1 - Bottom Left */
+  .ai-hero-content-{{ ai_gen_id }}.style1 {
+    align-items: flex-start;
+  }
+
+  .ai-hero-content-{{ ai_gen_id }}.style1 .ai-hero-text-wrapper-{{ ai_gen_id }} {
+    text-align: left;
+  }
+
+  /* Showcase Style 2 - Bottom Center */
+  .ai-hero-content-{{ ai_gen_id }}.style2 {
+    align-items: center;
+  }
+
+  .ai-hero-content-{{ ai_gen_id }}.style2 .ai-hero-text-wrapper-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  /* Showcase Style 3 - Bottom Right */
+  .ai-hero-content-{{ ai_gen_id }}.style3 {
+    align-items: flex-end;
+  }
+
+  .ai-hero-content-{{ ai_gen_id }}.style3 .ai-hero-text-wrapper-{{ ai_gen_id }} {
+    text-align: right;
+  }
+
+  .ai-hero-text-wrapper-{{ ai_gen_id }} {
     display: flex;
     flex-direction: column;
     gap: {{ block.settings.text_spacing }}px;
     padding: 0;
-    text-align: center;
   }
-
 
   .ai-hero-heading-{{ ai_gen_id }} {
     margin: 0;
@@ -234,7 +259,7 @@
 
   <div class="ai-hero-overlay-{{ ai_gen_id }}"></div>
 
-  <div class="ai-hero-content-{{ ai_gen_id }}">
+  <div class="ai-hero-content-{{ ai_gen_id }} {{ block.settings.showcase_style }}">
     <div class="ai-hero-text-wrapper-{{ ai_gen_id }}">
       {% if block.settings.heading != blank %}
         <h2 class="ai-hero-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
@@ -328,6 +353,26 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "showcase_style",
+      "label": "Showcase style (Mobile)",
+      "options": [
+        {
+          "value": "style1",
+          "label": "Style 1 - Bottom Left"
+        },
+        {
+          "value": "style2",
+          "label": "Style 2 - Bottom Center"
+        },
+        {
+          "value": "style3",
+          "label": "Style 3 - Bottom Right"
+        }
+      ],
+      "default": "style1"
     },
     {
       "type": "select",
