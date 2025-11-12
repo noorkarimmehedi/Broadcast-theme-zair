@@ -62,14 +62,14 @@
     display: flex;
     flex-direction: column;
     gap: {{ block.settings.content_spacing }}px;
-    align-items: {{ block.settings.content_alignment }};
+    align-items: {{ block.settings.content_alignment_mobile }};
   }
 
   .ai-hero-text-wrapper-{{ ai_gen_id }} {
     display: flex;
     flex-direction: column;
     gap: {{ block.settings.text_spacing }}px;
-    text-align: {{ block.settings.text_alignment }};
+    text-align: {{ block.settings.text_alignment_mobile }};
     width: 100%;
   }
 
@@ -203,9 +203,13 @@
       display: block;
     }
 
+    .ai-hero-text-wrapper-{{ ai_gen_id }} {
+      text-align: {{ block.settings.text_alignment_desktop }};
+    }
+
     .ai-hero-content-{{ ai_gen_id }} {
       padding: {{ block.settings.content_padding_desktop }}px;
-      align-items: {{ block.settings.content_alignment }};
+      align-items: {{ block.settings.content_alignment_desktop }};
     }
 
     .ai-hero-heading-{{ ai_gen_id }} {
@@ -494,8 +498,8 @@
     },
     {
       "type": "select",
-      "id": "text_alignment",
-      "label": "Text alignment",
+      "id": "text_alignment_mobile",
+      "label": "Text alignment (Mobile)",
       "options": [
         {
           "value": "left",
@@ -514,8 +518,48 @@
     },
     {
       "type": "select",
-      "id": "content_alignment",
-      "label": "Content alignment",
+      "id": "text_alignment_desktop",
+      "label": "Text alignment (Desktop)",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment_mobile",
+      "label": "Content alignment (Mobile)",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment_desktop",
+      "label": "Content alignment (Desktop)",
       "options": [
         {
           "value": "flex-start",
