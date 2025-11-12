@@ -62,14 +62,15 @@
     display: flex;
     flex-direction: column;
     gap: {{ block.settings.content_spacing }}px;
-    align-items: flex-start;
+    align-items: {{ block.settings.content_alignment }};
   }
 
   .ai-hero-text-wrapper-{{ ai_gen_id }} {
     display: flex;
     flex-direction: column;
     gap: {{ block.settings.text_spacing }}px;
-    text-align: left;
+    text-align: {{ block.settings.text_alignment }};
+    width: 100%;
   }
 
   .ai-hero-heading-{{ ai_gen_id }} {
@@ -137,7 +138,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 30px 40px;
-    background-color: #F5F5F5;
+    background-color: #FFFFFF;
     border-top: 1px solid #E5E5E5;
   }
 
@@ -204,7 +205,7 @@
 
     .ai-hero-content-{{ ai_gen_id }} {
       padding: {{ block.settings.content_padding_desktop }}px;
-      align-items: flex-start;
+      align-items: {{ block.settings.content_alignment }};
     }
 
     .ai-hero-heading-{{ ai_gen_id }} {
@@ -226,11 +227,12 @@
     }
 
     .ai-hero-controls-{{ ai_gen_id }} {
-      gap: 20px;
+      gap: 0;
+      padding: 30px 60px;
     }
 
     .ai-hero-arrow-{{ ai_gen_id }} {
-      display: none;
+      display: flex;
     }
   }
 {% endstyle %}
@@ -489,6 +491,46 @@
     {
       "type": "header",
       "content": "Text Style"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "flex-start"
     },
     {
       "type": "color",
