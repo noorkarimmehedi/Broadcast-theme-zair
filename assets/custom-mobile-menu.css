@@ -8,6 +8,7 @@
   background: #ffffff;
   width: 380px;
   max-width: 90vw;
+  font-family: 'Baskervville', serif;
 }
 
 .drawer--header .drawer__head {
@@ -122,6 +123,7 @@
   cursor: pointer;
   text-transform: capitalize;
   margin: 0;
+  font-family: 'Baskervville', serif;
 }
 
 /* ===== FIRST THREE ITEMS: HOME, NEW ARRIVALS, BEST SELLERS ===== */
@@ -145,7 +147,7 @@
   line-height: 1.4 !important;
   height: auto !important;
   min-height: 0 !important;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: 'Baskervville', serif !important;
 }
 
 /* Extra tight spacing for first item (Home) */
@@ -235,6 +237,7 @@
   opacity: 1 !important;
   visibility: visible !important;
   text-transform: capitalize;
+  font-family: 'Baskervville', serif;
 }
 
 .drawer--header .sliderow__links .sliderow:last-child .sliderow__title {
@@ -300,6 +303,7 @@
   transition: color 0.2s ease;
   text-transform: none;
   padding: 0;
+  font-family: 'Baskervville', serif;
 }
 
 .drawer--header a[href*="/account"]:hover,
