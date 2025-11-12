@@ -8,7 +8,6 @@
   background: #ffffff;
   width: 380px;
   max-width: 90vw;
-  font-family: 'Baskervville', serif;
 }
 
 .drawer--header .drawer__head {
@@ -123,7 +122,6 @@
   cursor: pointer;
   text-transform: capitalize;
   margin: 0;
-  font-family: 'Baskervville', serif;
 }
 
 /* ===== FIRST THREE ITEMS: HOME, NEW ARRIVALS, BEST SELLERS ===== */
@@ -141,31 +139,31 @@
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
   font-size: 18px !important;
   font-weight: 700 !important;
-  padding: 8px 0 !important;
+  padding: 14px 0 !important;
   margin: 0 !important;
   border-bottom: none !important;
   line-height: 1.4 !important;
   height: auto !important;
   min-height: 0 !important;
-  font-family: 'Baskervville', serif !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
 /* Extra tight spacing for first item (Home) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title {
-  padding: 8px 0 !important;
+  padding: 14px 0 !important;
   margin-bottom: 0 !important;
 }
 
 /* Tight spacing for second item (New Arrivals) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
-  padding: 8px 0 !important;
+  padding: 14px 0 !important;
   margin-bottom: 0 !important;
 }
 
 /* Tight spacing for third item (Best Sellers) - with bottom border after */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
-  padding: 8px 0 !important;
-  padding-bottom: 8px !important;
+  padding: 14px 0 !important;
+  padding-bottom: 14px !important;
   margin-bottom: 0 !important;
   border-bottom: 1px solid #000000 !important;
 }
@@ -237,7 +235,6 @@
   opacity: 1 !important;
   visibility: visible !important;
   text-transform: capitalize;
-  font-family: 'Baskervville', serif;
 }
 
 .drawer--header .sliderow__links .sliderow:last-child .sliderow__title {
@@ -303,7 +300,6 @@
   transition: color 0.2s ease;
   text-transform: none;
   padding: 0;
-  font-family: 'Baskervville', serif;
 }
 
 .drawer--header a[href*="/account"]:hover,
