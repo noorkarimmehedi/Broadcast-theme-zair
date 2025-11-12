@@ -21871,3 +21871,223 @@ recipient-form .recipient-form-field-label {
 }
 
 /*! ============ Add any custom styles below this line ================== */
+/* ============================================
+   SAFARI FIX - Full opacity and proper positioning
+   Fixes announcement bar overlap and transparency issues
+   ============================================ */
+
+/* Fix z-index stacking and ensure drawer is on top */
+.drawer--header {
+  z-index: 999999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  opacity: 1 !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+  transform: translateZ(0) !important;
+}
+
+/* Drawer inner - force full opacity and proper positioning */
+.drawer--header .drawer__inner {
+  background: #ffffff !important;
+  width: 380px;
+  max-width: 90vw;
+  font-family: 'Baskervville', serif;
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  z-index: 999999 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+  transform: translateZ(0) !important;
+  will-change: transform !important;
+}
+
+/* Hide announcement bar when drawer is open */
+body.drawer--open .shopify-section--announcement-bar,
+body.drawer--open .announcement-bar,
+body.drawer--open [data-section-type="announcement-bar"],
+body.drawer--open .section--announcement {
+  display: none !important;
+}
+
+/* Alternative: Push announcement bar behind drawer */
+body.drawer--open .shopify-section--announcement-bar,
+body.drawer--open .announcement-bar {
+  z-index: 1 !important;
+  position: relative !important;
+}
+
+/* Force white background on all drawer components - no transparency */
+.drawer--header .drawer__inner,
+.drawer--header .drawer__inner *,
+.drawer--header .drawer__head,
+.drawer--header .drawer__body,
+.drawer--header .drawer__content,
+.drawer--header .drawer__menu,
+.drawer--header .drawer__bottom,
+.drawer--header .sliderule__wrapper,
+.drawer--header .sliderow,
+.drawer--header .sliderow__links {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  opacity: 1 !important;
+  -webkit-opacity: 1 !important;
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari */
+  .drawer--header .drawer__inner {
+    height: 100vh !important;
+    height: -webkit-fill-available !important;
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important;
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+  
+  /* Prevent rubber band scrolling affecting drawer */
+  .drawer--header .drawer__body {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+  }
+  
+  /* Lock body scroll when drawer is open */
+  body.drawer--open {
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+}
+
+/* Ensure drawer head stays opaque */
+.drawer--header .drawer__head {
+  padding: 20px;
+  border-bottom: none;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+  -webkit-opacity: 1 !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Force GPU acceleration for smooth rendering */
+.drawer--header,
+.drawer--header .drawer__inner {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+/* Additional Safari mobile fixes */
+@media screen and (max-width: 768px) {
+  @supports (-webkit-touch-callout: none) {
+    .drawer--header .drawer__inner {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: auto !important;
+      bottom: 0 !important;
+      height: 100% !important;
+      max-height: 100% !important;
+      -webkit-transform: translateX(0) !important;
+      transform: translateX(0) !important;
+    }
+    
+    /* Ensure content doesn't bleed through */
+    .drawer--header .drawer__inner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #ffffff;
+      z-index: -1;
+      opacity: 1;
+    }
+  }
+}
+
+/* Override any theme transparency settings */
+.drawer--header[style*="opacity"] {
+  opacity: 1 !important;
+}
+
+.drawer--header .drawer__inner[style*="opacity"] {
+  opacity: 1 !important;
+}
+
+/* Ensure drawer body maintains full height */
+.drawer--header .drawer__body {
+  background: #ffffff !important;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 72px);
+  min-height: calc(100vh - 72px) !important;
+  min-height: calc(100dvh - 72px) !important;
+  opacity: 1 !important;
+  -webkit-opacity: 1 !important;
+}
+
+/* Extra insurance for Safari - solid backgrounds */
+.drawer--header .drawer__menu,
+.drawer--header .drawer__content {
+  background: rgb(255, 255, 255) !important;
+  background-color: rgb(255, 255, 255) !important;
+  opacity: 1 !important;
+  -webkit-opacity: 1 !important;
+}
+
+/* Prevent any bleed-through from page content */
+body.drawer--open::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999998;
+}
+
+/* [REST OF YOUR EXISTING CSS CONTINUES BELOW...] */
+
+/* Reset and Base Styles */
+.drawer--header .drawer__close {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ... rest of your existing CSS ... */
