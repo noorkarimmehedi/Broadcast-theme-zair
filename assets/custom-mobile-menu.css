@@ -15,6 +15,10 @@
   min-height: 100vh !important;
   min-height: 100dvh !important;
   opacity: 1 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 9999 !important;
 }
 
 .drawer--header .drawer__head {
@@ -421,10 +425,25 @@
 }
 
 /* Fix Safari Mobile - Remove backdrop opacity/transparency */
-.drawer--header,
+.drawer--header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 9998 !important;
+  opacity: 1 !important;
+}
+
 .drawer--header .drawer__overlay {
   background: rgba(0, 0, 0, 0.5) !important;
   opacity: 1 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 9998 !important;
 }
 
 /* Force solid white background on drawer - no transparency */
@@ -435,6 +454,13 @@
 .drawer--header .drawer__menu,
 .drawer--header .drawer__bottom {
   background: #ffffff !important;
+  opacity: 1 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Prevent any parent elements from affecting opacity */
+.drawer--header .drawer__inner * {
   opacity: 1 !important;
 }
 
