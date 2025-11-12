@@ -1,30 +1,36 @@
 /* ============================================
    MOBILE MENU - INLINE SUBCOLLECTIONS
-   Clean layout with subcollections below parent
-   FIXED: Safari mobile transparency and height issues
+   For Broadcast Theme - Only affects mobile drawer
+   FIXED: Safari mobile transparency and drawer functionality
    ============================================ */
 
-/* Reset and Base Styles */
-.drawer--header .drawer__inner {
+/* Only apply styles when drawer is OPEN (has is-open class) */
+.drawer--header.is-open .drawer__inner {
   background: #ffffff !important;
   width: 380px;
   max-width: 90vw;
   font-family: 'Baskervville', serif;
   height: 100vh !important;
-  height: 100dvh !important; /* Dynamic viewport height for mobile Safari */
+  height: 100dvh !important;
   min-height: 100vh !important;
   min-height: 100dvh !important;
   opacity: 1 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 9999 !important;
+  transform: translateX(0) !important;
+  transition: none !important;
 }
 
-.drawer--header .drawer__head {
+.drawer--header.is-open .drawer__head {
   padding: 20px;
   border-bottom: none;
   background: #ffffff !important;
   opacity: 1 !important;
 }
 
-.drawer--header .drawer__close {
+.drawer--header.is-open .drawer__close {
   background: none;
   border: none;
   padding: 0;
@@ -35,14 +41,14 @@
   justify-content: center;
 }
 
-.drawer--header .drawer__close svg {
+.drawer--header.is-open .drawer__close svg {
   width: 22px;
   height: 22px;
   color: #000000;
 }
 
 /* Body and Content */
-.drawer--header .drawer__body {
+.drawer--header.is-open .drawer__body {
   background: #ffffff !important;
   padding: 0;
   display: flex;
@@ -53,7 +59,7 @@
   opacity: 1 !important;
 }
 
-.drawer--header .drawer__content {
+.drawer--header.is-open .drawer__content {
   padding: 0;
   flex: 1;
   overflow-y: auto;
@@ -61,26 +67,26 @@
   opacity: 1 !important;
 }
 
-.drawer--header .drawer__menu {
+.drawer--header.is-open .drawer__menu {
   padding: 0 20px 20px 20px;
   background: #ffffff !important;
   opacity: 1 !important;
 }
 
 /* Remove "SHOP" label */
-.drawer--header .drawer__menu:before {
+.drawer--header.is-open .drawer__menu:before {
   display: none;
 }
 
 /* Main Navigation Wrapper */
-.drawer--header .sliderule__wrapper {
+.drawer--header.is-open .sliderule__wrapper {
   margin-bottom: 0;
   border-bottom: none;
 }
 
 /* DISABLE SLIDING PANELS - Show everything inline */
-.drawer--header .mobile__menu__dropdown,
-.drawer--header .sliderule__panel {
+.drawer--header.is-open .mobile__menu__dropdown,
+.drawer--header.is-open .sliderule__panel {
   position: static !important;
   transform: none !important;
   opacity: 1 !important;
@@ -99,17 +105,17 @@
 }
 
 /* Hide secondary menu wrapper (not needed) */
-.drawer--header .sliderule__wrapper--secondary {
+.drawer--header.is-open .sliderule__wrapper--secondary {
   display: none;
 }
 
 /* Hide back buttons (not needed for inline display) */
-.drawer--header .sliderow--back {
+.drawer--header.is-open .sliderow--back {
   display: none !important;
 }
 
 /* ALL NAVIGATION ITEMS - Reset */
-.drawer--header .sliderow {
+.drawer--header.is-open .sliderow {
   padding: 0;
   background: none;
   border: none;
@@ -118,12 +124,12 @@
 }
 
 /* Main level items without children */
-.drawer--header .drawer__menu > .sliderule__wrapper > .sliderow {
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper > .sliderow {
   cursor: default;
 }
 
 /* Main Collection Links - DEFAULT for all items */
-.drawer--header .sliderow__title {
+.drawer--header.is-open .sliderow__title {
   color: #000000;
   font-size: 16px;
   font-weight: 400;
@@ -141,18 +147,17 @@
 }
 
 /* ===== FIRST THREE ITEMS: HOME, NEW ARRIVALS, BEST SELLERS ===== */
-/* Make them BOLD, SAME SIZE, and TIGHT SPACING */
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1),
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2),
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) {
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(1),
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(2),
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(3) {
   margin: 0 !important;
   padding: 0 !important;
   border: none !important;
 }
 
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title,
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title,
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
   font-size: 18px !important;
   font-weight: 700 !important;
   padding: 8px 0 !important;
@@ -165,19 +170,19 @@
 }
 
 /* Extra tight spacing for first item (Home) */
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title {
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title {
   padding: 8px 0 !important;
   margin-bottom: 0 !important;
 }
 
 /* Tight spacing for second item (New Arrivals) */
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title {
   padding: 8px 0 !important;
   margin-bottom: 0 !important;
 }
 
 /* Tight spacing for third item (Best Sellers) - with bottom border after */
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
   padding: 8px 0 !important;
   padding-bottom: 8px !important;
   margin-bottom: 0 !important;
@@ -185,25 +190,25 @@
 }
 
 /* REST OF THE COLLECTIONS - Normal Weight (starting from 4th item) */
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(n+4) > .sliderow > .sliderow__title {
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(n+4) > .sliderow > .sliderow__title {
   font-size: 16px !important;
   font-weight: 400 !important;
   padding: 14px 0 !important;
 }
 
 /* Hover Effect on Main Items - Consistent for ALL items */
-.drawer--header .sliderow__title:hover {
+.drawer--header.is-open .sliderow__title:hover {
   background-color: #f5f5f5;
 }
 
 /* HIDE ALL CHEVRONS - We don't need them */
-.drawer--header .sliderule__chevron--right,
-.drawer--header .sliderule__chevron--left {
+.drawer--header.is-open .sliderule__chevron--right,
+.drawer--header.is-open .sliderule__chevron--left {
   display: none !important;
 }
 
 /* Subcollection Container */
-.drawer--header .sliderow__links {
+.drawer--header.is-open .sliderow__links {
   padding: 0;
   margin: 0;
   background: transparent;
@@ -214,14 +219,14 @@
 }
 
 /* Add spacing between parent and subcollections */
-.drawer--header .sliderule__wrapper:has(.sliderow__links) > .sliderow > .sliderow__title {
+.drawer--header.is-open .sliderule__wrapper:has(.sliderow__links) > .sliderow > .sliderow__title {
   margin-bottom: 0;
   padding-bottom: 14px;
   border-bottom: 1px solid #000000;
 }
 
 /* Make subcollections always visible */
-.drawer--header .sliderow__links .sliderule__wrapper {
+.drawer--header.is-open .sliderow__links .sliderule__wrapper {
   border-bottom: none;
   margin: 0;
   display: block !important;
@@ -232,7 +237,7 @@
 }
 
 /* Subcollection Links */
-.drawer--header .sliderow__links .sliderow {
+.drawer--header.is-open .sliderow__links .sliderow {
   padding: 0;
   background: none;
   display: block !important;
@@ -240,7 +245,7 @@
   visibility: visible !important;
 }
 
-.drawer--header .sliderow__links .sliderow__title {
+.drawer--header.is-open .sliderow__links .sliderow__title {
   font-size: 14px;
   font-weight: 400;
   color: #666666 !important;
@@ -254,33 +259,33 @@
   font-family: 'Baskervville', serif;
 }
 
-.drawer--header .sliderow__links .sliderow:last-child .sliderow__title {
+.drawer--header.is-open .sliderow__links .sliderow:last-child .sliderow__title {
   padding-bottom: 16px;
 }
 
-.drawer--header .sliderow__links .sliderow__title:hover {
+.drawer--header.is-open .sliderow__links .sliderow__title:hover {
   color: #000000 !important;
   background-color: #f5f5f5;
 }
 
 /* Collections without subcollections - keep normal spacing */
-.drawer--header .sliderule__wrapper:not(:has(.sliderow__links)) {
+.drawer--header.is-open .sliderule__wrapper:not(:has(.sliderow__links)) {
   margin-bottom: 0;
 }
 
 /* Add bottom border to parent items that have subcollections - AFTER the subcollections */
-.drawer--header .sliderule__wrapper:has(.sliderow__links) {
+.drawer--header.is-open .sliderule__wrapper:has(.sliderow__links) {
   border-bottom: 1px solid #000000;
   margin-bottom: 0;
 }
 
 /* Remove border from parent title when it has subcollections */
-.drawer--header .sliderule__wrapper:has(.sliderow__links) > .sliderow > .sliderow__title {
+.drawer--header.is-open .sliderule__wrapper:has(.sliderow__links) > .sliderow > .sliderow__title {
   border-bottom: none;
 }
 
 /* Bottom Section - LOGIN */
-.drawer--header .drawer__bottom {
+.drawer--header.is-open .drawer__bottom {
   padding: 20px;
   background: #ffffff !important;
   border-top: 1px solid #d0d0d0;
@@ -294,13 +299,13 @@
 }
 
 /* Hide social and localization in bottom */
-.drawer--header .drawer__bottom__row {
+.drawer--header.is-open .drawer__bottom__row {
   display: none;
 }
 
 /* Show only login/account link */
-.drawer--header .drawer__bottom__row:has(a[href*="/account"]),
-.drawer--header .drawer__bottom__row:has(a[href*="/login"]) {
+.drawer--header.is-open .drawer__bottom__row:has(a[href*="/account"]),
+.drawer--header.is-open .drawer__bottom__row:has(a[href*="/login"]) {
   display: flex;
   align-items: center;
   margin: 0;
@@ -308,8 +313,8 @@
 }
 
 /* Style the LOGIN link - positioned at bottom left */
-.drawer--header a[href*="/account"],
-.drawer--header a[href*="/login"] {
+.drawer--header.is-open a[href*="/account"],
+.drawer--header.is-open a[href*="/login"] {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -323,29 +328,29 @@
   font-family: 'Baskervville', serif;
 }
 
-.drawer--header a[href*="/account"]:hover,
-.drawer--header a[href*="/login"]:hover {
+.drawer--header.is-open a[href*="/account"]:hover,
+.drawer--header.is-open a[href*="/login"]:hover {
   color: #666666;
 }
 
 /* Make sure icon and text are together on the left */
-.drawer--header a[href*="/account"] .navlink,
-.drawer--header a[href*="/login"] .navlink {
+.drawer--header.is-open a[href*="/account"] .navlink,
+.drawer--header.is-open a[href*="/login"] .navlink {
   display: inline-flex;
   align-items: center;
   gap: 10px;
 }
 
-.drawer--header a[href*="/account"] svg,
-.drawer--header a[href*="/login"] svg {
+.drawer--header.is-open a[href*="/account"] svg,
+.drawer--header.is-open a[href*="/login"] svg {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
 }
 
 /* If there's no icon, add one with CSS */
-.drawer--header a[href*="/account"]::before,
-.drawer--header a[href*="/login"]::before {
+.drawer--header.is-open a[href*="/account"]::before,
+.drawer--header.is-open a[href*="/login"]::before {
   content: '';
   width: 20px;
   height: 20px;
@@ -358,33 +363,33 @@
 }
 
 /* Only show CSS icon if no SVG exists */
-.drawer--header a[href*="/account"]:not(:has(svg))::before,
-.drawer--header a[href*="/login"]:not(:has(svg))::before {
+.drawer--header.is-open a[href*="/account"]:not(:has(svg))::before,
+.drawer--header.is-open a[href*="/login"]:not(:has(svg))::before {
   display: block;
 }
 
 /* Remove focus outlines */
-.drawer--header .sliderow:focus,
-.drawer--header .sliderow__title:focus {
+.drawer--header.is-open .sliderow:focus,
+.drawer--header.is-open .sliderow__title:focus {
   outline: none;
 }
 
-.drawer--header .drawer__menu > .sliderule__wrapper:last-child > .sliderow > .sliderow__title {
+.drawer--header.is-open .drawer__menu > .sliderule__wrapper:last-child > .sliderow > .sliderow__title {
   border-bottom: none;
 }
 
 /* Optional: Highlight specific items (like Sale) */
-.drawer--header .sliderow__title--highlight {
+.drawer--header.is-open .sliderow__title--highlight {
   color: #FF0000 !important;
 }
 
 /* Remove the SALE badge */
-.drawer--header .sliderow__title--highlight:after {
+.drawer--header.is-open .sliderow__title--highlight:after {
   display: none;
 }
 
 /* Hide visually-hidden elements properly */
-.drawer--header .visually-hidden {
+.drawer--header.is-open .visually-hidden {
   position: absolute;
   left: -10000px;
   width: 1px;
@@ -394,86 +399,102 @@
 
 /* Mobile Adjustments */
 @media (max-width: 375px) {
-  .drawer--header .drawer__inner {
+  .drawer--header.is-open .drawer__inner {
     width: 100%;
     max-width: 100%;
   }
   
-  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
-  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title,
-  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
+  .drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
+  .drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title,
+  .drawer--header.is-open .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
     font-size: 16px !important;
   }
   
-  .drawer--header .sliderow__title {
+  .drawer--header.is-open .sliderow__title {
     font-size: 15px;
   }
   
-  .drawer--header .sliderow__links .sliderow__title {
+  .drawer--header.is-open .sliderow__links .sliderow__title {
     font-size: 13px;
     padding: 9px 14px;
   }
 }
 
 /* Smooth scrolling */
-.drawer--header .drawer__content {
+.drawer--header.is-open .drawer__content {
   scroll-behavior: smooth;
 }
 
 /* Fix Safari Mobile - Remove backdrop opacity/transparency */
-.drawer--header,
-.drawer--header .drawer__overlay {
+.drawer--header.is-open {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 9998 !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.drawer--header.is-open .drawer__overlay {
   background: rgba(0, 0, 0, 0.5) !important;
   opacity: 1 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 9998 !important;
+  transform: none !important;
 }
 
 /* Force solid white background on drawer - no transparency */
-.drawer--header .drawer__inner,
-.drawer--header .drawer__head,
-.drawer--header .drawer__body,
-.drawer--header .drawer__content,
-.drawer--header .drawer__menu,
-.drawer--header .drawer__bottom {
+.drawer--header.is-open .drawer__inner,
+.drawer--header.is-open .drawer__head,
+.drawer--header.is-open .drawer__body,
+.drawer--header.is-open .drawer__content,
+.drawer--header.is-open .drawer__menu,
+.drawer--header.is-open .drawer__bottom {
   background: #ffffff !important;
+  opacity: 1 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Prevent any parent elements from affecting opacity */
+.drawer--header.is-open .drawer__inner * {
   opacity: 1 !important;
 }
 
 /* Ensure full height on Safari iOS */
 @supports (-webkit-touch-callout: none) {
-  .drawer--header .drawer__inner {
+  .drawer--header.is-open .drawer__inner {
     height: 100vh !important;
     min-height: -webkit-fill-available !important;
   }
   
-  .drawer--header .drawer__body {
+  .drawer--header.is-open .drawer__body {
     min-height: calc(100vh - 72px) !important;
     min-height: -webkit-fill-available !important;
   }
 }
 
-/* Add subtle animation when menu opens */
-.drawer--header .drawer__inner {
-  animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+/* Override any default transforms that might hide the drawer */
+.drawer--header.is-open .drawer__inner {
+  transform: translateX(0) !important;
+  transition: transform 0.3s ease-out !important;
 }
 
 /* Ensure subcollections are always visible (no JS toggle needed) */
-.drawer--header .sliderow__links {
+.drawer--header.is-open .sliderow__links {
   display: block !important;
   max-height: none !important;
   overflow: visible !important;
 }
 
 /* Force all nested items to show */
-.drawer--header .sliderow__links * {
+.drawer--header.is-open .sliderow__links * {
   display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -482,8 +503,8 @@
 }
 
 /* Override any animation/hidden states */
-.drawer--header .sliderow__links [data-animates],
-.drawer--header .sliderow__links [data-animation] {
+.drawer--header.is-open .sliderow__links [data-animates],
+.drawer--header.is-open .sliderow__links [data-animation] {
   animation: none !important;
   transition: none !important;
 }
