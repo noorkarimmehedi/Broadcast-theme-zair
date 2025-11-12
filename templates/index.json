@@ -93,7 +93,7 @@
           "settings": {
             "height_mobile": 650,
             "height_desktop": 700,
-            "autoplay": true,
+            "autoplay": false,
             "autoplay_speed": 7,
             "overlay_color": "#000000",
             "overlay_opacity": 0.2,
