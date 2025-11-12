@@ -1,27 +1,20 @@
 /* ============================================
    MOBILE MENU - INLINE SUBCOLLECTIONS
    Clean layout with subcollections below parent
-   FIXED: Safari mobile transparency and height issues
    ============================================ */
 
 /* Reset and Base Styles */
 .drawer--header .drawer__inner {
-  background: #ffffff !important;
+  background: #ffffff;
   width: 380px;
   max-width: 90vw;
   font-family: 'Baskervville', serif;
-  height: 100vh !important;
-  height: 100dvh !important; /* Dynamic viewport height for mobile Safari */
-  min-height: 100vh !important;
-  min-height: 100dvh !important;
-  opacity: 1 !important;
 }
 
 .drawer--header .drawer__head {
   padding: 20px;
   border-bottom: none;
-  background: #ffffff !important;
-  opacity: 1 !important;
+  background: #ffffff;
 }
 
 .drawer--header .drawer__close {
@@ -43,28 +36,21 @@
 
 /* Body and Content */
 .drawer--header .drawer__body {
-  background: #ffffff !important;
+  background: #ffffff;
   padding: 0;
   display: flex;
   flex-direction: column;
   height: calc(100% - 72px);
-  min-height: calc(100vh - 72px) !important;
-  min-height: calc(100dvh - 72px) !important;
-  opacity: 1 !important;
 }
 
 .drawer--header .drawer__content {
   padding: 0;
   flex: 1;
   overflow-y: auto;
-  background: #ffffff !important;
-  opacity: 1 !important;
 }
 
 .drawer--header .drawer__menu {
   padding: 0 20px 20px 20px;
-  background: #ffffff !important;
-  opacity: 1 !important;
 }
 
 /* Remove "SHOP" label */
@@ -282,15 +268,12 @@
 /* Bottom Section - LOGIN */
 .drawer--header .drawer__bottom {
   padding: 20px;
-  background: #ffffff !important;
+  background: #ffffff;
   border-top: 1px solid #d0d0d0;
   margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  flex-shrink: 0;
-  min-height: 60px;
-  opacity: 1 !important;
 }
 
 /* Hide social and localization in bottom */
@@ -418,37 +401,6 @@
 /* Smooth scrolling */
 .drawer--header .drawer__content {
   scroll-behavior: smooth;
-}
-
-/* Fix Safari Mobile - Remove backdrop opacity/transparency */
-.drawer--header,
-.drawer--header .drawer__overlay {
-  background: rgba(0, 0, 0, 0.5) !important;
-  opacity: 1 !important;
-}
-
-/* Force solid white background on drawer - no transparency */
-.drawer--header .drawer__inner,
-.drawer--header .drawer__head,
-.drawer--header .drawer__body,
-.drawer--header .drawer__content,
-.drawer--header .drawer__menu,
-.drawer--header .drawer__bottom {
-  background: #ffffff !important;
-  opacity: 1 !important;
-}
-
-/* Ensure full height on Safari iOS */
-@supports (-webkit-touch-callout: none) {
-  .drawer--header .drawer__inner {
-    height: 100vh !important;
-    min-height: -webkit-fill-available !important;
-  }
-  
-  .drawer--header .drawer__body {
-    min-height: calc(100vh - 72px) !important;
-    min-height: -webkit-fill-available !important;
-  }
 }
 
 /* Add subtle animation when menu opens */
