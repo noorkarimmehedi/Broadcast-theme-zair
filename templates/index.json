@@ -91,7 +91,7 @@
         "ai_gen_block_19a4a03_cdXxr6": {
           "type": "ai_gen_block_19a4a03",
           "settings": {
-            "height_mobile": 300,
+            "height_mobile": 350,
             "height_desktop": 1000,
             "autoplay": false,
             "autoplay_speed": 7,
@@ -112,7 +112,7 @@
             "subheading_size_mobile": 14,
             "subheading_size_desktop": 20,
             "text_spacing": 5,
-            "slide_1_image_mobile": "shopify://shop_images/Mobile-View-Web-cover-Ash.png",
+            "slide_1_image_mobile": "shopify://shop_images/desktop-view-website-cover.png",
             "slide_1_image_desktop": "shopify://shop_images/desktop-view-website-cover.png",
             "slide_1_heading": "",
             "slide_1_subheading": "",
