@@ -269,7 +269,7 @@
           "type": "ai_gen_block_096e137",
           "settings": {
             "section_title": "LATEST DROP",
-            "collection": "",
+            "collection": "casual-shirts",
             "background_color": "#f5f5f5",
             "section_padding": 30,
             "container_padding": 20,
@@ -960,7 +960,7 @@
         "button_size": "",
         "button_style": "btn--solid",
         "show_arrow": false,
-        "featured_collection": "products",
+        "featured_collection": "new-arrival",
         "style": "grid",
         "grid": 4,
         "rows": 2,
