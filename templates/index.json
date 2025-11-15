@@ -96,7 +96,7 @@
             "autoplay": false,
             "autoplay_speed": 7,
             "overlay_color": "#000000",
-            "overlay_opacity": 0.1,
+            "overlay_opacity": 0.2,
             "content_padding_mobile": 20,
             "button_side_gap_mobile": 15,
             "content_padding_desktop": 60,
