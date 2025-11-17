@@ -1,6 +1,6 @@
 {% doc %}
   @prompt
-    Design a minimal, high-end e-commerce clothing section titled ‘YOU MAY ALSO LIKE’. Use a light grey background and place the section title in small, uppercase sans-serif text at the top-left. Add a clean rectangular button labeled ‘DISCOVER MORE’ at the top-right for navigation.
+    Design a minimal, high-end e-commerce clothing section titled 'YOU MAY ALSO LIKE'. Use a light grey background and place the section title in small, uppercase sans-serif text at the top-left. Add a clean rectangular button labeled 'DISCOVER MORE' at the top-right for navigation.
     
     Below, create a 2x2 grid layout displaying four product cards. Each card should feature a large, high-quality clothing image centered on a solid or gradient background (dark tones, black, olive, and warm hues). Under each image, display the product name in bold uppercase text and the price in smaller, grey-colored text beneath it. Maintain consistent spacing, alignment, and clean visual hierarchy across all cards.
     
@@ -68,6 +68,15 @@
   .ai-product-card-{{ ai_gen_id }} {
     text-decoration: none;
     display: block;
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: {{ block.settings.card_shadow_h }}px {{ block.settings.card_shadow_v }}px {{ block.settings.card_shadow_blur }}px rgba(0, 0, 0, {{ block.settings.card_shadow_opacity | divided_by: 100.0 }});
+  }
+
+  .ai-product-card-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.card_hover_border_color }};
   }
 
   .ai-product-image-wrapper-{{ ai_gen_id }} {
@@ -75,8 +84,6 @@
     width: 100%;
     padding-bottom: {{ block.settings.image_aspect_ratio | times: 100 }}%;
     overflow: hidden;
-    margin-bottom: {{ block.settings.image_spacing }}px;
-    box-shadow: {{ block.settings.card_shadow }};
   }
 
   .ai-product-image-{{ ai_gen_id }} {
@@ -113,6 +120,7 @@
 
   .ai-product-info-{{ ai_gen_id }} {
     text-align: {{ block.settings.text_alignment }};
+    padding: {{ block.settings.card_content_padding }}px;
   }
 
   .ai-product-name-{{ ai_gen_id }} {
@@ -200,6 +208,10 @@
     .ai-product-grid-bottom-button-{{ ai_gen_id }} {
       font-size: {{ block.settings.bottom_button_size | times: 0.85 }}px;
       padding: {{ block.settings.bottom_button_padding_vertical | times: 0.8 }}px {{ block.settings.bottom_button_padding_horizontal | times: 0.8 }}px;
+    }
+
+    .ai-product-info-{{ ai_gen_id }} {
+      padding: {{ block.settings.card_content_padding | times: 0.8 }}px;
     }
   }
 {% endstyle %}
@@ -634,20 +646,89 @@
       "default": 1.3
     },
     {
+      "type": "header",
+      "content": "Card border & shadow"
+    },
+    {
       "type": "range",
-      "id": "image_spacing",
-      "min": 8,
+      "id": "card_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_border_color",
+      "label": "Hover border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
       "max": 30,
       "step": 2,
       "unit": "px",
-      "label": "Space below image",
-      "default": 16
+      "label": "Border radius",
+      "default": 8
     },
     {
-      "type": "text",
-      "id": "card_shadow",
-      "label": "Card shadow",
-      "default": "0 2px 8px rgba(0, 0, 0, 0.08)"
+      "type": "range",
+      "id": "card_shadow_h",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Shadow horizontal offset",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_v",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Shadow vertical offset",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_blur",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow blur radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Shadow opacity (%)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_content_padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Card content padding",
+      "default": 16
     },
     {
       "type": "header",
