@@ -1089,7 +1089,7 @@
         "collection_TgxUPG": {
           "type": "collection",
           "settings": {
-            "collection": "formal-shirts",
+            "collection": "sweatshirt",
             "title": ""
           }
         },
@@ -1103,7 +1103,7 @@
         "collection_hKYLWc": {
           "type": "collection",
           "settings": {
-            "collection": "best-sellers",
+            "collection": "knit-sweater-1",
             "title": ""
           }
         }
