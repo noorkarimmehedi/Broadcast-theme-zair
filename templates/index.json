@@ -329,7 +329,7 @@
             "product_name_spacing": 1,
             "product_name_color": "#000000",
             "price_font": "system_ui_n4",
-            "price_size": 14,
+            "price_size": 13,
             "price_color": "#888888",
             "name_price_gap": 8,
             "text_alignment": "left"
@@ -569,7 +569,7 @@
             "shadow_opacity": 0,
             "arrow_size": 45,
             "arrow_bg_color": "#ffffff",
-            "arrow_hover_bg_color": "#000000",
+            "arrow_hover_bg_color": "#ffffff",
             "arrow_color": "#000000",
             "show_category_1": true,
             "collection_1": "formal-shirts",
