@@ -21872,64 +21872,40 @@ recipient-form .recipient-form-field-label {
 
 /*! ============ Add any custom styles below this line ================== */
 
-/* Fix for mobile navigation subcategories */
+/* Mobile drawer navigation fixes */
+.sliderule__header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0;
+}
 
-/* Style the back button row */
 .sliderow--back {
-  display: flex !important;
+  width: 100%;
+  padding: 16px 20px;
+  display: flex;
   align-items: center;
   gap: 12px;
-  width: 100%;
-  padding: 20px 24px !important;
-  background: none;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 0;
-  text-align: left;
-  cursor: pointer;
-  font-size: inherit;
-  font-family: inherit;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 600;
 }
 
-.sliderow--back:hover {
-  background-color: rgba(0, 0, 0, 0.03);
-}
-
-/* Back arrow icon */
-.sliderow--back .sliderule__chevron--left {
+.sliderule__chevron--left {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
 }
 
-.sliderow--back .sliderule__chevron--left svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Title in back button */
-.sliderow--back .sliderow__title {
-  font-weight: 600;
-  font-size: 1.1em;
-  margin: 0;
-  padding: 0;
-  flex: 1;
-  display: block !important;
-}
-
-/* Remove any nested button styling */
-.sliderow--back .sliderow__back-button {
-  display: none;
-}
-
-/* Ensure subcategory items have proper spacing */
 .sliderow__links {
   padding-top: 8px;
 }
 
-/* Make sure regular sliderow items aren't affected */
-.sliderow:not(.sliderow--back) {
-  display: block;
+/* Ensure proper spacing for menu items */
+.sliderow__links .sliderow,
+.sliderow__links .sliderule__wrapper {
+  margin-bottom: 0;
 }
