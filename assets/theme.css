@@ -21871,3 +21871,48 @@ recipient-form .recipient-form-field-label {
 }
 
 /*! ============ Add any custom styles below this line ================== */
+
+/* Fix for mobile navigation subcategories */
+.sliderow--back {
+  padding: 0 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.sliderow__back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.sliderow__back-button:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.sliderule__chevron--left {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sliderow__back-text {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: inherit;
+}
+
+.sliderow__links {
+  padding-top: 0.5rem;
+}
+
+.sliderow--back .sliderow__title {
+  display: none;
+}
