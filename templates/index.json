@@ -1181,6 +1181,16 @@
             "heading_size": 6
           }
         },
+        "logo_item_nXrmXd": {
+          "type": "logo-item",
+          "settings": {
+            "logo": "shopify://shop_images/5.png",
+            "logo_width": 100,
+            "link": "",
+            "description": "<p>Include a brief quote from a brand that loves your products</p>",
+            "heading_size": 6
+          }
+        },
         "logo_item_t4hV8a": {
           "type": "logo-item",
           "settings": {
@@ -1206,6 +1216,7 @@
         "logo_item_UeBCKf",
         "logo_item_9bgidd",
         "logo_item_Wj8HAK",
+        "logo_item_nXrmXd",
         "logo_item_t4hV8a",
         "logo_item_CRQQcQ"
       ],
