@@ -59,25 +59,25 @@
       id="sliderule-{{ key }}"
       data-sliderule="{{ link_level_next }}"
       data-scroll-lock-scrollable>
-      <button class="sliderow sliderow--back" type="button"
-        data-animates="{{ link_level_next }}"
-        data-animation="{{ animation_name }}"
-        data-animation-delay="{{ animation_delay | divided_by: forloop_index | at_least: animation_delay_min }}"
-        data-animation-duration="{{ animation_duration }}"
-        data-sliderule-close="sliderule-{{ key }}">
-        <span class="sliderule__chevron--left">
-          {%- render 'icon-arrow-left' -%}
-          <span class="visually-hidden">{{ 'general.accessibility.exit_menu' | t }}</span>
-        </span>
-        <span class="sliderow__title">{{ link.title | strip_html | escape }}</span>
-      </button>
+      
+      {%- comment -%} Back button header - now outside the scrollable content {%- endcomment -%}
+      <div class="sliderule__header">
+        <button class="sliderow sliderow--back" type="button"
+          data-animates="{{ link_level_next }}"
+          data-animation="{{ animation_name }}"
+          data-animation-delay="0"
+          data-animation-duration="{{ animation_duration }}"
+          data-sliderule-close="sliderule-{{ key }}">
+          <span class="sliderule__chevron--left">
+            {%- render 'icon-arrow-left' -%}
+            <span class="visually-hidden">{{ 'general.accessibility.exit_menu' | t }}</span>
+          </span>
+          <span class="sliderow__title">{{ link.title | strip_html | escape }}</span>
+        </button>
+      </div>
       
       <div class="sliderow__links" data-links>
         {%- for link in link.links -%}
-          {% comment %}
-            Handle case where multiple child menus
-            have an item called 'sale' in position 1
-          {% endcomment %}
           {%- assign index_recursive = index | append: 'x' | append: forloop.index -%}
           {%- assign animation_delay = 50 | times: forloop.index -%}
 
