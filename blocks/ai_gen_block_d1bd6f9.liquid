@@ -1,6 +1,6 @@
 {% doc %}
   @prompt
-    Create a minimal, horizontally swipeable category filter bar for a fashion e-commerce website. Use a clean white background with a row of rectangular buttons labeled in uppercase sans-serif text (e.g., ALL, NEW, FORMAL, PRINTS, PLAIN, etc.). Each button has a thin black border and white fill, except the active one ('ALL'), which features a solid black background with white text.
+    Create a minimal, horizontally swipeable category filter bar for a fashion e-commerce website. Use a clean light gray background (#F5F5F5) with a row of rectangular buttons labeled in uppercase sans-serif text (e.g., ALL, NEW, FORMAL, PRINTS, PLAIN, etc.). Each button has a thin black border and white fill, except the active one ('ALL'), which features a solid black background with white text.
     
     The filter bar should scroll horizontally (swipeable) on mobile and have smooth snap scrolling. Maintain equal spacing, rounded corners (small radius), and consistent padding. Add a subtle hover or active state transition that inverts colors. The style should feel premium, minimal, and fashion-forward, emphasizing clarity and usability., should be option for adding 20 Category and also in desktop version there should be option for alligment, only ALL should have black background and white text. all og the other should redirect to saved category when a user click it
 {% enddoc %}
@@ -29,7 +29,7 @@
 {% style %}
   .ai-category-filter-{{ ai_gen_id }} {
     width: 100%;
-    background-color: {{ block.settings.background_color }};
+    background-color: #F5F5F5;
     padding: {{ block.settings.vertical_padding }}px 0;
   }
 
@@ -265,12 +265,6 @@
     {
       "type": "header",
       "content": "Layout"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background",
-      "default": "#F5F5F5"
     },
     {
       "type": "range",
