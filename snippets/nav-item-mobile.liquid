@@ -39,14 +39,14 @@
       data-animation-delay="{{ animation_delay | plus: animation_delay_additional }}"
       data-animation-duration="{{ animation_duration }}"
       data-sliderule-open="sliderule-{{ key }}">
-      <span class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}">
+      <span class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}"{% if link_title_lowercase == "casual shirts" %} style="font-weight: 700;"{% endif %}>
         {{ link.title | strip_html | escape }}
       </span>
     </button>
     
     {%- comment -%} Add divider after Formal Shirts {%- endcomment -%}
     {%- if link_title_lowercase == "formal shirts" -%}
-      <div style="height: 1px; background-color: #e5e5e5; margin: 10px 0;"></div>
+      <div style="height: 1px; background-color: #e5e5e5; margin: 10px 0 0 0;"></div>
     {%- endif -%}
     
     {%- comment -%} Add divider after Casual Shirts {%- endcomment -%}
@@ -121,15 +121,15 @@
       data-animation-delay="{{ animation_delay | plus: animation_delay_additional }}"
       data-animation-duration="{{ animation_duration }}">
       {%- if link.url == "#" -%}
-        <span class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}">{{ link.title | strip_html | escape }}</span>
+        <span class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}"{% if link_title_lowercase == "casual shirts" %} style="font-weight: 700;"{% endif %}>{{ link.title | strip_html | escape }}</span>
       {%- else -%}
-        <a class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}" href="{{ link.url }}">{{ link.title | strip_html | escape }}</a>
+        <a class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}"{% if link_title_lowercase == "casual shirts" %} style="font-weight: 700;"{% endif %} href="{{ link.url }}">{{ link.title | strip_html | escape }}</a>
       {%- endif -%}
     </div>
     
     {%- comment -%} Add divider after Formal Shirts {%- endcomment -%}
     {%- if link_title_lowercase == "formal shirts" -%}
-      <div style="height: 1px; background-color: #e5e5e5; margin: 10px 0;"></div>
+      <div style="height: 1px; background-color: #e5e5e5; margin: 10px 0 0 0;"></div>
     {%- endif -%}
     
     {%- comment -%} Add divider after Casual Shirts {%- endcomment -%}
