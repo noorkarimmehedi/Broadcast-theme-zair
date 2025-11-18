@@ -91,7 +91,7 @@
         "ai_gen_block_19a4a03_cdXxr6": {
           "type": "ai_gen_block_19a4a03",
           "settings": {
-            "height_mobile": 300,
+            "height_mobile": 450,
             "height_desktop": 1000,
             "autoplay": false,
             "autoplay_speed": 7,
@@ -1274,7 +1274,7 @@
           "type": "question",
           "settings": {
             "title": "Any question?",
-            "content": "<p><strong>We're here to help! If you have any questions or need support, feel free to reach out to us anytime. You can contact us through Facebook, phone call, or WhatsApp — whatever is easiest for you.</strong></p><p></p><ul><li><strong>Facebook:</strong> facebook.com/Zairofficial<br/></li><li><strong>Call Us:</strong> +8801775374884<br/></li><li><strong>WhatsApp:</strong> +8801775374884<br/></li></ul>"
+            "content": "<p>You can call us at +8801775374884. We will be happy to assist you.</p>"
           }
         }
       },
