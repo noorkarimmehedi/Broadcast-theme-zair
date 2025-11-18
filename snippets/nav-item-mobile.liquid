@@ -50,6 +50,7 @@
       data-scroll-lock-scrollable>
       
       {%- comment -%} Back button header {%- endcomment -%}
+      {%- unless link_title_lowercase == "casual shirts" -%}
       <div class="sliderule__header">
         <button class="sliderow sliderow--back" type="button"
           data-animates="{{ link_level_next }}"
@@ -60,6 +61,7 @@
           <span class="sliderow__title sliderow__title--header">{{ link.title | strip_html | escape }}</span>
         </button>
       </div>
+      {%- endunless -%}
       
       <div class="sliderow__links sliderow__links--level-{{ link_level_next }}" data-links>
         {%- for link in link.links -%}
