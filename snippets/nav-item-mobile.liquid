@@ -48,10 +48,6 @@
       data-sliderule-open="sliderule-{{ key }}">
       <span class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}">
         {{ link.title | strip_html | escape }}
-        <span class="sliderule__chevron--right">
-          {%- render 'icon-arrow-right' -%}
-          <span class="visually-hidden">{{ 'general.accessibility.show_menu' | t }}</span>
-        </span>
       </span>
     </button>
 
@@ -68,10 +64,6 @@
           data-animation-delay="0"
           data-animation-duration="{{ animation_duration }}"
           data-sliderule-close="sliderule-{{ key }}">
-          <span class="sliderule__chevron--left">
-            {%- render 'icon-arrow-left' -%}
-            <span class="visually-hidden">{{ 'general.accessibility.exit_menu' | t }}</span>
-          </span>
           <span class="sliderow__title">{{ link.title | strip_html | escape }}</span>
         </button>
       </div>
