@@ -43,6 +43,11 @@
         {{ link.title | strip_html | escape }}
       </span>
     </button>
+    
+    {%- comment -%} Add divider after Formal Shirts {%- endcomment -%}
+    {%- if link_title_lowercase == "formal shirts" -%}
+      <div style="height: 1px; background-color: #e5e5e5; margin: 10px 0;"></div>
+    {%- endif -%}
 
     <div class="mobile__menu__dropdown sliderule__panel sliderule__panel--level-{{ link_level_next }}"
       id="sliderule-{{ key }}"
@@ -116,5 +121,10 @@
         <a class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}" href="{{ link.url }}">{{ link.title | strip_html | escape }}</a>
       {%- endif -%}
     </div>
+    
+    {%- comment -%} Add divider after Formal Shirts {%- endcomment -%}
+    {%- if link_title_lowercase == "formal shirts" -%}
+      <div style="height: 1px; background-color: #e5e5e5; margin: 10px 0;"></div>
+    {%- endif -%}
   {%- endif -%}
 </div>
