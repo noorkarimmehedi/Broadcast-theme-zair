@@ -1148,6 +1148,79 @@
         "padding_bottom": 50
       }
     },
+    "section_press_logos_LALpLp": {
+      "type": "section-press-logos",
+      "blocks": {
+        "logo_item_UeBCKf": {
+          "type": "logo-item",
+          "settings": {
+            "logo": "shopify://shop_images/Visa_Inc__logo_svg.webp",
+            "logo_width": 100,
+            "link": "",
+            "description": "<p>Include a brief quote from a brand that loves your products</p>",
+            "heading_size": 6
+          }
+        },
+        "logo_item_9bgidd": {
+          "type": "logo-item",
+          "settings": {
+            "logo": "shopify://shop_images/Mastercard-Logo.png",
+            "logo_width": 100,
+            "link": "",
+            "description": "<p>Include a brief quote from a brand that loves your products</p>",
+            "heading_size": 6
+          }
+        },
+        "logo_item_Wj8HAK": {
+          "type": "logo-item",
+          "settings": {
+            "logo": "shopify://shop_images/American_Express_logo__2018__svg.png",
+            "logo_width": 100,
+            "link": "",
+            "description": "<p>Include a brief quote from a brand that loves your products</p>",
+            "heading_size": 6
+          }
+        },
+        "logo_item_t4hV8a": {
+          "type": "logo-item",
+          "settings": {
+            "logo": "shopify://shop_images/1656227518bkash-logo-png.png",
+            "logo_width": 100,
+            "link": "",
+            "description": "<p>Include a brief quote from a brand that loves your products</p>",
+            "heading_size": 6
+          }
+        },
+        "logo_item_CRQQcQ": {
+          "type": "logo-item",
+          "settings": {
+            "logo": "shopify://shop_images/1725618513nagad-logo.png",
+            "logo_width": 100,
+            "link": "",
+            "description": "<p>Include a brief quote from a brand that loves your products</p>",
+            "heading_size": 6
+          }
+        }
+      },
+      "block_order": [
+        "logo_item_UeBCKf",
+        "logo_item_9bgidd",
+        "logo_item_Wj8HAK",
+        "logo_item_t4hV8a",
+        "logo_item_CRQQcQ"
+      ],
+      "name": "Press logos",
+      "settings": {
+        "title": "Pay with",
+        "enable_heading_slider": false,
+        "text_style": "font-body",
+        "logo_opacity": 60,
+        "bg_color": "",
+        "color": "",
+        "padding_top": 16,
+        "padding_bottom": 0
+      }
+    },
     "section_accordion_group_zgLRtn": {
       "type": "section-accordion-group",
       "blocks": {
@@ -1217,6 +1290,7 @@
     "icons",
     "section_collections_list_TFaVUd",
     "section_divider_c4YDxx",
+    "section_press_logos_LALpLp",
     "section_accordion_group_zgLRtn"
   ]
 }
