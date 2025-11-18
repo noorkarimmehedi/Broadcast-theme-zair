@@ -74,19 +74,6 @@
       {%- endunless -%}
       
       <div class="sliderow__links sliderow__links--level-{{ link_level_next }}" data-links>
-        {%- comment -%} Add "All Casual Shirts" link at the beginning for Casual Shirts submenu {%- endcomment -%}
-        {%- if link_title_lowercase == "casual shirts" and link.url != "#" and link.url != "" -%}
-          <div class="sliderow sliderow--level-{{ link_level_next }}"
-            role="button"
-            data-animates="{{ link_level_next }}"
-            data-animation="{{ animation_name }}"
-            data-animation-delay="50"
-            data-animation-duration="{{ animation_duration }}">
-            <a class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}" href="{{ link.url }}">All Casual Shirts</a>
-          </div>
-          <div style="height: 1px; background-color: #e5e5e5; margin: 10px 0;"></div>
-        {%- endif -%}
-        
         {%- for link in link.links -%}
           {%- assign index_recursive = index | append: 'x' | append: forloop.index -%}
           {%- assign animation_delay = 50 | times: forloop.index -%}
