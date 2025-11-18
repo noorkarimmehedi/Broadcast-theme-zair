@@ -141,21 +141,22 @@
       transform: translateY(-50%);
       background-color: {{ block.settings.arrow_bg_color }};
       color: {{ block.settings.arrow_color }};
-      border: none;
+      border: 1px solid #E0E0E0;
       width: {{ block.settings.arrow_size }}px;
       height: {{ block.settings.arrow_size }}px;
-      border-radius: 50%;
+      border-radius: 8px;
       cursor: pointer;
       z-index: 10;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
     }
 
     .ai-category-arrow-{{ ai_gen_id }}:hover {
       background-color: {{ block.settings.arrow_hover_bg_color }};
+      border-color: #CCCCCC;
       transform: translateY(-50%) scale(1.1);
     }
 
