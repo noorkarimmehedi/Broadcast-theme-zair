@@ -16,7 +16,7 @@
       "settings": {
         "announcement": true,
         "speed": 5000,
-        "design": "design1",
+        "design": "design2",
         "design1_message": "Free Delivery Over Orders <strong>৳</strong>1500",
         "countdown_day": 31,
         "countdown_month": 12,
