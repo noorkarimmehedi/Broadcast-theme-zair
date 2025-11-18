@@ -1153,6 +1153,7 @@
       "blocks": {
         "logo_item_UeBCKf": {
           "type": "logo-item",
+          "disabled": true,
           "settings": {
             "logo": "shopify://shop_images/Visa_Inc__logo_svg.webp",
             "logo_width": 100,
@@ -1163,6 +1164,7 @@
         },
         "logo_item_9bgidd": {
           "type": "logo-item",
+          "disabled": true,
           "settings": {
             "logo": "shopify://shop_images/Mastercard-Logo.png",
             "logo_width": 100,
@@ -1173,6 +1175,7 @@
         },
         "logo_item_Wj8HAK": {
           "type": "logo-item",
+          "disabled": true,
           "settings": {
             "logo": "shopify://shop_images/American_Express_logo__2018__svg.png",
             "logo_width": 100,
@@ -1183,6 +1186,7 @@
         },
         "logo_item_nXrmXd": {
           "type": "logo-item",
+          "disabled": true,
           "settings": {
             "logo": "shopify://shop_images/5.png",
             "logo_width": 100,
