@@ -15,7 +15,6 @@
         "ai_gen_block_d1bd6f9_pWKLBN": {
           "type": "ai_gen_block_d1bd6f9",
           "settings": {
-            "background_color": "#ffffff",
             "vertical_padding": 10,
             "horizontal_padding": 20,
             "button_spacing": 10,
@@ -54,9 +53,9 @@
             "category_5_enabled": true,
             "category_5_label": "Sweatshirt",
             "category_5_collection": "sweatshirt",
-            "category_6_enabled": false,
-            "category_6_label": "Pants",
-            "category_6_collection": "pants",
+            "category_6_enabled": true,
+            "category_6_label": "Sweater",
+            "category_6_collection": "sweater",
             "category_7_enabled": false,
             "category_7_label": "",
             "category_7_collection": "",
