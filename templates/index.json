@@ -548,7 +548,7 @@
             "grid_gap": 20,
             "section_padding_top": 20,
             "section_padding_bottom": 25,
-            "section_bg_color": "#ffffff",
+            "section_bg_color": "#f5f5f5",
             "image_aspect_ratio": 1.2,
             "title_overlay": false,
             "text_alignment": "center",
@@ -608,6 +608,56 @@
       "block_order": [
         "ai_gen_block_449ca2f_cpf9d9"
       ],
+      "settings": {}
+    },
+    "1763536465d346da1e": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_12394bd_eeVEyT": {
+          "type": "ai_gen_block_12394bd",
+          "settings": {
+            "heading": "FEATURED CATEGORIES",
+            "heading_font": "assistant_n4",
+            "heading_size": 32,
+            "heading_letter_spacing": 2,
+            "heading_color": "#000000",
+            "heading_margin_bottom": 50,
+            "max_width": 1800,
+            "grid_gap": 10,
+            "grid_gap_mobile": 10,
+            "section_padding_top": 60,
+            "section_padding_bottom": 60,
+            "background_color": "#ffffff",
+            "card_aspect_ratio": 0.7,
+            "card_background": "#f5f5f5",
+            "show_overlay": true,
+            "overlay_color": "rgba(0,0,0,0.6)",
+            "overlay_height": 50,
+            "label_font": "assistant_n4",
+            "label_size": 22,
+            "label_letter_spacing": 2,
+            "label_color": "#ffffff",
+            "label_padding": 30,
+            "collection_1": "casual-shirts",
+            "label_1": "",
+            "collection_2": "best-sellers",
+            "label_2": "",
+            "collection_3": "new-arrival",
+            "label_3": "",
+            "collection_4": "knit-sweater-1",
+            "label_4": "",
+            "collection_5": "sweater",
+            "label_5": "",
+            "collection_6": "sweatshirt",
+            "label_6": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_12394bd_eeVEyT"
+      ],
+      "disabled": true,
       "settings": {}
     },
     "docs": {
@@ -1304,6 +1354,7 @@
     "17628472147d8968f2",
     "176251656635c66783",
     "17622467612c9818ef",
+    "1763536465d346da1e",
     "docs",
     "image-with-text",
     "product-with-image",
