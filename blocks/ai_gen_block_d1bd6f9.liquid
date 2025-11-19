@@ -1,6 +1,6 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
-{% comment %} Get current collection information - multiple ways to ensure we catch it {% endcomment %}
+{% comment %} Get current collection information {% endcomment %}
 {% assign current_collection_handle = collection.handle | default: '' %}
 {% assign current_collection_id = collection.id | default: '' %}
 {% assign current_collection_title = collection.title | default: '' %}
@@ -133,6 +133,37 @@
       {% assign found_active = false %}
       {% assign active_category_index = 0 %}
       
+      {% comment %} First pass: Determine which category should be active {% endcomment %}
+      {% for i in (1..20) %}
+        {% liquid
+          assign category_enabled_key = 'category_' | append: i | append: '_enabled'
+          assign category_collection_key = 'category_' | append: i | append: '_collection'
+
+          assign category_enabled = block.settings[category_enabled_key]
+          assign category_collection = block.settings[category_collection_key]
+        %}
+
+        {% unless found_active %}
+          {% if category_enabled and category_collection != blank %}
+            {% assign cat_handle = category_collection.handle %}
+            {% assign cat_id = category_collection.id | plus: 0 %}
+            {% assign current_id = current_collection_id | plus: 0 %}
+            
+            {% if cat_handle == current_collection_handle and current_collection_handle != '' %}
+              {% assign found_active = true %}
+              {% assign active_category_index = i %}
+            {% elsif cat_handle == url_collection_handle and url_collection_handle != '' %}
+              {% assign found_active = true %}
+              {% assign active_category_index = i %}
+            {% elsif cat_id == current_id and cat_id != 0 and current_id != 0 %}
+              {% assign found_active = true %}
+              {% assign active_category_index = i %}
+            {% endif %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+      
+      {% comment %} Second pass: Render all buttons with correct URLs and active states {% endcomment %}
       {% for i in (1..20) %}
         {% liquid
           assign category_enabled_key = 'category_' | append: i | append: '_enabled'
@@ -142,58 +173,34 @@
           assign category_enabled = block.settings[category_enabled_key]
           assign category_label = block.settings[category_label_key]
           assign category_collection = block.settings[category_collection_key]
-          
-          # Initialize is_active as false for each iteration
-          assign is_active = false
-          assign match_reason = ''
-          
-          # Only check if we haven't found an active item yet
-          unless found_active
-            if category_collection != blank
-              # Try multiple ways to match the collection
-              assign cat_handle = category_collection.handle
-              assign cat_id = category_collection.id | plus: 0
-              assign current_id = current_collection_id | plus: 0
-              
-              # Method 1: Exact handle comparison (highest priority)
-              if cat_handle == current_collection_handle and current_collection_handle != ''
-                assign is_active = true
-                assign match_reason = 'exact handle match'
-                assign found_active = true
-                assign active_category_index = i
-              # Method 2: Exact URL handle comparison
-              elsif cat_handle == url_collection_handle and url_collection_handle != ''
-                assign is_active = true
-                assign match_reason = 'exact url handle match'
-                assign found_active = true
-                assign active_category_index = i
-              # Method 3: ID comparison
-              elsif cat_id == current_id and cat_id != 0 and current_id != 0
-                assign is_active = true
-                assign match_reason = 'id match'
-                assign found_active = true
-                assign active_category_index = i
-              endif
-            endif
-          endunless
         %}
 
         {% if category_enabled and category_label != blank %}
-          {% comment %} Generate the proper URL for each category {% endcomment %}
-          {% if category_collection != blank %}
-            {% assign category_url = category_collection.url %}
+          {% comment %} Determine if this category is active {% endcomment %}
+          {% if i == active_category_index %}
+            {% assign is_active = true %}
           {% else %}
-            {% assign category_url = '/collections/all' %}
+            {% assign is_active = false %}
+          {% endif %}
+
+          {% comment %} Always use the collection URL from settings, never default to /collections/all in the href {% endcomment %}
+          {% if category_collection != blank %}
+            {% assign button_url = category_collection.url %}
+            {% assign button_handle = category_collection.handle %}
+            {% assign button_id = category_collection.id %}
+          {% else %}
+            {% assign button_url = '/collections/all' %}
+            {% assign button_handle = 'all' %}
+            {% assign button_id = 'all' %}
           {% endif %}
 
           <li class="ai-category-filter-item-{{ ai_gen_id }}">
             <a
-              href="{{ category_url }}"
+              href="{{ button_url }}"
               class="ai-category-filter-button-{{ ai_gen_id }}{% if is_active %} active{% endif %}"
-              data-collection-id="{% if category_collection != blank %}{{ category_collection.id }}{% else %}all{% endif %}"
-              data-collection-handle="{% if category_collection != blank %}{{ category_collection.handle }}{% else %}all{% endif %}"
+              data-collection-id="{{ button_id }}"
+              data-collection-handle="{{ button_handle }}"
               data-category-index="{{ i }}"
-              data-match-reason="{{ match_reason }}"
             >
               {{ category_label }}
             </a>
@@ -230,7 +237,7 @@
           {% if cat_collection != blank %}
             Collection: {{ cat_collection.title }} (handle: {{ cat_collection.handle }}, id: {{ cat_collection.id }}, url: {{ cat_collection.url }})
           {% else %}
-            No collection assigned (will default to /collections/all)
+            No collection assigned (will use /collections/all)
           {% endif %}
           <br>
         {% endif %}
