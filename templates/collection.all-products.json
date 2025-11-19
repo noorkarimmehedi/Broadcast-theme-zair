@@ -1,0 +1,216 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1762785248b3b6ac23": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d1bd6f9_pWKLBN": {
+          "type": "ai_gen_block_d1bd6f9",
+          "settings": {
+            "vertical_padding": 10,
+            "horizontal_padding": 20,
+            "button_spacing": 10,
+            "desktop_alignment": "center",
+            "desktop_scrollable": false,
+            "button_font": "system_ui_n4",
+            "button_font_size": 12,
+            "letter_spacing": 1,
+            "button_padding_vertical": 10,
+            "button_padding_horizontal": 20,
+            "border_radius": 0,
+            "border_width": 1,
+            "transition_speed": 0.3,
+            "button_bg_color": "#ffffff",
+            "button_text_color": "#000000",
+            "button_border_color": "#000000",
+            "button_hover_bg_color": "#000000",
+            "button_hover_text_color": "#ffffff",
+            "button_hover_border_color": "#000000",
+            "active_bg_color": "#000000",
+            "active_text_color": "#ffffff",
+            "active_border_color": "#000000",
+            "show_debug": false,
+            "category_1_enabled": true,
+            "category_1_label": "All",
+            "category_1_collection": "best-sellers",
+            "category_2_enabled": true,
+            "category_2_label": "New Arrival",
+            "category_2_collection": "new-arrival",
+            "category_3_enabled": true,
+            "category_3_label": "Casual Shirts",
+            "category_3_collection": "casual-shirts",
+            "category_4_enabled": true,
+            "category_4_label": "Knit Sweater",
+            "category_4_collection": "knit-sweater-1",
+            "category_5_enabled": true,
+            "category_5_label": "Sweatshirt",
+            "category_5_collection": "sweatshirt",
+            "category_6_enabled": true,
+            "category_6_label": "Sweater",
+            "category_6_collection": "sweater",
+            "category_7_enabled": false,
+            "category_7_label": "",
+            "category_7_collection": "",
+            "category_8_enabled": false,
+            "category_8_label": "",
+            "category_8_collection": "",
+            "category_9_enabled": false,
+            "category_9_label": "",
+            "category_9_collection": "",
+            "category_10_enabled": false,
+            "category_10_label": "",
+            "category_10_collection": "",
+            "category_11_enabled": false,
+            "category_11_label": "",
+            "category_11_collection": "",
+            "category_12_enabled": false,
+            "category_12_label": "",
+            "category_12_collection": "",
+            "category_13_enabled": false,
+            "category_13_label": "",
+            "category_13_collection": "",
+            "category_14_enabled": false,
+            "category_14_label": "",
+            "category_14_collection": "",
+            "category_15_enabled": false,
+            "category_15_label": "",
+            "category_15_collection": "",
+            "category_16_enabled": false,
+            "category_16_label": "",
+            "category_16_collection": "",
+            "category_17_enabled": false,
+            "category_17_label": "",
+            "category_17_collection": "",
+            "category_18_enabled": false,
+            "category_18_label": "",
+            "category_18_collection": "",
+            "category_19_enabled": false,
+            "category_19_label": "",
+            "category_19_collection": "",
+            "category_20_enabled": false,
+            "category_20_label": "",
+            "category_20_collection": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d1bd6f9_pWKLBN"
+      ],
+      "settings": {}
+    },
+    "section_collections_list_JipAKY": {
+      "type": "section-collections-list",
+      "blocks": {
+        "collection_xaTRrr": {
+          "type": "collection",
+          "settings": {
+            "collection": "new-arrival",
+            "title": ""
+          }
+        },
+        "collection_nApm76": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "title": ""
+          }
+        },
+        "collection_iHpEPB": {
+          "type": "collection",
+          "settings": {
+            "collection": "political-teas",
+            "title": ""
+          }
+        },
+        "collection_QGcTr9": {
+          "type": "collection",
+          "settings": {
+            "collection": "tributes",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_xaTRrr",
+        "collection_nApm76",
+        "collection_iHpEPB",
+        "collection_QGcTr9"
+      ],
+      "disabled": true,
+      "name": "Collection list",
+      "settings": {
+        "title": "Collection list",
+        "description": "",
+        "layout": "grid",
+        "aspect_ratio": 1,
+        "grid": 4,
+        "layout_mobile": "2",
+        "bg_color": "",
+        "color": "",
+        "padding_top": 4,
+        "padding_bottom": 12
+      }
+    },
+    "hero": {
+      "type": "collection-image-with-title",
+      "settings": {
+        "show_title": true,
+        "show_description": true,
+        "flex_align": "align--middle-center",
+        "bg_color": "",
+        "color": "",
+        "show_image": true,
+        "banner_layout": "overlay",
+        "height": "screen-height-one-third",
+        "mobile_height": "screen-height-one-half--mobile",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000",
+        "show_overlay_text": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "subcollections": {
+      "type": "subcollections",
+      "settings": {
+        "subcollection_layout": "grid",
+        "subcollection_description": false,
+        "select_image": "collection",
+        "color": "#ffffff",
+        "bg_color": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "collection",
+      "settings": {
+        "enable_sort": true,
+        "enable_filters": true,
+        "filter_layout": "inline-closed",
+        "collection_linklist": "",
+        "grid": 3,
+        "grid_mobile": "2",
+        "product_limit": 36,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "1762785248b3b6ac23",
+    "section_collections_list_JipAKY",
+    "hero",
+    "subcollections",
+    "main"
+  ]
+}
