@@ -1,77 +1,256 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  .ai-category-section-{{ ai_gen_id }} {
-    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
-    background-color: {{ block.settings.section_bg_color }};
+  .ai-category-slider-{{ ai_gen_id }} {
+    padding-top: {{ block.settings.padding_top }}px;
+    padding-bottom: {{ block.settings.padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
   }
 
-  .ai-category-container-{{ ai_gen_id }} {
-    max-width: 100%;
+  .ai-category-slider-container-{{ ai_gen_id }} {
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 20px;
   }
 
-  .ai-category-heading-{{ ai_gen_id }} {
-    text-align: {{ block.settings.heading_alignment }};
-    font-size: {{ block.settings.heading_size }}px;
-    font-weight: {{ block.settings.heading_weight }};
-    color: {{ block.settings.heading_color }};
-    margin: 0 0 {{ block.settings.heading_margin }}px;
+  .ai-category-slider-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
   }
 
-  .ai-category-grid-{{ ai_gen_id }} {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: {{ block.settings.grid_gap }}px;
-  }
-
-  .ai-category-item-{{ ai_gen_id }} {
+  .ai-category-slider-title-{{ ai_gen_id }} {
     position: relative;
-    overflow: hidden;
-    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
-    border-radius: {{ block.settings.border_radius }}px;
-    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
-    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    text-align: center;
+    transition: 0.3s ease-in-out;
     cursor: pointer;
+    background-color: #FFF3E0;
+    filter: url(#handDrawnNoise);
+    user-select: none;
+    font-family: "Barlow", sans-serif;
+    font-size: {{ block.settings.heading_size }}px;
+    color: #D50000;
+    font-weight: 700;
+    padding: 0.5em 1.5em;
+    margin: 0 0 12px;
+    border-width: 0px;
+    border-radius: 4px;
+    box-shadow: #D5000066 4px 4px 0 1px;
+    animation: idle-{{ ai_gen_id }} 1s infinite ease-in-out;
   }
 
-  .ai-category-item-{{ ai_gen_id }}:hover {
-    border-color: {{ block.settings.hover_border_color }};
-    transform: translateY(-4px);
+  .ai-category-slider-title-{{ ai_gen_id }}:hover {
+    rotate: -2.5deg;
+    animation: hover-{{ ai_gen_id }} 2.5s infinite ease-in-out;
   }
 
-  .ai-category-link-{{ ai_gen_id }} {
-    display: block;
-    text-decoration: none;
-    color: inherit;
+  .ai-category-slider-title-{{ ai_gen_id }}:hover .ai-highlight-{{ ai_gen_id }} {
+    stroke-dashoffset: 0;
   }
 
-  .ai-category-image-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    width: 100%;
-    padding-bottom: {{ block.settings.image_aspect_ratio | times: 100 }}%;
-    overflow: hidden;
+  .ai-category-slider-title-{{ ai_gen_id }}:active {
+    box-shadow: inset #D50000f1 4px 4px 0 1px;
+    rotate: -2.5deg;
+    animation: active-{{ ai_gen_id }} 1s infinite ease-in-out;
   }
 
-  .ai-category-image-{{ ai_gen_id }} {
+  .ai-category-slider-title-{{ ai_gen_id }}:active .ai-highlight-{{ ai_gen_id }} {
+    stroke-dashoffset: 1000;
+    animation: highlight-{{ ai_gen_id }} 5s infinite, col-{{ ai_gen_id }} 0.5s forwards;
+    stroke: #bc4e2666;
+  }
+
+  .ai-highlight-{{ ai_gen_id }} {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+    fill: rgba(213, 0, 0, 0.2);
+    stroke: rgba(213, 0, 0, 0.5);
+    stroke-width: 10;
+    stroke-linecap: round;
+    pointer-events: none;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 0.5s ease-in-out;
   }
 
-  .ai-category-item-{{ ai_gen_id }}:hover .ai-category-image-{{ ai_gen_id }} {
-    transform: scale(1.05);
-  }
-
-  .ai-category-image-placeholder-{{ ai_gen_id }} {
+  .ai-button-cosm-{{ ai_gen_id }} {
+    fill: #D5000066;
+    transition: 0.3s ease-out;
+    scale: 0.5;
     position: absolute;
-    top: 0;
-    left: 0;
+    translate: calc(-100% + 24px) 1.5rem;
+  }
+
+  .ai-category-slider-title-{{ ai_gen_id }}:hover .ai-button-cosm-{{ ai_gen_id }} {
+    rotate: -15deg;
+    translate: calc(-100% + 22px) 1.9rem;
+  }
+
+  .ai-category-slider-title-{{ ai_gen_id }}:active .ai-button-cosm-{{ ai_gen_id }} {
+    fill: #D50000f1;
+    rotate: -135deg;
+    translate: calc(-100% + 55px) 1.6rem;
+    animation: none;
+  }
+
+  @keyframes idle-{{ ai_gen_id }} {
+    0% {
+      filter: url(#handDrawnNoise);
+    }
+    50% {
+      rotate: 2.5deg;
+      filter: url(#handDrawnNoise2);
+    }
+    100% {
+      filter: url(#handDrawnNoise);
+    }
+  }
+
+  @keyframes hover-{{ ai_gen_id }} {
+    0% {
+      rotate: 0deg;
+      filter: url(#handDrawnNoise);
+      translate: 0 0px;
+    }
+    25% {
+      rotate: -1deg;
+      filter: url(#handDrawnNoise2);
+      translate: 0 -2px;
+    }
+    50% {
+      rotate: 0deg;
+      filter: url(#handDrawnNoise);
+      translate: 0 2px;
+    }
+    75% {
+      rotate: -1deg;
+      filter: url(#handDrawnNoise2);
+      translate: 0 -2px;
+    }
+    100% {
+      rotate: 0deg;
+      filter: url(#handDrawnNoise);
+      translate: 0 0px;
+    }
+  }
+
+  @keyframes active-{{ ai_gen_id }} {
+    0% {
+      filter: url(#handDrawnNoiset);
+      translate: 0 -1px;
+    }
+    25% {
+      rotate: -3deg;
+    }
+    50% {
+      filter: url(#handDrawnNoiset2);
+      translate: 0 1px;
+    }
+    66% {
+      rotate: 1.5deg;
+    }
+    100% {
+      filter: url(#handDrawnNoiset);
+      translate: 0 -1px;
+    }
+  }
+
+  @keyframes col-{{ ai_gen_id }} {
+    0% {
+      stroke: rgba(213, 0, 0, 0.5);
+    }
+    100% {
+      stroke: rgba(213, 0, 0, 0.8);
+    }
+  }
+
+  @keyframes highlight-{{ ai_gen_id }} {
+    0% {
+      stroke-dashoffset: 0;
+    }
+    25% {
+      stroke-dashoffset: 1000;
+    }
+    50% {
+      stroke-dashoffset: 1000;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .ai-category-slider-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.subheading_color }};
+    margin: 0;
+  }
+
+  .ai-category-slider-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-category-slider-track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.gap }}px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 20px 0;
+    justify-content: center;
+  }
+
+  .ai-category-slider-track-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-category-slider-item-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    width: {{ block.settings.item_size }}px;
+    text-align: center;
+  }
+
+  .ai-category-slider-link-{{ ai_gen_id }} {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .ai-category-slider-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: {{ block.settings.item_size }}px;
+    height: {{ block.settings.item_size }}px;
+    margin: 0 auto {{ block.settings.text_spacing }}px;
+    {% if block.settings.image_shape == 'circle' %}
+      border-radius: 50%;
+    {% else %}
+      border-radius: {{ block.settings.border_radius }}px;
+    {% endif %}
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    overflow: hidden;
+    transition: all 0.3s ease;
+    {% if block.settings.shadow_opacity > 0 %}
+      box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity | divided_by: 100.0 }});
+    {% endif %}
+  }
+
+  .ai-category-slider-link-{{ ai_gen_id }}:hover .ai-category-slider-image-wrapper-{{ ai_gen_id }} {
+    border-color: {{ block.settings.hover_border_color }};
+    transform: translateY(-4px);
+  }
+
+  .ai-category-slider-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-category-slider-placeholder-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
     background-color: #f4f4f4;
@@ -80,343 +259,256 @@
     justify-content: center;
   }
 
-  .ai-category-image-placeholder-{{ ai_gen_id }} svg {
+  .ai-category-slider-placeholder-{{ ai_gen_id }} svg {
     width: 60%;
     height: 60%;
     opacity: 0.3;
   }
 
-  .ai-category-title-{{ ai_gen_id }} {
-    padding: {{ block.settings.title_padding }}px;
-    text-align: {{ block.settings.text_alignment }};
-    background-color: {{ block.settings.title_bg_color }};
-    color: {{ block.settings.title_text_color }};
-    font-size: {{ block.settings.title_font_size }}px;
-    font-weight: {{ block.settings.title_font_weight }};
+  .ai-category-slider-name-{{ ai_gen_id }} {
+    font-size: {{ block.settings.category_name_size }}px;
+    color: {{ block.settings.category_name_color }};
+    font-weight: 600;
     margin: 0;
   }
 
-  .ai-category-title-overlay-{{ ai_gen_id }} {
+  .ai-category-slider-nav-{{ ai_gen_id }} {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: {{ block.settings.title_padding }}px;
-    text-align: {{ block.settings.text_alignment }};
-    background: {{ block.settings.overlay_bg_color }};
-    color: {{ block.settings.overlay_text_color }};
-    font-size: {{ block.settings.title_font_size }}px;
-    font-weight: {{ block.settings.title_font_weight }};
-    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: {{ block.settings.nav_button_color }};
+    color: {{ block.settings.nav_icon_color }};
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
-  @media screen and (min-width: 750px) {
-    .ai-category-container-{{ ai_gen_id }} {
-      padding: 0 40px;
-    }
+  .ai-category-slider-nav-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.nav_button_hover_color }};
+    transform: translateY(-50%) scale(1.1);
+  }
 
-    .ai-category-desktop-slider-{{ ai_gen_id }} {
-      position: relative;
-    }
+  .ai-category-slider-nav-{{ ai_gen_id }}:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
 
-    .ai-category-slider-wrapper-{{ ai_gen_id }} {
-      overflow: hidden;
-      position: relative;
-    }
+  .ai-category-slider-nav-{{ ai_gen_id }}:disabled:hover {
+    transform: translateY(-50%) scale(1);
+  }
 
-    .ai-category-slider-track-{{ ai_gen_id }} {
-      display: flex;
-      transition: transform 0.3s ease;
-      gap: {{ block.settings.grid_gap }}px;
-    }
+  .ai-category-slider-nav-prev-{{ ai_gen_id }} {
+    left: -22px;
+  }
 
-    .ai-category-slide-{{ ai_gen_id }} {
-      flex: 0 0 calc((100% - ({{ block.settings.desktop_columns | minus: 1 }} * {{ block.settings.grid_gap }}px)) / {{ block.settings.desktop_columns }});
-      max-width: calc((100% - ({{ block.settings.desktop_columns | minus: 1 }} * {{ block.settings.grid_gap }}px)) / {{ block.settings.desktop_columns }});
-    }
-
-    .ai-category-arrow-{{ ai_gen_id }} {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: {{ block.settings.arrow_bg_color }};
-      color: {{ block.settings.arrow_color }};
-      border: 1px solid #E0E0E0;
-      width: {{ block.settings.arrow_size }}px;
-      height: {{ block.settings.arrow_size }}px;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
-    }
-
-    .ai-category-arrow-{{ ai_gen_id }}:hover {
-      background-color: {{ block.settings.arrow_hover_bg_color }};
-      border-color: #CCCCCC;
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .ai-category-arrow-{{ ai_gen_id }}:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-
-    .ai-category-arrow-{{ ai_gen_id }}:disabled:hover {
-      transform: translateY(-50%) scale(1);
-    }
-
-    .ai-category-arrow-prev-{{ ai_gen_id }} {
-      left: 5px;
-    }
-
-    .ai-category-arrow-next-{{ ai_gen_id }} {
-      right: 5px;
-    }
-
-    .ai-category-arrow-{{ ai_gen_id }} svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .ai-category-grid-{{ ai_gen_id }} {
-      display: none;
-    }
+  .ai-category-slider-nav-next-{{ ai_gen_id }} {
+    right: -22px;
   }
 
   @media screen and (max-width: 749px) {
-    .ai-category-desktop-slider-{{ ai_gen_id }} {
+    .ai-category-slider-{{ ai_gen_id }} {
+      padding-top: {{ block.settings.padding_top | times: 0.6 }}px;
+      padding-bottom: {{ block.settings.padding_bottom | times: 0.6 }}px;
+    }
+
+    .ai-category-slider-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .ai-category-slider-track-{{ ai_gen_id }} {
+      justify-content: flex-start;
+    }
+
+    .ai-category-slider-item-{{ ai_gen_id }} {
+      width: {{ block.settings.item_size | times: 0.8 }}px;
+    }
+
+    .ai-category-slider-image-wrapper-{{ ai_gen_id }} {
+      width: {{ block.settings.item_size | times: 0.8 }}px;
+      height: {{ block.settings.item_size | times: 0.8 }}px;
+    }
+
+    .ai-category-slider-nav-{{ ai_gen_id }} {
       display: none;
+    }
+
+    .ai-category-slider-header-{{ ai_gen_id }} {
+      margin-bottom: 24px;
     }
   }
 {% endstyle %}
 
-<div class="ai-category-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-category-container-{{ ai_gen_id }}">
-    {% if block.settings.section_heading != blank %}
-      <h2 class="ai-category-heading-{{ ai_gen_id }}">{{ block.settings.section_heading }}</h2>
+<!-- SVG Filters for hand-drawn effect -->
+<svg style="position: absolute; width: 0; height: 0;">
+  <defs>
+    <filter id="handDrawnNoise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="handDrawnNoise2">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="handDrawnNoiset">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="handDrawnNoiset2">
+      <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<category-slider-{{ ai_gen_id }} class="ai-category-slider-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-category-slider-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank or block.settings.subheading != blank %}
+      <div class="ai-category-slider-header-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-category-slider-title-{{ ai_gen_id }}">
+            <svg class="ai-highlight-{{ ai_gen_id }}" viewBox="0 0 200 60" preserveAspectRatio="none">
+              <path d="M5,30 Q50,10 100,30 T195,30" fill="none"/>
+            </svg>
+            <svg class="ai-button-cosm-{{ ai_gen_id }}" width="30" height="30" viewBox="0 0 200 200">
+              <path d="M100,10 L120,60 L170,70 L130,110 L140,160 L100,135 L60,160 L70,110 L30,70 L80,60 Z"/>
+            </svg>
+            {{ block.settings.heading }}
+          </h2>
+        {% endif %}
+        {% if block.settings.subheading != blank %}
+          <p class="ai-category-slider-subtitle-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+        {% endif %}
+      </div>
     {% endif %}
 
-    <div class="ai-category-grid-{{ ai_gen_id }}">
-      {% for i in (1..9) %}
-        {% liquid
-          assign show_key = 'show_category_' | append: i
-          assign collection_key = 'collection_' | append: i
-          assign image_key = 'custom_image_' | append: i
-          assign title_key = 'custom_title_' | append: i
-          
-          assign show_category = block.settings[show_key]
-          assign collection = block.settings[collection_key]
-          assign custom_image = block.settings[image_key]
-          assign custom_title = block.settings[title_key]
-        %}
-        
-        {% if show_category %}
-          {% liquid
-            if custom_image != blank
-              assign display_image = custom_image
-            elsif collection != blank and collection.featured_image != blank
-              assign display_image = collection.featured_image
-            else
-              assign display_image = blank
-            endif
-            
-            if custom_title != blank
-              assign display_title = custom_title
-            elsif collection != blank
-              assign display_title = collection.title
-            else
-              assign display_title = 'Category ' | append: i
-            endif
-            
-            if collection != blank
-              assign category_url = collection.url
-            else
-              assign category_url = '#'
-            endif
-          %}
-          
-          <div class="ai-category-item-{{ ai_gen_id }}">
-            <a href="{{ category_url }}" class="ai-category-link-{{ ai_gen_id }}">
-              <div class="ai-category-image-wrapper-{{ ai_gen_id }}">
-                {% if display_image != blank %}
-                  <img
-                    src="{{ display_image | image_url: width: 600 }}"
-                    alt="{{ display_title | escape }}"
-                    class="ai-category-image-{{ ai_gen_id }}"
-                    loading="lazy"
-                    width="600"
-                    height="{{ 600 | times: block.settings.image_aspect_ratio | round }}"
-                  >
-                {% else %}
-                  <div class="ai-category-image-placeholder-{{ ai_gen_id }}">
-                    {{ 'collection-1' | placeholder_svg_tag }}
-                  </div>
-                {% endif %}
-                
-                {% if block.settings.title_overlay %}
-                  <h3 class="ai-category-title-overlay-{{ ai_gen_id }}">{{ display_title }}</h3>
-                {% endif %}
-              </div>
-              
-              {% unless block.settings.title_overlay %}
-                <h3 class="ai-category-title-{{ ai_gen_id }}">{{ display_title }}</h3>
-              {% endunless %}
-            </a>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
+    <div class="ai-category-slider-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.show_navigation %}
+        <button
+          class="ai-category-slider-nav-{{ ai_gen_id }} ai-category-slider-nav-prev-{{ ai_gen_id }}"
+          aria-label="Previous categories"
+          data-direction="prev"
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="12 4 6 10 12 16"></polyline>
+          </svg>
+        </button>
+      {% endif %}
 
-    <category-slider-{{ ai_gen_id }} class="ai-category-desktop-slider-{{ ai_gen_id }}">
-      <button class="ai-category-arrow-{{ ai_gen_id }} ai-category-arrow-prev-{{ ai_gen_id }}" aria-label="Previous">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
-      
-      <div class="ai-category-slider-wrapper-{{ ai_gen_id }}">
-        <div class="ai-category-slider-track-{{ ai_gen_id }}">
-          {% for i in (1..9) %}
-            {% liquid
-              assign show_key = 'show_category_' | append: i
-              assign collection_key = 'collection_' | append: i
-              assign image_key = 'custom_image_' | append: i
-              assign title_key = 'custom_title_' | append: i
-              
-              assign show_category = block.settings[show_key]
-              assign collection = block.settings[collection_key]
-              assign custom_image = block.settings[image_key]
-              assign custom_title = block.settings[title_key]
-            %}
-            
-            {% if show_category %}
-              {% liquid
-                if custom_image != blank
-                  assign display_image = custom_image
-                elsif collection != blank and collection.featured_image != blank
-                  assign display_image = collection.featured_image
-                else
-                  assign display_image = blank
-                endif
-                
-                if custom_title != blank
-                  assign display_title = custom_title
-                elsif collection != blank
-                  assign display_title = collection.title
-                else
-                  assign display_title = 'Category ' | append: i
-                endif
-                
-                if collection != blank
-                  assign category_url = collection.url
-                else
-                  assign category_url = '#'
-                endif
-              %}
-              
-              <div class="ai-category-slide-{{ ai_gen_id }}">
-                <div class="ai-category-item-{{ ai_gen_id }}">
-                  <a href="{{ category_url }}" class="ai-category-link-{{ ai_gen_id }}">
-                    <div class="ai-category-image-wrapper-{{ ai_gen_id }}">
-                      {% if display_image != blank %}
-                        <img
-                          src="{{ display_image | image_url: width: 600 }}"
-                          alt="{{ display_title | escape }}"
-                          class="ai-category-image-{{ ai_gen_id }}"
-                          loading="lazy"
-                          width="600"
-                          height="{{ 600 | times: block.settings.image_aspect_ratio | round }}"
-                        >
-                      {% else %}
-                        <div class="ai-category-image-placeholder-{{ ai_gen_id }}">
-                          {{ 'collection-1' | placeholder_svg_tag }}
-                        </div>
-                      {% endif %}
-                      
-                      {% if block.settings.title_overlay %}
-                        <h3 class="ai-category-title-overlay-{{ ai_gen_id }}">{{ display_title }}</h3>
-                      {% endif %}
+      <div class="ai-category-slider-track-{{ ai_gen_id }}">
+        {% for i in (1..8) %}
+          {% liquid
+            assign collection_key = 'collection_' | append: i
+            assign collection = block.settings[collection_key]
+            assign custom_image_key = 'custom_image_' | append: i
+            assign custom_image = block.settings[custom_image_key]
+          %}
+
+          {% if collection != blank %}
+            <div class="ai-category-slider-item-{{ ai_gen_id }}">
+              <a href="{{ collection.url }}" class="ai-category-slider-link-{{ ai_gen_id }}">
+                <div class="ai-category-slider-image-wrapper-{{ ai_gen_id }}">
+                  {% if custom_image != blank %}
+                    <img
+                      src="{{ custom_image | image_url: width: 400 }}"
+                      alt="{{ custom_image.alt | escape }}"
+                      class="ai-category-slider-image-{{ ai_gen_id }}"
+                      loading="lazy"
+                      width="400"
+                      height="400"
+                    >
+                  {% elsif collection.image %}
+                    <img
+                      src="{{ collection.image | image_url: width: 400 }}"
+                      alt="{{ collection.image.alt | escape }}"
+                      class="ai-category-slider-image-{{ ai_gen_id }}"
+                      loading="lazy"
+                      width="400"
+                      height="400"
+                    >
+                  {% elsif collection.products.first and collection.products.first.featured_image %}
+                    <img
+                      src="{{ collection.products.first.featured_image | image_url: width: 400 }}"
+                      alt="{{ collection.products.first.featured_image.alt | escape }}"
+                      class="ai-category-slider-image-{{ ai_gen_id }}"
+                      loading="lazy"
+                      width="400"
+                      height="400"
+                    >
+                  {% else %}
+                    <div class="ai-category-slider-placeholder-{{ ai_gen_id }}">
+                      {{ 'collection-apparel-1' | placeholder_svg_tag }}
                     </div>
-                    
-                    {% unless block.settings.title_overlay %}
-                      <h3 class="ai-category-title-{{ ai_gen_id }}">{{ display_title }}</h3>
-                    {% endunless %}
-                  </a>
+                  {% endif %}
                 </div>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
+                <h3 class="ai-category-slider-name-{{ ai_gen_id }}">{{ collection.title }}</h3>
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
-      
-      <button class="ai-category-arrow-{{ ai_gen_id }} ai-category-arrow-next-{{ ai_gen_id }}" aria-label="Next">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
-    </category-slider-{{ ai_gen_id }}>
+
+      {% if block.settings.show_navigation %}
+        <button
+          class="ai-category-slider-nav-{{ ai_gen_id }} ai-category-slider-nav-next-{{ ai_gen_id }}"
+          aria-label="Next categories"
+          data-direction="next"
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="8 4 14 10 8 16"></polyline>
+          </svg>
+        </button>
+      {% endif %}
+    </div>
   </div>
-</div>
+</category-slider-{{ ai_gen_id }}>
 
 <script>
   (function() {
     class CategorySlider{{ ai_gen_id }} extends HTMLElement {
       constructor() {
         super();
-        this.currentIndex = 0;
-        this.slidesPerView = {{ block.settings.desktop_columns }};
       }
 
       connectedCallback() {
         this.track = this.querySelector('.ai-category-slider-track-{{ ai_gen_id }}');
-        this.prevButton = this.querySelector('.ai-category-arrow-prev-{{ ai_gen_id }}');
-        this.nextButton = this.querySelector('.ai-category-arrow-next-{{ ai_gen_id }}');
-        this.slides = this.querySelectorAll('.ai-category-slide-{{ ai_gen_id }}');
-        this.totalSlides = this.slides.length;
-        
-        this.prevButton.addEventListener('click', () => this.prev());
-        this.nextButton.addEventListener('click', () => this.next());
-        
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.prev();
-          if (e.key === 'ArrowRight') this.next();
-        });
-        
-        this.updateButtons();
-      }
+        this.prevButton = this.querySelector('.ai-category-slider-nav-prev-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-category-slider-nav-next-{{ ai_gen_id }}');
 
-      prev() {
-        if (this.currentIndex > 0) {
-          this.currentIndex--;
-          this.updateSlider();
+        if (this.prevButton && this.nextButton) {
+          this.setupNavigation();
         }
       }
 
-      next() {
-        const maxIndex = Math.max(0, this.totalSlides - this.slidesPerView);
-        if (this.currentIndex < maxIndex) {
-          this.currentIndex++;
-          this.updateSlider();
-        }
+      setupNavigation() {
+        this.prevButton.addEventListener('click', () => this.scroll('prev'));
+        this.nextButton.addEventListener('click', () => this.scroll('next'));
+        this.track.addEventListener('scroll', () => this.updateButtons());
+        this.updateButtons();
       }
 
-      updateSlider() {
-        if (this.slides.length === 0) return;
-        const slideWidth = this.slides[0].offsetWidth;
-        const gap = {{ block.settings.grid_gap }};
-        const offset = -(this.currentIndex * (slideWidth + gap));
-        this.track.style.transform = `translateX(${offset}px)`;
-        this.updateButtons();
+      scroll(direction) {
+        const scrollAmount = this.track.offsetWidth * 0.8;
+        const currentScroll = this.track.scrollLeft;
+
+        if (direction === 'next') {
+          this.track.scrollLeft = currentScroll + scrollAmount;
+        } else {
+          this.track.scrollLeft = currentScroll - scrollAmount;
+        }
       }
 
       updateButtons() {
-        const maxIndex = Math.max(0, this.totalSlides - this.slidesPerView);
-        this.prevButton.disabled = this.currentIndex === 0;
-        this.nextButton.disabled = this.currentIndex >= maxIndex;
+        const maxScroll = this.track.scrollWidth - this.track.offsetWidth;
+        this.prevButton.disabled = this.track.scrollLeft <= 0;
+        this.nextButton.disabled = this.track.scrollLeft >= maxScroll - 1;
       }
     }
 
@@ -426,217 +518,152 @@
 
 {% schema %}
 {
-  "name": "Fashion category grid",
+  "name": "Category slider",
   "tag": null,
   "settings": [
     {
       "type": "header",
-      "content": "Section heading"
+      "content": "Section spacing"
     },
     {
-      "type": "text",
-      "id": "section_heading",
-      "label": "Heading"
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
     },
     {
-      "type": "select",
-      "id": "heading_alignment",
-      "label": "Alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Category"
     },
     {
       "type": "range",
       "id": "heading_size",
-      "min": 20,
+      "min": 16,
       "max": 60,
       "step": 2,
       "unit": "px",
-      "label": "Font size",
+      "label": "Heading size",
       "default": 32
-    },
-    {
-      "type": "range",
-      "id": "heading_weight",
-      "min": 400,
-      "max": 700,
-      "step": 100,
-      "label": "Font weight",
-      "default": 700
     },
     {
       "type": "color",
       "id": "heading_color",
-      "label": "Color",
-      "default": "#000000"
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Explore our kitchen and home essentials"
     },
     {
       "type": "range",
-      "id": "heading_margin",
+      "id": "subheading_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Category items"
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "label": "Image shape",
+      "options": [
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "default": "circle"
+    },
+    {
+      "type": "range",
+      "id": "item_size",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Image size",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "gap",
       "min": 10,
       "max": 60,
       "step": 5,
       "unit": "px",
-      "label": "Bottom margin",
+      "label": "Gap between items",
       "default": 30
     },
     {
-      "type": "header",
-      "content": "Layout"
-    },
-    {
       "type": "range",
-      "id": "desktop_columns",
-      "min": 2,
-      "max": 5,
-      "step": 1,
-      "label": "Desktop columns",
-      "default": 4
-    },
-    {
-      "type": "range",
-      "id": "grid_gap",
-      "min": 10,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "label": "Gap between items",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "section_padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "label": "Top padding",
-      "default": 50
-    },
-    {
-      "type": "range",
-      "id": "section_padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "label": "Bottom padding",
-      "default": 50
-    },
-    {
-      "type": "color",
-      "id": "section_bg_color",
-      "label": "Section background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "Image"
-    },
-    {
-      "type": "range",
-      "id": "image_aspect_ratio",
-      "min": 0.5,
-      "max": 1.5,
-      "step": 0.1,
-      "label": "Image aspect ratio",
-      "default": 1.2
-    },
-    {
-      "type": "header",
-      "content": "Title"
-    },
-    {
-      "type": "checkbox",
-      "id": "title_overlay",
-      "label": "Overlay title on image",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "range",
-      "id": "title_font_size",
-      "min": 12,
+      "id": "text_spacing",
+      "min": 8,
       "max": 32,
       "step": 2,
       "unit": "px",
-      "label": "Font size",
+      "label": "Space below image",
       "default": 16
     },
     {
       "type": "range",
-      "id": "title_font_weight",
-      "min": 400,
-      "max": 700,
-      "step": 100,
-      "label": "Font weight",
-      "default": 600
-    },
-    {
-      "type": "range",
-      "id": "title_padding",
-      "min": 5,
-      "max": 30,
-      "step": 5,
+      "id": "category_name_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
       "unit": "px",
-      "label": "Padding",
-      "default": 15
+      "label": "Category name size",
+      "default": 16
     },
     {
       "type": "color",
-      "id": "title_bg_color",
-      "label": "Background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "title_text_color",
-      "label": "Text color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "overlay_bg_color",
-      "label": "Overlay background",
-      "default": "transparent"
-    },
-    {
-      "type": "color",
-      "id": "overlay_text_color",
-      "label": "Overlay text color",
-      "default": "#ffffff"
+      "id": "category_name_color",
+      "label": "Category name color",
+      "default": "#1a1a1a"
     },
     {
       "type": "header",
@@ -646,7 +673,7 @@
       "type": "range",
       "id": "border_width",
       "min": 0,
-      "max": 5,
+      "max": 10,
       "step": 1,
       "unit": "px",
       "label": "Border width",
@@ -668,11 +695,12 @@
       "type": "range",
       "id": "border_radius",
       "min": 0,
-      "max": 30,
-      "step": 2,
+      "max": 100,
+      "step": 4,
       "unit": "px",
       "label": "Border radius",
-      "default": 8
+      "default": 8,
+      "info": "Only applies when image shape is square"
     },
     {
       "type": "header",
@@ -712,272 +740,136 @@
       "type": "range",
       "id": "shadow_opacity",
       "min": 0,
-      "max": 1,
-      "step": 0.1,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
       "label": "Shadow opacity",
       "default": 0
     },
     {
       "type": "header",
-      "content": "Desktop slider arrows"
+      "content": "Navigation"
     },
     {
-      "type": "range",
-      "id": "arrow_size",
-      "min": 30,
-      "max": 60,
-      "step": 5,
-      "unit": "px",
-      "label": "Arrow size",
-      "default": 45
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation arrows",
+      "default": true
     },
     {
       "type": "color",
-      "id": "arrow_bg_color",
-      "label": "Background",
+      "id": "nav_button_color",
+      "label": "Button color",
       "default": "#ffffff"
     },
     {
       "type": "color",
-      "id": "arrow_hover_bg_color",
-      "label": "Hover background",
-      "default": "#000000"
+      "id": "nav_button_hover_color",
+      "label": "Button hover color",
+      "default": "#f5f5f5"
     },
     {
       "type": "color",
-      "id": "arrow_color",
+      "id": "nav_icon_color",
       "label": "Icon color",
-      "default": "#000000"
+      "default": "#1a1a1a"
     },
     {
       "type": "header",
-      "content": "Category 1"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_category_1",
-      "label": "Show category 1",
-      "default": true
+      "content": "Collections"
     },
     {
       "type": "collection",
       "id": "collection_1",
-      "label": "Collection"
+      "label": "Collection 1"
     },
     {
       "type": "image_picker",
       "id": "custom_image_1",
-      "label": "Custom image"
-    },
-    {
-      "type": "text",
-      "id": "custom_title_1",
-      "label": "Custom title"
-    },
-    {
-      "type": "header",
-      "content": "Category 2"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_category_2",
-      "label": "Show category 2",
-      "default": true
+      "label": "Custom image 1",
+      "info": "Optional: Override collection image"
     },
     {
       "type": "collection",
       "id": "collection_2",
-      "label": "Collection"
+      "label": "Collection 2"
     },
     {
       "type": "image_picker",
       "id": "custom_image_2",
-      "label": "Custom image"
-    },
-    {
-      "type": "text",
-      "id": "custom_title_2",
-      "label": "Custom title"
-    },
-    {
-      "type": "header",
-      "content": "Category 3"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_category_3",
-      "label": "Show category 3",
-      "default": true
+      "label": "Custom image 2",
+      "info": "Optional: Override collection image"
     },
     {
       "type": "collection",
       "id": "collection_3",
-      "label": "Collection"
+      "label": "Collection 3"
     },
     {
       "type": "image_picker",
       "id": "custom_image_3",
-      "label": "Custom image"
-    },
-    {
-      "type": "text",
-      "id": "custom_title_3",
-      "label": "Custom title"
-    },
-    {
-      "type": "header",
-      "content": "Category 4"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_category_4",
-      "label": "Show category 4",
-      "default": true
+      "label": "Custom image 3",
+      "info": "Optional: Override collection image"
     },
     {
       "type": "collection",
       "id": "collection_4",
-      "label": "Collection"
+      "label": "Collection 4"
     },
     {
       "type": "image_picker",
       "id": "custom_image_4",
-      "label": "Custom image"
-    },
-    {
-      "type": "text",
-      "id": "custom_title_4",
-      "label": "Custom title"
-    },
-    {
-      "type": "header",
-      "content": "Category 5"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_category_5",
-      "label": "Show category 5",
-      "default": true
+      "label": "Custom image 4",
+      "info": "Optional: Override collection image"
     },
     {
       "type": "collection",
       "id": "collection_5",
-      "label": "Collection"
+      "label": "Collection 5"
     },
     {
       "type": "image_picker",
       "id": "custom_image_5",
-      "label": "Custom image"
-    },
-    {
-      "type": "text",
-      "id": "custom_title_5",
-      "label": "Custom title"
-    },
-    {
-      "type": "header",
-      "content": "Category 6"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_category_6",
-      "label": "Show category 6",
-      "default": true
+      "label": "Custom image 5",
+      "info": "Optional: Override collection image"
     },
     {
       "type": "collection",
       "id": "collection_6",
-      "label": "Collection"
+      "label": "Collection 6"
     },
     {
       "type": "image_picker",
       "id": "custom_image_6",
-      "label": "Custom image"
-    },
-    {
-      "type": "text",
-      "id": "custom_title_6",
-      "label": "Custom title"
-    },
-    {
-      "type": "header",
-      "content": "Category 7"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_category_7",
-      "label": "Show category 7",
-      "default": true
+      "label": "Custom image 6",
+      "info": "Optional: Override collection image"
     },
     {
       "type": "collection",
       "id": "collection_7",
-      "label": "Collection"
+      "label": "Collection 7"
     },
     {
       "type": "image_picker",
       "id": "custom_image_7",
-      "label": "Custom image"
-    },
-    {
-      "type": "text",
-      "id": "custom_title_7",
-      "label": "Custom title"
-    },
-    {
-      "type": "header",
-      "content": "Category 8"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_category_8",
-      "label": "Show category 8",
-      "default": true
+      "label": "Custom image 7",
+      "info": "Optional: Override collection image"
     },
     {
       "type": "collection",
       "id": "collection_8",
-      "label": "Collection"
+      "label": "Collection 8"
     },
     {
       "type": "image_picker",
       "id": "custom_image_8",
-      "label": "Custom image"
-    },
-    {
-      "type": "text",
-      "id": "custom_title_8",
-      "label": "Custom title"
-    },
-    {
-      "type": "header",
-      "content": "Category 9"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_category_9",
-      "label": "Show category 9",
-      "default": true
-    },
-    {
-      "type": "collection",
-      "id": "collection_9",
-      "label": "Collection"
-    },
-    {
-      "type": "image_picker",
-      "id": "custom_image_9",
-      "label": "Custom image"
-    },
-    {
-      "type": "text",
-      "id": "custom_title_9",
-      "label": "Custom title"
+      "label": "Custom image 8",
+      "info": "Optional: Override collection image"
     }
   ],
   "presets": [
     {
-      "name": "Fashion category grid"
+      "name": "Category slider"
     }
   ]
 }
