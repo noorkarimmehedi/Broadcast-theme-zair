@@ -283,7 +283,7 @@
             "title_color": "#000000",
             "header_spacing": 40,
             "button_text": "DISCOVER MORE",
-            "button_link": "shopify://collections",
+            "button_link": "shopify://collections/new-arrival",
             "button_font": "system_ui_n4",
             "button_size": 11,
             "button_letter_spacing": 1.5,
