@@ -138,9 +138,7 @@
     <ul class="ai-category-filter-list-{{ ai_gen_id }}">
       {% assign found_active = false %}
       {% assign active_category_index = 0 %}
-      {% assign active_match_priority = 0 %}
       
-      {% comment %} First pass: Find the best matching category {% endcomment %}
       {% for i in (1..20) %}
         {% liquid
           assign category_enabled_key = 'category_' | append: i | append: '_enabled'
@@ -151,73 +149,69 @@
           assign category_label = block.settings[category_label_key]
           assign category_collection = block.settings[category_collection_key]
           
-          assign match_priority = 0
-          
-          if category_enabled and category_label != blank
-            if category_collection != blank
-              assign cat_handle = category_collection.handle
-              assign cat_id = category_collection.id | plus: 0
-              assign current_id = current_collection_id | plus: 0
-              
-              # Priority 1: Direct handle exact match (highest priority)
-              if cat_handle == current_collection_handle and current_collection_handle != ''
-                assign match_priority = 100
-              # Priority 2: URL handle exact match
-              elsif cat_handle == url_collection_handle and url_collection_handle != ''
-                assign match_priority = 90
-              # Priority 3: ID exact match
-              elsif cat_id == current_id and cat_id != 0
-                assign match_priority = 80
-              endif
-            else
-              # Handle the ALL category (no collection assigned)
-              if i == 1
-                if url_collection_handle == 'all' or current_collection_handle == 'all'
-                  assign match_priority = 70
-                elsif current_url contains '/collections/all'
-                  assign match_priority = 60
-                elsif current_collection_handle == blank and url_collection_handle == blank
-                  assign match_priority = 50
-                endif
-              endif
-            endif
-            
-            # Update active category if this has higher priority
-            if match_priority > active_match_priority
-              assign active_match_priority = match_priority
-              assign active_category_index = i
-              assign found_active = true
-            endif
-          endif
-        %}
-      {% endfor %}
-
-      {% comment %} Second pass: Render categories with correct active state {% endcomment %}
-      {% for i in (1..20) %}
-        {% liquid
-          assign category_enabled_key = 'category_' | append: i | append: '_enabled'
-          assign category_label_key = 'category_' | append: i | append: '_label'
-          assign category_collection_key = 'category_' | append: i | append: '_collection'
-
-          assign category_enabled = block.settings[category_enabled_key]
-          assign category_label = block.settings[category_label_key]
-          assign category_collection = block.settings[category_collection_key]
-          
-          # This category is active only if it's the one we found in the first pass
+          # Determine if this category is active
           assign is_active = false
-          if i == active_category_index
-            assign is_active = true
+          assign match_reason = ''
+          
+          if category_collection != blank
+            # Try multiple ways to match the collection
+            assign cat_handle = category_collection.handle
+            assign cat_id = category_collection.id | plus: 0
+            assign current_id = current_collection_id | plus: 0
+            
+            # Method 1: Direct handle comparison
+            if cat_handle == current_collection_handle
+              assign is_active = true
+              assign match_reason = 'handle match'
+              assign found_active = true
+              assign active_category_index = i
+            # Method 2: URL handle comparison
+            elsif cat_handle == url_collection_handle
+              assign is_active = true
+              assign match_reason = 'url handle match'
+              assign found_active = true
+              assign active_category_index = i
+            # Method 3: ID comparison
+            elsif cat_id == current_id and cat_id != 0
+              assign is_active = true
+              assign match_reason = 'id match'
+              assign found_active = true
+              assign active_category_index = i
+            # Method 4: URL contains check
+            elsif current_url contains cat_handle and cat_handle != ''
+              assign is_active = true
+              assign match_reason = 'url contains'
+              assign found_active = true
+              assign active_category_index = i
+            endif
+          else
+            # Handle the ALL category (no collection assigned)
+            if i == 1
+              if url_collection_handle == 'all' or current_collection_handle == 'all' or current_url contains '/collections/all'
+                assign is_active = true
+                assign match_reason = 'all collection'
+                assign found_active = true
+                assign active_category_index = i
+              elsif current_collection_handle == blank and url_collection_handle == blank
+                # No collection page, make first item active
+                assign is_active = true
+                assign match_reason = 'default first'
+                assign found_active = true
+                assign active_category_index = i
+              endif
+            endif
           endif
         %}
 
         {% if category_enabled and category_label != blank %}
           <li class="ai-category-filter-item-{{ ai_gen_id }}">
-            
+            <a
               href="{% if category_collection != blank %}{{ category_collection.url }}{% else %}/collections/all{% endif %}"
               class="ai-category-filter-button-{{ ai_gen_id }}{% if is_active %} active{% endif %}"
               data-collection-id="{% if category_collection != blank %}{{ category_collection.id }}{% else %}all{% endif %}"
               data-collection-handle="{% if category_collection != blank %}{{ category_collection.handle }}{% else %}all{% endif %}"
               data-category-index="{{ i }}"
+              data-match-reason="{{ match_reason }}"
             >
               {{ category_label }}
             </a>
@@ -237,7 +231,6 @@
       Current URL: <strong>{{ current_url }}</strong><br>
       Found Active: <strong>{{ found_active }}</strong><br>
       Active Category Index: <strong>{{ active_category_index }}</strong><br>
-      Active Match Priority: <strong>{{ active_match_priority }}</strong><br>
       <br>
       <strong>All Configured Categories:</strong><br>
       {% for i in (1..20) %}
@@ -257,7 +250,6 @@
           {% else %}
             No collection assigned
           {% endif %}
-          {% if i == active_category_index %}<strong style="color: green;"> ← ACTIVE</strong>{% endif %}
           <br>
         {% endif %}
       {% endfor %}
