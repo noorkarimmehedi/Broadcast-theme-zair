@@ -165,7 +165,7 @@
       "settings": {
         "show_title": true,
         "show_description": true,
-        "flex_align": "align--middle-left",
+        "flex_align": "align--middle-center",
         "bg_color": "",
         "color": "",
         "show_image": true,
