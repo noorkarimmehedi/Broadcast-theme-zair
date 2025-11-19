@@ -139,6 +139,7 @@
       {% assign found_active = false %}
       {% assign active_category_index = 0 %}
       
+      {% comment %} First pass: Find exact matches only {% endcomment %}
       {% for i in (1..20) %}
         {% liquid
           assign category_enabled_key = 'category_' | append: i | append: '_enabled'
@@ -149,45 +150,39 @@
           assign category_label = block.settings[category_label_key]
           assign category_collection = block.settings[category_collection_key]
           
-          # Determine if this category is active
+          # Determine if this category is active - EXACT MATCHES ONLY
           assign is_active = false
           assign match_reason = ''
           
           if category_collection != blank
-            # Try multiple ways to match the collection
+            # Try multiple ways to match the collection - EXACT MATCHES ONLY
             assign cat_handle = category_collection.handle
             assign cat_id = category_collection.id | plus: 0
             assign current_id = current_collection_id | plus: 0
             
-            # Method 1: Direct handle comparison
-            if cat_handle == current_collection_handle
+            # Method 1: Direct handle comparison (EXACT)
+            if cat_handle == current_collection_handle and current_collection_handle != ''
               assign is_active = true
-              assign match_reason = 'handle match'
+              assign match_reason = 'exact handle match'
               assign found_active = true
               assign active_category_index = i
-            # Method 2: URL handle comparison
-            elsif cat_handle == url_collection_handle
+            # Method 2: URL handle comparison (EXACT)
+            elsif cat_handle == url_collection_handle and url_collection_handle != ''
               assign is_active = true
-              assign match_reason = 'url handle match'
+              assign match_reason = 'exact url handle match'
               assign found_active = true
               assign active_category_index = i
-            # Method 3: ID comparison
+            # Method 3: ID comparison (EXACT)
             elsif cat_id == current_id and cat_id != 0
               assign is_active = true
-              assign match_reason = 'id match'
-              assign found_active = true
-              assign active_category_index = i
-            # Method 4: URL contains check
-            elsif current_url contains cat_handle and cat_handle != ''
-              assign is_active = true
-              assign match_reason = 'url contains'
+              assign match_reason = 'exact id match'
               assign found_active = true
               assign active_category_index = i
             endif
           else
             # Handle the ALL category (no collection assigned)
             if i == 1
-              if url_collection_handle == 'all' or current_collection_handle == 'all' or current_url contains '/collections/all'
+              if url_collection_handle == 'all' or current_collection_handle == 'all'
                 assign is_active = true
                 assign match_reason = 'all collection'
                 assign found_active = true
@@ -205,7 +200,7 @@
 
         {% if category_enabled and category_label != blank %}
           <li class="ai-category-filter-item-{{ ai_gen_id }}">
-            <a
+            
               href="{% if category_collection != blank %}{{ category_collection.url }}{% else %}/collections/all{% endif %}"
               class="ai-category-filter-button-{{ ai_gen_id }}{% if is_active %} active{% endif %}"
               data-collection-id="{% if category_collection != blank %}{{ category_collection.id }}{% else %}all{% endif %}"
