@@ -174,30 +174,21 @@
                 assign found_active = true
                 assign active_category_index = i
               endif
-            else
-              # Handle the ALL category (no collection assigned)
-              if i == 1
-                if url_collection_handle == 'all' or current_collection_handle == 'all' or current_url contains '/collections/all'
-                  assign is_active = true
-                  assign match_reason = 'all collection'
-                  assign found_active = true
-                  assign active_category_index = i
-                elsif current_collection_handle == blank and url_collection_handle == blank and current_url == '/' or current_url == '/collections' or current_url == '/collections/'
-                  # No collection page or root collections page, make first item active
-                  assign is_active = true
-                  assign match_reason = 'default first'
-                  assign found_active = true
-                  assign active_category_index = i
-                endif
-              endif
             endif
           endunless
         %}
 
         {% if category_enabled and category_label != blank %}
+          {% comment %} Generate the proper URL for each category {% endcomment %}
+          {% if category_collection != blank %}
+            {% assign category_url = category_collection.url %}
+          {% else %}
+            {% assign category_url = '/collections/all' %}
+          {% endif %}
+
           <li class="ai-category-filter-item-{{ ai_gen_id }}">
             <a
-              href="{% if category_collection != blank %}{{ category_collection.url }}{% else %}/collections/all{% endif %}"
+              href="{{ category_url }}"
               class="ai-category-filter-button-{{ ai_gen_id }}{% if is_active %} active{% endif %}"
               data-collection-id="{% if category_collection != blank %}{{ category_collection.id }}{% else %}all{% endif %}"
               data-collection-handle="{% if category_collection != blank %}{{ category_collection.handle }}{% else %}all{% endif %}"
@@ -209,25 +200,6 @@
           </li>
         {% endif %}
       {% endfor %}
-      
-      {% comment %} If no active item was found and we're on a collection page, check for partial matches as fallback {% endcomment %}
-      {% unless found_active %}
-        {% for i in (1..20) %}
-          {% liquid
-            assign category_enabled_key = 'category_' | append: i | append: '_enabled'
-            assign category_label_key = 'category_' | append: i | append: '_label'
-            assign category_collection_key = 'category_' | append: i | append: '_collection'
-
-            assign category_enabled = block.settings[category_enabled_key]
-            assign category_label = block.settings[category_label_key]
-            assign category_collection = block.settings[category_collection_key]
-          %}
-
-          {% if category_enabled and category_label != blank %}
-            {% comment %} This is a second pass, so we just render without active state {% endcomment %}
-          {% endif %}
-        {% endfor %}
-      {% endunless %}
     </ul>
   </div>
   
@@ -256,9 +228,9 @@
         {% if cat_enabled and cat_label != blank %}
           Category {{ i }}: <strong>{{ cat_label }}</strong> → 
           {% if cat_collection != blank %}
-            Collection: {{ cat_collection.title }} (handle: {{ cat_collection.handle }}, id: {{ cat_collection.id }})
+            Collection: {{ cat_collection.title }} (handle: {{ cat_collection.handle }}, id: {{ cat_collection.id }}, url: {{ cat_collection.url }})
           {% else %}
-            No collection assigned (ALL)
+            No collection assigned (will default to /collections/all)
           {% endif %}
           <br>
         {% endif %}
@@ -514,7 +486,8 @@
     {
       "type": "collection",
       "id": "category_1_collection",
-      "label": "Collection"
+      "label": "Collection",
+      "info": "Select the collection for this category. Leave blank to use /collections/all"
     },
     {
       "type": "header",
