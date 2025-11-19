@@ -298,7 +298,7 @@
             "button_hover_border": "#000000",
             "show_bottom_button": true,
             "bottom_button_text": "DISCOVER MORE",
-            "bottom_button_link": "shopify://collections",
+            "bottom_button_link": "shopify://collections/new-arrival",
             "bottom_button_spacing": 40,
             "bottom_button_font": "system_ui_n4",
             "bottom_button_size": 13,
