@@ -569,7 +569,7 @@
             "shadow_opacity": 0,
             "arrow_size": 45,
             "arrow_bg_color": "#ffffff",
-            "arrow_hover_bg_color": "#000000",
+            "arrow_hover_bg_color": "#ffffff",
             "arrow_color": "#000000",
             "show_category_1": false,
             "collection_1": "",
