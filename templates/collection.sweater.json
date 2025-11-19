@@ -40,7 +40,7 @@
             "show_debug": false,
             "category_1_enabled": true,
             "category_1_label": "All",
-            "category_1_collection": "best-sellers",
+            "category_1_collection": "all-products",
             "category_2_enabled": true,
             "category_2_label": "New Arrival",
             "category_2_collection": "new-arrival",
