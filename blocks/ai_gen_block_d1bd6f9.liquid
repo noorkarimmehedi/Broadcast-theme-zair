@@ -1,9 +1,3 @@
-{% doc %}
-  @prompt
-    Create a minimal, horizontally swipeable category filter bar for a fashion e-commerce website. Use a clean light gray background (#F5F5F5) with a row of rectangular buttons labeled in uppercase sans-serif text (e.g., ALL, NEW, FORMAL, PRINTS, PLAIN, etc.). Each button has a thin black border and white fill, except the active one ('ALL'), which features a solid black background with white text.
-    
-    The filter bar should scroll horizontally (swipeable) on mobile and have smooth snap scrolling. Maintain equal spacing, rounded corners (small radius), and consistent padding. Add a subtle hover or active state transition that inverts colors. The style should feel premium, minimal, and fashion-forward, emphasizing clarity and usability., should be option for adding 20 Category and also in desktop version there should be option for alligment, only ALL should have black background and white text. all og the other should redirect to saved category when a user click it
-{% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% comment %} Get current collection information - multiple ways to ensure we catch it {% endcomment %}
@@ -72,7 +66,7 @@
     font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
     font-weight: {{ block.settings.button_font.weight }};
     font-size: {{ block.settings.button_font_size }}px;
-    text-transform: capitalize;;
+    text-transform: uppercase;
     letter-spacing: {{ block.settings.letter_spacing }}px;
     text-decoration: none;
     cursor: pointer;
@@ -149,58 +143,55 @@
           assign category_label = block.settings[category_label_key]
           assign category_collection = block.settings[category_collection_key]
           
-          # Determine if this category is active
+          # Initialize is_active as false for each iteration
           assign is_active = false
           assign match_reason = ''
           
-          if category_collection != blank
-            # Try multiple ways to match the collection
-            assign cat_handle = category_collection.handle
-            assign cat_id = category_collection.id | plus: 0
-            assign current_id = current_collection_id | plus: 0
-            
-            # Method 1: Direct handle comparison
-            if cat_handle == current_collection_handle
-              assign is_active = true
-              assign match_reason = 'handle match'
-              assign found_active = true
-              assign active_category_index = i
-            # Method 2: URL handle comparison
-            elsif cat_handle == url_collection_handle
-              assign is_active = true
-              assign match_reason = 'url handle match'
-              assign found_active = true
-              assign active_category_index = i
-            # Method 3: ID comparison
-            elsif cat_id == current_id and cat_id != 0
-              assign is_active = true
-              assign match_reason = 'id match'
-              assign found_active = true
-              assign active_category_index = i
-            # Method 4: URL contains check
-            elsif current_url contains cat_handle and cat_handle != ''
-              assign is_active = true
-              assign match_reason = 'url contains'
-              assign found_active = true
-              assign active_category_index = i
-            endif
-          else
-            # Handle the ALL category (no collection assigned)
-            if i == 1
-              if url_collection_handle == 'all' or current_collection_handle == 'all' or current_url contains '/collections/all'
+          # Only check if we haven't found an active item yet
+          unless found_active
+            if category_collection != blank
+              # Try multiple ways to match the collection
+              assign cat_handle = category_collection.handle
+              assign cat_id = category_collection.id | plus: 0
+              assign current_id = current_collection_id | plus: 0
+              
+              # Method 1: Exact handle comparison (highest priority)
+              if cat_handle == current_collection_handle and current_collection_handle != ''
                 assign is_active = true
-                assign match_reason = 'all collection'
+                assign match_reason = 'exact handle match'
                 assign found_active = true
                 assign active_category_index = i
-              elsif current_collection_handle == blank and url_collection_handle == blank
-                # No collection page, make first item active
+              # Method 2: Exact URL handle comparison
+              elsif cat_handle == url_collection_handle and url_collection_handle != ''
                 assign is_active = true
-                assign match_reason = 'default first'
+                assign match_reason = 'exact url handle match'
+                assign found_active = true
+                assign active_category_index = i
+              # Method 3: ID comparison
+              elsif cat_id == current_id and cat_id != 0 and current_id != 0
+                assign is_active = true
+                assign match_reason = 'id match'
                 assign found_active = true
                 assign active_category_index = i
               endif
+            else
+              # Handle the ALL category (no collection assigned)
+              if i == 1
+                if url_collection_handle == 'all' or current_collection_handle == 'all' or current_url contains '/collections/all'
+                  assign is_active = true
+                  assign match_reason = 'all collection'
+                  assign found_active = true
+                  assign active_category_index = i
+                elsif current_collection_handle == blank and url_collection_handle == blank and current_url == '/' or current_url == '/collections' or current_url == '/collections/'
+                  # No collection page or root collections page, make first item active
+                  assign is_active = true
+                  assign match_reason = 'default first'
+                  assign found_active = true
+                  assign active_category_index = i
+                endif
+              endif
             endif
-          endif
+          endunless
         %}
 
         {% if category_enabled and category_label != blank %}
@@ -218,6 +209,25 @@
           </li>
         {% endif %}
       {% endfor %}
+      
+      {% comment %} If no active item was found and we're on a collection page, check for partial matches as fallback {% endcomment %}
+      {% unless found_active %}
+        {% for i in (1..20) %}
+          {% liquid
+            assign category_enabled_key = 'category_' | append: i | append: '_enabled'
+            assign category_label_key = 'category_' | append: i | append: '_label'
+            assign category_collection_key = 'category_' | append: i | append: '_collection'
+
+            assign category_enabled = block.settings[category_enabled_key]
+            assign category_label = block.settings[category_label_key]
+            assign category_collection = block.settings[category_collection_key]
+          %}
+
+          {% if category_enabled and category_label != blank %}
+            {% comment %} This is a second pass, so we just render without active state {% endcomment %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
     </ul>
   </div>
   
@@ -248,7 +258,7 @@
           {% if cat_collection != blank %}
             Collection: {{ cat_collection.title }} (handle: {{ cat_collection.handle }}, id: {{ cat_collection.id }})
           {% else %}
-            No collection assigned
+            No collection assigned (ALL)
           {% endif %}
           <br>
         {% endif %}
@@ -259,8 +269,7 @@
 
 {% schema %}
 {
-  "name": "Category filter bar",
-  "tag": null,
+  "name": "Category Filter Bar",
   "settings": [
     {
       "type": "header",
@@ -298,7 +307,7 @@
     },
     {
       "type": "header",
-      "content": "Desktop settings"
+      "content": "Desktop Settings"
     },
     {
       "type": "select",
@@ -332,7 +341,7 @@
     },
     {
       "type": "header",
-      "content": "Button style"
+      "content": "Button Style"
     },
     {
       "type": "font_picker",
@@ -411,7 +420,7 @@
     },
     {
       "type": "header",
-      "content": "Default button colors"
+      "content": "Default Button Colors"
     },
     {
       "type": "color",
@@ -433,7 +442,7 @@
     },
     {
       "type": "header",
-      "content": "Hover state"
+      "content": "Hover State"
     },
     {
       "type": "color",
@@ -455,7 +464,7 @@
     },
     {
       "type": "header",
-      "content": "Active state"
+      "content": "Active State"
     },
     {
       "type": "color",
@@ -894,7 +903,7 @@
   ],
   "presets": [
     {
-      "name": "Category filter bar"
+      "name": "Category Filter Bar"
     }
   ]
 }
