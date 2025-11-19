@@ -228,12 +228,12 @@
   <div class="ai-product-grid-container-{{ ai_gen_id }}">
     <div class="ai-product-grid-header-{{ ai_gen_id }}">
       <h2 class="ai-product-grid-title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
-      {% if block.settings.collection != blank %}
-        <a href="{{ block.settings.collection.url }}" class="ai-product-grid-button-{{ ai_gen_id }}">
+      {% if block.settings.button_link != blank %}
+        <a href="{{ block.settings.button_link }}" class="ai-product-grid-button-{{ ai_gen_id }}">
           {{ block.settings.button_text }}
         </a>
-      {% elsif block.settings.button_link != blank %}
-        <a href="{{ block.settings.button_link }}" class="ai-product-grid-button-{{ ai_gen_id }}">
+      {% elsif block.settings.collection != blank %}
+        <a href="{{ block.settings.collection.url }}" class="ai-product-grid-button-{{ ai_gen_id }}">
           {{ block.settings.button_text }}
         </a>
       {% endif %}
@@ -284,12 +284,12 @@
 
     {% if block.settings.show_bottom_button %}
       <div class="ai-product-grid-bottom-{{ ai_gen_id }}">
-        {% if block.settings.collection != blank %}
-          <a href="{{ block.settings.collection.url }}" class="ai-product-grid-bottom-button-{{ ai_gen_id }}">
+        {% if block.settings.bottom_button_link != blank %}
+          <a href="{{ block.settings.bottom_button_link }}" class="ai-product-grid-bottom-button-{{ ai_gen_id }}">
             {{ block.settings.bottom_button_text }}
           </a>
-        {% elsif block.settings.bottom_button_link != blank %}
-          <a href="{{ block.settings.bottom_button_link }}" class="ai-product-grid-bottom-button-{{ ai_gen_id }}">
+        {% elsif block.settings.collection != blank %}
+          <a href="{{ block.settings.collection.url }}" class="ai-product-grid-bottom-button-{{ ai_gen_id }}">
             {{ block.settings.bottom_button_text }}
           </a>
         {% endif %}
@@ -403,7 +403,7 @@
     {
       "type": "url",
       "id": "button_link",
-      "label": "Custom link"
+      "label": "Custom link (overrides collection URL)"
     },
     {
       "type": "font_picker",
@@ -516,7 +516,7 @@
     {
       "type": "url",
       "id": "bottom_button_link",
-      "label": "Custom link"
+      "label": "Custom link (overrides collection URL)"
     },
     {
       "type": "range",
