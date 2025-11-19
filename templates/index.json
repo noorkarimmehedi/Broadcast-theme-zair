@@ -538,9 +538,9 @@
         "ai_gen_block_449ca2f_cpf9d9": {
           "type": "ai_gen_block_449ca2f",
           "settings": {
-            "section_heading": "Shop by Category",
+            "section_heading": "FEATURED CATEGORIES",
             "heading_alignment": "center",
-            "heading_size": 32,
+            "heading_size": 24,
             "heading_weight": 700,
             "heading_color": "#000000",
             "heading_margin": 30,
@@ -631,7 +631,7 @@
             "card_aspect_ratio": 0.7,
             "card_background": "#f5f5f5",
             "show_overlay": true,
-            "overlay_color": "rgba(0,0,0,0.6)",
+            "overlay_color": "#00000099",
             "overlay_height": 50,
             "label_font": "assistant_n4",
             "label_size": 22,
