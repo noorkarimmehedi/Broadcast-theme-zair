@@ -541,7 +541,7 @@
             "section_heading": "FEATURED CATEGORIES",
             "heading_alignment": "center",
             "heading_size": 24,
-            "heading_weight": 700,
+            "heading_weight": 500,
             "heading_color": "#000000",
             "heading_margin": 30,
             "desktop_columns": 4,
