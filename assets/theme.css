@@ -21873,6 +21873,71 @@ recipient-form .recipient-form-field-label {
 /*! ============ Add any custom styles below this line ================== */
 
 /* ================================
+   MOBILE DRAWER - MOVE CONTENT BELOW HEADER
+   ================================ */
+
+/* Push drawer content below the site header */
+.drawer {
+  top: 0 !important; /* Start from top of viewport */
+  height: 100vh !important;
+  padding-top: 0 !important;
+}
+
+/* If there's a drawer header, position it below site header */
+.drawer__header,
+.drawer-menu__header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100;
+  background: #fff;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Position close button in top right */
+.drawer__close,
+.drawer-menu__close,
+button[data-drawer-close],
+.js-drawer-close {
+  position: absolute !important;
+  top: 16px !important;
+  right: 16px !important;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  z-index: 101;
+}
+
+/* Style the close icon */
+.drawer__close svg,
+.drawer-menu__close svg,
+button[data-drawer-close] svg,
+.js-drawer-close svg {
+  width: 24px;
+  height: 24px;
+  stroke: #000;
+  stroke-width: 2;
+}
+
+.drawer__close:hover svg,
+.drawer-menu__close:hover svg,
+button[data-drawer-close]:hover svg,
+.js-drawer-close:hover svg {
+  stroke: #666;
+}
+
+/* Drawer content area - add top spacing if needed */
+.drawer__content,
+.drawer-menu__content {
+  padding-top: 0 !important;
+  overflow-y: auto;
+  height: calc(100vh - 72px); /* Adjust based on your header height */
+}
+
+/* ================================
    MOBILE DRAWER MENU - CLEAR HIERARCHY (FLICKER-FREE)
    ================================ */
 
@@ -21905,8 +21970,8 @@ recipient-form .recipient-form-field-label {
   overflow: visible !important;
   position: relative !important;
   transform: none !important;
-  transition: none !important; /* KEY FIX: Disable all transitions */
-  animation: none !important; /* KEY FIX: Disable animations */
+  transition: none !important;
+  animation: none !important;
   background-color: #f8f8f8;
   padding: 8px 0;
   margin-bottom: 8px;
@@ -21935,7 +22000,7 @@ recipient-form .recipient-form-field-label {
   border-bottom: none !important;
   border-top: none !important;
   box-shadow: none !important;
-  transition: none !important; /* Prevent flicker on child items too */
+  transition: none !important;
 }
 
 /* REMOVE all dividers between subcategory items */
@@ -21966,7 +22031,7 @@ recipient-form .recipient-form-field-label {
   color: #444;
   text-decoration: none;
   display: block;
-  transition: color 0.2s ease; /* Keep only color transition for hover */
+  transition: color 0.2s ease;
   border: none !important;
 }
 
