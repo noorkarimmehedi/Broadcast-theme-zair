@@ -1,0 +1,921 @@
+{% liquid
+  assign ai_gen_id = block.id | replace: '_', '' | downcase
+  assign current_collection_handle = collection.handle | default: ''
+  assign current_collection_id = collection.id | default: ''
+  assign current_collection_title = collection.title | default: ''
+  assign current_url = request.path
+  
+  assign url_parts = current_url | split: '/'
+  assign url_collection_handle = ''
+  assign found_collections = false
+  
+  for part in url_parts
+    if found_collections
+      assign url_collection_handle = part
+      break
+    endif
+    if part == 'collections'
+      assign found_collections = true
+    endif
+  endfor
+%}
+
+{% style %}
+  .category-filter-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: #F5F5F5;
+    padding: {{ block.settings.vertical_padding }}px 0;
+  }
+
+  .category-filter-scroll-{{ ai_gen_id }} {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+
+  .category-filter-scroll-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-filter-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.button_spacing }}px;
+    padding: 0 {{ block.settings.horizontal_padding }}px;
+    margin: 0;
+    list-style: none;
+    min-width: min-content;
+  }
+
+  .category-filter-buttons-{{ ai_gen_id }} li {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+
+  .category-filter-link-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: {{ block.settings.border_width }}px solid {{ block.settings.button_border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
+    font-weight: {{ block.settings.button_font.weight }};
+    font-size: {{ block.settings.button_font_size }}px;
+    text-transform: capitalize;
+    letter-spacing: {{ block.settings.letter_spacing }}px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all {{ block.settings.transition_speed }}s ease;
+    white-space: nowrap;
+  }
+
+  .category-filter-link-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+  }
+
+  .category-filter-link-{{ ai_gen_id }}.is-active {
+    background-color: {{ block.settings.active_bg_color }} !important;
+    color: {{ block.settings.active_text_color }} !important;
+    border-color: {{ block.settings.active_border_color }} !important;
+  }
+
+  .category-debug-panel-{{ ai_gen_id }} {
+    padding: 15px;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    margin: 10px 20px;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .category-debug-panel-{{ ai_gen_id }} strong {
+    color: #333;
+  }
+
+  .category-debug-alert-{{ ai_gen_id }} {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    color: #856404;
+    padding: 15px;
+    margin: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  @media screen and (min-width: 750px) {
+    .category-filter-scroll-{{ ai_gen_id }} {
+      {% if block.settings.desktop_scrollable %}
+        overflow-x: auto;
+      {% else %}
+        overflow-x: visible;
+      {% endif %}
+    }
+
+    .category-filter-buttons-{{ ai_gen_id }} {
+      {% if block.settings.desktop_alignment == 'left' %}
+        justify-content: flex-start;
+      {% elsif block.settings.desktop_alignment == 'center' %}
+        justify-content: center;
+      {% elsif block.settings.desktop_alignment == 'right' %}
+        justify-content: flex-end;
+      {% elsif block.settings.desktop_alignment == 'space-between' %}
+        justify-content: space-between;
+      {% endif %}
+      
+      {% unless block.settings.desktop_scrollable %}
+        flex-wrap: wrap;
+      {% endunless %}
+    }
+  }
+{% endstyle %}
+
+<div class="category-filter-wrapper-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="category-filter-scroll-{{ ai_gen_id }}">
+    <ul class="category-filter-buttons-{{ ai_gen_id }}">
+      {% assign active_found = false %}
+      {% assign active_index = 0 %}
+      
+      {% comment %} First pass: Find active category {% endcomment %}
+      {% for num in (1..20) %}
+        {% assign enable_key = 'category_' | append: num | append: '_enabled' %}
+        {% assign collection_key = 'category_' | append: num | append: '_collection' %}
+        
+        {% assign is_enabled = block.settings[enable_key] %}
+        {% assign linked_collection = block.settings[collection_key] %}
+        
+        {% unless active_found %}
+          {% if is_enabled and linked_collection != blank %}
+            {% assign collection_handle = linked_collection.handle %}
+            {% assign collection_id = linked_collection.id | plus: 0 %}
+            {% assign current_id = current_collection_id | plus: 0 %}
+            
+            {% if collection_handle == current_collection_handle and current_collection_handle != '' %}
+              {% assign active_found = true %}
+              {% assign active_index = num %}
+            {% elsif collection_handle == url_collection_handle and url_collection_handle != '' %}
+              {% assign active_found = true %}
+              {% assign active_index = num %}
+            {% elsif collection_id == current_id and collection_id != 0 and current_id != 0 %}
+              {% assign active_found = true %}
+              {% assign active_index = num %}
+            {% endif %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+      
+      {% comment %} Second pass: Render buttons {% endcomment %}
+      {% for num in (1..20) %}
+        {% assign enable_key = 'category_' | append: num | append: '_enabled' %}
+        {% assign label_key = 'category_' | append: num | append: '_label' %}
+        {% assign collection_key = 'category_' | append: num | append: '_collection' %}
+        
+        {% assign is_enabled = block.settings[enable_key] %}
+        {% assign button_label = block.settings[label_key] %}
+        {% assign linked_collection = block.settings[collection_key] %}
+        
+        {% if is_enabled and button_label != blank and linked_collection != blank %}
+          {% assign is_current = false %}
+          {% if num == active_index %}
+            {% assign is_current = true %}
+          {% endif %}
+          
+          {% assign target_url = linked_collection.url %}
+          {% assign target_handle = linked_collection.handle %}
+          {% assign target_id = linked_collection.id %}
+          {% assign target_title = linked_collection.title %}
+          
+          <li>
+            <a
+              href="{{ target_url }}"
+              class="category-filter-link-{{ ai_gen_id }}{% if is_current %} is-active{% endif %}"
+              data-handle="{{ target_handle }}"
+              data-id="{{ target_id }}"
+              data-title="{{ target_title }}"
+              data-index="{{ num }}"
+            >
+              {{ button_label }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  
+  {% if block.settings.show_debug %}
+    {% assign first_collection = block.settings.category_1_collection %}
+    {% assign display_warning = false %}
+    
+    {% if first_collection != blank %}
+      {% assign first_title = first_collection.title | downcase %}
+      {% if first_title contains 'best' or first_title contains 'seller' %}
+        {% assign display_warning = true %}
+      {% endif %}
+    {% endif %}
+
+    {% if display_warning %}
+      <div class="category-debug-alert-{{ ai_gen_id }}">
+        ⚠️ WARNING: Your "All" button (Category 1) points to "{{ first_collection.title }}".<br>
+        This is why it redirects to Best Sellers!<br>
+        <br>
+        TO FIX:<br>
+        1. Open theme customizer<br>
+        2. Find this Category Filter Bar<br>
+        3. Change Category 1 Collection from "{{ first_collection.title }}" to your "All Products" collection<br>
+        4. Save changes
+      </div>
+    {% endif %}
+
+    <div class="category-debug-panel-{{ ai_gen_id }}">
+      <strong>🔍 Debug Information:</strong><br>
+      <br>
+      <strong>Current Page:</strong><br>
+      Collection Handle: <strong>{{ current_collection_handle | default: 'none' }}</strong><br>
+      Collection ID: <strong>{{ current_collection_id | default: 'none' }}</strong><br>
+      Collection Title: <strong>{{ current_collection_title | default: 'none' }}</strong><br>
+      URL Handle: <strong>{{ url_collection_handle | default: 'none' }}</strong><br>
+      Current Path: <strong>{{ current_url }}</strong><br>
+      <br>
+      <strong>Active Detection:</strong><br>
+      Active Found: <strong>{{ active_found }}</strong><br>
+      Active Index: <strong>{{ active_index }}</strong><br>
+      <br>
+      <strong>📋 Configured Buttons:</strong><br>
+      {% for num in (1..20) %}
+        {% assign enable_key = 'category_' | append: num | append: '_enabled' %}
+        {% assign label_key = 'category_' | append: num | append: '_label' %}
+        {% assign collection_key = 'category_' | append: num | append: '_collection' %}
+        
+        {% assign is_enabled = block.settings[enable_key] %}
+        {% assign button_label = block.settings[label_key] %}
+        {% assign linked_collection = block.settings[collection_key] %}
+        
+        {% if is_enabled and button_label != blank %}
+          <br>
+          <strong>Category {{ num }} - "{{ button_label }}":</strong><br>
+          {% if linked_collection != blank %}
+            &nbsp;&nbsp;→ Collection: <strong>{{ linked_collection.title }}</strong><br>
+            &nbsp;&nbsp;→ Handle: {{ linked_collection.handle }}<br>
+            &nbsp;&nbsp;→ ID: {{ linked_collection.id }}<br>
+            &nbsp;&nbsp;→ URL: {{ linked_collection.url }}<br>
+            {% if num == 1 %}
+              &nbsp;&nbsp;→ <span style="color: #0066cc;">This is "All" - redirects to "{{ linked_collection.title }}"</span>
+            {% endif %}
+          {% else %}
+            &nbsp;&nbsp;→ <span style="color: red;">⚠️ NO COLLECTION - WILL NOT RENDER</span><br>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Category Filter Bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Button spacing",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "select",
+      "id": "desktop_alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "space-between",
+          "label": "Space between"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_scrollable",
+      "label": "Enable horizontal scroll on desktop",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Button Style"
+    },
+    {
+      "type": "font_picker",
+      "id": "button_font",
+      "label": "Font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Transition speed",
+      "default": 0.3
+    },
+    {
+      "type": "header",
+      "content": "Default Button Colors"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Hover State"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Active State"
+    },
+    {
+      "type": "color",
+      "id": "active_bg_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "active_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "active_border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Debug"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_debug",
+      "label": "Show debug info",
+      "default": true,
+      "info": "Enable to troubleshoot issues"
+    },
+    {
+      "type": "header",
+      "content": "Category 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_1_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "category_1_label",
+      "label": "Label",
+      "default": "All"
+    },
+    {
+      "type": "collection",
+      "id": "category_1_collection",
+      "label": "Collection",
+      "info": "⚠️ SELECT YOUR 'ALL PRODUCTS' COLLECTION - NOT 'Best Sellers'"
+    },
+    {
+      "type": "header",
+      "content": "Category 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_2_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "category_2_label",
+      "label": "Label",
+      "default": "New"
+    },
+    {
+      "type": "collection",
+      "id": "category_2_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_3_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "category_3_label",
+      "label": "Label",
+      "default": "Formal"
+    },
+    {
+      "type": "collection",
+      "id": "category_3_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_4_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "category_4_label",
+      "label": "Label",
+      "default": "Prints"
+    },
+    {
+      "type": "collection",
+      "id": "category_4_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_5_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "category_5_label",
+      "label": "Label",
+      "default": "Plain"
+    },
+    {
+      "type": "collection",
+      "id": "category_5_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_6_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_6_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_6_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_7_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_7_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_7_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_8_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_8_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_8_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_9_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_9_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_9_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_10_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_10_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_10_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 11"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_11_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_11_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_11_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 12"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_12_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_12_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_12_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 13"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_13_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_13_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_13_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 14"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_14_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_14_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_14_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 15"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_15_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_15_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_15_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 16"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_16_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_16_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_16_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 17"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_17_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_17_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_17_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 18"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_18_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_18_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_18_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 19"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_19_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_19_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_19_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Category 20"
+    },
+    {
+      "type": "checkbox",
+      "id": "category_20_enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "category_20_label",
+      "label": "Label"
+    },
+    {
+      "type": "collection",
+      "id": "category_20_collection",
+      "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Filter Bar"
+    }
+  ]
+}
+{% endschema %}
