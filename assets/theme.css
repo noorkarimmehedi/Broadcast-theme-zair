@@ -21872,53 +21872,69 @@ recipient-form .recipient-form-field-label {
 
 /*! ============ Add any custom styles below this line ================== */
 
+/* ================================
+   MOBILE DRAWER MENU - CUSTOM STYLES
+   ================================ */
+
 /* Parent collection titles - non-clickable headers */
-.sliderow--parent-header {
-  padding: 16px 24px;
-  pointer-events: none;
+.sliderow--static-header {
+  padding: 20px 24px 8px 24px;
 }
 
 .sliderow__title--parent {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
-  color: #000;
+  color: #888;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  pointer-events: none;
+  cursor: default;
 }
 
-/* Subcategories container */
-.sliderow__subcategories {
-  padding-left: 0;
-  margin-bottom: 16px;
+/* Subcategories container - always visible */
+.sliderow__children {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  overflow: visible !important;
+  position: relative !important;
+  transform: none !important;
 }
 
 /* Child menu items - clickable links */
 .sliderow--child {
-  padding: 10px 24px 10px 36px; /* Indented from parent */
+  padding: 12px 24px 12px 24px;
 }
 
 .sliderow__title--child {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
-  color: #333;
+  color: #000;
   text-decoration: none;
   display: block;
   transition: color 0.2s ease;
 }
 
-.sliderow__title--child:hover {
-  color: #000;
+.sliderow__title--child:hover,
+.sliderow__title--child:active {
+  color: #666;
 }
 
 /* Divider styling */
 .sliderow__divider {
   height: 1px;
   background-color: #e5e5e5;
-  margin: 10px 24px;
+  margin: 16px 24px;
 }
 
-/* Remove old back button styles if no longer needed */
-.sliderow--back,
-.sliderule__header {
-  display: none;
+/* Hide any old back button/header elements */
+.sliderule__header,
+.sliderow--back {
+  display: none !important;
+}
+
+/* Ensure animations don't hide children */
+.sliderow__children[data-animation] {
+  opacity: 1 !important;
 }
