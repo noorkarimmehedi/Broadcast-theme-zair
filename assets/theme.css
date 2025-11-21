@@ -21873,25 +21873,29 @@ recipient-form .recipient-form-field-label {
 /*! ============ Add any custom styles below this line ================== */
 
 /* ================================
-   MOBILE DRAWER MENU - CUSTOM STYLES
+   MOBILE DRAWER MENU - CLEAR HIERARCHY
    ================================ */
 
-/* Parent collection titles - non-clickable headers */
+/* Parent collection titles - prominent headers */
 .sliderow--static-header {
-  padding: 20px 24px 8px 24px;
+  padding: 24px 24px 12px 24px;
+  border-bottom: none;
 }
 
 .sliderow__title--parent {
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 700;
-  color: #888;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: #000;
+  text-transform: none;
+  letter-spacing: 0;
   pointer-events: none;
   cursor: default;
+  display: block;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #000;
 }
 
-/* Subcategories container - always visible */
+/* Subcategories container */
 .sliderow__children {
   display: block !important;
   visibility: visible !important;
@@ -21900,17 +21904,29 @@ recipient-form .recipient-form-field-label {
   overflow: visible !important;
   position: relative !important;
   transform: none !important;
+  background-color: #f8f8f8;
+  padding: 8px 0;
+  margin-bottom: 8px;
 }
 
-/* Child menu items - clickable links */
+/* Child menu items - clearly indented & lighter */
 .sliderow--child {
-  padding: 12px 24px 12px 24px;
+  padding: 14px 24px 14px 40px;
+  position: relative;
+}
+
+/* Add a subtle bullet/dash before child items */
+.sliderow--child::before {
+  content: "–";
+  position: absolute;
+  left: 24px;
+  color: #999;
 }
 
 .sliderow__title--child {
   font-size: 15px;
   font-weight: 400;
-  color: #000;
+  color: #444;
   text-decoration: none;
   display: block;
   transition: color 0.2s ease;
@@ -21918,17 +21934,17 @@ recipient-form .recipient-form-field-label {
 
 .sliderow__title--child:hover,
 .sliderow__title--child:active {
-  color: #666;
+  color: #000;
 }
 
-/* Divider styling */
+/* Divider between sections */
 .sliderow__divider {
   height: 1px;
-  background-color: #e5e5e5;
-  margin: 16px 24px;
+  background-color: #e0e0e0;
+  margin: 8px 24px 16px 24px;
 }
 
-/* Hide any old back button/header elements */
+/* Hide old elements */
 .sliderule__header,
 .sliderow--back {
   display: none !important;
