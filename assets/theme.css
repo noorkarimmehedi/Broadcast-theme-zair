@@ -21872,21 +21872,53 @@ recipient-form .recipient-form-field-label {
 
 /*! ============ Add any custom styles below this line ================== */
 
-/* Updated back button styles - remove these lines from previous CSS */
-.sliderow--back {
-  display: flex;
-  align-items: center;
+/* Parent collection titles - non-clickable headers */
+.sliderow--parent-header {
   padding: 16px 24px;
-  border-bottom: none;
+  pointer-events: none;
 }
 
-.sliderow__back-label {
-  /* DELETE THIS ENTIRE BLOCK */
-}
-
-.sliderow__title--header {
-  font-size: 18px;
-  font-weight: 600;
+.sliderow__title--parent {
+  font-size: 16px;
+  font-weight: 700;
   color: #000;
-  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Subcategories container */
+.sliderow__subcategories {
+  padding-left: 0;
+  margin-bottom: 16px;
+}
+
+/* Child menu items - clickable links */
+.sliderow--child {
+  padding: 10px 24px 10px 36px; /* Indented from parent */
+}
+
+.sliderow__title--child {
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.sliderow__title--child:hover {
+  color: #000;
+}
+
+/* Divider styling */
+.sliderow__divider {
+  height: 1px;
+  background-color: #e5e5e5;
+  margin: 10px 24px;
+}
+
+/* Remove old back button styles if no longer needed */
+.sliderow--back,
+.sliderule__header {
+  display: none;
 }
