@@ -21915,7 +21915,7 @@ recipient-form .recipient-form-field-label {
   position: relative;
 }
 
-/* Add a subtle bullet/dash before child items */
+/* Add a subtle dash before child items */
 .sliderow--child::before {
   content: "–";
   position: absolute;
@@ -21937,7 +21937,7 @@ recipient-form .recipient-form-field-label {
   color: #000;
 }
 
-/* Divider between sections */
+/* Divider between main sections only */
 .sliderow__divider {
   height: 1px;
   background-color: #e0e0e0;
