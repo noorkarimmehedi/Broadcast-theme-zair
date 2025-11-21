@@ -21905,8 +21905,8 @@ recipient-form .recipient-form-field-label {
   overflow: visible !important;
   position: relative !important;
   transform: none !important;
-  transition: none !important; /* KEY FIX: Disable all transitions */
-  animation: none !important; /* KEY FIX: Disable animations */
+  transition: none !important;
+  animation: none !important;
   background-color: #f8f8f8;
   padding: 8px 0;
   margin-bottom: 8px;
@@ -21935,7 +21935,7 @@ recipient-form .recipient-form-field-label {
   border-bottom: none !important;
   border-top: none !important;
   box-shadow: none !important;
-  transition: none !important; /* Prevent flicker on child items too */
+  transition: none !important;
 }
 
 /* REMOVE all dividers between subcategory items */
@@ -21966,7 +21966,7 @@ recipient-form .recipient-form-field-label {
   color: #444;
   text-decoration: none;
   display: block;
-  transition: color 0.2s ease; /* Keep only color transition for hover */
+  transition: color 0.2s ease;
   border: none !important;
 }
 
@@ -21997,4 +21997,23 @@ recipient-form .recipient-form-field-label {
   opacity: 1 !important;
   height: auto !important;
   visibility: visible !important;
+}
+
+/* ================================
+   DRAWER HEADER ADJUSTMENTS (SAFE)
+   ================================ */
+
+/* Only target drawer close button positioning */
+.drawer-menu .drawer__close,
+.drawer-menu button[data-drawer-close],
+.drawer-menu .js-drawer-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+}
+
+/* Ensure drawer content has proper spacing from top */
+.drawer-menu__tier--1 {
+  padding-top: 60px;
 }
