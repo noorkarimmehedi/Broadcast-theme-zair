@@ -21876,27 +21876,6 @@ recipient-form .recipient-form-field-label {
    MOBILE DRAWER MENU - CLEAR HIERARCHY
    ================================ */
 
-/* Fix drawer flicker */
-.drawer--header {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-}
-
-.drawer__content,
-.drawer__menu {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* Disable conflicting animations on subcategories */
-.sliderow__children,
-.sliderow__children * {
-  animation: none !important;
-  -webkit-animation: none !important;
-}
-
 /* Parent collection titles - prominent headers */
 .sliderow--static-header {
   padding: 24px 24px 12px 24px;
@@ -21930,7 +21909,7 @@ recipient-form .recipient-form-field-label {
   margin-bottom: 8px;
 }
 
-/* Child menu items */
+/* Child menu items - clearly indented & lighter */
 .sliderow--child {
   padding: 14px 24px 14px 40px;
   position: relative;
@@ -21938,13 +21917,13 @@ recipient-form .recipient-form-field-label {
   border-bottom: none !important;
   border-top: none !important;
   box-shadow: none !important;
-  opacity: 1 !important;
 }
 
-/* Remove dividers between subcategory items */
+/* REMOVE all dividers between subcategory items */
 .sliderow__children .sliderow--child::after,
 .sliderow__children .sliderow::after,
-.sliderow__children .sliderule__wrapper::after {
+.sliderow__children .sliderule__wrapper::after,
+.sliderow__children > *:not(:last-child) {
   border: none !important;
   border-bottom: none !important;
 }
@@ -21954,7 +21933,7 @@ recipient-form .recipient-form-field-label {
   border-bottom: none !important;
 }
 
-/* Dash before child items */
+/* Add a subtle dash before child items */
 .sliderow--child::before {
   content: "–";
   position: absolute;
@@ -21988,4 +21967,9 @@ recipient-form .recipient-form-field-label {
 .sliderule__header,
 .sliderow--back {
   display: none !important;
+}
+
+/* Ensure animations don't hide children */
+.sliderow__children[data-animation] {
+  opacity: 1 !important;
 }
