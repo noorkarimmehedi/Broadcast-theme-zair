@@ -21873,7 +21873,7 @@ recipient-form .recipient-form-field-label {
 /*! ============ Add any custom styles below this line ================== */
 
 /* ================================
-   MOBILE DRAWER MENU - CLEAR HIERARCHY
+   MOBILE DRAWER MENU - CLEAR HIERARCHY (FLICKER-FREE)
    ================================ */
 
 /* Parent collection titles - prominent headers */
@@ -21895,18 +21895,36 @@ recipient-form .recipient-form-field-label {
   border-bottom: 2px solid #000;
 }
 
-/* Subcategories container */
+/* Subcategories container - FLICKER FIX */
 .sliderow__children {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
   height: auto !important;
+  max-height: none !important;
   overflow: visible !important;
   position: relative !important;
   transform: none !important;
-  background-color: #f5f5f5;
+  transition: none !important; /* KEY FIX: Disable all transitions */
+  animation: none !important; /* KEY FIX: Disable animations */
+  background-color: #f8f8f8;
   padding: 8px 0;
   margin-bottom: 8px;
+}
+
+/* Force immediate display on all animation states */
+.sliderow__children[data-animation],
+.sliderow__children[data-animation="start"],
+.sliderow__children[data-animation="end"],
+.sliderow__children.is-animating,
+.sliderow__children.is-hidden {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  transition: none !important;
+  animation: none !important;
 }
 
 /* Child menu items - clearly indented & lighter */
@@ -21917,6 +21935,7 @@ recipient-form .recipient-form-field-label {
   border-bottom: none !important;
   border-top: none !important;
   box-shadow: none !important;
+  transition: none !important; /* Prevent flicker on child items too */
 }
 
 /* REMOVE all dividers between subcategory items */
@@ -21947,7 +21966,7 @@ recipient-form .recipient-form-field-label {
   color: #444;
   text-decoration: none;
   display: block;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease; /* Keep only color transition for hover */
   border: none !important;
 }
 
@@ -21969,7 +21988,13 @@ recipient-form .recipient-form-field-label {
   display: none !important;
 }
 
-/* Ensure animations don't hide children */
-.sliderow__children[data-animation] {
+/* Override any JavaScript-added inline styles that might cause flicker */
+.sliderow__children[style*="display"],
+.sliderow__children[style*="opacity"],
+.sliderow__children[style*="height"],
+.sliderow__children[style*="visibility"] {
+  display: block !important;
   opacity: 1 !important;
+  height: auto !important;
+  visibility: visible !important;
 }
