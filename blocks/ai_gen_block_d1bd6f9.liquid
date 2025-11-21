@@ -100,6 +100,16 @@
     color: #333;
   }
 
+  .debug-warning-{{ ai_gen_id }} {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    color: #856404;
+    padding: 15px;
+    margin: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
   @media screen and (min-width: 750px) {
     .ai-category-filter-container-{{ ai_gen_id }} {
       {% if block.settings.desktop_scrollable %}
@@ -188,11 +198,13 @@
             {% assign button_url = category_collection.url %}
             {% assign button_handle = category_collection.handle %}
             {% assign button_id = category_collection.id %}
+            {% assign button_title = category_collection.title %}
           {% else %}
-            {% comment %} If no collection is assigned, skip this button or show warning in debug {% endcomment %}
+            {% comment %} If no collection is assigned, skip this button {% endcomment %}
             {% assign button_url = '' %}
             {% assign button_handle = 'none' %}
             {% assign button_id = 'none' %}
+            {% assign button_title = 'none' %}
           {% endif %}
 
           {% comment %} Only render button if it has a valid collection assigned {% endcomment %}
@@ -203,7 +215,9 @@
                 class="ai-category-filter-button-{{ ai_gen_id }}{% if is_active %} active{% endif %}"
                 data-collection-id="{{ button_id }}"
                 data-collection-handle="{{ button_handle }}"
+                data-collection-title="{{ button_title }}"
                 data-category-index="{{ i }}"
+                data-category-label="{{ category_label }}"
               >
                 {{ category_label }}
               </a>
@@ -215,17 +229,44 @@
   </div>
   
   {% if block.settings.show_debug %}
+    {% comment %} Check if "All" button is pointing to Best Sellers {% endcomment %}
+    {% assign all_button_collection = block.settings.category_1_collection %}
+    {% assign show_warning = false %}
+    {% if all_button_collection != blank %}
+      {% assign all_collection_title = all_button_collection.title | downcase %}
+      {% if all_collection_title contains 'best' or all_collection_title contains 'seller' %}
+        {% assign show_warning = true %}
+      {% endif %}
+    {% endif %}
+
+    {% if show_warning %}
+      <div class="debug-warning-{{ ai_gen_id }}">
+        ⚠️ WARNING: Your "All" button (Category 1) is currently pointing to "{{ all_button_collection.title }}".<br>
+        This is why clicking "All" redirects to Best Sellers!<br>
+        <br>
+        TO FIX THIS:<br>
+        1. Go to your theme customizer<br>
+        2. Find this Category Filter Bar block<br>
+        3. Under "Category 1" settings, change the Collection from "{{ all_button_collection.title }}" to your actual "All Products" collection<br>
+        4. Save your changes
+      </div>
+    {% endif %}
+
     <div class="debug-info-{{ ai_gen_id }}">
-      <strong>Debug Information:</strong><br>
-      Current Collection Handle: <strong>{{ current_collection_handle | default: 'none' }}</strong><br>
-      Current Collection ID: <strong>{{ current_collection_id | default: 'none' }}</strong><br>
-      Current Collection Title: <strong>{{ current_collection_title | default: 'none' }}</strong><br>
+      <strong>🔍 Debug Information:</strong><br>
+      <br>
+      <strong>Current Page:</strong><br>
+      Collection Handle: <strong>{{ current_collection_handle | default: 'none' }}</strong><br>
+      Collection ID: <strong>{{ current_collection_id | default: 'none' }}</strong><br>
+      Collection Title: <strong>{{ current_collection_title | default: 'none' }}</strong><br>
       URL Collection Handle: <strong>{{ url_collection_handle | default: 'none' }}</strong><br>
       Current URL: <strong>{{ current_url }}</strong><br>
+      <br>
+      <strong>Active State Detection:</strong><br>
       Found Active: <strong>{{ found_active }}</strong><br>
       Active Category Index: <strong>{{ active_category_index }}</strong><br>
       <br>
-      <strong>All Configured Categories:</strong><br>
+      <strong>📋 All Configured Buttons:</strong><br>
       {% for i in (1..20) %}
         {% liquid
           assign category_enabled_key = 'category_' | append: i | append: '_enabled'
@@ -237,13 +278,19 @@
           assign cat_collection = block.settings[category_collection_key]
         %}
         {% if cat_enabled and cat_label != blank %}
-          Category {{ i }}: <strong>{{ cat_label }}</strong> → 
-          {% if cat_collection != blank %}
-            Collection: {{ cat_collection.title }} (handle: {{ cat_collection.handle }}, id: {{ cat_collection.id }}, url: {{ cat_collection.url }})
-          {% else %}
-            <span style="color: red;">⚠️ NO COLLECTION ASSIGNED - BUTTON WILL NOT RENDER</span>
-          {% endif %}
           <br>
+          <strong>Category {{ i }} - "{{ cat_label }}":</strong><br>
+          {% if cat_collection != blank %}
+            &nbsp;&nbsp;→ Collection: <strong>{{ cat_collection.title }}</strong><br>
+            &nbsp;&nbsp;→ Handle: {{ cat_collection.handle }}<br>
+            &nbsp;&nbsp;→ ID: {{ cat_collection.id }}<br>
+            &nbsp;&nbsp;→ URL: {{ cat_collection.url }}<br>
+            {% if i == 1 %}
+              &nbsp;&nbsp;→ <span style="color: #0066cc;">This is your "All" button - it will redirect to "{{ cat_collection.title }}"</span>
+            {% endif %}
+          {% else %}
+            &nbsp;&nbsp;→ <span style="color: red;">⚠️ NO COLLECTION ASSIGNED - BUTTON WILL NOT RENDER</span><br>
+          {% endif %}
         {% endif %}
       {% endfor %}
     </div>
@@ -498,7 +545,7 @@
       "type": "collection",
       "id": "category_1_collection",
       "label": "Collection",
-      "info": "⚠️ IMPORTANT: You MUST select a collection here. This should be your 'All Products' collection, NOT 'Best Sellers'"
+      "info": "⚠️ CRITICAL: Select your 'All Products' collection here. DO NOT select 'Best Sellers' - that's why it's redirecting wrong!"
     },
     {
       "type": "header",
