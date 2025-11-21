@@ -21913,6 +21913,24 @@ recipient-form .recipient-form-field-label {
 .sliderow--child {
   padding: 14px 24px 14px 40px;
   position: relative;
+  border: none !important;
+  border-bottom: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+/* REMOVE all dividers between subcategory items */
+.sliderow__children .sliderow--child::after,
+.sliderow__children .sliderow::after,
+.sliderow__children .sliderule__wrapper::after,
+.sliderow__children > *:not(:last-child) {
+  border: none !important;
+  border-bottom: none !important;
+}
+
+.sliderow__children .sliderule__wrapper {
+  border: none !important;
+  border-bottom: none !important;
 }
 
 /* Add a subtle dash before child items */
@@ -21930,6 +21948,7 @@ recipient-form .recipient-form-field-label {
   text-decoration: none;
   display: block;
   transition: color 0.2s ease;
+  border: none !important;
 }
 
 .sliderow__title--child:hover,
