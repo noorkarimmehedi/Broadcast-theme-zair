@@ -21876,6 +21876,18 @@ recipient-form .recipient-form-field-label {
    MOBILE DRAWER MENU - CLEAR HIERARCHY
    ================================ */
 
+/* Fix drawer flicker - only on menu items, not the drawer itself */
+.drawer--header {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Disable animations ONLY on subcategory children */
+.sliderow__children [data-animation] {
+  animation-name: none !important;
+  -webkit-animation-name: none !important;
+}
+
 /* Parent collection titles - prominent headers */
 .sliderow--static-header {
   padding: 24px 24px 12px 24px;
@@ -21909,7 +21921,7 @@ recipient-form .recipient-form-field-label {
   margin-bottom: 8px;
 }
 
-/* Child menu items - clearly indented & lighter */
+/* Child menu items */
 .sliderow--child {
   padding: 14px 24px 14px 40px;
   position: relative;
@@ -21917,13 +21929,13 @@ recipient-form .recipient-form-field-label {
   border-bottom: none !important;
   border-top: none !important;
   box-shadow: none !important;
+  opacity: 1 !important;
 }
 
-/* REMOVE all dividers between subcategory items */
+/* Remove dividers between subcategory items */
 .sliderow__children .sliderow--child::after,
 .sliderow__children .sliderow::after,
-.sliderow__children .sliderule__wrapper::after,
-.sliderow__children > *:not(:last-child) {
+.sliderow__children .sliderule__wrapper::after {
   border: none !important;
   border-bottom: none !important;
 }
@@ -21933,7 +21945,7 @@ recipient-form .recipient-form-field-label {
   border-bottom: none !important;
 }
 
-/* Add a subtle dash before child items */
+/* Dash before child items */
 .sliderow--child::before {
   content: "–";
   position: absolute;
@@ -21967,9 +21979,4 @@ recipient-form .recipient-form-field-label {
 .sliderule__header,
 .sliderow--back {
   display: none !important;
-}
-
-/* Ensure animations don't hide children */
-.sliderow__children[data-animation] {
-  opacity: 1 !important;
 }
