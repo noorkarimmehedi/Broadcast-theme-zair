@@ -32,83 +32,71 @@
 
 <div class="sliderule__wrapper{% if secondary_menu %} sliderule__wrapper--secondary{% endif %}" data-level="{{ link_level }}">
   {%- if expands -%}
-    {%- comment -%} Menu item with children - show as expandable button only {%- endcomment -%}
-    <button class="sliderow sliderow--expandable sliderow--level-{{ link_level }}" type="button"
+    {%- comment -%} Parent collection title - NON-CLICKABLE static header {%- endcomment -%}
+    <div class="sliderow sliderow--parent-header sliderow--level-{{ link_level }}"
       data-animates="{{ link_level }}"
       data-animation="{{ animation_name }}"
       data-animation-delay="{{ animation_delay | plus: animation_delay_additional }}"
-      data-animation-duration="{{ animation_duration }}"
-      data-sliderule-open="sliderule-{{ key }}">
-      <span class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}"{% if link_title_lowercase == "casual shirts" %} style="font-weight: 700;"{% endif %}>
+      data-animation-duration="{{ animation_duration }}">
+      <span class="sliderow__title sliderow__title--parent{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}">
         {{ link.title | strip_html | escape }}
       </span>
-    </button>
+    </div>
     
-    {%- comment -%} Add divider after Formal Shirts {%- endcomment -%}
-    {%- if link_title_lowercase == "formal shirts" -%}
-      <div style="height: 1px; background-color: #e5e5e5; margin: 10px 0 0 0;"></div>
-    {%- endif -%}
-
-    <div class="mobile__menu__dropdown sliderule__panel sliderule__panel--level-{{ link_level_next }}"
-      id="sliderule-{{ key }}"
-      data-sliderule="{{ link_level_next }}"
-      data-scroll-lock-scrollable>
-      
-      {%- comment -%} Back button header {%- endcomment -%}
-      {%- unless link_title_lowercase == "casual shirts" -%}
-      <div class="sliderule__header">
-        <button class="sliderow sliderow--back" type="button"
+    {%- comment -%} Subcategories - always visible below parent {%- endcomment -%}
+    <div class="sliderow__subcategories sliderow__subcategories--level-{{ link_level_next }}">
+      {%- for child_link in link.links -%}
+        {%- assign child_title_lowercase = child_link.title | downcase | strip_html | escape -%}
+        {%- assign child_animation_delay = 50 | times: forloop.index | plus: animation_delay | plus: animation_delay_additional -%}
+        
+        <div class="sliderow sliderow--child sliderow--level-{{ link_level_next }}"
           data-animates="{{ link_level_next }}"
           data-animation="{{ animation_name }}"
-          data-animation-delay="0"
-          data-animation-duration="{{ animation_duration }}"
-          data-sliderule-close="sliderule-{{ key }}">
-          <span class="sliderow__title sliderow__title--header">{{ link.title | strip_html | escape }}</span>
-        </button>
-      </div>
-      {%- endunless -%}
-      
-      <div class="sliderow__links sliderow__links--level-{{ link_level_next }}" data-links>
-        {%- for link in link.links -%}
-          {%- assign index_recursive = index | append: 'x' | append: forloop.index -%}
-          {%- assign animation_delay = 50 | times: forloop.index -%}
+          data-animation-delay="{{ child_animation_delay }}"
+          data-animation-duration="{{ animation_duration }}">
+          <a class="sliderow__title sliderow__title--child{% if highlight_item == child_title_lowercase %} sliderow__title--highlight{% endif %}" href="{{ child_link.url }}">
+            {{ child_link.title | strip_html | escape }}
+          </a>
+        </div>
+      {%- endfor -%}
 
-          {%- render 'nav-item-mobile', link: link, index: index_recursive, forloop_index: forloop.index, link_level: link_level_next, highlight_item: highlight_item, animation_delay: animation_delay -%}
-        {%- endfor -%}
+      {%- comment -%} Render block content if any {%- endcomment -%}
+      {%- if section and section.blocks.size > 0 -%}
+        {%- assign header_blocks = '' -%}
+        {%- assign animation_delay_next = 50 -%}
 
-        {% comment %} Render block content {% endcomment %}
-        {%- if section and section.blocks.size > 0 -%}
-          {%- assign header_blocks = '' -%}
-          {%- assign animation_delay_next = 50 -%}
+        {%- unless link.links.size > 0 -%}
+          {%- assign animation_delay = animation_delay | divided_by: forloop_index | at_least: animation_delay_min | minus: animation_delay_next -%}
+        {%- endunless -%}
 
-          {%- unless link.links.size > 0 -%}
-            {%- assign animation_delay = animation_delay | divided_by: forloop_index | at_least: animation_delay_min | minus: animation_delay_next -%}
-          {%- endunless -%}
+        {%- assign animation_delay = animation_delay | plus: animation_delay_additional -%}
 
-          {%- assign animation_delay = animation_delay | plus: animation_delay_additional -%}
+        {% for block in section.blocks %}
+          {%- if block.settings.position == index -%}
+            {%- assign animation_delay = animation_delay | plus: animation_delay_next -%}
 
-          {% for block in section.blocks %}
-            {%- if block.settings.position == index -%}
-              {%- assign animation_delay = animation_delay | plus: animation_delay_next -%}
-
-              {%- capture header_blocks -%}
-                {{ header_blocks }}
-
-                {% render 'header-block', block: block, link_level_next: link_level_next, animation_delay: animation_delay, is_mobile: true %}
-              {%- endcapture -%}
-            {%- endif -%}
-          {% endfor %}
-
-          {%- if header_blocks != '' -%}
-            <div class="sliderule-grid blocks-{{ block_count }}">
+            {%- capture header_blocks -%}
               {{ header_blocks }}
-            </div>
+              {% render 'header-block', block: block, link_level_next: link_level_next, animation_delay: animation_delay, is_mobile: true %}
+            {%- endcapture -%}
           {%- endif -%}
+        {% endfor %}
+
+        {%- if header_blocks != '' -%}
+          <div class="sliderule-grid blocks-{{ block_count }}">
+            {{ header_blocks }}
+          </div>
         {%- endif -%}
-      </div>
+      {%- endif -%}
     </div>
+    
+    {%- comment -%} Add divider after this section {%- endcomment -%}
+    {%- if link_title_lowercase == "formal shirts" -%}
+      <div class="sliderow__divider"></div>
+    {%- endif -%}
+
   {%- else -%}
-    {% comment %} Single menu item, no nesting {% endcomment %}
+    {%- comment -%} Single menu item, no nesting {%- endcomment -%}
     <div class="sliderow sliderow--level-{{ link_level }}"
       role="button"
       data-animates="{{ link_level }}"
@@ -116,15 +104,14 @@
       data-animation-delay="{{ animation_delay | plus: animation_delay_additional }}"
       data-animation-duration="{{ animation_duration }}">
       {%- if link.url == "#" -%}
-        <span class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}"{% if link_title_lowercase == "casual shirts" %} style="font-weight: 700;"{% endif %}>{{ link.title | strip_html | escape }}</span>
+        <span class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}">{{ link.title | strip_html | escape }}</span>
       {%- else -%}
-        <a class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}"{% if link_title_lowercase == "casual shirts" %} style="font-weight: 700;"{% endif %} href="{{ link.url }}">{{ link.title | strip_html | escape }}</a>
+        <a class="sliderow__title{% if secondary_menu %} sliderow__title--secondary{% endif %}{% if highlight_item == link_title_lowercase %} sliderow__title--highlight{% endif %}" href="{{ link.url }}">{{ link.title | strip_html | escape }}</a>
       {%- endif -%}
     </div>
     
-    {%- comment -%} Add divider after Formal Shirts {%- endcomment -%}
     {%- if link_title_lowercase == "formal shirts" -%}
-      <div style="height: 1px; background-color: #e5e5e5; margin: 10px 0 0 0;"></div>
+      <div class="sliderow__divider"></div>
     {%- endif -%}
   {%- endif -%}
 </div>
