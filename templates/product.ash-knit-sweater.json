@@ -702,12 +702,12 @@
         "ai_gen_block_fd779fe_BY4JYp": {
           "type": "ai_gen_block_fd779fe",
           "settings": {
-            "row_1_label": "Description",
-            "row_1_content": "<p>Premium quality fabric with exceptional comfort and durability. Perfect for everyday wear.</p>",
-            "row_2_label": "Details",
-            "row_2_content": "<p>100% Cotton<br/>Regular fit<br/>Button closure<br/>Machine washable</p>",
-            "row_3_label": "Wash Care",
-            "row_3_content": "<p>Machine wash cold with like colors. Do not bleach. Tumble dry low. Iron on low heat if needed.</p>",
+            "row_1_label": "Fabric",
+            "row_1_content": "<p>Soft, textured knit for superior warmth.</p>",
+            "row_2_label": "Design",
+            "row_2_content": "<p>Classic crew neck, perfect for layering.</p>",
+            "row_3_label": "Fit",
+            "row_3_content": "<p>Relaxed and comfortable, ensuring ease of movement.</p>",
             "row_4_label": "Shipping",
             "row_4_content": "<p>Enjoy Free Delivery on All Orders Above ৳1,500 — Fast Delivery Within 48 Hours</p>",
             "row_5_label": "",
