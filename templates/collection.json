@@ -11,6 +11,7 @@
   "sections": {
     "category_filter_bar_gFGdrK": {
       "type": "category-filter-bar",
+      "disabled": true,
       "name": "Category Filter Bar",
       "settings": {
         "vertical_padding": 20,
@@ -194,7 +195,6 @@
       "block_order": [
         "ai_gen_block_d1bd6f9_pWKLBN"
       ],
-      "disabled": true,
       "settings": {}
     },
     "section_collections_list_JipAKY": {
