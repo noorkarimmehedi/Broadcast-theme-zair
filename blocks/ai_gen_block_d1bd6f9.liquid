@@ -183,28 +183,32 @@
             {% assign is_active = false %}
           {% endif %}
 
-          {% comment %} Always use the collection URL from settings, never default to /collections/all in the href {% endcomment %}
+          {% comment %} Set button URL and metadata {% endcomment %}
           {% if category_collection != blank %}
             {% assign button_url = category_collection.url %}
             {% assign button_handle = category_collection.handle %}
             {% assign button_id = category_collection.id %}
           {% else %}
-            {% assign button_url = '/collections/all' %}
-            {% assign button_handle = 'all' %}
-            {% assign button_id = 'all' %}
+            {% comment %} If no collection is assigned, skip this button or show warning in debug {% endcomment %}
+            {% assign button_url = '' %}
+            {% assign button_handle = 'none' %}
+            {% assign button_id = 'none' %}
           {% endif %}
 
-          <li class="ai-category-filter-item-{{ ai_gen_id }}">
-            <a
-              href="{{ button_url }}"
-              class="ai-category-filter-button-{{ ai_gen_id }}{% if is_active %} active{% endif %}"
-              data-collection-id="{{ button_id }}"
-              data-collection-handle="{{ button_handle }}"
-              data-category-index="{{ i }}"
-            >
-              {{ category_label }}
-            </a>
-          </li>
+          {% comment %} Only render button if it has a valid collection assigned {% endcomment %}
+          {% if button_url != blank %}
+            <li class="ai-category-filter-item-{{ ai_gen_id }}">
+              <a
+                href="{{ button_url }}"
+                class="ai-category-filter-button-{{ ai_gen_id }}{% if is_active %} active{% endif %}"
+                data-collection-id="{{ button_id }}"
+                data-collection-handle="{{ button_handle }}"
+                data-category-index="{{ i }}"
+              >
+                {{ category_label }}
+              </a>
+            </li>
+          {% endif %}
         {% endif %}
       {% endfor %}
     </ul>
@@ -237,7 +241,7 @@
           {% if cat_collection != blank %}
             Collection: {{ cat_collection.title }} (handle: {{ cat_collection.handle }}, id: {{ cat_collection.id }}, url: {{ cat_collection.url }})
           {% else %}
-            No collection assigned (will use /collections/all)
+            <span style="color: red;">⚠️ NO COLLECTION ASSIGNED - BUTTON WILL NOT RENDER</span>
           {% endif %}
           <br>
         {% endif %}
@@ -494,7 +498,7 @@
       "type": "collection",
       "id": "category_1_collection",
       "label": "Collection",
-      "info": "Select the collection for this category. Leave blank to use /collections/all"
+      "info": "⚠️ IMPORTANT: You MUST select a collection here. This should be your 'All Products' collection, NOT 'Best Sellers'"
     },
     {
       "type": "header",
