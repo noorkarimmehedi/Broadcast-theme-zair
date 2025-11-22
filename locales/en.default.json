@@ -528,12 +528,12 @@
   "shopify": {
     "checkout": {
       "contact": {
-        "email_or_phone_label": "Mobile phone number",
-        "email_or_phone_placeholder": "Mobile phone number"
+        "email_or_phone_label": "Email or mobile phone number",
+        "email_or_phone_placeholder": "Email or mobile phone number"
       },
       "field_errors": {
-        "email_or_phone_blank": "Enter a mobile phone number",
-        "email_or_phone_invalid": "Enter a valid mobile phone number"
+        "email_or_phone_blank": "Email or mobile phone number",
+        "email_or_phone_invalid": "Enter a valid email or mobile phone number"
       }
     }
   }
