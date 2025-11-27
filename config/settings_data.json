@@ -49,7 +49,7 @@
     "quickview_enable": false,
     "form_style": "classic",
     "swatch_style": "square",
-    "favicon": "shopify://shop_images/Untitled_280_x_80_px_40_x_40_px.png",
+    "favicon": "shopify://shop_images/12.png",
     "enable_estimate_shipping": false,
     "show_free_shipping_message": true,
     "message": "You are ||amount|| away from free shipping.",
