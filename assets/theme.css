@@ -22018,24 +22018,3 @@ recipient-form .recipient-form-field-label {
   padding-top: 60px;
 }
 
-/* Position badges at bottom of product image */
-.product-item__image {
-  position: relative;
-}
-
-.product-item__badges-image-bottom {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  z-index: 10;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.product-item__badges-image-bottom .badge-box,
-.product-item__badges-image-bottom .sale-box,
-.product-item__badges-image-bottom .preorder-box {
-  display: inline-block;
-  margin: 0;
-}
