@@ -352,7 +352,7 @@
 {%- endcapture -%}
 
 <div class="grid-item product-item {{ alignment_class }} {{ overlay_text_class }} {{ quickview_class }}" id="{{ item_unique }}" data-product-grid-item {{ additional_attributes }}>
-  <div class="product-item__image{% if double_img %} double__image{% endif %}" data-product-image>
+  <div class="product-item__image{% if double_img %} double__image{% endif %}" data-product-image style="position: relative;">
     <a class="product-link" href="{{ product_url }}" aria-label="{{ product.title | strip_html | escape }}" data-product-link="{{ product_url }}">
       {%- if product.media.size > 0 -%}
         <div class="product-item__bg" data-product-image-default>
