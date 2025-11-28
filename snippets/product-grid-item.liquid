@@ -216,11 +216,19 @@
       data-aos-duration="{{ aos_duration }}"
       data-aos-anchor="{{ aos_anchor }}">{{ 'products.product.pre_order' | t }}</span>
   {%- elsif on_sale and sold_out == false -%}
+    {%- liquid
+      assign savings = product.compare_at_price | minus: product.price
+      if settings.currency_code_enable
+        assign savings_formatted = savings | money_with_currency
+      else
+        assign savings_formatted = savings | money
+      endif
+    -%}
     <span class="sale-box"
       data-aos="fade"
       data-aos-delay="{{ aos_image_delay }}"
       data-aos-duration="{{ aos_duration }}"
-      data-aos-anchor="{{ aos_anchor }}">{{ 'products.product.on_sale' | t }}</span>
+      data-aos-anchor="{{ aos_anchor }}">{{ savings_formatted }} {{ 'products.product.save' | t }}</span>
   {%- endif -%}
 
   {%- if settings.quickview_enable and current_variant -%}
