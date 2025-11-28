@@ -458,25 +458,23 @@
           {%- endif -%}
         </div>
       {%- endif -%}
-
-      {%- comment -%} Savings badge at the bottom {%- endcomment -%}
-      {%- if product.compare_at_price > product.price and product.available and settings.sale_tags_enable -%}
-        {%- liquid
-          assign savings = product.compare_at_price | minus: product.price
-          if settings.currency_code_enable
-            assign savings_formatted = savings | money_with_currency
-          else
-            assign savings_formatted = savings | money
-          endif
-        -%}
-        <div class="product-item__savings-badge" style="margin-top: 8px;">
-          <span class="sale-box"
-            data-aos="fade"
-            data-aos-delay="{{ aos_image_delay }}"
-            data-aos-duration="{{ aos_duration }}"
-            data-aos-anchor="{{ aos_anchor }}">{{ savings_formatted }} {{ 'products.product.save' | t }}</span>
-        </div>
-      {%- endif -%}
     </div>
+
+    {%- comment -%} Savings badge at the bottom {%- endcomment -%}
+    {%- if product.compare_at_price > product.price and product.available -%}
+      {%- liquid
+        assign savings = product.compare_at_price | minus: product.price
+        if settings.currency_code_enable
+          assign savings_formatted = savings | money_with_currency
+        else
+          assign savings_formatted = savings | money
+        endif
+      -%}
+      <div class="product-item__savings-badge" style="margin-top: 10px; text-align: center;">
+        <span class="sale-box" style="display: inline-block; padding: 5px 12px; background: #ff0000; color: #fff; font-size: 12px; font-weight: bold; border-radius: 3px;">
+          {{ savings_formatted }} {{ 'products.product.save' | t }}
+        </span>
+      </div>
+    {%- endif -%}
   </div>
 </div>
