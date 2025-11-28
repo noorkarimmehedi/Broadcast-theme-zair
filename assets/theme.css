@@ -22018,7 +22018,7 @@ recipient-form .recipient-form-field-label {
   padding-top: 60px;
 }
 
-/* Force show badges at bottom of product image */
+/* Position badges at bottom of product image */
 .product-item__image {
   position: relative !important;
 }
@@ -22027,8 +22027,11 @@ recipient-form .recipient-form-field-label {
   position: absolute !important;
   bottom: 8px !important;
   left: 8px !important;
+  right: 8px !important;
   z-index: 999 !important;
-  display: block !important;
+  display: flex !important;
+  gap: 8px;
+  flex-wrap: wrap;
   pointer-events: none;
 }
 
@@ -22038,7 +22041,10 @@ recipient-form .recipient-form-field-label {
   display: inline-block !important;
   position: static !important;
   pointer-events: auto;
-  margin-right: 5px;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-width: none !important;
 }
 
 /* Hide any badges that might still be at the top */
