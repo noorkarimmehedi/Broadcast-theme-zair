@@ -22018,3 +22018,32 @@ recipient-form .recipient-form-field-label {
   padding-top: 60px;
 }
 
+/* Force show badges at bottom of product image */
+.product-item__image {
+  position: relative !important;
+}
+
+.product-item__badges-image-bottom {
+  position: absolute !important;
+  bottom: 8px !important;
+  left: 8px !important;
+  z-index: 999 !important;
+  display: block !important;
+  pointer-events: none;
+}
+
+.product-item__badges-image-bottom .badge-box,
+.product-item__badges-image-bottom .sale-box,
+.product-item__badges-image-bottom .preorder-box {
+  display: inline-block !important;
+  position: static !important;
+  pointer-events: auto;
+  margin-right: 5px;
+}
+
+/* Hide any badges that might still be at the top */
+.product-item__image > .badge-box,
+.product-item__image > .sale-box,
+.product-item__image > .preorder-box {
+  display: none !important;
+}
