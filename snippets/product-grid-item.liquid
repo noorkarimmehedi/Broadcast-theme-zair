@@ -168,50 +168,8 @@
   {%- endif -%}
 {%- endif -%}
 
+{%- comment -%} CAPTURE OVER IMAGE CONTENT - ONLY QUICKVIEW BUTTON, NO BADGES {%- endcomment -%}
 {%- capture over_image_content -%}
-  {%- liquid
-    assign product_tags = product.tags | join: ',' | append: ','
-    assign preorder = false
-    assign is_preorder_meta = false
-    assign sold_out = false
-    assign badge = ''
-
-    if product.metafields.theme.badge != blank and product.metafields.theme.badge.type == 'single_line_text_field'
-      assign badge = product.metafields.theme.badge.value
-    endif
-
-    if badge == '' and product_tags contains '_badge_'
-      assign badge = product_tags | split: '_badge_'
-      assign badge = badge[1] | split: ',' | first | replace: '_', ' '
-    endif
-
-    if product.metafields.theme.preorder.type == 'boolean' and product.metafields.theme.preorder.value == true
-      assign is_preorder_meta = true
-    endif
-
-    if product_tags contains '_preorder' or is_preorder_meta
-      assign preorder = true
-    endif
-
-    unless product.available
-      assign sold_out = true
-    endunless
-  -%}
-
-  {%- if badge != '' -%}
-    <span class="badge-box"
-      data-aos="fade"
-      data-aos-delay="{{ aos_image_delay }}"
-      data-aos-duration="{{ aos_duration }}"
-      data-aos-anchor="{{ aos_anchor }}">{{ badge }}</span>
-  {%- elsif preorder and sold_out == false -%}
-    <span class="preorder-box"
-      data-aos="fade"
-      data-aos-delay="{{ aos_image_delay }}"
-      data-aos-duration="{{ aos_duration }}"
-      data-aos-anchor="{{ aos_anchor }}">{{ 'products.product.pre_order' | t }}</span>
-  {%- endif -%}
-
   {%- if settings.quickview_enable and current_variant -%}
     {%- liquid
       assign is_preorder_meta_exist = false
@@ -459,22 +417,68 @@
         </div>
       {%- endif -%}
 
-      {%- comment -%} Savings badge at the bottom {%- endcomment -%}
-      {%- if product.compare_at_price > product.price and product.available and settings.sale_tags_enable -%}
-        {%- liquid
-          assign savings = product.compare_at_price | minus: product.price
-          if settings.currency_code_enable
-            assign savings_formatted = savings | money_with_currency
-          else
-            assign savings_formatted = savings | money
-          endif
-        -%}
-        <div class="product-item__savings-badge" style="margin-top: 8px;">
-          <span class="sale-box"
-            data-aos="fade"
-            data-aos-delay="{{ aos_image_delay }}"
-            data-aos-duration="{{ aos_duration }}"
-            data-aos-anchor="{{ aos_anchor }}">{{ savings_formatted }} {{ 'products.product.save' | t }}</span>
+      {%- comment -%} ALL BADGES AT BOTTOM - Badge, Preorder, and Sale/Savings {%- endcomment -%}
+      {%- liquid
+        assign product_tags = product.tags | join: ',' | append: ','
+        assign preorder = false
+        assign is_preorder_meta = false
+        assign sold_out = false
+        assign badge = ''
+
+        if product.metafields.theme.badge != blank and product.metafields.theme.badge.type == 'single_line_text_field'
+          assign badge = product.metafields.theme.badge.value
+        endif
+
+        if badge == '' and product_tags contains '_badge_'
+          assign badge = product_tags | split: '_badge_'
+          assign badge = badge[1] | split: ',' | first | replace: '_', ' '
+        endif
+
+        if product.metafields.theme.preorder.type == 'boolean' and product.metafields.theme.preorder.value == true
+          assign is_preorder_meta = true
+        endif
+
+        if product_tags contains '_preorder' or is_preorder_meta
+          assign preorder = true
+        endif
+
+        unless product.available
+          assign sold_out = true
+        endunless
+      -%}
+
+      {%- comment -%} Display badges at the bottom {%- endcomment -%}
+      {%- if badge != '' or (preorder and sold_out == false) or (product.compare_at_price > product.price and product.available and settings.sale_tags_enable) -%}
+        <div class="product-item__badges-bottom" style="margin-top: 8px;">
+          {%- if badge != '' -%}
+            <span class="badge-box"
+              data-aos="fade"
+              data-aos-delay="{{ aos_image_delay }}"
+              data-aos-duration="{{ aos_duration }}"
+              data-aos-anchor="{{ aos_anchor }}">{{ badge }}</span>
+          {%- elsif preorder and sold_out == false -%}
+            <span class="preorder-box"
+              data-aos="fade"
+              data-aos-delay="{{ aos_image_delay }}"
+              data-aos-duration="{{ aos_duration }}"
+              data-aos-anchor="{{ aos_anchor }}">{{ 'products.product.pre_order' | t }}</span>
+          {%- endif -%}
+
+          {%- if product.compare_at_price > product.price and product.available and settings.sale_tags_enable -%}
+            {%- liquid
+              assign savings = product.compare_at_price | minus: product.price
+              if settings.currency_code_enable
+                assign savings_formatted = savings | money_with_currency
+              else
+                assign savings_formatted = savings | money
+              endif
+            -%}
+            <span class="sale-box"
+              data-aos="fade"
+              data-aos-delay="{{ aos_image_delay }}"
+              data-aos-duration="{{ aos_duration }}"
+              data-aos-anchor="{{ aos_anchor }}">{{ savings_formatted }} {{ 'products.product.save' | t }}</span>
+          {%- endif -%}
         </div>
       {%- endif -%}
     </div>
