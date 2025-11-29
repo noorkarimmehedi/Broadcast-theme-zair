@@ -543,6 +543,7 @@
         "image_DfKMcX",
         "image_nP9EH4"
       ],
+      "disabled": true,
       "name": "Slideshow",
       "settings": {
         "height": "image-height",
@@ -553,6 +554,46 @@
         "autoplay": false,
         "autoplay_speed": 8
       }
+    },
+    "1764427096e97ef7c6": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a5600c9_kqKkNp": {
+          "type": "ai_gen_block_a5600c9",
+          "settings": {
+            "heading": "What Our Customers Say",
+            "heading_size": 36,
+            "heading_color": "#000000",
+            "heading_spacing": 40,
+            "section_padding": 50,
+            "grid_gap": 20,
+            "image_aspect_ratio": 100,
+            "border_width": 1,
+            "border_color": "#E0E0E0",
+            "hover_border_color": "#CCCCCC",
+            "border_radius": 8,
+            "shadow_horizontal": 0,
+            "shadow_vertical": 4,
+            "shadow_blur": 8,
+            "shadow_opacity": 0,
+            "show_testimonial_1": true,
+            "testimonial_image_1": "shopify://shop_images/WhatsApp_Image_2025-11-27_at_22.26.45_0131ec20-56f8-412e-a8f2-da1282da363a.jpg",
+            "show_testimonial_2": true,
+            "testimonial_image_2": "shopify://shop_images/WhatsApp_Image_2025-11-27_at_22.26.45.jpg",
+            "show_testimonial_3": true,
+            "testimonial_image_3": "shopify://shop_images/WhatsApp_Image_2025-11-27_at_22.25.58_1.jpg",
+            "show_testimonial_4": true,
+            "testimonial_image_4": "shopify://shop_images/WhatsApp_Image_2025-11-27_at_22.25.58.jpg",
+            "show_testimonial_5": true,
+            "show_testimonial_6": true
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a5600c9_kqKkNp"
+      ],
+      "settings": {}
     },
     "17628472147d8968f2": {
       "type": "_blocks",
@@ -1486,6 +1527,7 @@
     "blocks_Hmhc8n",
     "17622467612c9818ef",
     "section_slideshow_RLXi3K",
+    "1764427096e97ef7c6",
     "17628472147d8968f2",
     "176251656635c66783",
     "1763536465d346da1e",
