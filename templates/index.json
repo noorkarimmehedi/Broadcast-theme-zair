@@ -569,8 +569,8 @@
             "grid_gap": 20,
             "image_aspect_ratio": 100,
             "border_width": 1,
-            "border_color": "#E0E0E0",
-            "hover_border_color": "#CCCCCC",
+            "border_color": "#e0e0e0",
+            "hover_border_color": "#cccccc",
             "border_radius": 2,
             "shadow_horizontal": 0,
             "shadow_vertical": 4,
@@ -584,8 +584,8 @@
             "testimonial_image_3": "shopify://shop_images/WhatsApp_Image_2025-11-27_at_22.25.58_1.jpg",
             "show_testimonial_4": true,
             "testimonial_image_4": "shopify://shop_images/WhatsApp_Image_2025-11-27_at_22.25.58.jpg",
-            "show_testimonial_5": true,
-            "show_testimonial_6": true
+            "show_testimonial_5": false,
+            "show_testimonial_6": false
           },
           "blocks": {}
         }
