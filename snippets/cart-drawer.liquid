@@ -1,231 +1,516 @@
-{%- if settings.cart_drawer -%}
 {%- liquid
-	assign free_shipping = settings.free_shipping
-	assign free_shipping_minimum = settings.free_shipping_minimum | times: 100
-	assign total = cart.total_price
+  assign animation_name = 'cart-items-fade'
+  assign animation_duration = 500
+  assign animation_delay = 200
+  assign animation_delay_increment = 50
+  assign animation_delay_cart_empty = 0
+  assign is_cart_drawer = true
+  assign cart_item_count = cart.item_count
+  assign cart_custom_message_text = settings.cart_custom_message_text
+  assign show_empty_cart_menu = settings.show_empty_cart_menu
+  assign empty_cart_menu = settings.empty_cart_menu
+  assign custom_message_color = settings.cart_cust_message_color
+  assign show_wheel = false
+  assign show_progress_bar = true
+  
+  comment
+    Enhanced features from other theme
+  endcomment
+  assign cart_recommendations = settings.cart_recommendations
 -%}
-<div class="side-panel cart-drawer" id="Cart-Drawer" tabindex="-1">
-	<div class="side-panel-inner">
-		<div class="side-panel-header">
-			<div>
-				<h4 class="body-font">{{ 'general.cart_drawer.title' | t }}</h4>
-				<side-panel-close class="side-panel-close">{%- render 'svg-icons' with 'close' -%}</side-panel-close>
-			</div>
-		</div>
-		<div class="side-panel-content">
-			{%- if cart != empty -%}
-				<div class="product-cart-item--container">
-					{%- if free_shipping and settings.free_shipping_minimum != blank -%}
-						<aside class="free-shipping" data-cart-total="{{ total }}" data-minimum="{{ free_shipping_minimum }}">
-							<div class="free-shipping--text">
-								{%- if total < free_shipping_minimum -%}
-									{%- assign remaining_amount = total | minus: free_shipping_minimum | abs | money_without_trailing_zeros -%}
-									{{ 'general.cart_drawer.free_shipping.spend_more_for_free_shipping_html' | t: amount: remaining_amount }}
-								{%- else -%}
-									{{ 'general.cart_drawer.free_shipping.free_shipping_applied_at_checkout' | t }}
-								{%- endif -%}
-							</div>
-							<div class="free-shipping--bar">
-								<div class="free-shipping--percentage"></div>
-							</div>
-						</aside>
-					{%- endif -%}
-					{% for item in cart.items %}
-					<div class="product-cart-item" id="CartDrawerItem-{{ item.index | plus: 1 }}">
-						<div class="product-cart-item-image">
-							{% if item.image %}
-								{%- render 'responsive-image', image: item.image, sizes: '192x0' -%}
-							{% else %}
-								<div class="thb-placeholder" style="width: 96px;">
-									{{ 'product-1' | placeholder_svg_tag }}
-								</div>
-							{% endif %}
-							<div class="loading-overlay">
-								{% render 'svg-icons' with 'thb-loading' %}
-							</div>
-						</div>
-						<div class="product-cart-item-info">
-							<a href="{{ item.url }}" title="{{ item.product.title | escape }}" class="cart-product-link">{{ item.product.title }}</a>
-							<span class="price">
-								{%- if item.original_line_price != item.final_line_price -%}
-								 <del><span class="amount">{{ item.original_line_price | money }}</span></del>
-								 <ins><span class="amount">{{ item.final_line_price | money }}</span></ins>
-								{%- else -%}
-								 <ins><span class="amount">{{ item.original_line_price | money }}</span></ins>
-								{%- endif -%}
-								{%- if item.variant.available and item.unit_price_measurement -%}
-									<small class="unit-price">
-										{{ item.variant.unit_price | money }}
-										<span class="unit-price-separator">/</span>
-										{%- if item.variant.unit_price_measurement.reference_value != 1 -%}
-										{{- item.variant.unit_price_measurement.reference_value -}}
-										{%- endif -%}
-										{{ item.variant.unit_price_measurement.reference_unit }}
-									</small>
-								{%- endif -%}
-							</span>
-							{% if item.selling_plan_allocation %}
-							<div class="properties">
-								<span class="selling-plan">{{ item.selling_plan_allocation.selling_plan.name }}</span>
-							</div>
-							{% endif %}
-							{% unless item.variant.title contains 'Default' %}
-								<div class="product-cart-item-options">
-									{% for option in item.product.options %}
-										{{ item.variant.options[forloop.index0] }}{% if forloop.last != true %}, {% endif %}
-									{% endfor %}
-								</div>
-							{% endunless %}
-							{%- for property in item.properties -%}
-								{%- assign property_first_char = property.first | slice: 0 -%}
-								{%- if property.last != blank and property_first_char != '_' -%}
-									<div class="product-cart-item-options">
-										<span>{{ property.first }}: </span>
-											{%- if property.last contains '/uploads/' -%}
-												<a href="{{ property.last }}" class="link" target="_blank">
-													{{ property.last | split: '/' | last }}
-												</a>
-											{%- else -%}
-												{{ property.last }}
-											{%- endif -%}
-											<br/>
-									</div>
-								{%- endif -%}
-							{%- endfor -%}
-							{%- if item.discounts != blank -%}
-							<ul class="discounts" role="list">
-								{%- for discount in item.discounts -%}
-									<li class="discounts__discount">
-										{%- render 'svg-icons' with 'discount' -%}
-										{{ discount.title }} (-{{ discount.amount | money }})
-									</li>
-								{%- endfor -%}
-							</ul>
-							{%- endif -%}
-							<quantity-selector class="quantity cart-update small-qty" data-id="{{ item.key | escape }}">
-							 <button class="minus" type="button" aria-label="{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}">{% render 'svg-icons' with 'minus' %}</button>
-								<input
-								type="number"
-								name="updates[]"
-								id="updates_{{ item.key }}"
-								value="{{ item.quantity }}"
-								min="{{ item.variant.quantity_rule.min }}"
-								{% if item.variant.quantity_rule.max != null %}
-			          	max="{{ item.variant.quantity_rule.max }}"
-								{% elsif item.variant.inventory_management != null and item.variant.inventory_quantity > 0 %}
-									max="{{ item.variant.inventory_quantity }}"
-			          {% endif %}
-								step="{{ item.variant.quantity_rule.increment }}"
-								class="qty"
-								data-index="{{ item.index | plus: 1 }}"
-								aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
-								>
-							 <button class="plus" type="button" aria-label="{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}">{% render 'svg-icons' with 'plus' %}</button>
-							</quantity-selector>
-							<a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="remove" data-index="{{ item.index | plus: 1 }}">{% render 'svg-icons' with 'trash' %}</a>
-						</div>
-						<div class="product-cart-item-price">
-							<span class="price">
-							{%- if item.original_line_price != item.final_line_price -%}
-							 <del><span class="amount"><div class="pn-total-line-item" data-id="{{ item.key }}">{{ item.original_line_price | money }}</div></span></del>
-							 <ins><span class="amount">{{ item.final_line_price | money }}</span></ins>
-							{%- else -%}
-							 <ins><span class="amount"><div class="pn-total-line-item" data-id="{{ item.key }}">{{ item.original_line_price | money }}</div></span></ins>
-							{%- endif -%}
-							{%- if item.variant.available and item.unit_price_measurement -%}
-								<small class="unit-price">
-									{{ item.variant.unit_price | money }}
-									<span class="unit-price-separator">/</span>
-									{%- if item.variant.unit_price_measurement.reference_value != 1 -%}
-									{{- item.variant.unit_price_measurement.reference_value -}}
-									{%- endif -%}
-									{{ item.variant.unit_price_measurement.reference_unit }}
-								</small>
-							{%- endif -%}
-							</span>
-						</div>
-					</div>
-					{% endfor %}
-				</div>
-			{%- else -%}
-				<div class="cart-drawer__empty-cart">
-					{% render 'svg-icons' with 'thb-empty-cart' %}
-					<p>{{ 'general.cart_drawer.cart_empty' | t }}</p>
-					<a class="button accent2" href="{{ routes.all_products_collection_url }}"><span>{{ 'general.cart_drawer.start_shopping' | t }}</span></a>
-				</div>
-			{%- endif -%}
-			{%- if settings.cart_recommendations -%}
-				<div class="cart-drawer--recommendations--container product-recommendations--parent">
-					<product-recommendations class="cart-drawer--recommendations" data-url="{{ routes.product_recommendations_url }}?section_id=cart-drawer&product_id={{ cart.items[0].product_id }}&limit=4">
-						{% if recommendations.performed and recommendations.products_count > 0 %}
-							<h6 class="cart-drawer--recommendations--heading">{{ 'general.cart_drawer.you_may_also_like' | t }}</h6>
-							<div class="cart-drawer--recommendations--products">
-								{% for recommendation in recommendations.products %}
-									{% render 'product-card-small' product_small: recommendation, quick_add: true %}
-								{% endfor %}
-							</div>
-						{% endif %}
-					</product-recommendations>
-				</div>
-			{%- endif -%}
-		</div>
-		{%- if cart != empty -%}
-			<div class="side-panel-footer">
-				{%- if settings.cart_drawer_notes -%}
-				<button type="button" class="order-note-toggle mini-cart__row" id="order-note-toggle" aria-controls="mini-cart-note">{{ 'general.cart_drawer.add_order_note' | t }} <span></span></button>
-				<div class="order-note-toggle__content">
-					<label for="mini-cart__notes">{{ 'general.cart_drawer.add_order_note' | t }}</label>
-					<textarea name="note" id="mini-cart__notes" rows="5">{{ cart.note }}</textarea>
-					<button class="button full"><span>{{ 'general.cart_drawer.save' | t }}</span></button>
-					<div class="order-note-toggle__content-overlay"></div>
-				</div>
-				{%- endif -%}
-				<div class="cart-drawer-footer">
-					{%- if cart.cart_level_discount_applications.size > 0 -%}
-						{%- for discount in cart.cart_level_discount_applications -%}
-							<div class="mini-cart__row mini-cart__discount">
-								<div class="mini-cart__label">{{ discount.title }}</div>
-								<span>(-{{ discount.total_allocated_amount | money }})</span>
-							</div>
-						{%- endfor -%}
-					{%- endif -%}
 
-					<div class="cart-drawer-buttons">
-						<p class="cart-policy-text">
-							{%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
-								{{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
-							{%- elsif cart.taxes_included -%}
-								{{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
-							{%- elsif shop.shipping_policy.body != blank -%}
-								{{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
-							{%- else -%}
-								{{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
-							{%- endif -%}
-						</p>
-						{% if settings.cart_terms_conditions_enable %}
-	            <div class="cart-drawer-terms">
-	              <input type="checkbox" id="CartDrawerTerms" required>
-	              <label for="CartDrawerTerms">
-	                {% if settings.cart_terms_conditions_page != blank %}
-	                  {{ 'sections.cart.terms_html' | t: url: settings.cart_terms_conditions_page.url }}
-	                {% else %}
-	                  {{ 'sections.cart.terms' | t }}
-	                {% endif %}
-	              </label>
-	            </div>
-	          {% endif %}
-						{%- if settings.cart_drawer_checkout_button -%}
-						<form action="{{ routes.cart_url }}" method="post" novalidate>
-							<button type="submit" class="button full checkout" name="checkout" title="{{ 'general.cart_drawer.checkout' | t | escape }}"><span>{{ 'general.cart_drawer.checkout' | t }} <b>•</b> {% if settings.currency_code_enabled %}{{ cart.total_price | money_with_currency }}{% else %}{{ cart.total_price | money }}{% endif %}</span></button>
-						</form>
-						{%- endif -%}
-						{%- if settings.cart_drawer_cart_button -%}
-						<a href="{{ routes.cart_url }}" class="text-button" title="{{ 'general.cart_drawer.view_cart' | t | escape }}">{{ 'general.cart_drawer.view_cart' | t }}</a>
-						{%- endif -%}
-					</div>
-				</div>
-			</div>
-		{%- endif -%}
-	</div>
-</div>
+{%- unless custom_message_color == 'rgba(0,0,0,0)' or custom_message_color == blank -%}
+  {%- style -%}
+    .drawer__message--custom { --text: {{ custom_message_color }}; }
+  {%- endstyle -%}
+{%- endunless -%}
+
+{%- capture upsell_products -%}
+  {%- render 'cart-line-items', part: 'upsell-items' -%}
+{%- endcapture -%}
+
+<div class="drawer drawer--cart" id="cart-drawer" data-cart-drawer tabindex="0">
+  <div class="drawer__inner" data-scroll-lock-scrollable>
+    {%- if cart_custom_message_text != blank -%}
+      <div
+        class="drawer__message cart__message drawer__message--custom"
+        data-animation="{{ animation_name }}"
+        data-animation-duration="{{ animation_duration }}"
+        data-animation-delay="{{ animation_delay }}"
+        {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}
+      >
+        {{ cart_custom_message_text }}
+      </div>
+    {%- endif -%}
+
+    <header
+      class="drawer__head"
+      data-animation="{{ animation_name }}"
+      data-animation-duration="{{ animation_duration }}"
+      data-animation-delay="{{ animation_delay }}"
+      {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}
+    >
+      <h3>{{ 'cart.general.title' | t }}</h3>
+
+      <button type="button" class="drawer__close" data-cart-drawer-close aria-label="{{ 'general.accessibility.close' | t }} {{ 'cart.general.title' | t }}">
+        {%- render 'icon-cancel' -%}
+      </button>
+    </header>
+
+    <div class="drawer__body" data-cart-drawer-body data-scroll-lock-scrollable>
+      {% comment %} Free shipping {% endcomment %}
+
+{%- liquid
+  assign free_shipping_text = block.settings.message | default: settings.message
+  assign show_message = false
+
+  if block.settings.message != blank
+    assign show_message = true
+  endif
+
+  if settings.show_free_shipping_message and settings.free_shipping_limit != blank and free_shipping_text != blank
+    assign show_message = true
+  endif
+-%}
+
+{%- if show_message -%}
+  {%- liquid
+    assign limit = settings.free_shipping_limit | plus: 0
+    assign limit_currency = limit | times: 100
+    assign subtotal_without_currency = cart.total_price | plus: 0 | divided_by: 100
+    assign percent = limit | minus: subtotal_without_currency | times: 100 | divided_by: limit
+    assign percent = 100 | minus: percent
+
+    if settings.currency_code_enable
+      assign limit_currency = limit_currency | minus: cart.total_price | money_with_currency | remove: '.00' | remove: ',00'
+    else
+      assign limit_currency = limit_currency | minus: cart.total_price | money_without_trailing_zeros
+    endif
+
+    capture left_to_spend
+      echo '<span data-left-to-spend>' | append: limit_currency | append: '</span>'
+    endcapture
+
+    assign free_shipping_message = free_shipping_text | replace: '||amount||', left_to_spend
+    assign qualified_shipping_message = 'cart.general.qualified_shipping_message' | t
+
+    capture free_shipping_classes
+      if is_cart_drawer
+        echo 'drawer__message '
+      endif
+
+      if template.name == 'cart'
+        echo 'cart__message '
+      endif
+
+      echo 'free-shipping'
+
+      if subtotal_without_currency >= limit and qualified_shipping_message != blank
+        echo ' is-success'
+      endif
+    endcapture
+  -%}
+
+  <div class="{{ free_shipping_classes }}"
+    data-free-shipping="{% if qualified_shipping_message != blank %}true{% else %}false{% endif %}"
+    data-free-shipping-limit="{{ limit }}"
+    {% if template.name == 'cart' or is_cart_drawer %}
+      data-animation="{{ animation_name }}"
+      data-animation-duration="{{ animation_duration }}"
+      {% if empty_cart %}
+        {% assign animation_cart_empty_delay = animation_cart_empty_delay | plus: 50 %}
+        data-animation-delay="{{ animation_cart_empty_delay }}"
+      {% else %}
+      {% assign animation_delay = animation_delay | plus: 50 %}
+        data-animation-delay="{{ animation_delay }}"
+      {% endif %}
+    {% endif %}
+    >
+    {%- if show_wheel -%}
+      <div class="free-shipping__graph" data-progress-graph style="--stroke-dashoffset: 87.96459430051421;">
+        <svg height="18" width="18">
+          <circle r="7" cx="9" cy="9" />
+          <circle class="free-shipping__graph-progress" stroke-dasharray="87.96459430051421 87.96459430051421" r="7" cx="9" cy="9" />
+        </svg>
+      </div>
+    {%- endif -%}
+
+    {%- if qualified_shipping_message != blank -%}
+      <span class="free-shipping__success-message">{{ qualified_shipping_message }}</span>
+    {%- endif -%}
+
+    <span class="free-shipping__default-message">
+      {{ free_shipping_message }}
+    </span>
+
+    {%- if show_progress_bar -%}
+      <progress class="free-shipping__progress-bar" data-progress-bar value="{{ percent }}" max="100"></progress>
+    {%- endif -%}
+
+    <div class="confetti">
+      <span class="confetti__dot confetti__dot--1"></span>
+      <span class="confetti__dot confetti__dot--2"></span>
+      <span class="confetti__dot confetti__dot--3"></span>
+      <span class="confetti__dot confetti__dot--4"></span>
+      <span class="confetti__dot confetti__dot--5"></span>
+      <span class="confetti__dot confetti__dot--6"></span>
+    </div>
+  </div>
 {%- endif -%}
+
+      {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}
+
+      <div class="cart__errors drawer__errors"
+        data-cart-errors
+        data-animation="{{ animation_name }}"
+        data-animation-duration="{{ animation_duration }}"
+        data-animation-delay="{{ animation_delay }}">
+        <div class="cart__errors__inner">
+          <h5 class="cart__errors__heading">{{ 'cart.general.limit_message' | t }}</h5>
+
+          <p class="cart__errors__content" data-error-message></p>
+
+          <button class="cart__errors__close" type="button" data-cart-error-close aria-label="{{ 'general.accessibility.close' | t }} {{ 'cart.general.title' | t }}">
+            {%- render 'icon-cancel' -%}
+          </button>
+        </div>
+      </div>
+
+      <div class="drawer__items{% if cart_item_count <= 0 %} is-hidden{% endif %}"
+        data-items-holder
+        style="--base-animation-delay: {{ animation_delay }}ms">
+
+        {%- render 'cart-line-items', part: 'line-items' -%}
+        {%- liquid
+          comment
+            Increase animation delay by using the cart item count limited up to 3
+          endcomment
+          assign animation_multiplier = cart_item_count | at_most: 3
+          assign animation_delay_after_items = animation_multiplier | times: animation_delay_increment
+          assign animation_delay = animation_delay | plus: animation_delay_after_items
+        -%}
+      </div>
+
+      <div class="drawer__empty{% if cart_item_count > 0 %} is-hidden{% endif %}"
+        data-cart-empty
+        style="--base-animation-delay: {{ animation_delay }}ms">
+
+        <div class="drawer__empty__inner">
+          <p class="drawer__empty__message" data-animation="{{ animation_name }}" data-animation-duration="{{ animation_duration }}" data-animation-delay="{{ animation_delay_cart_empty }}">
+            {{- 'cart.general.empty' | t -}}
+          </p>
+          {%- assign animation_delay_cart_empty = animation_delay_cart_empty | plus: animation_delay_increment -%}
+
+          {%- if show_empty_cart_menu and linklists[empty_cart_menu].links.size > 0 -%}
+            <div class="drawer__empty__buttons">
+              {%- for link in linklists[empty_cart_menu].links -%}
+                {%- liquid
+                  assign is_odd_last = false
+                  capture index_type
+                    cycle 'odd', 'even'
+                  endcapture
+
+                  if forloop.last and index_type == 'odd'
+                    assign is_odd_last = true
+                  endif
+                -%}
+
+                <div
+                  class="drawer__empty__item{% if is_odd_last %} drawer__empty__item--odd--last{% endif %}"
+                  data-animation="{{ animation_name }}"
+                  data-animation-duration="{{ animation_duration }}"
+                  data-animation-delay="{{ animation_delay_cart_empty }}"
+                  {%- assign animation_delay_cart_empty = animation_delay_cart_empty | plus: animation_delay_increment -%}
+                >
+                  <a href="{{ link.url }}" class="btn btn--full btn--primary btn--outline">
+                    {{ link.title | strip_html | escape }}
+                  </a>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          {%- if settings.cart_product -%}
+            <div class="drawer__empty__product"
+              data-animation="{{ animation_name }}"
+              data-animation-duration="{{ animation_duration }}"
+              data-animation-delay="{{ animation_delay_cart_empty }}"
+            >
+              {%- render 'upsell-product', upsell_product: settings.cart_product -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Cart Recommendations Section {%- endcomment -%}
+      {%- if cart_recommendations and cart_item_count > 0 -%}
+        <div class="cart-drawer--recommendations--container product-recommendations--parent"
+          data-animation="{{ animation_name }}"
+          data-animation-duration="{{ animation_duration }}"
+          data-animation-delay="{{ animation_delay }}">
+          <product-recommendations class="cart-drawer--recommendations" data-url="{{ routes.product_recommendations_url }}?section_id=cart-drawer&product_id={{ cart.items[0].product_id }}&limit=4">
+            {% if recommendations.performed and recommendations.products_count > 0 %}
+              <h6 class="cart-drawer--recommendations--heading">{{ 'general.cart_drawer.you_may_also_like' | t }}</h6>
+              <div class="cart-drawer--recommendations--products">
+                {% for recommendation in recommendations.products %}
+                  {%- render 'product-card-small', product: recommendation -%}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </product-recommendations>
+        </div>
+        {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}
+      {%- endif -%}
+    </div>
+
+    <div class="drawer__foot cart__foot{% if cart_item_count == 0 %} is-hidden{% endif %}" data-foot-holder>
+      <collapsible-elements single="true">
+        <details
+          class="cart__widget cart__widget--products accordion{% if upsell_products == blank %} is-hidden{% endif %}"
+          {% if upsell_products != blank %}
+            open="true"
+          {% endif %}
+          data-collapsible
+          data-upsell-widget
+          data-animation="{{ animation_name }}"
+          data-animation-duration="{{ animation_duration }}"
+          data-animation-delay="{{ animation_delay }}"
+          {% if cart_item_count > 0 %}
+            {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}
+          {% endif %}>
+          <summary class="cart__widget__title" data-collapsible-trigger>
+            {{- 'cart.general.pair_products' | t -}}
+
+            {%- render 'icon-plus' -%}
+            {%- render 'icon-minus' -%}
+          </summary>
+
+          <div class="cart__widget__content"{% if upsell_products != blank %} style="height: auto;"{% endif %} data-collapsible-body>
+            <div class="cart__widget__content__inner" data-collapsible-content>
+              <div class="cart__widget__products" data-upsell-products>
+                {{- upsell_products -}}
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <form action="{{ routes.cart_url }}" method="post" novalidate class="cart__form">
+          {%- if settings.enable_order_notes -%}
+            <details
+              class="cart__widget accordion"
+              data-collapsible
+              data-animation="{{ animation_name }}"
+              data-animation-duration="{{ animation_duration }}"
+              data-animation-delay="{{ animation_delay }}"
+              {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}>
+              <summary class="cart__widget__title" data-collapsible-trigger>
+                {{- 'cart.general.cart_notes_label' | t -}}
+
+                {%- render 'icon-plus' -%}
+                {%- render 'icon-minus' -%}
+              </summary>
+
+              <div class="cart__widget__content" data-collapsible-body>
+                <div class="cart__widget__content__inner" data-collapsible-content>
+                  <label for="note">{{ 'cart.general.customer_note' | t }}</label>
+                  <textarea id="note" name="note" class="cart__field cart__field--textarea"  aria-label="{{ 'cart.general.customer_note' | t }}">
+                    {{- cart.note -}}
+                  </textarea>
+                </div>
+              </div>
+            </details>
+          {%- endif -%}
+
+          {%- if settings.enable_gift_notes -%}
+            <details
+              class="cart__widget accordion"
+              data-collapsible
+              data-animation="{{ animation_name }}"
+              data-animation-duration="{{ animation_duration }}"
+              data-animation-delay="{{ animation_delay }}"
+              {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}>
+              <summary class="cart__widget__title" data-collapsible-trigger>
+                {{- 'cart.general.gift_notes_label' | t -}}
+
+                {%- render 'icon-plus' -%}
+                {%- render 'icon-minus' -%}
+              </summary>
+
+              <div class="cart__widget__content" data-collapsible-body>
+                <div class="cart__widget__content__inner" data-collapsible-content>
+                  {%- assign gift_note_attribute_default = 'Gift note' -%}
+                  {%- assign gift_note_attribute_string = 'cart.general.gift_note_attribute' | t -%}
+                  {%- assign gift_note_attribute = gift_note_attribute_string | default: gift_note_attribute_default -%}
+
+                  <label for="gift-note">{{ 'cart.general.customer_note' | t }}</label>
+                  <textarea id="gift-note" name="attributes[{{ gift_note_attribute }}]" class="cart__field cart__field--textarea" aria-label="{{ 'cart.general.customer_note' | t }}">{{ cart.attributes[gift_note_attribute] }}</textarea>
+                </div>
+              </div>
+            </details>
+          {%- endif -%}
+
+          {%- if settings.enable_estimate_shipping -%}
+            <details
+              class="cart__widget accordion"
+              data-collapsible
+              data-animation="{{ animation_name }}"
+              data-animation-duration="{{ animation_duration }}"
+              data-animation-delay="{{ animation_delay }}"
+              {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}>
+              <summary class="cart__widget__title" data-collapsible-trigger>
+                {{- 'cart.general.estimate_shipping_label' | t -}}
+
+                {%- render 'icon-plus' -%}
+                {%- render 'icon-minus' -%}
+              </summary>
+
+              <div class="cart__widget__content" data-collapsible-body>
+                <div class="cart__widget__content__inner" data-collapsible-content>
+                  {%- render 'cart-shipping-calculator' -%}
+                </div>
+              </div>
+            </details>
+          {%- endif -%}
+
+          <div class="cart__foot__inner"
+            data-animation="{{ animation_name }}"
+            data-animation-duration="{{ animation_duration }}"
+            data-animation-delay="{{ animation_delay }}">
+
+            <div class="cart__price__holder" data-cart-price-holder>
+              {%- liquid
+  assign subtotal = cart.total_price | plus: 0
+  assign cart_discount_size = cart.cart_level_discount_applications.size
+  assign original_subtotal = cart.original_total_price | plus: 0
+  assign currency_code_enable = settings.currency_code_enable
+
+  if currency_code_enable
+    assign original_subtotal_formatted = original_subtotal | money_with_currency
+  else
+    assign original_subtotal_formatted = original_subtotal | money
+  endif
+
+  if original_subtotal < subtotal or cart_discount_size == 0
+    assign cart_total_hidden = true
+  endif
+
+  if cart_discount_size == 0
+    assign cart_total_discount_hidden = true
+  endif
+-%}
+
+<div class="cart__total{% if cart_total_hidden %} is-hidden{% endif %}"
+  {% unless cart_total_hidden %}
+    data-animation="{{ animation_name }}"
+    data-animation-duration="{{ animation_duration }}"
+    data-animation-delay="{{ animation_delay }}"
+    {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}
+  {% endunless %}
+>
+  <span class="cart__total__label">{{ 'cart.general.subtotal_items' | t }}</span>
+
+  <span class="cart__total__price">
+    {%- if original_subtotal == 0 -%}
+      {{ 'general.money.free' | t }}
+    {%- else -%}
+      {{- original_subtotal_formatted -}}
+    {%- endif -%}
+  </span>
+</div>
+
+<div class="cart__total__discount{% if cart_total_discount_hidden %} is-hidden{% endif %}"
+  {% unless cart_total_discount_hidden %}
+    data-animation="{{ animation_name }}"
+    data-animation-duration="{{ animation_duration }}"
+    data-animation-delay="{{ animation_delay }}"
+    {% if cart_discount_size > 0 %}
+      {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}
+    {% endif %}
+  {% endunless %}
+>
+  {%- if cart.cart_level_discount_applications.size > 0 -%}
+    {%- for discount in cart.cart_level_discount_applications -%}
+      {%- liquid
+        if currency_code_enable
+          assign discount_total_allocated_amount = discount.total_allocated_amount | money_with_currency
+        else
+          assign discount_total_allocated_amount = discount.total_allocated_amount | money
+        endif
+      -%}
+
+      <div class="cart__total">
+        <div>
+          {%- render 'icon-tags' -%}
+
+          <span>
+            {{- discount.title -}}
+          </span>
+        </div>
+
+        <span>
+          -{{- discount_total_allocated_amount -}}
+        </span>
+      </div>
+    {%- endfor -%}
+  {%- endif -%}
+</div>
+
+<div class="cart__total"
+  data-animation="{{ animation_name }}"
+  data-animation-duration="{{ animation_duration }}"
+  data-animation-delay="{{ animation_delay }}"
+  {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}
+>
+  <span class="cart__total__label">{{- 'cart.general.subtotal' | t -}}</span>
+
+  <span class="cart__total__price cart__total__price--animated" data-cart-total="{{ subtotal }}">
+    {%- if subtotal == 0 -%}
+      {{ 'general.money.free' | t }}
+    {%- else -%}
+      {{- subtotal | money_with_currency -}}
+    {%- endif -%}
+  </span>
+
+  <div class="cart__price__loader loader"><div class="loader-indeterminate"></div></div>
+</div>
+            </div>
+
+            <div class="cart__button"
+              data-animation="{{ animation_name }}"
+              data-animation-duration="{{ animation_duration }}"
+              data-animation-delay="{{ animation_delay }}"
+              {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}>
+              <button type="submit" name="checkout" class="btn btn--primary btn--solid btn--full cart__checkout">
+                {%- if settings.show_lock_icon -%}
+                  {%- render 'animated-icon', filename: 'icon-lock' -%}
+                {%- endif -%}
+
+                {{- 'cart.general.checkout' | t -}}
+              </button>
+            </div>
+
+            <em class="cart__note"
+              data-animation="{{ animation_name }}"
+              data-animation-duration="{{ animation_duration }}"
+              data-animation-delay="{{ animation_delay }}"
+              {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}>
+              {{- 'cart.general.subtotal_note' | t -}}
+            </em>
+          </div>
+
+          {%- if settings.enable_additional_buttons and additional_checkout_buttons -%}
+            <div class="additional-checkout-buttons additional-checkout-buttons--vertical"
+              data-animation="{{ animation_name }}"
+              data-animation-duration="{{ animation_duration }}"
+              data-animation-delay="{{ animation_delay }}"
+              {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}>
+              {{- content_for_additional_checkout_buttons -}}
+            </div>
+          {%- endif -%}
+        </form>
+      </collapsible-elements>
+    </div>
+  </div>
+
+  <span class="drawer__underlay" data-drawer-underlay></span>
+</div>
