@@ -1,6 +1,402 @@
+{% doc %}
+  @prompt
+    create a section where i will showcase images of testimonial. keep this: Border
+    Border width
+    
+    1
+    
+    Border color
+    
+    
+    #E0E0E0
+    
+    Hover border color
+    
+    
+    #CCCCCC
+    
+    Border radius
+    
+    8
+    
+    Shadow
+    Horizontal offset
+    
+    0
+    
+    Vertical offset
+    
+    4
+    
+    Blur radius
+    
+    8
+    
+    Shadow opacity
+    
+    0
+    
+    
+    , if a Testimonial image isn't set from shopify it shuldn't be shown in the home page. there should be on off option. in desktop version 4 images should be in one row 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-testimonial-showcase-{{ ai_gen_id }} {
+    padding: {{ block.settings.section_padding }}px 0;
+  }
+
+  .ai-testimonial-showcase__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-testimonial-showcase__heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.heading_spacing }}px;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+  }
+
+  .ai-testimonial-showcase__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-testimonial-showcase__card-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    transition: all 0.3s ease;
+    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+  }
+
+  .ai-testimonial-showcase__card-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.hover_border_color }};
+  }
+
+  .ai-testimonial-showcase__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: {{ block.settings.image_aspect_ratio }}%;
+    overflow: hidden;
+  }
+
+  .ai-testimonial-showcase__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-testimonial-showcase__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-testimonial-showcase__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: {{ block.settings.grid_gap | times: 0.7 }}px;
+    }
+
+    .ai-testimonial-showcase__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-testimonial-showcase-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-testimonial-showcase__container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-testimonial-showcase__heading-{{ ai_gen_id }}">
+        {{ block.settings.heading }}
+      </h2>
+    {% endif %}
+
+    <div class="ai-testimonial-showcase__grid-{{ ai_gen_id }}">
+      {% for i in (1..6) %}
+        {% liquid
+          assign image_key = 'testimonial_image_' | append: i
+          assign enabled_key = 'show_testimonial_' | append: i
+          assign testimonial_image = block.settings[image_key]
+          assign is_enabled = block.settings[enabled_key]
+        %}
+
+        {% if is_enabled and testimonial_image %}
+          <div class="ai-testimonial-showcase__card-{{ ai_gen_id }}">
+            <div class="ai-testimonial-showcase__image-wrapper-{{ ai_gen_id }}">
+              <img
+                src="{{ testimonial_image | image_url: width: 800 }}"
+                alt="{{ testimonial_image.alt | escape }}"
+                loading="lazy"
+                width="{{ testimonial_image.width }}"
+                height="{{ testimonial_image.height }}"
+                class="ai-testimonial-showcase__image-{{ ai_gen_id }}"
+              >
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Testimonial showcase",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Spacing below heading",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid gap",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "image_aspect_ratio",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "label": "Image aspect ratio",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "hover_border_color",
+      "label": "Hover border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal offset",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical offset",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Blur radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_1",
+      "label": "Show testimonial 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_1",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_2",
+      "label": "Show testimonial 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_2",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_3",
+      "label": "Show testimonial 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_3",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_4",
+      "label": "Show testimonial 4",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_4",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_5",
+      "label": "Show testimonial 5",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_5",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_6",
+      "label": "Show testimonial 6",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_6",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial showcase"
+    }
+  ]
+}
 {% endschema %}
