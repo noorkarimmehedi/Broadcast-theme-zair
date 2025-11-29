@@ -22053,25 +22053,3 @@ recipient-form .recipient-form-field-label {
 .product-item__image > .preorder-box {
   display: none !important;
 }
-
-@media (max-width: 749px) {
-  #menu-drawer {
-    z-index: -1;
-    top: 0% !important;
-  }
-  a.list-social__link.link {
-    color: white;
-  }
-  .header__icon--menu[aria-expanded=true]:before {
-    display: none !important;
-  }
-  .list-menu {
-    margin-top: 50px !important;
-  }
-  .menu-drawer__inner-submenu {
-    margin-top: 90px !important;
-  }
-  #link-collections {
-    overflow: hidden !important;
-  }
-}
