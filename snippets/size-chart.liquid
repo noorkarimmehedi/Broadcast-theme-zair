@@ -58,7 +58,7 @@
   .size-chart-content {
     background: white;
     border-radius: 12px;
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
@@ -112,49 +112,8 @@
     color: #111827;
   }
   
-  .size-chart-tabs {
-    display: flex;
-    gap: 12px;
-    padding: 20px 24px;
-    justify-content: center;
-  }
-  
-  .size-chart-tab {
-    padding: 8px 32px;
-    background: white;
-    border: 1px solid #d1d5db;
-    border-radius: 0 !important;
-    font-size: 14px;
-    font-weight: 500;
-    color: #6b7280;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  
-  .size-chart-tab:hover {
-    background: #f9fafb;
-    color: #111827;
-    border-color: #9ca3af;
-  }
-  
-  .size-chart-tab.active {
-    background: #000000;
-    color: white;
-    border-color: #000000;
-  }
-  
   .size-chart-body {
     padding: 24px;
-  }
-  
-  .size-chart-tab-content {
-    display: none;
-  }
-  
-  .size-chart-tab-content.active {
-    display: block;
   }
   
   .size-chart-section {
@@ -235,17 +194,6 @@
       font-size: 18px;
     }
     
-    .size-chart-tabs {
-      padding: 16px 20px 0;
-      gap: 6px;
-    }
-    
-    .size-chart-tab {
-      padding: 10px 16px;
-      font-size: 13px;
-      border-radius: 6px;
-    }
-    
     .size-chart-body {
       padding: 16px 20px;
     }
@@ -292,191 +240,181 @@
       <button class="size-chart-close" onclick="closeSizeChart()">&times;</button>
     </div>
     
-    <div class="size-chart-tabs">
-      <button class="size-chart-tab active" onclick="switchTab('shirt')">Shirt</button>
-      <button class="size-chart-tab" onclick="switchTab('winter')">Winter Collection</button>
-    </div>
-    
     <div class="size-chart-body">
-      <!-- Shirt Tab Content -->
-      <div class="size-chart-tab-content active" id="shirt-content">
-        <div class="size-chart-section">
-          <div class="size-chart-table-container">
-            <table class="size-chart-table">
-              <thead>
-                <tr>
-                  <th>Size</th>
-                  <th>Chest</th>
-                  <th>Length</th>
-                  <th>Sleeves</th>
-                  <th>Collar</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>S</strong></td>
-                  <td>40"</td>
-                  <td>27"</td>
-                  <td>24"</td>
-                  <td>15.5"</td>
-                </tr>
-                <tr>
-                  <td><strong>M</strong></td>
-                  <td>42"</td>
-                  <td>28"</td>
-                  <td>24.5"</td>
-                  <td>15.5"</td>
-                </tr>
-                <tr>
-                  <td><strong>L</strong></td>
-                  <td>44"</td>
-                  <td>29"</td>
-                  <td>25"</td>
-                  <td>16.5"</td>
-                </tr>
-                <tr>
-                  <td><strong>XL</strong></td>
-                  <td>46"</td>
-                  <td>30"</td>
-                  <td>25.5"</td>
-                  <td>16.5"</td>
-                </tr>
-                <tr>
-                  <td><strong>XXL</strong></td>
-                  <td>48"</td>
-                  <td>30.5"</td>
-                  <td>26"</td>
-                  <td>17.5"</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        
-        <div class="size-chart-note">
-          <strong>📏 How to Measure:</strong> Use a soft measuring tape and measure around the fullest part of your chest/bust, natural waistline, and hips. If you're between sizes, we recommend sizing up for a comfortable fit.
+      <!-- Shirt Section -->
+      <div class="size-chart-section">
+        <h3>Shirt</h3>
+        <div class="size-chart-table-container">
+          <table class="size-chart-table">
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Chest</th>
+                <th>Length</th>
+                <th>Sleeves</th>
+                <th>Collar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>S</strong></td>
+                <td>40"</td>
+                <td>27"</td>
+                <td>24"</td>
+                <td>15.5"</td>
+              </tr>
+              <tr>
+                <td><strong>M</strong></td>
+                <td>42"</td>
+                <td>28"</td>
+                <td>24.5"</td>
+                <td>15.5"</td>
+              </tr>
+              <tr>
+                <td><strong>L</strong></td>
+                <td>44"</td>
+                <td>29"</td>
+                <td>25"</td>
+                <td>16.5"</td>
+              </tr>
+              <tr>
+                <td><strong>XL</strong></td>
+                <td>46"</td>
+                <td>30"</td>
+                <td>25.5"</td>
+                <td>16.5"</td>
+              </tr>
+              <tr>
+                <td><strong>XXL</strong></td>
+                <td>48"</td>
+                <td>30.5"</td>
+                <td>26"</td>
+                <td>17.5"</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       
-      <!-- Winter Collection Tab Content -->
-      <div class="size-chart-tab-content" id="winter-content">
-        <div class="size-chart-section">
-          <h3>Knit Sweater</h3>
-          <div class="size-chart-table-container">
-            <table class="size-chart-table">
-              <thead>
-                <tr>
-                  <th>Size</th>
-                  <th>Length</th>
-                  <th>Chest</th>
-                  <th>Sleeve</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>M</strong></td>
-                  <td>26.5"</td>
-                  <td>42"</td>
-                  <td>23.5"</td>
-                </tr>
-                <tr>
-                  <td><strong>L</strong></td>
-                  <td>27.5"</td>
-                  <td>44"</td>
-                  <td>24"</td>
-                </tr>
-                <tr>
-                  <td><strong>XL</strong></td>
-                  <td>28.5"</td>
-                  <td>46"</td>
-                  <td>24.5"</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      <!-- Knit Sweater Section -->
+      <div class="size-chart-section">
+        <h3>Knit Sweater</h3>
+        <div class="size-chart-table-container">
+          <table class="size-chart-table">
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Length</th>
+                <th>Chest</th>
+                <th>Sleeve</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>M</strong></td>
+                <td>26.5"</td>
+                <td>42"</td>
+                <td>23.5"</td>
+              </tr>
+              <tr>
+                <td><strong>L</strong></td>
+                <td>27.5"</td>
+                <td>44"</td>
+                <td>24"</td>
+              </tr>
+              <tr>
+                <td><strong>XL</strong></td>
+                <td>28.5"</td>
+                <td>46"</td>
+                <td>24.5"</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        
-        <div class="size-chart-section">
-          <h3>Sweater</h3>
-          <div class="size-chart-table-container">
-            <table class="size-chart-table">
-              <thead>
-                <tr>
-                  <th>Size</th>
-                  <th>Chest</th>
-                  <th>Length</th>
-                  <th>Sleeve</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>M</strong></td>
-                  <td>40"</td>
-                  <td>27"</td>
-                  <td>25.5"</td>
-                </tr>
-                <tr>
-                  <td><strong>L</strong></td>
-                  <td>42"</td>
-                  <td>28"</td>
-                  <td>26"</td>
-                </tr>
-                <tr>
-                  <td><strong>XL</strong></td>
-                  <td>44"</td>
-                  <td>28"</td>
-                  <td>26"</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      </div>
+      
+      <!-- Sweater Section -->
+      <div class="size-chart-section">
+        <h3>Sweater</h3>
+        <div class="size-chart-table-container">
+          <table class="size-chart-table">
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Chest</th>
+                <th>Length</th>
+                <th>Sleeve</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>M</strong></td>
+                <td>40"</td>
+                <td>27"</td>
+                <td>25.5"</td>
+              </tr>
+              <tr>
+                <td><strong>L</strong></td>
+                <td>42"</td>
+                <td>28"</td>
+                <td>26"</td>
+              </tr>
+              <tr>
+                <td><strong>XL</strong></td>
+                <td>44"</td>
+                <td>28"</td>
+                <td>26"</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        
-        <div class="size-chart-section">
-          <h3>Sweatshirt</h3>
-          <div class="size-chart-table-container">
-            <table class="size-chart-table">
-              <thead>
-                <tr>
-                  <th>Size</th>
-                  <th>Chest</th>
-                  <th>Length</th>
-                  <th>Sleeve</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>S</strong></td>
-                  <td>40"</td>
-                  <td>23"</td>
-                  <td>22.5"</td>
-                </tr>
-                <tr>
-                  <td><strong>M</strong></td>
-                  <td>42"</td>
-                  <td>24"</td>
-                  <td>22.5"</td>
-                </tr>
-                <tr>
-                  <td><strong>L</strong></td>
-                  <td>44"</td>
-                  <td>25.5"</td>
-                  <td>23"</td>
-                </tr>
-                <tr>
-                  <td><strong>XL</strong></td>
-                  <td>50"</td>
-                  <td>27"</td>
-                  <td>25"</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      </div>
+      
+      <!-- Sweatshirt Section -->
+      <div class="size-chart-section">
+        <h3>Sweatshirt</h3>
+        <div class="size-chart-table-container">
+          <table class="size-chart-table">
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Chest</th>
+                <th>Length</th>
+                <th>Sleeve</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>S</strong></td>
+                <td>40"</td>
+                <td>23"</td>
+                <td>22.5"</td>
+              </tr>
+              <tr>
+                <td><strong>M</strong></td>
+                <td>42"</td>
+                <td>24"</td>
+                <td>22.5"</td>
+              </tr>
+              <tr>
+                <td><strong>L</strong></td>
+                <td>44"</td>
+                <td>25.5"</td>
+                <td>23"</td>
+              </tr>
+              <tr>
+                <td><strong>XL</strong></td>
+                <td>50"</td>
+                <td>27"</td>
+                <td>25"</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        
-        <div class="size-chart-note">
-          <strong>📏 How to Measure:</strong> Use a soft measuring tape and measure around the fullest part of your chest/bust, natural waistline, and hips. If you're between sizes, we recommend sizing up for a comfortable fit.
-        </div>
+      </div>
+      
+      <div class="size-chart-note">
+        <strong>📏 How to Measure:</strong> Use a soft measuring tape and measure around the fullest part of your chest/bust, natural waistline, and hips. If you're between sizes, we recommend sizing up for a comfortable fit.
       </div>
     </div>
   </div>
@@ -496,24 +434,6 @@
   function closeSizeChartOnOutside(event) {
     if (event.target.id === 'sizeChartModal') {
       closeSizeChart();
-    }
-  }
-  
-  function switchTab(tabName) {
-    // Remove active class from all tabs and contents
-    const tabs = document.querySelectorAll('.size-chart-tab');
-    const contents = document.querySelectorAll('.size-chart-tab-content');
-    
-    tabs.forEach(tab => tab.classList.remove('active'));
-    contents.forEach(content => content.classList.remove('active'));
-    
-    // Add active class to selected tab and content
-    if (tabName === 'shirt') {
-      tabs[0].classList.add('active');
-      document.getElementById('shirt-content').classList.add('active');
-    } else if (tabName === 'winter') {
-      tabs[1].classList.add('active');
-      document.getElementById('winter-content').classList.add('active');
     }
   }
   
