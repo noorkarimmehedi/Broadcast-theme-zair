@@ -584,8 +584,10 @@
             "testimonial_image_3": "shopify://shop_images/WhatsApp_Image_2025-11-27_at_22.25.58_1.jpg",
             "show_testimonial_4": true,
             "testimonial_image_4": "shopify://shop_images/WhatsApp_Image_2025-11-27_at_22.25.58.jpg",
-            "show_testimonial_5": false,
-            "show_testimonial_6": false
+            "show_testimonial_5": true,
+            "testimonial_image_5": "shopify://shop_images/c2b22231-1dc2-4bad-8453-c853a829eecb.jpg",
+            "show_testimonial_6": false,
+            "testimonial_image_6": "shopify://shop_images/debdefb8-57e8-4f85-9579-b67b02c9107c.jpg"
           },
           "blocks": {}
         }
