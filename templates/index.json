@@ -568,6 +568,8 @@
             "section_padding": 10,
             "grid_gap": 20,
             "image_aspect_ratio": 100,
+            "image_width": 500,
+            "image_height": 500,
             "border_width": 1,
             "border_color": "#e0e0e0",
             "hover_border_color": "#cccccc",
