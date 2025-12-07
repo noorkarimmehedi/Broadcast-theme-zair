@@ -205,7 +205,7 @@
 
     <!-- Desktop Grid -->
     <div class="ai-testimonial-showcase__grid-{{ ai_gen_id }}">
-      {% for i in (1..6) %}
+      {% for i in (1..12) %}
         {% liquid
           assign image_key = 'testimonial_image_' | append: i
           assign enabled_key = 'show_testimonial_' | append: i
@@ -234,7 +234,7 @@
     <div class="ai-testimonial-showcase__slider-{{ ai_gen_id }}">
       <div class="ai-testimonial-showcase__slider-wrapper-{{ ai_gen_id }}">
         <div class="ai-testimonial-showcase__slider-track-{{ ai_gen_id }}" id="slider-track-{{ ai_gen_id }}">
-          {% for i in (1..6) %}
+          {% for i in (1..12) %}
             {% liquid
               assign image_key = 'testimonial_image_' | append: i
               assign enabled_key = 'show_testimonial_' | append: i
@@ -599,6 +599,96 @@
     {
       "type": "image_picker",
       "id": "testimonial_image_6",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_7",
+      "label": "Show testimonial 7",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_7",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_8",
+      "label": "Show testimonial 8",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_8",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_9",
+      "label": "Show testimonial 9",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_9",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_10",
+      "label": "Show testimonial 10",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_10",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 11"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_11",
+      "label": "Show testimonial 11",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_11",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 12"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonial_12",
+      "label": "Show testimonial 12",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_image_12",
       "label": "Image"
     }
   ],
