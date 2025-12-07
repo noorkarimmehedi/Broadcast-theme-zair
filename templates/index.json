@@ -587,7 +587,15 @@
             "show_testimonial_5": true,
             "testimonial_image_5": "shopify://shop_images/c2b22231-1dc2-4bad-8453-c853a829eecb.jpg",
             "show_testimonial_6": true,
-            "testimonial_image_6": "shopify://shop_images/debdefb8-57e8-4f85-9579-b67b02c9107c.jpg"
+            "testimonial_image_6": "shopify://shop_images/debdefb8-57e8-4f85-9579-b67b02c9107c.jpg",
+            "show_testimonial_7": true,
+            "testimonial_image_7": "shopify://shop_images/a325f603-3a2b-4719-aa9a-24517ae73faa.jpg",
+            "show_testimonial_8": true,
+            "testimonial_image_8": "shopify://shop_images/0d515590-4d7b-471b-8a60-7b16b0fec734.jpg",
+            "show_testimonial_9": false,
+            "show_testimonial_10": false,
+            "show_testimonial_11": false,
+            "show_testimonial_12": false
           },
           "blocks": {}
         }
