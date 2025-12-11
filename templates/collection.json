@@ -282,12 +282,12 @@
       "block_order": [
         "ai_gen_block_e0318ed_BMUhiU"
       ],
+      "disabled": true,
       "name": "Collection image title",
       "settings": {}
     },
     "hero": {
       "type": "collection-image-with-title",
-      "disabled": true,
       "settings": {
         "show_title": true,
         "show_description": true,
