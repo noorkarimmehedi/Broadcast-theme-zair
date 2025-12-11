@@ -342,14 +342,14 @@
         "ai_gen_block_9171d39_Ycedcr": {
           "type": "ai_gen_block_9171d39",
           "settings": {
-            "image": "shopify://shop_images/DSC01615_8_11zon.webp",
+            "image": "shopify://shop_images/Black_Brown_Modern_Creative_Portfolio_Presentation.png",
             "desktop_height": 400,
             "mobile_height": 100,
             "border_radius": 0,
             "show_overlay": true,
             "overlay_color": "#000000",
             "overlay_opacity": 0.3,
-            "show_title": true,
+            "show_title": false,
             "title": "",
             "title_font": "baskervville_n4",
             "desktop_title_size": 60,
