@@ -336,8 +336,38 @@
       "disabled": true,
       "settings": {}
     },
+    "17654449303b0ea2bb": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_9171d39_Ycedcr": {
+          "type": "ai_gen_block_9171d39",
+          "settings": {
+            "image": "shopify://shop_images/DSC01615_8_11zon.webp",
+            "desktop_height": 400,
+            "mobile_height": 100,
+            "border_radius": 0,
+            "show_overlay": true,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.3,
+            "show_title": true,
+            "title": "",
+            "title_font": "baskervville_n4",
+            "desktop_title_size": 60,
+            "mobile_title_size": 32,
+            "title_color": "#ffffff",
+            "text_alignment": "center"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_9171d39_Ycedcr"
+      ],
+      "settings": {}
+    },
     "hero": {
       "type": "collection-image-with-title",
+      "disabled": true,
       "settings": {
         "show_title": true,
         "show_description": true,
@@ -387,6 +417,7 @@
     "blocks_j4eHNb",
     "section_collections_list_Kwr4jp",
     "17593394853e0db13d",
+    "17654449303b0ea2bb",
     "hero",
     "subcollections",
     "main"
