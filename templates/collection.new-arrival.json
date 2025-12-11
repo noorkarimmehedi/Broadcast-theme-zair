@@ -346,7 +346,7 @@
             "desktop_height": 400,
             "mobile_height": 100,
             "border_radius": 0,
-            "show_overlay": true,
+            "show_overlay": false,
             "overlay_color": "#000000",
             "overlay_opacity": 0.3,
             "show_title": false,
