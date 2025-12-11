@@ -250,8 +250,44 @@
         "padding_bottom": 12
       }
     },
+    "blocks_a8twRn": {
+      "type": "_blocks",
+      "name": "Collection image title",
+      "settings": {}
+    },
+    "blocks_hinC6a": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_e0318ed_BMUhiU": {
+          "type": "ai_gen_block_e0318ed",
+          "settings": {
+            "image": "shopify://shop_images/Black_Brown_Modern_Creative_Portfolio_Presentation_1.png",
+            "desktop_height": 400,
+            "mobile_height": 150,
+            "border_radius": 0,
+            "show_overlay": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.3,
+            "show_title": false,
+            "title": "",
+            "title_font": "baskervville_n4",
+            "desktop_title_size": 60,
+            "mobile_title_size": 32,
+            "title_color": "#ffffff",
+            "text_alignment": "center"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_e0318ed_BMUhiU"
+      ],
+      "name": "Collection image title",
+      "settings": {}
+    },
     "hero": {
       "type": "collection-image-with-title",
+      "disabled": true,
       "settings": {
         "show_title": true,
         "show_description": true,
@@ -300,6 +336,8 @@
     "category_filter_bar_gFGdrK",
     "1762785248b3b6ac23",
     "section_collections_list_JipAKY",
+    "blocks_a8twRn",
+    "blocks_hinC6a",
     "hero",
     "subcollections",
     "main"
