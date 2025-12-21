@@ -81,7 +81,7 @@
         "buttons_xAgMTi"
       ],
       "custom_css": [
-        "h1 {font-size: 22px;}"
+        "h1 {font-size: 21px;}"
       ],
       "settings": {
         "product_sticky_enable": true,
