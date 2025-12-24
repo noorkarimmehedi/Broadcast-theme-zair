@@ -443,5 +443,10 @@
       "announcement_text": "#ab8c52",
       "sale_background_color": "#be563f"
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      "[class*=\"price\"],[class*=\"Price\"],.product__info-wrapper [class*=\"price\"],.product__price,.price-item,.price-item--regular,.price--large,.product-price {font-weight: 900 !important;}"
+    ]
   }
 }
