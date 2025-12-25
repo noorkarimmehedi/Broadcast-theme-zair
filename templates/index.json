@@ -330,7 +330,7 @@
             "product_name_color": "#000000",
             "price_font": "system_ui_n4",
             "price_size": 13,
-            "price_color": "#888888",
+            "price_color": "#000000",
             "name_price_gap": 8,
             "text_alignment": "left"
           },
