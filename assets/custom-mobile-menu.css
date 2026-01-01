@@ -138,7 +138,8 @@
 
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title,
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title,
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(4) .sliderow__title {
   font-size: 18px !important;
   font-weight: 700 !important;
   padding: 8px 0 !important;
@@ -162,16 +163,23 @@
   margin-bottom: 0 !important;
 }
 
-/* Tight spacing for third item (Best Sellers) - with bottom border after */
+/* Tight spacing for third item (Best Sellers) */
 .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
+  padding: 8px 0 !important;
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
+/* Tight spacing for fourth item (Pants) - with bottom border after */
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(4) .sliderow__title {
   padding: 8px 0 !important;
   padding-bottom: 8px !important;
   margin-bottom: 0 !important;
   border-bottom: 1px solid #000000 !important;
 }
 
-/* REST OF THE COLLECTIONS - Normal Weight (starting from 4th item) */
-.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(n+4) > .sliderow > .sliderow__title {
+/* REST OF THE COLLECTIONS - Normal Weight (starting from 5th item) */
+.drawer--header .drawer__menu > .sliderule__wrapper:nth-child(n+5) > .sliderow > .sliderow__title {
   font-size: 16px !important;
   font-weight: 400 !important;
   padding: 14px 0 !important;
@@ -384,7 +392,8 @@
   
   .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(1) .sliderow__title,
   .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(2) .sliderow__title,
-  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title {
+  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(3) .sliderow__title,
+  .drawer--header .drawer__menu > .sliderule__wrapper:nth-child(4) .sliderow__title {
     font-size: 16px !important;
   }
   
