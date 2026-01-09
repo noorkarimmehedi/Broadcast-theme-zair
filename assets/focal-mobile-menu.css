@@ -11,13 +11,15 @@ mobile-navigation {
   z-index: 10000;
   width: 100%;
   max-width: 400px;
-  background: var(--bg, #fff);
+  background-color: #ffffff !important;
+  color: #000000 !important;
   transform: translateX(-100%);
   transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), visibility 0.4s;
   visibility: hidden;
   display: flex;
   flex-direction: column;
 }
+
 
 .drawer--from-left {
   left: 0;
@@ -52,8 +54,10 @@ mobile-navigation[open] .drawer__overlay {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ddd;
+  background-color: #ffffff !important;
 }
+
 
 .drawer__header--shadowed {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -68,9 +72,10 @@ mobile-navigation[open] .drawer__overlay {
 
 .drawer__footer {
   padding: 20px;
-  border-top: 1px solid #eee;
-  background: #f9f9f9;
+  border-top: 1px solid #ddd;
+  background: #ffffff !important;
 }
+
 
 /* Mobile Nav Styles */
 .mobile-nav {
@@ -94,10 +99,11 @@ mobile-navigation[open] .drawer__overlay {
   border: none;
   font-size: 16px;
   font-weight: 500;
-  color: inherit;
+  color: #000000 !important;
   text-decoration: none;
   cursor: pointer;
 }
+
 
 .mobile-nav__link.h5,
 .mobile-nav__link.h6 {
@@ -170,7 +176,9 @@ collapsible-content {
   margin-top: 10px;
   font-size: 14px;
   font-weight: 600;
+  color: #000000 !important;
 }
+
 
 /* Footer elements */
 .mobile-nav__footer {
@@ -184,9 +192,10 @@ collapsible-content {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: inherit;
+  color: #000000 !important;
   font-size: 14px;
 }
+
 
 .lock-scroll {
   overflow: hidden;
