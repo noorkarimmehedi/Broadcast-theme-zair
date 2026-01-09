@@ -14250,6 +14250,8 @@ dialog[closing] .product-modal__inner {
   right: 15px !important;
   width: 44px !important;
   height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
   padding: 10px !important;
   background: #ffffff !important;
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
@@ -14257,13 +14259,16 @@ dialog[closing] .product-modal__inner {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  z-index: 99 !important;
+  z-index: 2147483647 !important;
   cursor: pointer !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   transition: transform 0.2s ease !important;
   pointer-events: auto !important;
   opacity: 1 !important;
   visibility: visible !important;
+  margin: 0 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
 }
 
 @media only screen and (max-width: 749px) {
@@ -14272,6 +14277,8 @@ dialog[closing] .product-modal__inner {
     right: 10px !important;
     width: 36px !important;
     height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
     padding: 8px !important;
   }
 }
