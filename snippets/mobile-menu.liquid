@@ -151,7 +151,7 @@
         {%- if shop.customer_accounts_enabled -%}
           <a class="icon-text" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" style="--index: 15;">
             {%- render 'icon' with 'header-customer' -%}
-            {{- 'layout.header.account' | t -}}
+            LOGIN
 
           </a>
 
