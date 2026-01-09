@@ -39,6 +39,9 @@
       <div class="product__slide">
         <div class="product__photo">
           {%- render 'image' image: product.featured_image, widths: '365, 550, 730, 1100, 1460', loading: 'eager', cover: true -%}
+          <button type="button" class="product__photo-zoom" aria-label="{{ 'products.product.zoom' | t }}">
+            {% render 'icon-zoom-in' %}
+          </button>
         </div>
       </div>
     {%- endif -%}
