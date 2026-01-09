@@ -211,7 +211,7 @@
 {%- capture minimal -%}
   <div class="header__mobile__left">
     <div class="header__mobile__button">
-      <button is="toggle-button" class="header__mobile__hamburger{% if show_icons == false %} navlink navlink--toplevel{% endif %}{% if settings.type_nav_caps %} caps{% endif %}"
+      <button type="button" is="toggle-button" class="header__mobile__hamburger{% if show_icons == false %} navlink navlink--toplevel{% endif %}{% if settings.type_nav_caps %} caps{% endif %}"
         aria-label="{{ 'general.accessibility.show_menu' | t }}"
         aria-haspopup="true"
         aria-expanded="false"
