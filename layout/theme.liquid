@@ -188,7 +188,11 @@
 
   <!-- Shopify app scripts =========================================================== -->
 
+  {{ 'focal-mobile-menu.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'focal-mobile-menu.js' | asset_url }}" defer="defer"></script>
+
   {{ content_for_header }}
+
 
 </head>
 

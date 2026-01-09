@@ -211,19 +211,19 @@
 {%- capture minimal -%}
   <div class="header__mobile__left">
     <div class="header__mobile__button">
-      <button class="header__mobile__hamburger{% if show_icons == false %} navlink navlink--toplevel{% endif %}{% if settings.type_nav_caps %} caps{% endif %}"
-        data-drawer-toggle="hamburger"
+      <button is="toggle-button" class="header__mobile__hamburger{% if show_icons == false %} navlink navlink--toplevel{% endif %}{% if settings.type_nav_caps %} caps{% endif %}"
         aria-label="{{ 'general.accessibility.show_menu' | t }}"
         aria-haspopup="true"
         aria-expanded="false"
-        aria-controls="header-menu">
+        aria-controls="mobile-menu-drawer">
 
         {%- if show_icons == false -%}
           <small class="navtext">{{ 'layout.header.menu' | t }}</small>
         {%- endif -%}
 
-        {%- render 'icon-menu' -%}
+        {%- render 'icon' with 'header-hamburger' -%}
       </button>
+
     </div>
     {%- if section.settings.enable_search -%}
       <div class="header__mobile__button{% if settings.type_nav_caps %} caps{% endif %}">
@@ -513,6 +513,10 @@
     }
   </script>
 {%- endif -%}
+
+{%- assign focal_menu = section.settings.tertiary_menu_linklist | default: section.settings.main_menu_linklist -%}
+{%- render 'mobile-menu', menu: linklists[focal_menu] -%}
+
 
 {% schema %}
 {

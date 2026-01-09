@@ -1,0 +1,19 @@
+{%- comment -%}
+  Icon snippet for Focal-style mobile menu.
+  Maps Focal icon names to Broadcast theme icons.
+{%- endcomment -%}
+
+{%- case icon -%}
+  {%- when 'close' -%}
+    {%- render 'icon-cancel' -%}
+  {%- when 'header-hamburger' -%}
+    {%- render 'icon-menu' -%}
+  {%- when 'chevron' -%}
+    {%- render 'icon-nav-arrow-right' -%}
+  {%- when 'header-customer' -%}
+    {%- render 'icon-profile-circled' -%}
+  {%- else -%}
+    {%- comment -%} Fallback to generic icon rendering if snippet exists {%- endcomment -%}
+    {%- capture icon_name -%}icon-{{ icon }}{%- endcapture -%}
+    {%- render icon_name -%}
+{%- endcase -%}

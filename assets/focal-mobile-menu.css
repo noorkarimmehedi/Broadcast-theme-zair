@@ -1,0 +1,208 @@
+/* Focal-style Mobile Menu CSS for Broadcast Theme */
+
+mobile-navigation {
+  display: block;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg, #fff);
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer--from-left {
+  left: 0;
+}
+
+mobile-navigation[open] {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.drawer__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: -1;
+}
+
+mobile-navigation[open] .drawer__overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.drawer__header {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid #eee;
+}
+
+.drawer__header--shadowed {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.drawer__content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+}
+
+.drawer__footer {
+  padding: 20px;
+  border-top: 1px solid #eee;
+  background: #f9f9f9;
+}
+
+/* Mobile Nav Styles */
+.mobile-nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mobile-nav__item {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mobile-nav__link.h5, .mobile-nav__link.h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.animated-plus {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.animated-plus::before,
+.animated-plus::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.animated-plus::before {
+  top: 5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.animated-plus::after {
+  top: 0;
+  left: 5px;
+  width: 2px;
+  height: 100%;
+}
+
+[aria-expanded="true"] .animated-plus::after {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+/* Collapsible */
+collapsible-content {
+  display: block;
+  padding-left: 15px;
+}
+
+.mobile-nav__images-wrapper {
+  margin: 20px -20px;
+  padding: 0 20px;
+  overflow-x: auto;
+  display: flex;
+  gap: 15px;
+}
+
+.mobile-nav__image-push {
+  flex: 0 0 200px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.mobile-nav__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.mobile-nav__image-heading {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Footer elements */
+.mobile-nav__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.icon-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+}
+
+.lock-scroll {
+  overflow: hidden;
+}
+
+/* Localization bits */
+.popover-container {
+  position: relative;
+}
+
+.popover-button {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
