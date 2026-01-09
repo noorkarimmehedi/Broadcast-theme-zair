@@ -122,17 +122,20 @@ mobile-navigation.drawer[open] .drawer__overlay {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 0;
+  padding: 10px 0;
+  /* Reduced from 15px */
   width: 100%;
   text-align: left;
   background: none;
   border: none;
-  font-size: 16px;
+  font-size: 14px;
+  /* Reduced from 16px */
   font-weight: 500;
   color: #000000 !important;
   text-decoration: none;
   cursor: pointer;
 }
+
 
 .mobile-nav__link.h5,
 .mobile-nav__link.h6 {
@@ -142,10 +145,13 @@ mobile-navigation.drawer[open] .drawer__overlay {
 
 .animated-plus {
   position: relative;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  /* Reduced from 12px */
+  height: 10px;
+  /* Reduced from 12px */
   flex-shrink: 0;
 }
+
 
 .animated-plus::before,
 .animated-plus::after {
