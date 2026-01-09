@@ -1,23 +1,30 @@
 /* Focal-style Mobile Menu CSS for Broadcast Theme */
 
-mobile-navigation {
+/* Focal-style Mobile Navigation Host Element */
+mobile-navigation.drawer {
   display: block;
-}
-
-.drawer {
   position: fixed;
   top: 0;
   bottom: 0;
-  z-index: 10000;
-  width: 100%;
-  max-width: 400px;
+  z-index: 100000 !important;
+  width: 100% !important;
+  max-width: 400px !important;
   background-color: #ffffff !important;
   color: #000000 !important;
-  transform: translateX(-100%);
-  transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), visibility 0.4s;
+  transform: translateX(-100%) !important;
+  transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), visibility 0.4s, opacity 0.4s;
   visibility: hidden;
-  display: flex;
+  opacity: 0;
+  display: flex !important;
   flex-direction: column;
+}
+
+/* Force black text on ALL sub-elements */
+mobile-navigation.drawer,
+mobile-navigation.drawer :not(.drawer__overlay) {
+  color: #000000 !important;
+  opacity: 1 !important;
+  visibility: inherit;
 }
 
 
@@ -25,11 +32,11 @@ mobile-navigation {
   left: 0;
 }
 
-mobile-navigation[open] {
-  transform: translateX(0);
-  visibility: visible;
+mobile-navigation.drawer[open] {
+  transform: translateX(0) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
-
 
 .drawer__overlay {
   position: fixed;
@@ -37,17 +44,21 @@ mobile-navigation[open] {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5) !important;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s ease, visibility 0.4s ease;
   z-index: -1;
+  /* Keep behind menu content */
+  pointer-events: none;
 }
 
-mobile-navigation[open] .drawer__overlay {
-  opacity: 1;
-  visibility: visible;
+mobile-navigation.drawer[open] .drawer__overlay {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto;
 }
+
 
 .drawer__header {
   padding: 15px 20px;
