@@ -58,20 +58,22 @@
                 {%- endcapture -%}
 
                 {%- if mega_menu_block.settings[image_link_setting] != blank -%}
-                  <a href="{{ mega_menu_block.settings[image_link_setting] }}" class="mobile-nav__image-push">
+                  <a href="{{ mega_menu_block.settings[image_link_setting] }}" class="mobile-nav__image-push" style="--index: {{ forloop.index | plus: 10 }};">
                     {{- image_push -}}
                   </a>
-                {%- else -%}
-                  <div class="mobile-nav__image-push">
+{%- else -%}
+                  <div class="mobile-nav__image-push" style="--index: {{ forloop.index | plus: 10 }};">
                     {{- image_push -}}
                   </div>
                 {%- endif -%}
+
               {%- endif -%}
             {%- endfor -%}
           {%- endcapture -%}
         {%- endif -%}
 
-        <li class="mobile-nav__item" data-level="1">
+        <li class="mobile-nav__item" data-level="1" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 50 }}" style="--index: {{ forloop.index }};">
+
           {%- if link.links.size > 0 or mega_menu_images != blank -%}
             <button is="toggle-button" class="mobile-nav__link heading {% if settings.heading_text_transform == 'uppercase' %}h6{% else %}h5{% endif %}" aria-controls="mobile-menu-{{ forloop.index }}" aria-expanded="false">
               {{- link.title -}}
@@ -82,7 +84,8 @@
               {%- if link.links.size > 0 -%}
                 <ul class="mobile-nav list--unstyled" role="list">
                   {%- for sub_link in link.links -%}
-                    <li class="mobile-nav__item" data-level="2">
+                    <li class="mobile-nav__item" data-level="2" style="--index: {{ forloop.index }};">
+
                       {%- if sub_link.links.size > 0 -%}
                         <button is="toggle-button" class="mobile-nav__link" aria-controls="mobile-menu-{{ forloop.parentloop.index }}-{{ forloop.index }}" aria-expanded="false">
                           {{- sub_link.title -}}
@@ -92,7 +95,8 @@
                         <collapsible-content id="mobile-menu-{{ forloop.parentloop.index }}-{{ forloop.index }}" class="collapsible">
                           <ul class="mobile-nav list--unstyled" role="list">
                             {%- for sub_sub_link in sub_link.links -%}
-                              <li class="mobile-nav__item" data-level="3">
+                              <li class="mobile-nav__item" data-level="3" style="--index: {{ forloop.index }};">
+
                                 <a href="{{ sub_sub_link.url }}" class="mobile-nav__link">{{ sub_sub_link.title }}</a>
                               </li>
                             {%- endfor -%}
@@ -134,11 +138,12 @@
     <div class="drawer__footer drawer__footer--tight drawer__footer--bordered">
       <div class="mobile-nav__footer">
         {%- if shop.customer_accounts_enabled -%}
-          <a class="icon-text" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+          <a class="icon-text" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" style="--index: 15;">
             {%- render 'icon' with 'header-customer' -%}
             {{- 'layout.header.account' | t -}}
 
           </a>
+
         {%- endif -%}
 
         {%- if locale_selector or country_selector -%}
@@ -149,7 +154,8 @@
                 <span class="visually-hidden">{{ 'layout.footer.currency' | t }}</span>
 
 
-                <button type="button" is="toggle-button" class="popover-button text--xsmall tap-area" aria-expanded="false" aria-controls="header-sidebar-localization-form-currency">
+                <button type="button" is="toggle-button" class="popover-button text--xsmall tap-area" aria-expanded="false" aria-controls="header-sidebar-localization-form-currency" style="--index: 16;">
+
                   {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {% if localization.country.currency.symbol %}{{ localization.country.currency.symbol }}{%- endif -%})
                   {%- render 'icon' with 'chevron', width: 9, height: 6, inline: true -%}
                 </button>
@@ -187,7 +193,8 @@
                 <span class="visually-hidden">{{ 'layout.footer.language' | t }}</span>
 
 
-                <button type="button" is="toggle-button" class="popover-button text--xsmall tap-area" aria-expanded="false" aria-controls="header-sidebar-localization-form-locale">
+                <button type="button" is="toggle-button" class="popover-button text--xsmall tap-area" aria-expanded="false" aria-controls="header-sidebar-localization-form-locale" style="--index: 17;">
+
                   {{- form.current_locale.endonym_name | capitalize -}}
                   {%- render 'icon' with 'chevron', width: 9, height: 6, inline: true -%}
                 </button>
