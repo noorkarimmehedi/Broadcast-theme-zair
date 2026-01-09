@@ -14302,8 +14302,7 @@ dialog[closing] .product-modal__inner {
 }
 
 [data-image-zoom-enable=true] [data-zoom-wrapper] {
-  cursor: zoom-in;
-  cursor: var(--ICON-ZOOM-IN), zoom-in;
+  cursor: pointer !important;
 }
 
 body.is-focused .product__photo:focus:after,
