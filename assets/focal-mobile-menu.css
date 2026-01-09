@@ -70,9 +70,9 @@ mobile-navigation.drawer[open] .drawer__overlay {
 
 .drawer__header {
   padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
   border-bottom: 1px solid #ddd;
   background-color: #ffffff !important;
 }
@@ -91,7 +91,11 @@ mobile-navigation.drawer[open] .drawer__overlay {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: auto !important;
+  /* Force to left */
+  margin-left: 0 !important;
 }
+
 
 .drawer__content {
   flex: 1;
