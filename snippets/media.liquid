@@ -73,9 +73,9 @@
         data-image-alt="{{ media.alt | strip_html | escape }}"
         style="--aspect-ratio: {{ media_aspect_ratio }}">
         {{ image }}
-        <button type="button" class="product__photo-zoom" aria-label="{{ 'products.product.zoom' | t }}">
-          Click to zoom
-        </button>
+        <div class="product-zoom-text-btn" id="custom-zoom-trigger-upsell">
+          CLICK TO ZOOM
+        </div>
       </div>
 
     {%- when 'model' -%}
