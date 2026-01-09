@@ -514,8 +514,10 @@
   </script>
 {%- endif -%}
 
-{%- assign focal_menu = section.settings.tertiary_menu_linklist | default: section.settings.main_menu_linklist -%}
-{%- render 'mobile-menu', menu: linklists[focal_menu] -%}
+{%- assign focal_menu_handle = tertiary_menu_linklist | default: main_menu_linklist | default: 'main-menu' -%}
+{%- render 'mobile-menu', menu: linklists[focal_menu_handle], section: section -%}
+
+
 
 <style>
   #header-menu { display: none !important; }

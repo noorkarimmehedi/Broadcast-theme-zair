@@ -15,7 +15,9 @@
 
   <div class="drawer__content">
     <ul class="mobile-nav list--unstyled" role="list">
-      {%- for link in menu.links -%}
+      {%- assign menu_to_render = menu | default: linklists.main-menu -%}
+      {%- for link in menu_to_render.links -%}
+
         {%- assign link_title_downcase = link.title | strip | downcase -%}
         {%- assign mega_menu_block = '' -%}
         {%- assign mega_menu_images = '' -%}
@@ -134,7 +136,8 @@
         {%- if shop.customer_accounts_enabled -%}
           <a class="icon-text" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
             {%- render 'icon' with 'header-customer' -%}
-            {{- 'header.general.account' | t -}}
+            {{- 'layout.header.account' | t -}}
+
           </a>
         {%- endif -%}
 
@@ -143,7 +146,8 @@
             {%- if country_selector -%}
               <div class="popover-container">
                 <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
-                <span class="visually-hidden">{{ 'header.general.country' | t }}</span>
+                <span class="visually-hidden">{{ 'layout.footer.currency' | t }}</span>
+
 
                 <button type="button" is="toggle-button" class="popover-button text--xsmall tap-area" aria-expanded="false" aria-controls="header-sidebar-localization-form-currency">
                   {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {% if localization.country.currency.symbol %}{{ localization.country.currency.symbol }}{%- endif -%})
@@ -154,7 +158,8 @@
                   <span class="popover__overlay"></span>
 
                   <header class="popover__header">
-                    <span class="popover__title heading h6">{{- 'header.general.country' | t -}}</span>
+                    <span class="popover__title heading h6">{{- 'layout.footer.currency' | t -}}</span>
+
 
                     <button type="button" class="popover__close-button tap-area tap-area--large" data-action="close" title="{{ 'general.accessibility.close' | t | escape }}">
                       {%- render 'icon' with 'close' -%}
@@ -179,7 +184,8 @@
             {%- if locale_selector -%}
               <div class="popover-container">
                 <input type="hidden" name="locale_code" value="{{ form.current_locale.iso_code }}">
-                <span class="visually-hidden">{{ 'header.general.language' | t }}</span>
+                <span class="visually-hidden">{{ 'layout.footer.language' | t }}</span>
+
 
                 <button type="button" is="toggle-button" class="popover-button text--xsmall tap-area" aria-expanded="false" aria-controls="header-sidebar-localization-form-locale">
                   {{- form.current_locale.endonym_name | capitalize -}}
@@ -190,7 +196,8 @@
                   <span class="popover__overlay"></span>
 
                   <header class="popover__header">
-                    <span class="popover__title heading h6">{{- 'header.general.language' | t -}}</span>
+                    <span class="popover__title heading h6">{{- 'layout.footer.language' | t -}}</span>
+
 
                     <button type="button" class="popover__close-button tap-area tap-area--large" data-action="close" title="{{ 'general.accessibility.close' | t | escape }}">
                       {%- render 'icon' with 'close' -%}
