@@ -72,12 +72,18 @@
           {%- endcapture -%}
         {%- endif -%}
 
-        <li class="mobile-nav__item" data-level="1" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 50 }}" style="--index: {{ forloop.index }};">
+        <li class="mobile-nav__item" data-level="1" style="--index: {{ forloop.index }};">
+
 
           {%- if link.links.size > 0 or mega_menu_images != blank -%}
             <button is="toggle-button" class="mobile-nav__link heading {% if settings.heading_text_transform == 'uppercase' %}h6{% else %}h5{% endif %}" aria-controls="mobile-menu-{{ forloop.index }}" aria-expanded="false">
               {{- link.title -}}
-              <span class="animated-plus"></span>
+              <span class="custom-plus-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                  <path fill="currentColor" fill-rule="evenodd" d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"></path>
+                </svg>
+              </span>
+
             </button>
 
             <collapsible-content id="mobile-menu-{{ forloop.index }}" class="collapsible">
@@ -89,7 +95,12 @@
                       {%- if sub_link.links.size > 0 -%}
                         <button is="toggle-button" class="mobile-nav__link" aria-controls="mobile-menu-{{ forloop.parentloop.index }}-{{ forloop.index }}" aria-expanded="false">
                           {{- sub_link.title -}}
-                          <span class="animated-plus"></span>
+                          <span class="custom-plus-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                  <path fill="currentColor" fill-rule="evenodd" d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"></path>
+                </svg>
+              </span>
+
                         </button>
 
                         <collapsible-content id="mobile-menu-{{ forloop.parentloop.index }}-{{ forloop.index }}" class="collapsible">
